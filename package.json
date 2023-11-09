@@ -1,0 +1,23 @@
+{
+  "name": "srv-dev",
+  "version": "1.0.0",
+  "description": "Avenirs dev environment",
+  "main": "commitlint.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avenirs-esr/srv-dev.git"
+  },
+  "author": "Arnaud Deman",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/avenirs-esr/srv-dev/issues"
+  },
+  "homepage": "https://github.com/avenirs-esr/srv-dev#readme",
+  "devDependencies": {
+    "husky": "^8.0.0"
+  }
+}
