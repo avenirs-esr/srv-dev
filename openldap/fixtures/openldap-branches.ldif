@@ -1,0 +1,6 @@
+dn: ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+objectClass: organizationalUnit
+objectClass: top
+ou: people
+description: People branch
+

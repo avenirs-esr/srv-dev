@@ -1,0 +1,11 @@
+
+Resources
+https://github.com/osixia/docker-openldap/tree/master
+https://github.com/osixia/docker-openldap/blob/master/example/docker-compose.yml
+
+
+Commands
+docker run --name my-openldap-container --detach osixia/openldap:1.5.0
+docker run --name my-openldap-container  osixia/openldap:1.5.0
+docker exec openldap ldapsearch -x -H ldap://localhost -b dc=ldap-dev,dc=avenirs-esr,dc=fr -D "cn=admin,dc=ldap-dev,dc=avenirs-esr,dc=fr" -w admin
+

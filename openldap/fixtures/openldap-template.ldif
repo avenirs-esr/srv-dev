@@ -1,0 +1,16 @@
+dn: uid=__UID__,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+objectClass: posixAccount
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: __CN__
+uidNumber: __UID_NUMBER__
+gidNumber: __GID_NUMBER__
+homeDirectory: /home/perso/__UID__
+sn: __SN__
+uid: __UID__
+gecos:  __GECOS__
+givenName: __GIVEN_NAME__
+userPassword:__USER_PASSWORD__
+
