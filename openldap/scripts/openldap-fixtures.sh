@@ -16,7 +16,6 @@ OUT_FETCH_FLAG=0
 . $SCRIPT_DIR/../../scripts/commons.sh
 init_help "`basename $0`" "[ -o | --out filename ]"
 init_commons $*
-
 function generate() {
     info "LDIF generation started."
     info "Using file: $OUT."

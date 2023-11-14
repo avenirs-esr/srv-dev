@@ -14,6 +14,7 @@
 
 . $SCRIPT_DIR/../../scripts/commons.sh
 init_commons $*
+install_overlay
 
 
 # [ -f $FIXTURES_SCRIPT ] || err "$FIXTURES_SCRIPT not found."

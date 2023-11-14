@@ -9,11 +9,13 @@ VOLUMES_ROOT=/var/lib/docker-containers/dev.avenirs-esr.fr/ldap
 LDIF_CUSTOM_DIR=$VOLUMES_ROOT/container/service/slapd/assets/config/bootstrap/ldif/custom
 LDIF_FILE=$LDIF_CUSTOM_DIR/openldap-fixtures.ldif
 
-FIXTURES_SCRIPT_CMD="$SCRIPT_DIR/generate-openldap-fixtures.sh -o $LDIF_FILE -vvv"
+FIXTURES_SCRIPT_CMD="$SCRIPT_DIR/openldap-fixtures.sh -o $LDIF_FILE"
 
 
 . $SCRIPT_DIR/../../scripts/commons.sh
+
 init_commons $*
+
 
 
 [ -f $FIXTURES_SCRIPT ] || err "$FIXTURES_SCRIPT not found."
