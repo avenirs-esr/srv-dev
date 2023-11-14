@@ -1,0 +1,3 @@
+[submodule "apisix/apisix-docker"]
+	path = apisix/apisix-docker
+	url = https://github.com/apache/apisix-docker.git

@@ -1,15 +1,21 @@
 #! /bin/bash
 
+# ------------------------------------------------------------------
+# Utilitary functions and common options shared by the scripts.
+# - Display methods: info, warn, etc
+# - intialization methods.
+# ------------------------------------------------------------------
+
+
+# Flags
 declare -i VERBOSE_FLAG=0
 declare -i QUIET_FLAG=0
 declare -i HELP_FLAG=0
+
+# This string will contains the help message for the target script
 USAGE_STRING=""
 
-
-# [ "$1" = '-v' -o "$1" = '--verbose' -o "$2" = '-v' -o "$2" = '--verbose'  ] && VERBOSE_FLAG=1
-# [ "$1" = '-q' -o "$1" = '--quiet' -o "$2" = '-q' -o "$2" = '--quiet'  ] && INFO_FLAG=0
-# [ "$1" = "-h" -o "$1" = "--help" ] && { echo -ne "\n `basename $0` [ -v | --verbose ] [ -q | --quiet ]\n\n"; exit 0; }
-
+# Display functions - info, warning error and verbose messages (3 verbosity levels)
 function info(){
 [ $QUIET_FLAG -eq 0 ] && echo "[INFO] $*"
 }
@@ -35,10 +41,12 @@ function err (){
     exit 1
 }
 
+# Used to initialize the common parts of help string.
 function init_help(){
     USAGE_STRING="\n $1 [ -v[v[v]] | --[v[v]]verbose ] [ -q | --quiet ] [ -h | --help ] $2\n\n"
 }
 
+# Initialization for the common options: help, verbose, etc.
 function init_commons(){
     
     local args=$*
