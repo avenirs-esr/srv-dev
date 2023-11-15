@@ -13,32 +13,46 @@
 [ -z "$HELP_FLAG" ] &&  export HELP_FLAG=0
 [ -z "$COMMONS_INITIALIZED_FLAG" ] &&  export COMMONS_INITIALIZED_FLAG=0
 
+# Constants to format the outputs.
+BOLD='\033[1;30m'
+RED='\033[0;31m'
+BOLD_RED='\033[1;31m'
+GREEN='\033[0;32m'
+BOLD_GREEN='\033[1;32m'
+PURPLE='\033[0;35m'
+BOLD_PURPLE='\033[1;35m'
+GREY='\033[0;30m'
+BOLD_GREY='\033[1;30m'
+YELLOW='\033[0;33m'
+BOLD_YELLOW='\033[1;33m'
+NC='\033[0m'
+
 # This string will contains the help message for the target script
 USAGE_STRING=""
 
 # Display functions - info, warning error and verbose messages (3 verbosity levels)
 function info(){
-[ $QUIET_FLAG -eq 0 ] && echo "[INFO] $*"
+[ $QUIET_FLAG -eq 0 ] && echo -ne "${GREY}[${GREEN}INFO${GREY}]${NC} $*\n"
 }
 
 function warn(){
- echo "[WARNING] $*"
+ echo -ne "${GREY}[${BOLD_PURPLE}WARNING${GREY}]${NC} $*\n"
 }
 
 function verbose (){
-    [ $VERBOSE_FLAG -ge 1 ] && echo "[VERBOSE] $*"
+    [ $VERBOSE_FLAG -ge 1 ] && echo -ne "${GREY}[${YELLOW}VERBOSE:1${GREY}]${NC} $*\n"
 }
 
 function vverbose (){
-    [ $VERBOSE_FLAG -ge 2 ] && echo "[VERBOSE:2] $*"
+    [ $VERBOSE_FLAG -ge 2 ] && echo -ne "${GREY}[${YELLOW}VERBOSE:2${GREY}]${NC} $*\n"
 }
 
 function vvverbose (){
-    [ $VERBOSE_FLAG -ge 3 ] && echo "[VERBOSE:3] $*"
+    [ $VERBOSE_FLAG -ge 3 ] && echo -ne "${GREY}[${YELLOW}VERBOSE:3${GREY}]${NC} $*\n"
 }
 
 function err (){
-    >&2 echo "[ERROR] $*"
+    >&2 echo -ne "${GREY}[${BOLD_RED}ERROR${GREY}]${BOLD_RED} $*${NC}\n";
     exit 1
 }
 
