@@ -82,7 +82,7 @@ function init_commons(){
 
                 ;;
                  "--verbose" | "-v")
-                    VERBOSE_FLAG=$VERBOSE_FLAG+1
+                    VERBOSE_FLAG=$[VERBOSE_FLAG+1]
                 ;;
                  "--vverbose" | "-vv")
                     VERBOSE_FLAG=2
@@ -103,9 +103,28 @@ function init_commons(){
 
 # Copy the files from a root directory to a project respection the directory structure.
 function install_overlay {
+   
     local overlay_root=$1
+    local target=$2
     [ -z "$overlay_root" ] && err "the overlay directory parameter is required"
-    [ -e $overlay_root ] || err "overlay directory not found: $overlay_root"
-    [ -d $overlay_root ] || err "not a directory: $overlay_root"
-    [ -r $overlay_root ] || err "not a readable directory: $overlay_root"
+    [ -e $overlay_root ] || err "overlay directory not found: $overlay_root"
+    [ -d $overlay_root ] || err "not a directory: $overlay_root"
+    [ -r $overlay_root ] || err "not a readable directory: $overlay_root"
+
+    [ -z "$target" ] && err "the target directory parameter is required"
+    [ -e $target ] || err "target directory not found: $target"
+    [ -d $target ] || err "not a directory: $target"
+    [ -w $overlay_root ] || err "not a writable directory: $target"
+
+    verbose "Processing overlay"
+    local -i files_cpt=0
+    local -i dir_cpt=0
+    for  f in `ls -A $overlay_root`
+    do
+        local source=$overlay_root/$f
+        [ -f $source ] &&  cp $source $target && { files_cpt=$files_cpt+1; vverbose "Overlay file: $source -> $target"; }
+        [ -d $source ] &&  cp -R $source $target &&  { dir_cpt=$dir_cpt+1; vverbose "Overlay directory: $source -> $target"; }
+    done
+     verbose "Overlay processed (Files: $files_cpt, Directories: $dir_cpt)"
+
 }
