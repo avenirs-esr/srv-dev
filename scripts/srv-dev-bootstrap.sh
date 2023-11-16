@@ -1,16 +1,14 @@
 # #! /bin/bash
 
 
-MODULES="apisix cas"
-#MODULES="cas"
+MODULES="apisix cas openldap"
+DOCKER_NETWORK="avenirs-network"
+
 
 SCRIPT_DIR=`dirname $0`
 
-
-
 . $SCRIPT_DIR/commons.sh
 init_commons $*
-
 
 
 function deploy(){
@@ -22,6 +20,7 @@ function deploy(){
     info "running: $script"
     $script
 }
+
 
 for module in $MODULES 
 do
