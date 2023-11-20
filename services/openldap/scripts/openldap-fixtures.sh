@@ -13,7 +13,7 @@ USER_PASSWORD='{ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==' #Azerty123
 OUT_FETCH_FLAG=0
 
 
-. $SCRIPT_DIR/../../scripts/commons.sh
+. $SCRIPT_DIR/../../../scripts/commons.sh
 init_help "`basename $0`" "[ -o | --out filename ]"
 init_commons $*
 function generate() {

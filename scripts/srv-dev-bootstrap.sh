@@ -1,20 +1,30 @@
 # #! /bin/bash
 
 
-MODULES="apisix cas openldap"
-DOCKER_NETWORK="avenirs-network"
-
 
 SCRIPT_DIR=`dirname $0`
 
 . $SCRIPT_DIR/commons.sh
 init_commons $*
 
+SERVICES_ROOT="$SCRIPT_DIR/../services"
+
+## Uncomment to use specific services
+#SERVICES="$SERVICES_ROOT/apisix $SERVICES_ROOT/cas $SERVICES_ROOT/openldap"
+
+[ -z "$SERVICES" ] &&   { cd $SERVICES_ROOT && SERVICES=`ls -d *` && cd - >/dev/null || err "Unable to set the services"; }  
+
+
+
+
+vverbose "Services: $SERVICES"
+
 
 function deploy(){
-    local module=$1
-    info "Deploying module $module"
-    local script=$module/scripts/$module-bootstrap.sh
+    local service=$1
+    info "Deploying service $service"
+    local script=$SERVICES_ROOT/$service/scripts/$service-bootstrap.sh
+    vvverbose "Target script: $script"
     [ -e "$script" ] || err "script not found: $script"
     [ -x "$script" ] || err "script not executable: $script"
     info "running: $script"
@@ -22,7 +32,7 @@ function deploy(){
 }
 
 
-for module in $MODULES 
+for service in $SERVICES 
 do
-    deploy $module
+    deploy $service
 done
