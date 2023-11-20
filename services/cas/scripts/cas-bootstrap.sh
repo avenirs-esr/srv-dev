@@ -7,6 +7,7 @@ TARGET_DIR=$SCRIPT_DIR/../cas-overlay-template
 
 
 . $SCRIPT_DIR/../../../scripts/commons.sh
+init_help "`basename $0`" 
 init_commons $*
 info "CAS bootstrapping started."
 install_overlay $OVERLAY_DIR $TARGET_DIR

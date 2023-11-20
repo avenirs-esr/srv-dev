@@ -5,6 +5,7 @@
 SCRIPT_DIR=`dirname $0`
 
 . $SCRIPT_DIR/commons.sh
+init_help "`basename $0`" 
 init_commons $*
 
 SERVICES_ROOT="$SCRIPT_DIR/../services"
