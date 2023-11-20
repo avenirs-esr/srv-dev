@@ -31,7 +31,7 @@ function generate() {
 
 function parse() {
     local l=$1
-    verbose "$l"
+    vverbose "$l"
     uid=`echo $l | cut -f 1 -d ';'| sed s/^' '*//g | sed s/' *$'//g`
     entry=`echo $l | cut -f 2 -d ';'| sed s/^' '*//g | sed s/' *$'//g`
     givenName=${entry,,}
