@@ -54,14 +54,14 @@ function generate_ldif(){
     local gecos=$5
     local uidNumber=$6
     local gidNumber=$7
-    verbose "uid          $uid"
-    verbose "givenName    $givenName"
-    verbose "givenNameCap $givenNameCap"
-    verbose "sn           $sn"
-    verbose "cn           $cn"
-    verbose "gecos        $gecos"
-    verbose "uidNumber    $uidNumber"
-    verbose "gidNumber    $gidNumber"
+    vvverbose "uid          $uid"
+    vvverbose "givenName    $givenName"
+    vvverbose "givenNameCap $givenNameCap"
+    vvverbose "sn           $sn"
+    vvverbose "cn           $cn"
+    vvverbose "gecos        $gecos"
+    vvverbose "uidNumber    $uidNumber"
+    vvverbose "gidNumber    $gidNumber"
     cat $TEMPLATE \
         | sed s"/__UID__/$uid/g" \
         | sed s"/__CN__/$cn/g" \
