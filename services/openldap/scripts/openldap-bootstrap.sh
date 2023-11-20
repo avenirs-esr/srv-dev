@@ -17,7 +17,7 @@ init_commons $*
 [ -f $FIXTURES_SCRIPT ] || err "$FIXTURES_SCRIPT not found."
 [ -x $FIXTURES_SCRIPT ] || err "$FIXTURES_SCRIPT NOT executable."
 
-[ "$1" = "--reset" || "$1" = "-r" ] && { warn "Deleting $VOLUME_ROOT in 4 seconds."; sleep 4; sudo rm -Rf $VOLUMES_ROOT && info "$VOLUMES_ROOT deleted"; }
+[ "$1" = "--reset" -o "$1" = "-r" ] && { warn "Deleting $VOLUME_ROOT in 4 seconds."; sleep 4; sudo rm -Rf $VOLUMES_ROOT && info "$VOLUMES_ROOT deleted"; }
 
 mkdir -p  $VOLUMES_ROOT/var/lib/ldap && vverbose " > $VOLUMES_ROOT/var/lib/ldap" 
 mkdir -p  $VOLUMES_ROOT/etc/ldap/slapd.d && vverbose " > $VOLUMES_ROOT/etc/ldap/slapd.d" 
