@@ -1,0 +1,11 @@
+version: '3'
+services:
+  cas:
+    container_name: cas
+    build: .
+    ports:
+     - "8443:8443"
+     - "8081:8080"
+networks: 
+  avenirs-network:
+    external: true

@@ -4,6 +4,6 @@ networks:
     name: avenirs-network
     driver: bridge
 include:
-  - ./openldap/docker-compose.yml
-  - ./apisix/apisix-docker/example/docker-compose.yml
-  - ./cas/cas-overlay-template/docker-compose.yml
+  - ./services/openldap/docker-compose.yml
+  - ./services/apisix/apisix-docker/example/docker-compose.yml
+  - ./services/cas/cas-overlay-template/docker-compose.yml
