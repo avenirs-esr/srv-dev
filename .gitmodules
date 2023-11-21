@@ -1,6 +1,6 @@
-[submodule "apisix/apisix-docker"]
-	path = apisix/apisix-docker
+[submodule "services/apisix/apisix-docker"]
+	path = services/apisix/apisix-docker
 	url = https://github.com/apache/apisix-docker.git
-[submodule "cas/cas-overlay-template"]
-	path = cas/cas-overlay-template
+[submodule "services/cas/cas-overlay-template"]
+	path = services/cas/cas-overlay-template
 	url = https://github.com/apereo/cas-overlay-template.git
