@@ -101,7 +101,7 @@ function init_commons(){
     fi
 }
 
-# Copy the files from a root directory to a project respection the directory structure.
+# Copy the files from a root directory to a project with the same the directory structure.
 function install_overlay {
    
     local overlay_root=$1
@@ -127,4 +127,19 @@ function install_overlay {
     done
      verbose "Overlay processed (Files: $files_cpt, Directories: $dir_cpt)"
 
+}
+
+# Revert the modifications.
+function remove_overlay {
+   
+    local target=$1
+    
+    [ -z "$target" ] && err "the target directory parameter is required"
+    [ -e $target ] || err "target directory not found: $target"
+    [ -d $target ] || err "not a directory: $target"
+    [ -w $overlay_root ] || err "not a writable directory: $target"
+
+    verbose "Removing overlay from $target"
+    cd $target && git status && cd -
+    [ $? -eq 0 ] && info "Overlay removed from $target" || err "Unable to remove overlay from $target"
 }
