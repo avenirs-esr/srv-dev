@@ -7,4 +7,3 @@ include:
   - ./services/openldap/docker-compose.yml
   - ./services/apisix/apisix-docker/example/docker-compose.yml
   - ./services/cas/cas-overlay-template/docker-compose.yml
-

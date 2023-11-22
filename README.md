@@ -44,9 +44,9 @@ Docker (tested with 24.0.6) and docker-compose >=2.2.0 for the support of "inclu
 </pre>
 
 
-# Local installation
+# Local installation quick start
 
-## Fetch the repository
+## Fetches the repository
 <pre>
 git clone git@github.com:avenirs-esr/srv-dev.git --recurse
 cd srv-dev/

@@ -2,10 +2,16 @@
 
 # ------------------------------------------------------------------
 # Utilitary functions and common options shared by the scripts.
-# - Display methods: info, warn, etc
+# - Display methods: info, warn, etc.
 # - intialization methods.
+# - helpers.          
 # ------------------------------------------------------------------
 
+# Arguments without the common ones: -h, -v, etc.
+REMAINING_ARGS=""
+
+# Services fetched from the arguments or by scanning the service directory.
+SERVICES=""
 
 # Flags
 [ -z "$VERBOSE_FLAG" ] &&  export VERBOSE_FLAG=0
@@ -52,13 +58,18 @@ function vvverbose (){
 }
 
 function err (){
+    [ "$1" = "--no-exit" ] && local -i no_exit=1 || local -i no_exit=0
     >&2 echo -ne "${GREY}[${BOLD_RED}ERROR${GREY}]${BOLD_RED} $*${NC}\n";
-    exit 1
+    [ $no_exit -ne 1 ] && exit 1
 }
 
 # Used to initialize the common parts of help string.
 function init_help(){
-    USAGE_STRING="\n $1 [ -v[v[v]] | --[v[v]]verbose ] [ -q | --quiet ] [ -h | --help ] $2\n\n"
+    USAGE_STRING="\n Usage: $1 [-v[v[v]] | --[v[v]]verbose ] [-q | --quiet] [-h | --help] $2\n\n"
+}
+
+function invalid_arg(){
+    err "Invalid Argument: $1\n\n$USAGE_STRING"
 }
 
 # Initialization for the common options: help, verbose, etc.
@@ -79,10 +90,10 @@ function init_commons(){
                 ;;
                  "--quiet" | "-q")
                     QUIET_FLAG=1
-
-                ;;
+                 ;;
                  "--verbose" | "-v")
                     VERBOSE_FLAG=$[VERBOSE_FLAG+1]
+                    
                 ;;
                  "--vverbose" | "-vv")
                     VERBOSE_FLAG=2
@@ -90,7 +101,9 @@ function init_commons(){
                  "--vvverbose" | "-vvv")
                     VERBOSE_FLAG=3
                 ;;
-
+                *) 
+                    REMAINING_ARGS="$REMAINING_ARGS$arg "
+                ;;
             esac
 
         done;
@@ -101,7 +114,7 @@ function init_commons(){
     fi
 }
 
-# Copy the files from a root directory to a project with the same the directory structure.
+# Copy the files from a root directory to a project respecting the directory structure.
 function install_overlay {
    
     local overlay_root=$1
@@ -129,7 +142,7 @@ function install_overlay {
 
 }
 
-# Revert the modifications.
+# Reverts the modifications from a github sub module.
 function remove_overlay {
    
     local target=$1
@@ -140,6 +153,57 @@ function remove_overlay {
     [ -w $overlay_root ] || err "not a writable directory: $target"
 
     verbose "Removing overlay from $target"
-    cd $target && git status && cd -
+    cd $target && git stash -u && cd -
     [ $? -eq 0 ] && info "Overlay removed from $target" || err "Unable to remove overlay from $target"
 }
+
+# Fetches the service by scanning the user args or the 
+# services' root directory.
+function init_services() {
+
+    [ "$COMMONS_INITIALIZED_FLAG" = "0" ] && err "init_commons should be executed before init_services."
+
+    local -i fetch_service_flag=0
+    local -i cpt=0
+   
+    # Fetches the services from the command line argumants.
+    for arg in $REMAINING_ARGS
+    do
+        
+        case $arg in
+            "--service" | "-s")
+               
+                fetch_service_flag=1
+            ;;
+            *)
+                # Fetches a service
+                if [ $fetch_service_flag -eq 1 ]
+                then
+                    local service=`basename $arg`
+                    vverbose "Required service to bootstrap: $service"
+                    local service_path=$SERVICES_ROOT/$service
+                    vverbose "Required service path: $service_path"
+                    
+                    # Checks that the directory corresponding to the service exists.
+                    [ -d $service_path ] || err "Invalid service $service: directory not found $service_path"
+                    SERVICES="$SERVICES$service "
+                    cpt=$cpt+1
+                else
+                    invalid_arg $arg
+                fi
+            ;;
+        esac
+    done
+
+    [ $cpt -gt 0 ] && vvverbose "Services found from arguments: $SERVICES"
+
+    # Scans the services directory
+    # the echo is to remove the \n it cuold be also done via the GNU option -z of sed
+    [ -z "$SERVICES" ] && { cd $SERVICES_ROOT && SERVICES=$(echo `ls -d *`) \
+        && cd - >/dev/null \
+        || err "Unable to set the services"; }
+
+    vverbose "Services: $SERVICES"
+}
+
+

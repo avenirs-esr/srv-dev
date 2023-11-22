@@ -1,16 +1,17 @@
 version: '2'
 services:
   openldap:
-    container_name: openldap
+    container_name: ${openldap_container_name}
     image: osixia/openldap:1.5.0
+    env_file: ../../scripts/srv-dev-env.sh
     #build:
     #   context: .
     #   dockerfile: ./openldap_Dockerfile
     environment:
       LDAP_LOG_LEVEL: "256"
-      LDAP_ORGANISATION: "avenirs-esr.fr"
-      LDAP_DOMAIN: "ldap-dev.avenirs-esr.fr"
-      LDAP_BASE_DN: "dc=ldap-dev,dc=avenirs-esr,dc=fr"
+      # LDAP_ORGANISATION: "avenirs-esr.fr"
+      # LDAP_DOMAIN: "ldap-dev.avenirs-esr.fr"
+      # LDAP_BASE_DN: "dc=ldap-dev,dc=avenirs-esr,dc=fr"
       LDAP_ADMIN_PASSWORD: "admin"
       LDAP_CONFIG_PASSWORD: "config"
       LDAP_READONLY_USER: "false"
@@ -36,10 +37,10 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - /var/lib/docker-containers/dev.avenirs-esr.fr/ldap/var/lib/ldap:/var/lib/ldap
-      - /var/lib/docker-containers/dev.avenirs-esr.fr/ldap/etc/ldap/slapd.d:/etc/ldap/slapd.d
-      - /var/lib/docker-containers/dev.avenirs-esr.fr/ldap/container/service/slapd/assets/certs/:/container/service/slapd/assets/certs/
-      - /var/lib/docker-containers/dev.avenirs-esr.fr/ldap/container/service/slapd/assets/config/bootstrap/ldif/custom/:/container/service/slapd/assets/config/bootstrap/ldif/custom
+      - ${OPENLDAP_VOLUMES_ROOT}/var/lib/ldap:/var/lib/ldap
+      - ${OPENLDAP_VOLUMES_ROOT}/etc/ldap/slapd.d:/etc/ldap/slapd.d
+      - ${OPENLDAP_VOLUMES_ROOT}/container/service/slapd/assets/certs/:/container/service/slapd/assets/certs/
+      - ${OPENLDAP_VOLUMES_ROOT}/container/service/slapd/assets/config/bootstrap/ldif/custom/:/container/service/slapd/assets/config/bootstrap/ldif/custom
     ports:
       - "389:389"
       - "636:636"
