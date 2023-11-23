@@ -1,15 +1,15 @@
 # Development Environment - srv-dev
-The repository can be used to install the services and all the development environment for the Avenirs ePortfolio.
+The repository can be used to install the services and all the development environment for the Avenirs-ESR's ePortfolio.
 
 ## Prerequisites
-Docker (tested with 24.0.6) and docker-compose >=2.2.0 for the support of "include".
+Git, Docker (tested with 24.0.6) and docker-compose >=2.2.0 for the support of "include".
 
 ## Tree structure
 
 <pre>
 . 
 ├── docker-compose.yml              Main docker compose file
-├── scripts
+├── scripts                         Main Scripts directory
 │   ├── commons.sh                  Helpers for the bash scripts
 │   └── srv-dev-bootstrap.sh        Main bootsrapping file
 └── services
@@ -18,7 +18,7 @@ Docker (tested with 24.0.6) and docker-compose >=2.2.0 for the support of "inclu
     │   ├── avenirs-apisix-overlay
     │   │   └── example
     │   │       └── docker-compose.yml
-    │   └── scripts
+    │   └── scripts                 Service scripts directorygi
     │       └── apisix-bootstrap.sh
     ├── cas
     │   ├── avenirs-cas-overlay       git submodule: https://github.com/apereo/cas-overlay-template.git 
@@ -43,6 +43,10 @@ Docker (tested with 24.0.6) and docker-compose >=2.2.0 for the support of "inclu
         └── scripts
 </pre>
 
+## Scripts
+The scripts are located in the folders "scripts"; in the root for the main one, and in each service directory for specific ones.
+The services' scripts can be executed via the main ones: srv-dev-bootstrap or srv-dev-clean.sh or individually directly.
+
 
 # Local installation quick start
 
@@ -54,4 +58,11 @@ npm i
 </pre>
 
 ## Bootstrap
-./scr
+<pre>
+ ./scripts/srv-dev-bootstap.sh -v
+</pre>
+
+## Docker
+<pre>
+
+</pre>
