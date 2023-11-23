@@ -20,6 +20,7 @@ echo "OPENLDAP_ENV_FILE $PWD/$OPENLDAP_ENV_FILE"
 warn_and_wait "Deleting volume root: $BOLD $OPENLDAP_VOLUMES_ROOT $NC in 4 seconds. (CtrL + C to abort)"; 
 
 sudo rm -Rf $OPENLDAP_VOLUMES_ROOT && info "$OPENLDAP_VOLUMES_ROOT deleted" || err "Unable to delete Openldap volumes root: $OPENLDAP_VOLUMES_ROOT"
+
 [ -f $OPENLDAP_ENV_FILE ] \
     && { rm $OPENLDAP_ENV_FILE && info "Docker environment file deleted: $OPENLDAP_ENV_FILE" || err "Unable to delete $OPENLDAP_ENV_FILE"; }\
     || info "File $OPENLDAP_ENV_FILE not present"
