@@ -18,7 +18,7 @@ info "CAS bootstrapping started."
 
 # Initialization of the local branch if needed.
 cd $CAS_REPOSITORY_DIR || err "Unable to enter $CAS_REPOSITORY_DIR"
-if [ -z "`git branch  --show-current  | grep $LOCAL_CAS_BRANCH`" ]
+if [ -z "`git branch   | grep $LOCAL_CAS_BRANCH`" ]
 then
     verbose "Switching to branch $REMOTE_CAS_BRANCH (local branch $LOCAL_CAS_BRANCH)"
     git checkout -B $LOCAL_CAS_BRANCH $REMOTE_CAS_BRANCH || err "unable to create branch $LOCAL_CAS_BRANCH from $REMOTE_CAS_BRANCH"

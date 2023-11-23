@@ -38,7 +38,7 @@ USAGE_STRING=""
 
 # Display functions - info, warning error and verbose messages (3 verbosity levels)
 function info(){
-[ $QUIET_FLAG -eq 0 ] && echo -ne "${GREY}[${GREEN}INFO${GREY}]${NC} $*\n"
+    [ $QUIET_FLAG -eq 0 ] && echo -ne "${GREY}[${GREEN}INFO${GREY}]${NC} $*\n"
 }
 
 function warn(){
@@ -61,6 +61,22 @@ function err (){
     [ "$1" = "--no-exit" ] && local -i no_exit=1 || local -i no_exit=0
     >&2 echo -ne "${GREY}[${BOLD_RED}ERROR${GREY}]${BOLD_RED} $*${NC}\n";
     [ $no_exit -ne 1 ] && exit 1
+}
+
+function warn_and_wait(){
+    local msg=$1
+    local -i count=$2
+    [ $count -gt 0  ] || count=4
+    echo "count $count"
+    warn "$msg"; 
+
+    while [ $count -gt 0 ]
+    do
+        echo -ne "$count..."
+        sleep 1; 
+        count=$count-1
+    done
+    echo "0"
 }
 
 # Used to initialize the common parts of help string.
