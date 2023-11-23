@@ -173,7 +173,7 @@ function remove_overlay {
     [ $? -eq 0 ] && info "Overlay removed from $target" || err "Unable to remove overlay from $target"
 }
 
-# Fetches the service by scanning the user args or the 
+# Fetches the services by scanning the user args or the 
 # services' root directory.
 function init_services() {
 
