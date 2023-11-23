@@ -1,22 +1,22 @@
 version: '2'
 services:
   openldap:
-    container_name: ${openldap_container_name}
+    #env_file: .env
+    container_name: ${AVENIRS_OPENLDAP_CONTAINER_NAME}
     image: osixia/openldap:1.5.0
-    env_file: ../../scripts/srv-dev-env.sh
     #build:
     #   context: .
     #   dockerfile: ./openldap_Dockerfile
     environment:
       LDAP_LOG_LEVEL: "256"
-      # LDAP_ORGANISATION: "avenirs-esr.fr"
-      # LDAP_DOMAIN: "ldap-dev.avenirs-esr.fr"
-      # LDAP_BASE_DN: "dc=ldap-dev,dc=avenirs-esr,dc=fr"
-      LDAP_ADMIN_PASSWORD: "admin"
-      LDAP_CONFIG_PASSWORD: "config"
-      LDAP_READONLY_USER: "false"
-      LDAP_READONLY_USER_USERNAME: "readonly"
-      LDAP_READONLY_USER_PASSWORD: "readonly"
+     # LDAP_ORGANISATION: "avenirs-esr.fr"
+     # LDAP_DOMAIN: "ldap-dev.avenirs-esr.fr"
+     # LDAP_BASE_DN: "dc=ldap-dev,dc=avenirs-esr,dc=fr"
+     # LDAP_ADMIN_PASSWORD: "admin"
+     # LDAP_CONFIG_PASSWORD: "config"
+      # LDAP_READONLY_USER: "true"
+      # LDAP_READONLY_USER_USERNAME: "readonly"
+      # LDAP_READONLY_USER_PASSWORD: "readonly"
       LDAP_RFC2307BIS_SCHEMA: "false"
       LDAP_BACKEND: "mdb"
       LDAP_TLS: "true"
@@ -51,7 +51,7 @@ services:
     hostname: "ldap-server"
   phpldapadmin:
     image: osixia/phpldapadmin:latest
-    container_name: phpldapadmin
+    container_name: ${AVENIRS_LDAP_ADMIN_CONTAINER_NAME}
     environment:
       PHPLDAPADMIN_LDAP_HOSTS: "openldap"
       PHPLDAPADMIN_HTTPS: "false"

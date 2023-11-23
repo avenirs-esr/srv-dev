@@ -17,16 +17,7 @@ info "Openldap cleaning started."
     || err "Unable to source $OPENLDAP_SCRIPT_DIR/openldap-env.sh"
 
 echo "OPENLDAP_ENV_FILE $PWD/$OPENLDAP_ENV_FILE"
-warn "Deleting volume root: $BOLD $OPENLDAP_VOLUMES_ROOT $NC in 4 seconds. (CtrL + C to abort)"; 
-
-echo -ne "3..."
-sleep 1; 
-echo -ne "2..."
-sleep 1; 
-echo -ne "1..."
-sleep 1; 
-echo -ne "0\n"
-sleep 1; 
+warn_and_wait "Deleting volume root: $BOLD $OPENLDAP_VOLUMES_ROOT $NC in 4 seconds. (CtrL + C to abort)"; 
 
 sudo rm -Rf $OPENLDAP_VOLUMES_ROOT && info "$OPENLDAP_VOLUMES_ROOT deleted" || err "Unable to delete Openldap volumes root: $OPENLDAP_VOLUMES_ROOT"
 [ -f $OPENLDAP_ENV_FILE ] \

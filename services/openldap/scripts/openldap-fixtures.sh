@@ -9,7 +9,8 @@ OUT=$SCRIPT_DIR/openldap-fixtures.ldif
 TEMPLATE=$SCRIPT_DIR/openldap-template.ldif
 BRANCHES=$SCRIPT_DIR/openldap-branches.ldif
 
-USER_PASSWORD='{ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==' #Azerty123
+
+# Flag to fetch the output file name
 OUT_FETCH_FLAG=0
 
 
@@ -62,6 +63,7 @@ function generate_ldif(){
     vvverbose "gecos        $gecos"
     vvverbose "uidNumber    $uidNumber"
     vvverbose "gidNumber    $gidNumber"
+
     cat $TEMPLATE \
         | sed s"/__UID__/$uid/g" \
         | sed s"/__CN__/$cn/g" \
@@ -70,7 +72,10 @@ function generate_ldif(){
         | sed s"/__GECOS__/$gecos/g" \
         | sed s"/__UID_NUMBER__/$uidNumber/g" \
         | sed s"/__GID_NUMBER__/$gidNumber/g"\
-        | sed s"%__USER_PASSWORD__%$USER_PASSWORD%g">>$OUT || err "Unable to write to $OUT"
+        | sed s"%__USER_PASSWORD__%$AVENIRS_LDAP_FIXTURES_PASSWORD%g">>$OUT || err "Unable to write to $OUT"
+
+
+      
 }
 
 
@@ -89,5 +94,18 @@ do
     esac
 done
 
-touch $OUT 2>/dev/null || err "$OUT not writable"
+# When the container has already been launched the owner:group of the file and directory
+# is openldap:openldap (911:911).
+# This is a workaround and should be handled via another mecanism, group mapping or instance.
+touch $OUT 2>/dev/null || { 
+    dir=`dirname $OUT`
+    warn "Deleting $dir"
+    echo "dir $dir"
+    warn_and_wait "The directory $dir and all its files will be deleted in 4s (CTRL+C to abort)"
+    sudo rm -Rf $dir || err "Unable to delete directory $dir (fixtures process)"
+    mkdir $dir || err "Unable to create directory $dir (fixtures process)"
+    touch $OUT || err "Unable to create file $OUT (fixtures process)"
+    info "Fixtures directory reseted"
+}
+
 generate
