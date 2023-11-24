@@ -53,7 +53,7 @@ services:
       avenirs-network:
 
   web1:
-    container_name: apisix_web1
+    container_name: apisix_nginx1
     image: nginx:1.19.0-alpine
     restart: always
     volumes:
@@ -66,7 +66,7 @@ services:
       avenirs-network:
 
   web2:
-    container_name: apisix_web2
+    container_name: apisix_nginx2
     image: nginx:1.19.0-alpine
     restart: always
     volumes:
