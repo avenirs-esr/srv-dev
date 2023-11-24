@@ -75,9 +75,21 @@ npm i
 
 ## Docker
 <pre>
-
+docker-compose up --build -d
+$ docker ps
+CONTAINER ID   IMAGE                        COMMAND                  CREATED       STATUS       PORTS                                                                                                                                                                                            NAMES
+7b9655421acd   apache/apisix:3.6.0-debian   "/docker-entrypoint.…"   2 hours ago   Up 2 hours   0.0.0.0:9080->9080/tcp, :::9080->9080/tcp, 0.0.0.0:9091-9092->9091-9092/tcp, :::9091-9092->9091-9092/tcp, 0.0.0.0:9180->9180/tcp, :::9180->9180/tcp, 0.0.0.0:9443->9443/tcp, :::9443->9443/tcp   apisix
+64de5b872845   osixia/phpldapadmin:latest   "/container/tool/run"    2 hours ago   Up 2 hours   443/tcp, 0.0.0.0:8080->80/tcp, :::8080->80/tcp                                                                                                                                                   ldapadmin
+d4459f36e0f2   prom/prometheus:v2.25.0      "/bin/prometheus --c…"   2 hours ago   Up 2 hours   0.0.0.0:9090->9090/tcp, :::9090->9090/tcp                                                                                                                                                        apisix_prometheus
+781a9742c581   nginx:1.19.0-alpine          "/docker-entrypoint.…"   2 hours ago   Up 2 hours   0.0.0.0:9082->80/tcp, :::9082->80/tcp                                                                                                                                                            apisix_nginx2
+f8128fd7b122   nginx:1.19.0-alpine          "/docker-entrypoint.…"   2 hours ago   Up 2 hours   0.0.0.0:9081->80/tcp, :::9081->80/tcp                                                                                                                                                            apisix_nginx1
+70d351711c1a   grafana/grafana:7.3.7        "/run.sh"                2 hours ago   Up 2 hours   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp                                                                                                                                                        apisix_grafana
+6f391d03a4ca   bitnami/etcd:3.4.15          "/opt/bitnami/script…"   2 hours ago   Up 2 hours   0.0.0.0:2379->2379/tcp, :::2379->2379/tcp, 2380/tcp                                                                                                                                              apisix_etcd
+0231b57b04cd   srv-dev-cas                  "java -server -nover…"   2 hours ago   Up 2 hours   0.0.0.0:8443->8443/tcp, :::8443->8443/tcp, 0.0.0.0:8081->8080/tcp, :::8081->8080/tcp 
 </pre>
 
 # Distant deployment
 
+WIP...
+Creation of the contexts
   docker context create env --docker host=ssh://arnaud@srv-dev-avenirs --default-stack-orchestrator=swarm
