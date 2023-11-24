@@ -9,14 +9,23 @@ services:
     #   dockerfile: ./openldap_Dockerfile
     environment:
       LDAP_LOG_LEVEL: "256"
-     # LDAP_ORGANISATION: "avenirs-esr.fr"
-     # LDAP_DOMAIN: "ldap-dev.avenirs-esr.fr"
-     # LDAP_BASE_DN: "dc=ldap-dev,dc=avenirs-esr,dc=fr"
-     # LDAP_ADMIN_PASSWORD: "admin"
-     # LDAP_CONFIG_PASSWORD: "config"
-      # LDAP_READONLY_USER: "true"
-      # LDAP_READONLY_USER_USERNAME: "readonly"
-      # LDAP_READONLY_USER_PASSWORD: "readonly"
+      # LDAP_ORGANISATION: "avenirs-esr.fr"
+      # LDAP_DOMAIN: "ldap-dev.avenirs-esr.fr"
+      # LDAP_BASE_DN: "dc=ldap-dev,dc=avenirs-esr,dc=fr"
+      # LDAP_ADMIN_PASSWORD: "admin"
+      # LDAP_CONFIG_PASSWORD: "config"
+      # LDAP_READONLY_USER: "false"
+      #LDAP_READONLY_USER_USERNAME: "readonly"
+      #LDAP_READONLY_USER_PASSWORD: "readonly"
+      LDAP_ORGANISATION: ${LDAP_ORGANISATION}
+      LDAP_DOMAIN: ${LDAP_DOMAIN}
+      LDAP_BASE_DN: ${LDAP_BASE_DN}
+      LDAP_ADMIN_PASSWORD: ${LDAP_ADMIN_PASSWORD}
+      LDAP_CONFIG_PASSWORD: ${LDAP_CONFIG_PASSWORD}
+      LDAP_READONLY_USER: ${LDAP_READONLY_USER}
+      LDAP_READONLY_USER_USERNAME: ${LDAP_READONLY_USER_USERNAME}
+      LDAP_READONLY_USER_PASSWORD: ${LDAP_READONLY_USER_PASSWORD}
+
       LDAP_RFC2307BIS_SCHEMA: "false"
       LDAP_BACKEND: "mdb"
       LDAP_TLS: "true"

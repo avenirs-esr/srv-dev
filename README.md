@@ -70,3 +70,7 @@ npm i
 <pre>
 
 </pre>
+
+# Distant deployment
+
+  docker context create env --docker host=ssh://arnaud@srv-dev-avenirs --default-stack-orchestrator=swarm

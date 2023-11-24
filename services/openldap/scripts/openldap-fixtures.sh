@@ -1,9 +1,24 @@
-#! /bin/bash
-
-# Generates an LDAP test set.
 
 
-SCRIPT_DIR="`dirname $0`/../fixtures"
+#--------------------------------------#
+# Fixtures script for Openldap         #
+#                                      #  
+# Creates an LDIF file for a test set  #
+#--------------------------------------#
+
+
+# Initialization
+OPENLDAP_SCRIPT_DIR=`dirname $0`
+. $OPENLDAP_SCRIPT_DIR/../../../scripts/srv-dev-commons.sh
+init_commons $*
+init_help "`basename $0`" "[ -o | --out filename ]"
+. $OPENLDAP_SCRIPT_DIR/openldap-env.sh $OPENLDAP_SCRIPT_DIR 2> /dev/null \
+    || err "Unable to source $OPENLDAP_SCRIPT_DIR/openldap-env.sh"
+
+
+
+
+SCRIPT_DIR="$OPENLDAP_SCRIPT_DIR/../fixtures"
 IN=$SCRIPT_DIR/openldap-data.csv
 OUT=$SCRIPT_DIR/openldap-fixtures.ldif
 TEMPLATE=$SCRIPT_DIR/openldap-template.ldif
@@ -13,10 +28,7 @@ BRANCHES=$SCRIPT_DIR/openldap-branches.ldif
 # Flag to fetch the output file name
 OUT_FETCH_FLAG=0
 
-
-. $SCRIPT_DIR/../../../scripts/srv-dev-commons.sh
-init_help "`basename $0`" "[ -o | --out filename ]"
-init_commons $*
+# Generates the ldif file
 function generate() {
     info "LDIF generation started."
     info "Using file: $OUT."
