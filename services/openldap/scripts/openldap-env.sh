@@ -11,6 +11,7 @@ LDIF_CUSTOM_DIR=$OPENLDAP_VOLUMES_ROOT/container/service/slapd/assets/config/boo
 LDIF_FILE=$LDIF_CUSTOM_DIR/openldap-fixtures.ldif
 FIXTURES_SCRIPT_CMD="$OPENLDAP_SCRIPT_DIR/openldap-fixtures.sh -o $LDIF_FILE"
 
+
 # Docker env file
 OPENLDAP_ENV_FILE=$OPENLDAP_SCRIPT_DIR/../.env
 
