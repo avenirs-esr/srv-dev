@@ -20,17 +20,17 @@ Git, Docker (tested with 24.0.6) and docker-compose >=2.2.0 for the support of "
 │   └── srv-dev-env.sh              Main environment file : can override the services environment files.
 └── services
     ├── apisix
-    │   ├── apisix-docker            git submodule: https://github.com/apache/apisix-docker.git
+    │   ├── apisix-docker           git submodule: https://github.com/apache/apisix-docker.git
     │   ├── avenirs-apisix-overlay
     │   │   └── example
     │   │       └── docker-compose.yml
     │   └── scripts                
     ├── scripts                       
-    │   ├── apisix-bootstrap.sh        Apisix bootsrapping script
-    │   ├── apisix-clean.sh            Reverts Apisix bootstrapping
-    │   └── apisix-env.sh              Apisix environment file
+    │   ├── apisix-bootstrap.sh     Apisix bootsrapping script
+    │   ├── apisix-clean.sh         Reverts Apisix bootstrapping
+    │   └── apisix-env.sh           Apisix environment file
     ├── cas
-    │   ├── avenirs-cas-overlay       git submodule: https://github.com/apereo/cas-overlay-template.git 
+    │   ├── avenirs-cas-overlay     git submodule: https://github.com/apereo/cas-overlay-template.git 
     │   │   ├── build.gradle
     │   │   ├── docker-compose.yml
     │   │   ├── Dockerfile
@@ -46,7 +46,7 @@ Git, Docker (tested with 24.0.6) and docker-compose >=2.2.0 for the support of "
     │   │           └── thekeystore
     │   ├── cas-overlay-template
     │   └── scripts
-    └── openldap                      custom container based on osixia's images
+    └── openldap                    custom container based on osixia's images
         ├── doc
         ├── fixtures
         └── scripts
@@ -74,6 +74,12 @@ npm i
 ## Docker
 <pre>
 docker-compose up --build -d
+
+</pre>
+
+Several containers should be deployed and running:
+
+<pre>
 $ docker ps
 CONTAINER ID   IMAGE                        COMMAND                  CREATED       STATUS       PORTS                                                                                                                                                                                            NAMES
 7b9655421acd   apache/apisix:3.6.0-debian   "/docker-entrypoint.…"   2 hours ago   Up 2 hours   0.0.0.0:9080->9080/tcp, :::9080->9080/tcp, 0.0.0.0:9091-9092->9091-9092/tcp, :::9091-9092->9091-9092/tcp, 0.0.0.0:9180->9180/tcp, :::9180->9180/tcp, 0.0.0.0:9443->9443/tcp, :::9443->9443/tcp   apisix
