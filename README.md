@@ -10,8 +10,6 @@ Git, Docker (tested with 24.0.6) and docker-compose >=2.2.0 for the support of "
 
 ## Tree structure
 
-h
-srv-dev-env.sh
 <pre>
 . 
 ├── docker-compose.yml              Main docker compose file
