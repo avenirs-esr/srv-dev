@@ -1,6 +1,10 @@
 # Development Environment - srv-dev
 The repository can be used to install the services and all the development environment for the Avenirs-ESR's ePortfolio.
 
+It is based on bash scripts for bootstraping and cleaning and a main docker compose file that includes a docker compose file for each service to deploy.
+The main bootstrap script will invoque the bootstrap script for each service. A service bootstrap script may create the docker volumes on file system, 
+check the branch (if a git submodule), and create a .env file to propagate the settings.
+
 ## Prerequisites
 Git, Docker (tested with 24.0.6) and docker-compose >=2.2.0 for the support of "include".
 
@@ -15,15 +19,18 @@ srv-dev-env.sh
 │   ├── srv-dev-bootstrap.sh        Main bootsrapping script
 │   ├── srv-dev-clean.sh            Removes all the bootstrap modifications
 │   ├── srv-dev-commons.sh          Helpers and constants for the bash scripts
-│   └── srv-dev-env.sh              Main environment file
+│   └── srv-dev-env.sh              Main environment file : can override the services environment files.
 └── services
     ├── apisix
     │   ├── apisix-docker            git submodule: https://github.com/apache/apisix-docker.git
     │   ├── avenirs-apisix-overlay
     │   │   └── example
     │   │       └── docker-compose.yml
-    │   └── scripts                 Service scripts directorygi
-    │       └── apisix-bootstrap.sh
+    │   └── scripts                
+    ├── scripts                       
+    │   ├── apisix-bootstrap.sh        Apisix bootsrapping script
+    │   ├── apisix-clean.sh            Reverts Apisix bootstrapping
+    │   └── apisix-env.sh              Apisix environment file
     ├── cas
     │   ├── avenirs-cas-overlay       git submodule: https://github.com/apereo/cas-overlay-template.git 
     │   │   ├── build.gradle
