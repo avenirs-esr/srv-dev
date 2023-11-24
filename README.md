@@ -6,12 +6,16 @@ Git, Docker (tested with 24.0.6) and docker-compose >=2.2.0 for the support of "
 
 ## Tree structure
 
+h
+srv-dev-env.sh
 <pre>
 . 
 ├── docker-compose.yml              Main docker compose file
 ├── scripts                         Main Scripts directory
-│   ├── commons.sh                  Helpers for the bash scripts
-│   └── srv-dev-bootstrap.sh        Main bootsrapping file
+│   ├── srv-dev-bootstrap.sh        Main bootsrapping script
+│   ├── srv-dev-clean.sh            Removes all the bootstrap modifications
+│   ├── srv-dev-commons.sh          Helpers and constants for the bash scripts
+│   └── srv-dev-env.sh              Main environment file
 └── services
     ├── apisix
     │   ├── apisix-docker            git submodule: https://github.com/apache/apisix-docker.git
