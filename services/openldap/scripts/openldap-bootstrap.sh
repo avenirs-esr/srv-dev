@@ -24,7 +24,6 @@ info "Openldap bootstrapping started."
 [ -x $FIXTURES_SCRIPT ] || err "$FIXTURES_SCRIPT NOT executable."
 
 
-
 # Volumes creation
 mkdir -p  $AVENIRS_LDAP_VOLUMES_ROOT/var/lib/ldap && vverbose "Volume OK: $AVENIRS_LDAP_VOLUMES_ROOT/var/lib/ldap" 
 mkdir -p  $AVENIRS_LDAP_VOLUMES_ROOT/etc/ldap/slapd.d && vverbose "Volume OK: $AVENIRS_LDAP_VOLUMES_ROOT/etc/ldap/slapd.d" 
