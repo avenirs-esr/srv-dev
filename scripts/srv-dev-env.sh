@@ -5,7 +5,7 @@
 #--------------------------------------#
 SRV_DEV_SCRIPT_DIR=$1
 SERVICES_ROOT="$SRV_DEV_SCRIPT_DIR/../services"
-VOLUMES_ROOT=/var/lib/docker-containers/deletedev.avenirs-esr.fr
+VOLUMES_ROOT=/var/lib/docker-containers/dev.avenirs-esr.fr
 DOCKER_GROUP="docker"
 
 # ---- Docker environment variables that can be overridden

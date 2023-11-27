@@ -58,7 +58,7 @@ function check_prerequisites(){
     if [ ! -e $VOLUMES_ROOT ]
     then
         vvverbose "Volumes root not found: $VOLUMES_ROOT, trying to create"
-        sudo mkdir $VOLUMES_ROOT || err "Unable to create $VOLUMES_ROOT"
+        sudo mkdir -p $VOLUMES_ROOT || err "Unable to create $VOLUMES_ROOT"
         sudo chgrp $DOCKER_GROUP $VOLUMES_ROOT || err "Unable to change owner group of $VOLUMES_ROOT to $DOCKER_GROUP"
         sudo chmod g+u $VOLUMES_ROOT || err "Unable to change permission on $VOLUMES_ROOT (chmod g+u)"
         sudo chmod g+s $VOLUMES_ROOT || err "Unable to change permission on $VOLUMES_ROOT (chmod g+s)"
