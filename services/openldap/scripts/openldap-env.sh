@@ -24,10 +24,10 @@ OPENLDAP_ENV_FILE=$OPENLDAP_SCRIPT_DIR/../.env
 [ -z  "$LDAP_READONLY_USER" ] && LDAP_READONLY_USER="true"
 [ -z  "$LDAP_READONLY_USER_USERNAME" ] && LDAP_READONLY_USER_USERNAME="readonly"
 [ -z  "$LDAP_READONLY_USER_PASSWORD" ] && LDAP_READONLY_USER_PASSWORD="readonly"
-#Azerty123
-[ -z  "$AVENIRS_LDAP_FIXTURES_PASSWORD" ] && AVENIRS_LDAP_FIXTURES_PASSWORD='{ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==' 
+[ -z  "$AVENIRS_LDAP_FIXTURES_PASSWORD" ] && AVENIRS_LDAP_FIXTURES_PASSWORD='{ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==' #Azerty123
 [ -z  "$AVENIRS_OPENLDAP_CONTAINER_NAME" ] && AVENIRS_OPENLDAP_CONTAINER_NAME="openldap"
 [ -z  "$AVENIRS_LDAP_ADMIN_CONTAINER_NAME" ] && AVENIRS_LDAP_ADMIN_CONTAINER_NAME="ldapadmin"
 [ -z "$AVENIRS_LDAP_VOLUMES_ROOT" ] && AVENIRS_LDAP_VOLUMES_ROOT=$VOLUMES_ROOT/ldap
-# This is required to source this script as the test below can fail.
+
+# This is required to source this script as the test above can fail.
 return 0
