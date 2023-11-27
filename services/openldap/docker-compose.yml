@@ -1,22 +1,10 @@
-version: '2'
+version: '3'
 services:
   openldap:
-    #env_file: .env
     container_name: ${AVENIRS_OPENLDAP_CONTAINER_NAME}
     image: osixia/openldap:1.5.0
-    #build:
-    #   context: .
-    #   dockerfile: ./openldap_Dockerfile
     environment:
       LDAP_LOG_LEVEL: "256"
-      # LDAP_ORGANISATION: "avenirs-esr.fr"
-      # LDAP_DOMAIN: "ldap-dev.avenirs-esr.fr"
-      # LDAP_BASE_DN: "dc=ldap-dev,dc=avenirs-esr,dc=fr"
-      # LDAP_ADMIN_PASSWORD: "admin"
-      # LDAP_CONFIG_PASSWORD: "config"
-      # LDAP_READONLY_USER: "false"
-      #LDAP_READONLY_USER_USERNAME: "readonly"
-      #LDAP_READONLY_USER_PASSWORD: "readonly"
       LDAP_ORGANISATION: ${LDAP_ORGANISATION}
       LDAP_DOMAIN: ${LDAP_DOMAIN}
       LDAP_BASE_DN: ${LDAP_BASE_DN}
@@ -25,7 +13,6 @@ services:
       LDAP_READONLY_USER: ${LDAP_READONLY_USER}
       LDAP_READONLY_USER_USERNAME: ${LDAP_READONLY_USER_USERNAME}
       LDAP_READONLY_USER_PASSWORD: ${LDAP_READONLY_USER_PASSWORD}
-
       LDAP_RFC2307BIS_SCHEMA: "false"
       LDAP_BACKEND: "mdb"
       LDAP_TLS: "true"
@@ -37,9 +24,6 @@ services:
       LDAP_TLS_CIPHER_SUITE: "SECURE256:-VERS-SSL3.0"
       LDAP_TLS_VERIFY_CLIENT: "demand"
       LDAP_REPLICATION: "false"
-      #LDAP_REPLICATION_CONFIG_SYNCPROV: 'binddn="cn=admin,cn=config" bindmethod=simple credentials="$$LDAP_CONFIG_PASSWORD" searchbase="cn=config" type=refreshAndPersist retry="60 +" timeout=1 starttls=critical'
-      #LDAP_REPLICATION_DB_SYNCPROV: 'binddn="cn=admin,$$LDAP_BASE_DN" bindmethod=simple credentials="$$LDAP_ADMIN_PASSWORD" searchbase="$$LDAP_BASE_DN" type=refreshAndPersist interval=00:00:00:10 retry="60 +" timeout=1 starttls=critical'
-      #LDAP_REPLICATION_HOSTS: "#PYTHON2BASH:['ldap://ldap.example.org','ldap://ldap2.example.org']"
       KEEP_EXISTING_CONFIG: "false"
       LDAP_REMOVE_CONFIG_AFTER_SETUP: "false"
       LDAP_SSL_HELPER_PREFIX: "ldap"
