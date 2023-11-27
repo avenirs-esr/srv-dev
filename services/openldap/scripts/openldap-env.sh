@@ -6,8 +6,8 @@
 
 OPENLDAP_SCRIPT_DIR=$1
 . $OPENLDAP_SCRIPT_DIR/../../../scripts/srv-dev-env.sh
-OPENLDAP_VOLUMES_ROOT=$VOLUMES_ROOT/ldap
-LDIF_CUSTOM_DIR=$OPENLDAP_VOLUMES_ROOT/container/service/slapd/assets/config/bootstrap/ldif/custom
+
+LDIF_CUSTOM_DIR=$AVENIRS_LDAP_VOLUMES_ROOT/container/service/slapd/assets/config/bootstrap/ldif/custom
 LDIF_FILE=$LDIF_CUSTOM_DIR/openldap-fixtures.ldif
 FIXTURES_SCRIPT_CMD="$OPENLDAP_SCRIPT_DIR/openldap-fixtures.sh -o $LDIF_FILE"
 
@@ -28,6 +28,6 @@ OPENLDAP_ENV_FILE=$OPENLDAP_SCRIPT_DIR/../.env
 [ -z  "$AVENIRS_LDAP_FIXTURES_PASSWORD" ] && AVENIRS_LDAP_FIXTURES_PASSWORD='{ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==' 
 [ -z  "$AVENIRS_OPENLDAP_CONTAINER_NAME" ] && AVENIRS_OPENLDAP_CONTAINER_NAME="openldap"
 [ -z  "$AVENIRS_LDAP_ADMIN_CONTAINER_NAME" ] && AVENIRS_LDAP_ADMIN_CONTAINER_NAME="ldapadmin"
-
+[ -z "$AVENIRS_LDAP_VOLUMES_ROOT" ] && AVENIRS_LDAP_VOLUMES_ROOT=$VOLUMES_ROOT/ldap
 # This is required to source this script as the test below can fail.
 return 0

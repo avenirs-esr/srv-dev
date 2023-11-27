@@ -30,10 +30,10 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - ${OPENLDAP_VOLUMES_ROOT}/var/lib/ldap:/var/lib/ldap
-      - ${OPENLDAP_VOLUMES_ROOT}/etc/ldap/slapd.d:/etc/ldap/slapd.d
-      - ${OPENLDAP_VOLUMES_ROOT}/container/service/slapd/assets/certs/:/container/service/slapd/assets/certs/
-      - ${OPENLDAP_VOLUMES_ROOT}/container/service/slapd/assets/config/bootstrap/ldif/custom/:/container/service/slapd/assets/config/bootstrap/ldif/custom
+      - ${AVENIRS_LDAP_VOLUMES_ROOT}/var/lib/ldap:/var/lib/ldap
+      - ${AVENIRS_LDAP_VOLUMES_ROOT}/etc/ldap/slapd.d:/etc/ldap/slapd.d
+      - ${AVENIRS_LDAP_VOLUMES_ROOT}/container/service/slapd/assets/certs/:/container/service/slapd/assets/certs/
+      - ${AVENIRS_LDAP_VOLUMES_ROOT}/container/service/slapd/assets/config/bootstrap/ldif/custom/:/container/service/slapd/assets/config/bootstrap/ldif/custom
     ports:
       - "389:389"
       - "636:636"
