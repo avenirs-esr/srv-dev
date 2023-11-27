@@ -9,6 +9,7 @@ VOLUMES_ROOT=/var/lib/docker-containers/dev.avenirs-esr.fr
 DOCKER_GROUP="docker"
 
 # ---- Docker environment variables that can be overridden
+
 # Openldap
 #LDAP_ORGANISATION=""
 #LDAP_DOMAIN=""
@@ -24,5 +25,6 @@ DOCKER_GROUP="docker"
 #AVENIRS_LDAP_ADMIN_CONTAINER_NAME=""
 #AVENIRS_OPENLDAP_CONTAINER_NAME=""
 #AVENIRS_LDAP_ADMIN_CONTAINER_NAME=""
+
 # Apache
 #AVENIRS_APACHE_CONTAINER_NAME=""
