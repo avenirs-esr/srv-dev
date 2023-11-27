@@ -77,14 +77,7 @@ function check_prerequisites(){
     else    
         info "Volumes root checked $VOLUMES_ROOT"
     fi
-     
-
 }
 
-
-
 check_prerequisites
-
-exit 1
-
 bootstrap_services
