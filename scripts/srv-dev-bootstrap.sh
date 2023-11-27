@@ -41,4 +41,37 @@ function bootstrap_services() {
     info "Completed"
 }
 
+function check_prerequisites(){
+    # Checks the docker group
+    [ -n "$DOCKER_GROUP" ] || err "DOCKER_GROUP is missing in srv-dev-env.sh"
+    verbose "Using docker group: $DOCKER_GROUP"
+
+    local entry=`cat /etc/group | grep -e "^$DOCKER_GROUP:"`
+    
+    [ -z "$entry" ] && err "Group $DOCKER_GROUP not found"
+    verbose "Docker group \"$DOCKER_GROUP\" found"
+
+    # Checks the docker volume roots
+    [ -n "$VOLUMES_ROOT" ] || err "VOLUMES_ROOT is missing in srv-dev-env.sh"
+    [ -e $VOLUMES_ROOT -a ! -d $VOLUMES_ROOT ] && err "Volumes root $VOLUMES_ROOT exists but is not a directory"
+    
+    if [ ! -e $VOLUMES_ROOT ]
+    then
+        vvverbose "Volumes root not found: $VOLUMES_ROOT, trying to create"
+        sudo mkdir $VOLUMES_ROOT || err "Unable to create $VOLUMES_ROOT"
+        sudo chgrp $DOCKER_GROUP $VOLUMES_ROOT || err "Unable to change owner group of $VOLUMES_ROOT to $DOCKER_GROUP"
+        sudo chmod g+u $VOLUMES_ROOT || err "Unable to change permission on $VOLUMES_ROOT (chmod g+u)"
+        sudo chmod g+s $VOLUMES_ROOT || err "Unable to change permission on $VOLUMES_ROOT (chmod g+s)"
+        info "Volume root $VOLUMES_ROOT created."
+    else    
+        info "Volumes root checked $VOLUMES_ROOT"
+    fi
+     
+
+}
+
+
+
+check_prerequisites
+
 bootstrap_services
