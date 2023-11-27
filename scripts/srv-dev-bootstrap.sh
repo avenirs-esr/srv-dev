@@ -57,10 +57,10 @@ function check_prerequisites(){
     verbose "Docker group \"$DOCKER_GROUP\" found"
 
     # Checks that the user is member of Docker group
-    vvverbose "Checking that user $USER is member of group $DOCKER_GROUP"
+    vvverbose "Checking that user $USER is member of docker group $DOCKER_GROUP"
     groups | grep -qw $DOCKER_GROUP
-    [ $? -ne 0 ] && err "User $USER is not member of $DOCKER_GROUP"
-    verbose "User $USER is memberof $DOCKER_GROUP"
+    [ $? -ne 0 ] && err "User $USER is not member of docker group $DOCKER_GROUP"
+    verbose "User $USER is memberof docker group $DOCKER_GROUP"
 
     # Checks the docker volume roots
     [ -n "$VOLUMES_ROOT" ] || err "VOLUMES_ROOT is missing in srv-dev-env.sh"
