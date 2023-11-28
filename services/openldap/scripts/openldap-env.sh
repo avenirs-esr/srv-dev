@@ -6,10 +6,8 @@
 
 OPENLDAP_SCRIPT_DIR=$1
 . $OPENLDAP_SCRIPT_DIR/../../../scripts/srv-dev-env.sh
-OPENLDAP_VOLUMES_ROOT=$VOLUMES_ROOT/ldap
-LDIF_CUSTOM_DIR=$OPENLDAP_VOLUMES_ROOT/container/service/slapd/assets/config/bootstrap/ldif/custom
-LDIF_FILE=$LDIF_CUSTOM_DIR/openldap-fixtures.ldif
-FIXTURES_SCRIPT_CMD="$OPENLDAP_SCRIPT_DIR/openldap-fixtures.sh -o $LDIF_FILE"
+
+
 
 
 # Docker env file
@@ -24,10 +22,14 @@ OPENLDAP_ENV_FILE=$OPENLDAP_SCRIPT_DIR/../.env
 [ -z  "$LDAP_READONLY_USER" ] && LDAP_READONLY_USER="true"
 [ -z  "$LDAP_READONLY_USER_USERNAME" ] && LDAP_READONLY_USER_USERNAME="readonly"
 [ -z  "$LDAP_READONLY_USER_PASSWORD" ] && LDAP_READONLY_USER_PASSWORD="readonly"
-#Azerty123
-[ -z  "$AVENIRS_LDAP_FIXTURES_PASSWORD" ] && AVENIRS_LDAP_FIXTURES_PASSWORD='{ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==' 
+[ -z  "$AVENIRS_LDAP_FIXTURES_PASSWORD" ] && AVENIRS_LDAP_FIXTURES_PASSWORD='{ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==' #Azerty123
 [ -z  "$AVENIRS_OPENLDAP_CONTAINER_NAME" ] && AVENIRS_OPENLDAP_CONTAINER_NAME="openldap"
 [ -z  "$AVENIRS_LDAP_ADMIN_CONTAINER_NAME" ] && AVENIRS_LDAP_ADMIN_CONTAINER_NAME="ldapadmin"
+[ -z "$AVENIRS_LDAP_VOLUMES_ROOT" ] && AVENIRS_LDAP_VOLUMES_ROOT=$VOLUMES_ROOT/ldap
 
-# This is required to source this script as the test below can fail.
+LDIF_CUSTOM_DIR=$AVENIRS_LDAP_VOLUMES_ROOT/container/service/slapd/assets/config/bootstrap/ldif/custom
+LDIF_FILE=$LDIF_CUSTOM_DIR/openldap-fixtures.ldif
+FIXTURES_SCRIPT_CMD="$OPENLDAP_SCRIPT_DIR/openldap-fixtures.sh -o $LDIF_FILE"
+
+# This is to be sure that this script can be sourced.
 return 0

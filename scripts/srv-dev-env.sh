@@ -5,10 +5,11 @@
 #--------------------------------------#
 SRV_DEV_SCRIPT_DIR=$1
 SERVICES_ROOT="$SRV_DEV_SCRIPT_DIR/../services"
-VOLUMES_ROOT=/var/lib/docker-containers/deletedev.avenirs-esr.fr
+VOLUMES_ROOT=/var/lib/docker-containers/dev.avenirs-esr.fr
 DOCKER_GROUP="docker"
 
 # ---- Docker environment variables that can be overridden
+
 # Openldap
 #LDAP_ORGANISATION=""
 #LDAP_DOMAIN=""
@@ -18,8 +19,12 @@ DOCKER_GROUP="docker"
 #LDAP_READONLY_USER=""
 #LDAP_READONLY_USER_USERNAME=""
 #LDAP_READONLY_USER_PASSWORD=""
+#AVENIRS_LDAP_VOLUMES_ROOT=$VOLUMES_ROOT/ldap
 #AVENIRS_LDAP_FIXTURES_PASSWORD=""
 #AVENIRS_OPENLDAP_CONTAINER_NAME=""
 #AVENIRS_LDAP_ADMIN_CONTAINER_NAME=""
 #AVENIRS_OPENLDAP_CONTAINER_NAME=""
 #AVENIRS_LDAP_ADMIN_CONTAINER_NAME=""
+
+# Apache
+#AVENIRS_APACHE_CONTAINER_NAME=""

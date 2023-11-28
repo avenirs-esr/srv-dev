@@ -40,7 +40,12 @@ function bootstrap_services() {
     info "Bootstrapped services: $SERVICES"
     info "Completed"
 }
-
+function check_group(){
+    vvverbose "Checking that user $USER is member of group $DOCKER_GROUP"
+    groups | grep -qw $DOCKER_GROUP
+    [ $? -ne 0 ] && err "User $USER is not member of $DOCKER_GROUP"
+    verbose "User $USER is memberof $DOCKER_GROUP"
+}
 function check_prerequisites(){
     # Checks the docker group
     [ -n "$DOCKER_GROUP" ] || err "DOCKER_GROUP is missing in srv-dev-env.sh"
@@ -51,6 +56,12 @@ function check_prerequisites(){
     [ -z "$entry" ] && err "Group $DOCKER_GROUP not found"
     verbose "Docker group \"$DOCKER_GROUP\" found"
 
+    # Checks that the user is member of Docker group
+    vvverbose "Checking that user $USER is member of docker group $DOCKER_GROUP"
+    groups | grep -qw $DOCKER_GROUP
+    [ $? -ne 0 ] && err "User $USER is not member of docker group $DOCKER_GROUP"
+    verbose "User $USER is memberof docker group $DOCKER_GROUP"
+
     # Checks the docker volume roots
     [ -n "$VOLUMES_ROOT" ] || err "VOLUMES_ROOT is missing in srv-dev-env.sh"
     [ -e $VOLUMES_ROOT -a ! -d $VOLUMES_ROOT ] && err "Volumes root $VOLUMES_ROOT exists but is not a directory"
@@ -58,7 +69,7 @@ function check_prerequisites(){
     if [ ! -e $VOLUMES_ROOT ]
     then
         vvverbose "Volumes root not found: $VOLUMES_ROOT, trying to create"
-        sudo mkdir $VOLUMES_ROOT || err "Unable to create $VOLUMES_ROOT"
+        sudo mkdir -p $VOLUMES_ROOT || err "Unable to create $VOLUMES_ROOT"
         sudo chgrp $DOCKER_GROUP $VOLUMES_ROOT || err "Unable to change owner group of $VOLUMES_ROOT to $DOCKER_GROUP"
         sudo chmod g+u $VOLUMES_ROOT || err "Unable to change permission on $VOLUMES_ROOT (chmod g+u)"
         sudo chmod g+s $VOLUMES_ROOT || err "Unable to change permission on $VOLUMES_ROOT (chmod g+s)"
@@ -66,8 +77,6 @@ function check_prerequisites(){
     else    
         info "Volumes root checked $VOLUMES_ROOT"
     fi
- }
-
+}
 check_prerequisites
-
 bootstrap_services
