@@ -19,7 +19,7 @@ version: "3"
 
 services:
   apisix-dashboard:
-    container_name: apisix-dashboard
+    container_name: apisix_dashboard
     image: apache/apisix-dashboard:3.0.1-alpine
     restart: always
     volumes:
