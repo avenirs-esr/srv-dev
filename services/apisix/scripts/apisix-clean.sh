@@ -19,6 +19,14 @@ info "APISIX cleaning started."
 
 
 # Resets the repository
-remove_overlay $OVERLAY_DIR $APISIX_REPOSITORY_DIR
+remove_overlay $APISIX_OVERLAY_DIR $APISIX_REPOSITORY_DIR
+cd $APISIX_REPOSITORY_DIR
+git checkout $MAIN_APISIX_BRANCH || err "Unabble to checkout $MAIN_APISIX_BRANCH"
+
+[ -n "`git branch | grep $LOCAL_APISIX_BRANCH`" ] \
+    && { git branch -d $LOCAL_APISIX_BRANCH || err "Unable to delete d$LOCAL_APISIX_BRANCH"; } \
+    || verbose "Branch $LOCAL_APISIX_BRANCH not found"
+
+cd - > /dev/null
 
 info "APISIX cleaning completed."
