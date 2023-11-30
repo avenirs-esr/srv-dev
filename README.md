@@ -24,11 +24,21 @@ Git, Docker (tested with 24.0.6) and docker-compose >=2.2.0 for the support of "
     │   ├── avenirs-apisix-overlay
     │   │   └── example
     │   │       └── docker-compose.yml
-    │   └── scripts                
-    ├── scripts                       
-    │   ├── apisix-bootstrap.sh     Apisix bootsrapping script
-    │   ├── apisix-clean.sh         Reverts Apisix bootstrapping
-    │   └── apisix-env.sh           Apisix environment file
+    │   └──  scripts                       
+    │           ├── apisix-bootstrap.sh     Apisix bootsrapping script
+    │           ├── apisix-clean.sh         Reverts Apisix bootstrapping
+    │           └── apisix-env.sh           Apisix environment file
+    │
+    ├── apache                              Proxy for the docker containers
+    │        ├── apache-files
+    │        │    ├── conf
+    │        │    │    ├── extra   
+    │        │    │    │    ├── avenirs.conf     Proxy rules
+    │        │    │    │    └── httpd-ssl.conf
+│   │        │    │    └── httpd.conf
+    │        │    └── htdocs
+    │        └── scripts
+    │  
     ├── cas
     │   ├── avenirs-cas-overlay     git submodule: https://github.com/apereo/cas-overlay-template.git 
     │   │   ├── build.gradle
