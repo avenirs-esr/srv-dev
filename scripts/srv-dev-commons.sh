@@ -166,7 +166,7 @@ function remove_overlay {
     [ -z "$target" ] && err "the target directory parameter is required"
     [ -e $target ] || err "target directory not found: $target"
     [ -d $target ] || err "not a directory: $target"
-    [ -w $overlay_root ] || err "not a writable directory: $target"
+    
 
     verbose "Removing overlay from $target"
     cd $target && git stash -u && cd -
