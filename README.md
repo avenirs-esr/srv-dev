@@ -69,41 +69,77 @@ The services' scripts can be executed via the main ones: srv-dev-bootstrap or sr
 
 # Local installation quick start
 
-## Fetches the repository
+**Fetches the repository**
 <pre>
 git clone git@github.com:avenirs-esr/srv-dev.git --recurse
 cd srv-dev/
 npm i
 </pre>
 
-## Bootstrap
+**Bootstrapping**
 <pre>
  ./scripts/srv-dev-bootstap.sh -v
 </pre>
 
-## Docker
+**Build and lanches the docker images**
 <pre>
 docker-compose up --build -d
-
 </pre>
 
 Several containers should be deployed and running:
 
 <pre>
 $ docker ps
-CONTAINER ID   IMAGE                                  COMMAND                  CREATED             STATUS             PORTS                                                                                                                                                                                            NAMES
-56f5937bd11a   osixia/phpldapadmin:latest             "/container/tool/run"    About an hour ago   Up About an hour   443/tcp, 0.0.0.0:8080->80/tcp, :::8080->80/tcp                                                                                                                                                   phpldapadmin
-05dfd079e031   apache/apisix:3.6.0-debian             "/docker-entrypoint.…"   About an hour ago   Up About an hour   0.0.0.0:9080->9080/tcp, :::9080->9080/tcp, 0.0.0.0:9091-9092->9091-9092/tcp, :::9091-9092->9091-9092/tcp, 0.0.0.0:9180->9180/tcp, :::9180->9180/tcp, 0.0.0.0:9443->9443/tcp, :::9443->9443/tcp   apisix
-538e61bb3722   nginx:1.19.0-alpine                    "/docker-entrypoint.…"   About an hour ago   Up About an hour   0.0.0.0:9081->80/tcp, :::9081->80/tcp                                                                                                                                                            apisix_nginx1
-67ff791b9614   srv-dev-le-apache                      "httpd-foreground"       About an hour ago   Up About an hour   0.0.0.0:80->80/tcp, :::80->80/tcp, 0.0.0.0:443->443/tcp, :::443->443/tcp                                                                                                                         apache
-d1774f89ca8f   srv-dev-cas                            "java -server -nover…"   About an hour ago   Up About an hour   0.0.0.0:8443->8443/tcp, :::8443->8443/tcp, 0.0.0.0:8081->8080/tcp, :::8081->8080/tcp                                                                                                             cas
-7ef501c539f3   prom/prometheus:v2.25.0                "/bin/prometheus --c…"   About an hour ago   Up About an hour   0.0.0.0:9090->9090/tcp, :::9090->9090/tcp                                                                                                                                                        apisix_prometheus
-aea02430c9f3   nginx:1.19.0-alpine                    "/docker-entrypoint.…"   About an hour ago   Up About an hour   0.0.0.0:9082->80/tcp, :::9082->80/tcp                                                                                                                                                            apisix_nginx2
-a74aa53579fb   osixia/openldap:1.5.0                  "/container/tool/run"    About an hour ago   Up About an hour   0.0.0.0:389->389/tcp, :::389->389/tcp, 0.0.0.0:636->636/tcp, :::636->636/tcp                                                                                                                     openldap
-9abf9542b691   bitnami/etcd:3.4.15                    "/opt/bitnami/script…"   About an hour ago   Up About an hour   0.0.0.0:2379->2379/tcp, :::2379->2379/tcp, 2380/tcp                                                                                                                                              apisix_etcd
-7f16ce2a0d51   apache/apisix-dashboard:3.0.1-alpine   "/usr/local/apisix-d…"   About an hour ago   Up About an hour   0.0.0.0:9000->9000/tcp, :::9000->9000/tcp                                                                                                                                                        apisix-dashboard
-6d841dbd137d   grafana/grafana:7.3.7                  "/run.sh"                About an hour ago   Up About an hour   0.0.0.0:3001->3000/tcp, :::3001->3000/tcp                                                                                                                                                        apisix_grafana
+CONTAINER ID   IMAGE                        COMMAND                  CREATED      STATUS      PORTS                             NAMES
+26af756ed65d   apache-le-apache             "httpd-foreground"       2 days ago   Up 2 days   0.0.0.0:80->80/tcp,               apache
+                                                                                              :::80->80/tcp, 
+                                                                                              0.0.0.0:443->443/tcp, 
+                                                                                              :::443->443/tcp
+
+15105354c245   osixia/phpldapadmin:latest   "/container/tool/run"    2 days ago   Up 2 days   443/tcp, 0.0.0.0:8080->80/tcp,    ldapadmin 
+                                                                                              :::8080->80/tcp 
+
+8217143735e2   apache/apisix:3.6.0-debian   "/docker-entrypoint.…"   2 days ago   Up 2 days   0.0.0.0:9080->9080/tcp,           apisix
+                                                                                              :::9080->9080/tcp, 
+                                                                                              0.0.0.0:9091-9092->9091-9092/tcp, 
+                                                                                              :::9091-9092->9091-9092/tcp, 
+                                                                                              0.0.0.0:9180->9180/tcp, 
+                                                                                              :::9180->9180/tcp, 
+                                                                                              0.0.0.0:9443->9443/tcp, 
+                                                                                              :::9443->9443/tcp   
+
+38dbbc0caea3   prom/prometheus:v2.25.0      "/bin/prometheus --c…"   2 days ago   Up 2 days   0.0.0.0:9090->9090/tcp,           apisix_prometheus
+                                                                                              :::9090->9090/tcp
+                                                                                                                                                                                                                                                      
+aecb067e65dc   grafana/grafana:7.3.7        "/run.sh"                2 days ago   Up 2 days   0.0.0.0:3000->3000/tcp,           apisix_grafana
+                                                                                              :::3000->3000/tcp
+                                                                                                                                                                                                                                                      
+5b92bc287247   nginx:1.19.0-alpine          "/docker-entrypoint.…"   2 days ago   Up 2 days   0.0.0.0:9081->80/tcp,             apisix_nginx1
+                                                                                              :::9081->80/tcp
+                                                                                                                                                                                                                                                          
+7e6ef9e8423d   srv-dev-cas                  "java -server -nover…"   2 days ago   Up 2 days   0.0.0.0:8443->8443/tcp,           cas 
+                                                                                              :::8443->8443/tcp, 
+                                                                                              0.0.0.0:8081->8080/tcp, 
+                                                                                              :::8081->8080/tcp
+                                                                                                                                                                                                           
+836c3be31027   bitnami/etcd:3.4.15          "/opt/bitnami/script…"   2 days ago   Up 2 days   0.0.0.0:2379->2379/tcp,          apisix_etcd
+                                                                                              :::2379->2379/tcp, 
+                                                                                              2380/tcp
+                                                                                                                                                                                                                                            
+6ab87a07e569   nginx:1.19.0-alpine          "/docker-entrypoint.…"   2 days ago   Up 2 days   0.0.0.0:9082->80/tcp,           apisix_nginx2  
+                                                                                              :::9082->80/tcp
+                                                                                                                                                                                                                                                          
+f09872ea87d8   osixia/openldap:1.5.0        "/container/tool/run"    2 days ago   Up 2 days   0.0.0.0:389->389/tcp,           openldap
+                                                                                              :::389->389/tcp, 
+                                                                                              0.0.0.0:636->636/tcp, 
+                                                                                              :::636->636/tcp                                                                                              
+                                                                                                                                                                                                                                                                           
 </pre>
+
+## End-points
+
+- `http://<server>/grafana/`
+- `http://<server>/cas` -> e.g.:  `http://<server\>/cas/login` 
 
 # Distant deployment
 
