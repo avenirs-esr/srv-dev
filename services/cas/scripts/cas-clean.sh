@@ -16,7 +16,7 @@ info "CAS cleaning started."
 
 
 # Repository reset
-remove_overlay $OVERLAY_DIR $CAS_REPOSITORY_DIR
+remove_overlay $CAS_OVERLAY_DIR $CAS_REPOSITORY_DIR
 cd $CAS_REPOSITORY_DIR
 git checkout $MAIN_CAS_BRANCH || err "Unabble to checkout $MAIN_CAS_BRANCH"
 
