@@ -64,32 +64,6 @@ services:
     networks:
       avenirs-network:
 
-  web1:
-    container_name: apisix_nginx1
-    image: nginx:1.19.0-alpine
-    restart: always
-    volumes:
-      - ./upstream/web1.conf:/etc/nginx/nginx.conf
-    ports:
-      - "9081:80/tcp"
-    environment:
-      - NGINX_PORT=80
-    networks:
-      avenirs-network:
-
-  web2:
-    container_name: apisix_nginx2
-    image: nginx:1.19.0-alpine
-    restart: always
-    volumes:
-      - ./upstream/web2.conf:/etc/nginx/nginx.conf
-    ports:
-      - "9082:80/tcp"
-    environment:
-      - NGINX_PORT=80
-    networks:
-      avenirs-network:
-
   prometheus:
     container_name: apisix_prometheus
     image: prom/prometheus:v2.25.0
