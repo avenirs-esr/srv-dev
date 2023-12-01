@@ -146,3 +146,25 @@ f09872ea87d8   osixia/openldap:1.5.0        "/container/tool/run"    2 days ago 
 WIP...
 Creation of the contexts
   docker context create env --docker host=ssh://arnaud@srv-dev-avenirs --default-stack-orchestrator=swarm
+
+
+```mermaid
+graph LR;
+subgraph apisix["<big><strong>Apisix<br/></strong></big>"]
+  a_etcd["<big><strong>etcd</strong></big><br/><small>Distributed key-value store</small>"] 
+  a_ui["<big><strong>Dashboard</strong></big><br/><small>API Manager UI<small>"] <--> a_etcd
+  a_grafana["<big><strong>Grafana</strong></big><br/><small>Metrics visualisation</small>"] <--> a_etcd
+  a_prometheus["<big><strong>Prometheus</strong></big><br/><small>Metrics</small>"] <--> a_etcd
+  a_core(("<big><strong><font color=blue size=6em>Apisix</font></strong></big><br/><small>Kernel: Api manager</small>")) <--> a_etcd
+
+  a_grafana --> a_ui
+  a_prometheus --> a_grafana
+  a_ui <--> a_core -->a_prometheus
+
+
+
+end 
+
+apache["<strong>Apache</strong><br/>Reverse proxy</strong>"]  <--> apisix
+
+```
