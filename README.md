@@ -8,6 +8,40 @@ check the branch (if a git submodule), and create a .env file to propagate the s
 ## Prerequisites
 Git, Docker (tested with 24.0.6) and docker-compose >=2.2.0 for the support of "include".
 
+
+## Docker Containers
+
+```mermaid
+graph LR;
+subgraph apisix["<big><strong>Apisix<br/></strong></big>"]
+  a_etcd["<big><strong>etcd</strong></big><br/><small>Distributed key-value store</small>"] 
+  a_ui["<big><strong>Dashboard</strong></big><br/><small>API Manager UI<small>"] <--> a_etcd
+  a_grafana["<big><strong>Grafana</strong></big><br/><small>Metrics visualisation</small>"] <--> a_etcd
+  a_prometheus["<big><strong>Prometheus</strong></big><br/><small>Metrics</small>"] <--> a_etcd
+  a_core(("<big><strong><font color=blue size=6em>Apisix</font></strong></big><br/><small>Kernel: Api manager</small>")) <--> a_etcd
+
+  a_grafana --> a_ui
+  a_prometheus --> a_grafana
+  a_ui <--> a_core -->a_prometheus
+
+
+end 
+
+apache["<strong>Apache</strong><br/>Reverse proxy</strong>"] 
+cas["<big><strong>CAS</strong></big><br/><small>Authentication</small>"] 
+openldap["<big><strong>OpenLDAP</strong></big><br/><small>Directory</small>"] 
+phpldapadmin["<big><strong>PHPLdapAdmin</strong></big><br/><small>LDAP Frontend</small>"] 
+
+
+apache  <--> apisix
+apache <--> cas 
+apache <--> phpldapadmin
+openldap <--> cas
+phpldapadmin <--> openldap
+
+```
+
+
 ## Tree structure
 
 <pre>
@@ -114,9 +148,6 @@ CONTAINER ID   IMAGE                        COMMAND                  CREATED    
 aecb067e65dc   grafana/grafana:7.3.7        "/run.sh"                2 days ago   Up 2 days   0.0.0.0:3000->3000/tcp,           apisix_grafana
                                                                                               :::3000->3000/tcp
                                                                                                                                                                                                                                                       
-5b92bc287247   nginx:1.19.0-alpine          "/docker-entrypoint.…"   2 days ago   Up 2 days   0.0.0.0:9081->80/tcp,             apisix_nginx1
-                                                                                              :::9081->80/tcp
-                                                                                                                                                                                                                                                          
 7e6ef9e8423d   srv-dev-cas                  "java -server -nover…"   2 days ago   Up 2 days   0.0.0.0:8443->8443/tcp,           cas 
                                                                                               :::8443->8443/tcp, 
                                                                                               0.0.0.0:8081->8080/tcp, 
@@ -125,10 +156,7 @@ aecb067e65dc   grafana/grafana:7.3.7        "/run.sh"                2 days ago 
 836c3be31027   bitnami/etcd:3.4.15          "/opt/bitnami/script…"   2 days ago   Up 2 days   0.0.0.0:2379->2379/tcp,          apisix_etcd
                                                                                               :::2379->2379/tcp, 
                                                                                               2380/tcp
-                                                                                                                                                                                                                                            
-6ab87a07e569   nginx:1.19.0-alpine          "/docker-entrypoint.…"   2 days ago   Up 2 days   0.0.0.0:9082->80/tcp,           apisix_nginx2  
-                                                                                              :::9082->80/tcp
-                                                                                                                                                                                                                                                          
+                                                                                                                        
 f09872ea87d8   osixia/openldap:1.5.0        "/container/tool/run"    2 days ago   Up 2 days   0.0.0.0:389->389/tcp,           openldap
                                                                                               :::389->389/tcp, 
                                                                                               0.0.0.0:636->636/tcp, 
@@ -148,23 +176,3 @@ Creation of the contexts
   docker context create env --docker host=ssh://arnaud@srv-dev-avenirs --default-stack-orchestrator=swarm
 
 
-```mermaid
-graph LR;
-subgraph apisix["<big><strong>Apisix<br/></strong></big>"]
-  a_etcd["<big><strong>etcd</strong></big><br/><small>Distributed key-value store</small>"] 
-  a_ui["<big><strong>Dashboard</strong></big><br/><small>API Manager UI<small>"] <--> a_etcd
-  a_grafana["<big><strong>Grafana</strong></big><br/><small>Metrics visualisation</small>"] <--> a_etcd
-  a_prometheus["<big><strong>Prometheus</strong></big><br/><small>Metrics</small>"] <--> a_etcd
-  a_core(("<big><strong><font color=blue size=6em>Apisix</font></strong></big><br/><small>Kernel: Api manager</small>")) <--> a_etcd
-
-  a_grafana --> a_ui
-  a_prometheus --> a_grafana
-  a_ui <--> a_core -->a_prometheus
-
-
-
-end 
-
-apache["<strong>Apache</strong><br/>Reverse proxy</strong>"]  <--> apisix
-
-```
