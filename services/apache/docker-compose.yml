@@ -12,7 +12,8 @@ services:
     #   - ./httpd.conf:/etc/apache2/httpd.conf
     #   - ./html:/var/www/localhost/htdocs/
     networks:
-      - avenirs-network
+      - apache-network
 networks: 
-  avenirs-network:
+  apache-network:
     external: true
+    name: ${AVENIRS_NETWORK}
