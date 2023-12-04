@@ -222,4 +222,21 @@ function init_services() {
     vverbose "Services: $SERVICES"
 }
 
+function check_network(){
+   
+    [ -z "$AVENIRS_NETWORK" ] && err "AVENIRS_NETWORK unset (should be defined in srv-dev-env.sh)"
+    vverbose "Using network $AVENIRS_NETWORK"
+
+    docker network inspect $AVENIRS_NETWORK > /dev/null 2>&1
+    if [ $? -eq 0 ]
+    then 
+        verbose "Network $AVENIRS_NETWORK found"
+    else    
+        verbose "Network $AVENIRS_NETWORK need to be created."
+        docker network create "$AVENIRS_NETWORK" \
+            && info "Network $AVENIRS_NETWORK created" \
+            || err "Unable to create network $AVENIRS_NETWORK"
+    fi
+}
+
 

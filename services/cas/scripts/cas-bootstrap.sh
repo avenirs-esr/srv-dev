@@ -27,7 +27,13 @@ else
 fi
 cd - >/dev/null
 
+# Network check
+check_network
+
 # Overlay files
 install_overlay $CAS_OVERLAY_DIR $CAS_REPOSITORY_DIR
+
+# .env file generation
+echo "AVENIRS_NETWORK=$AVENIRS_NETWORK" > $CAS_ENV_FILE
 
 info "CAS bootstrapping completed."

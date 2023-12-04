@@ -6,6 +6,9 @@ services:
     ports:
      - "8443:8443"
      - "8081:8080"
+    networks:
+      - cas-network
 networks: 
-  avenirs-network:
+  cas-network:
     external: true
+    name: $AVENIRS_NETWORK

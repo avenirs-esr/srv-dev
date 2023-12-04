@@ -40,12 +40,7 @@ function bootstrap_services() {
     info "Bootstrapped services: $SERVICES"
     info "Completed"
 }
-function check_group(){
-    vvverbose "Checking that user $USER is member of group $DOCKER_GROUP"
-    groups | grep -qw $DOCKER_GROUP
-    [ $? -ne 0 ] && err "User $USER is not member of $DOCKER_GROUP"
-    verbose "User $USER is memberof $DOCKER_GROUP"
-}
+
 function check_prerequisites(){
     # Checks the docker group
     [ -n "$DOCKER_GROUP" ] || err "DOCKER_GROUP is missing in srv-dev-env.sh"
@@ -77,6 +72,10 @@ function check_prerequisites(){
     else    
         info "Volumes root checked $VOLUMES_ROOT"
     fi
+
+    
+    
 }
 check_prerequisites
+check_network
 bootstrap_services

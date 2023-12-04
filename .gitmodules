@@ -4,3 +4,6 @@
 [submodule "services/cas/cas-overlay-template"]
 	path = services/cas/cas-overlay-template
 	url = https://github.com/apereo/cas-overlay-template.git
+[submodule "services/apisix/apisix-dashboard"]
+	path = services/apisix/apisix-dashboard
+	url = https://github.com/apache/apisix-dashboard.git

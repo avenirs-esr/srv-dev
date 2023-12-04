@@ -9,7 +9,8 @@ VOLUMES_ROOT=/var/lib/docker-containers/dev.avenirs-esr.fr
 DOCKER_GROUP="docker"
 
 # ---- Docker environment variables that can be overridden
-
+# clobal
+AVENIRS_NETWORK=avenirs-network
 # Openldap
 #LDAP_ORGANISATION=""
 #LDAP_DOMAIN=""

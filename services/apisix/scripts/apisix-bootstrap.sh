@@ -28,8 +28,12 @@ else
 fi
 cd - >/dev/null
 
+# Network check
+check_network
+
 # Overlay files
 install_overlay $APISIX_OVERLAY_DIR $APISIX_REPOSITORY_DIR
+
 
 info "APISIX bootstrapping completed."
 
