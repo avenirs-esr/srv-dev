@@ -222,6 +222,10 @@ function init_services() {
     vverbose "Services: $SERVICES"
 }
 
+# Checks the docker network and create it if required.
+# This is done in the boostrap script because if done 
+# in the main docker-compose file, sometime docker try to 
+# use it before is actually created.
 function check_network(){
    
     [ -z "$AVENIRS_NETWORK" ] && err "AVENIRS_NETWORK unset (should be defined in srv-dev-env.sh)"
@@ -233,10 +237,31 @@ function check_network(){
         verbose "Network $AVENIRS_NETWORK found"
     else    
         verbose "Network $AVENIRS_NETWORK need to be created."
-        docker network create "$AVENIRS_NETWORK" \
+        docker network create "$AVENIRS_NETWORK" --driver bridge  \
             && info "Network $AVENIRS_NETWORK created" \
             || err "Unable to create network $AVENIRS_NETWORK"
     fi
+}
+
+function init_git_branch(){
+    local repository_dir=$1
+    local remote_branch=$2
+    local local_branch=$3
+
+    [ -n $repository_dir ] || err "init_git_branch: parameter repository_dir is required"
+    [ -n $remote_branch ] || err "init_git_branch: parameter remote_branch is required"
+    [ -n $local_branch ] || err "init_git_branch: parameter local_branch is required"
+
+    cd $repository_dir || err "Unable to enter $repository_dir"
+    
+    if [ -z "`git branch   | grep $local_branch`" ]
+    then
+        verbose "Switching to branch $remote_branch (local branch $local_branch)"
+        git checkout -B $local_branch $remote_branch || err "unable to create branch $local_branch from $remote_branch"
+    else 
+        verbose "Local branch found $local_branch"
+    fi
+    cd - >/dev/null
 }
 
 
