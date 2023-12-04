@@ -20,14 +20,17 @@ version: "3"
 services:
   apisix-dashboard:
     container_name: apisix_dashboard
-    image: apache/apisix-dashboard:3.0.1-alpine
+    build:
+      context: ../../apisix-dashboard/
+      dockerfile: Dockerfile
+    # image: apache/apisix-dashboard:3.0.1-alpine
     restart: always
     volumes:
     - ./dashboard_conf/conf.yaml:/usr/local/apisix-dashboard/conf/conf.yaml
     ports:
     - "9000:9000"
     networks:
-      avenirs-network:
+      apisix-network:
 
 
   apisix:
@@ -46,7 +49,7 @@ services:
       - "9443:9443/tcp"
       - "9092:9092/tcp"
     networks:
-      avenirs-network:
+      apisix-network:
 
   etcd:
     container_name: apisix_etcd
@@ -62,7 +65,7 @@ services:
     ports:
       - "2379:2379/tcp"
     networks:
-      avenirs-network:
+     apisix-network:
 
   prometheus:
     container_name: apisix_prometheus
@@ -73,7 +76,7 @@ services:
     ports:
       - "9090:9090"
     networks:
-      avenirs-network:
+      apisix-network:
 
   grafana:
     container_name: apisix_grafana
@@ -86,15 +89,16 @@ services:
       - "./grafana_conf/dashboards:/var/lib/grafana/dashboards"
       - "./grafana_conf/config/grafana.ini:/etc/grafana/grafana.ini"
     networks:
-      avenirs-network:
+      apisix-network:
       # apisix:
 
 # networks:
 #   apisix:
 #     driver: bridge
 networks: 
-  avenirs-network:
+  apisix-network:
     external: true
+    name: $AVENIRS_NETWORK
     
 volumes:
   etcd_data:
