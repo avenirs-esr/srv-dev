@@ -26,7 +26,7 @@ RUN set -x \
 
 COPY web/config/config.ts /usr/local/apisix-dashboard/web/config.ts
 
-FROM golang:1.19 as api-buildercd
+FROM golang:1.19 as api-builder
 
 ARG ENABLE_PROXY=false
 
