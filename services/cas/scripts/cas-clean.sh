@@ -14,16 +14,10 @@ init_commons $*
 info "CAS cleaning started."
 . $CAS_SCRIPT_DIR/cas-env.sh $CAS_SCRIPT_DIR 2> /dev/null || err "Unable to source $CAS_SCRIPT_DIR/cas-env.sh"
 
+# Removes the overlay's files
+remove_overlay $CAS_REPOSITORY_DIR  
 
 # Repository reset
-remove_overlay $CAS_REPOSITORY_DIR
-cd $CAS_REPOSITORY_DIR
-git checkout $MAIN_CAS_BRANCH || err "Unabble to checkout $MAIN_CAS_BRANCH"
-
-[ -n "`git branch | grep $LOCAL_CAS_BRANCH`" ] \
-    && { git branch -d $LOCAL_CAS_BRANCH || err "Unable to delete d$LOCAL_CAS_BRANCH"; } \
-    || verbose "Branch $LOCAL_CAS_BRANCH not found"
-
-cd - > /dev/null
+reset_git_repository $CAS_REPOSITORY_DIR $CAS_MAIN_BRANCH $CAS_LOCAL_BRANCH
 
 info "CAS cleaning completed."

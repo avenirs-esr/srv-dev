@@ -131,6 +131,8 @@ function init_commons(){
 }
 
 # Copy the files from a root directory to a project respecting the directory structure.
+# @param $1 Root directory of the overlay.
+# @param $2 target, destination to copy the files.
 function install_overlay {
    
     local overlay_root=$1
@@ -175,6 +177,7 @@ function remove_overlay {
 
 # Fetches the services by scanning the user args or the 
 # services' root directory.
+# No parameter.
 function init_services() {
 
     [ "$COMMONS_INITIALIZED_FLAG" = "0" ] && err "init_commons should be executed before init_services."
@@ -226,6 +229,7 @@ function init_services() {
 # This is done in the boostrap script because if done 
 # in the main docker-compose file, sometime docker try to 
 # use it before is actually created.
+# No parameter.
 function check_network(){
    
     [ -z "$AVENIRS_NETWORK" ] && err "AVENIRS_NETWORK unset (should be defined in srv-dev-env.sh)"
@@ -243,25 +247,52 @@ function check_network(){
     fi
 }
 
-function init_git_branch(){
+# Initialize a specific local branch in a git repository
+# @param $1 Repository directory
+# @param $2 Remote branch name
+# @param $3 Local branch name
+function init_git_repository(){
     local repository_dir=$1
     local remote_branch=$2
     local local_branch=$3
 
-    [ -n $repository_dir ] || err "init_git_branch: parameter repository_dir is required"
-    [ -n $remote_branch ] || err "init_git_branch: parameter remote_branch is required"
-    [ -n $local_branch ] || err "init_git_branch: parameter local_branch is required"
+    vvverbose "init_git_repository repository_dir: $repository_dir, main_branch: $main_branch, local_branch: $local_branch"
+
+    [ -n $repository_dir ] || err "init_git_repository: parameter repository_dir is required"
+    [ -n $remote_branch ] || err "init_git_repository: parameter remote_branch is required"
+    [ -n $local_branch ] || err "init_git_repository: parameter local_branch is required"
 
     cd $repository_dir || err "Unable to enter $repository_dir"
     
-    if [ -z "`git branch   | grep $local_branch`" ]
+    if [ -z "`git branch --list $local_branch`" ]
     then
         verbose "Switching to branch $remote_branch (local branch $local_branch)"
+        vvverbose "init_git_repository git command: git checkout -B $local_branch $remote_branch"
         git checkout -B $local_branch $remote_branch || err "unable to create branch $local_branch from $remote_branch"
     else 
         verbose "Local branch found $local_branch"
     fi
     cd - >/dev/null
+}
+
+# Resets a git repository: removes all local changes
+# @param $1 Repository directory
+# @param $2 Remote main branch name
+# @param $3 Local branch name
+function reset_git_repository(){
+    local repository_dir=$1
+    local main_branch=$2
+    local local_branch=$3
+
+    vvverbose "reset_git_repository repository_dir: $repository_dir, main_branch: $main_branch, local_branch: $local_branch"
+
+    cd $repository_dir || err "Unable to enter $repository_dir"
+    git checkout $main_branch || err "Unable to checkout $main_branch"
+   [ -n "`git branch --list $local_branch`" ] \
+        && { git branch -d $local_branch || err "Unable to delete $local_branch"; } \
+        || verbose "Branch $local_branch not found"
+
+    cd - > /dev/null
 }
 
 

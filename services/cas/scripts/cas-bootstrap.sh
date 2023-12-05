@@ -17,15 +17,7 @@ info "CAS bootstrapping started."
 . $CAS_SCRIPT_DIR/cas-env.sh $CAS_SCRIPT_DIR 2> /dev/null || err "Unable to source $CAS_SCRIPT_DIR/cas-env.sh"
 
 # Initialization of the local branch if needed.
-cd $CAS_REPOSITORY_DIR || err "Unable to enter $CAS_REPOSITORY_DIR"
-if [ -z "`git branch   | grep $LOCAL_CAS_BRANCH`" ]
-then
-    verbose "Switching to branch $REMOTE_CAS_BRANCH (local branch $LOCAL_CAS_BRANCH)"
-    git checkout -B $LOCAL_CAS_BRANCH $REMOTE_CAS_BRANCH || err "unable to create branch $LOCAL_CAS_BRANCH from $REMOTE_CAS_BRANCH"
-else 
-    verbose "Local CAS branch found $LOCAL_CAS_BRANCH"
-fi
-cd - >/dev/null
+init_git_repository $CAS_REPOSITORY_DIR $CAS_REMOTE_BRANCH $CAS_LOCAL_BRANCH
 
 # Network check
 check_network
