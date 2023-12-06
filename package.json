@@ -6,10 +6,10 @@
   "scripts": {
     "test": "",
     "prepare": "husky install",
-    "start": "bash ./scripts/srv-dev-clean.sh -vv && bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build -d",
+    "deploy": "bash ./scripts/srv-dev-clean.sh -vv && bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build -d",
     "clean": "docker-compose down; bash ./scripts/srv-dev-clean.sh -vv",
     "purge": "docker-compose down; bash ./scripts/srv-dev-clean.sh -vv; docker system prune -a",
-    "reset":"npm run purge; npm run install",
+    "reset":"npm run purge; && bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build -d",
     "dev": "npm run clean; bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build"
   },
   "repository": {
