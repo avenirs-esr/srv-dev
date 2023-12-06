@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: ./Dockerfile
       args:
-        OVERLAY_DIR: ${APACHE_OVERLAY_DIR}
+        OVERLAY_DIR: ${APACHE_OVERLAY_BASENAME}
     ports:
       - "80:80"
       - "443:443"
