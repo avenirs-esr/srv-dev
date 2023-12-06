@@ -116,7 +116,6 @@ The services' scripts can be executed via the main ones: srv-dev-bootstrap or sr
 
 # Installation
 
-
 <pre>
 git clone git@github.com:avenirs-esr/srv-dev.git --recurse
 cd srv-dev/
@@ -136,6 +135,32 @@ Available npm scripts :
 - npm run purge: idem as clean + docker system prune -a
 - npm run reset: resets all the services as if they were just installed
 - npm run dev: idem as deploy without detaching the containers
+
+
+
+## Test
+<pre>
+curl "http://localhost/apisix-gw" --head | grep Server
+</pre>
+<pre>
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+ Server: APISIX/3.6.0
+</pre>
+
+
+## End-points
+
+- `http://<server>/apisix-api/`
+- `http://<server>/apisix-gw/`
+- `http://<server>/apisix-ui/`
+- `http://<server>/apisix-prometheus/`
+- `http://<server>/apisix-grafana/`
+- `http://<server>/ldapadmin/`
+- `http://<server>/cas` -> e.g.:  `http://<server\>/cas/login` 
+
+### Deployed containers
 
 Several containers should be deployed and running. The list of containers may vary, but this is the list at the time this document was written:
 
@@ -184,26 +209,3 @@ f09872ea87d8   osixia/openldap:1.5.0        "/container/tool/run"    2 days ago 
                                                                                               :::636->636/tcp                                                                                              
                                                                                                                                                                                                                                                                            
 </pre>
-
-## Test
-<pre>
-curl "http://localhost/apisix-gw" --head | grep Server
-</pre>
-<pre>
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
- Server: APISIX/3.6.0
-</pre>
-
-
-## End-points
-
-- `http://<server>/apisix-api/`
-- `http://<server>/apisix-gw/`
-- `http://<server>/apisix-ui/`
-- `http://<server>/apisix-prometheus/`
-- `http://<server>/apisix-grafana/`
-- `http://<server>/ldapadmin/`
-- `http://<server>/cas` -> e.g.:  `http://<server\>/cas/login` 
-
