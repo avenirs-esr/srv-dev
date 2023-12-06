@@ -5,7 +5,11 @@
   "main": "commitlint.config.js",
   "scripts": {
     "test": "",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "install": "bash ./scripts/srv-dev-clean.sh -vv && bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build -d",
+    "clean": "docker-compose down; bash ./scripts/srv-dev-clean.sh -vv",
+    "purge": "docker-compose down; bash ./scripts/srv-dev-clean.sh -vv; docker system prune -a",
+    "reset":"npm run purge; npm run install"
   },
   "repository": {
     "type": "git",
