@@ -40,7 +40,7 @@ apache <--> cas
 apache <--> phpldapadmin
 openldap <--> cas
 phpldapadmin <--> openldap
-classDef main fill:#0a71b4,stroke:#ed184e,stroke-width:2px, min-width:2000px
+classDef main fill:white,stroke:#ed184e,stroke-width:4px, min-width:2000px
 class a_core main
 
 ```
@@ -125,10 +125,10 @@ npm run deploy
 </pre>
 
 This instructions will :
-1. download the project and all its  submodules (--recurse option)
-2. Run the bootstratp scripts (the main one and the one associated to each service)
-3. download / générate the docker images 
-4. run the containers associated to each service (via docker-compose)
+1. Download the project and all its  submodules (--recurse option).
+2. Run the bootstratp scripts (the main one and the ones associated to each service).
+3. Download / générate the docker images.
+4. Run the containers associated to each service (via docker-compose).
 
 Available npm scripts :
 - npm run deploy: bootstrap each service and run the containers.
