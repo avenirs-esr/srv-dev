@@ -24,7 +24,7 @@ RUN set -x \
     && cd /usr/local/apisix-dashboard && git clean -Xdf \
     && rm -f ./.githash && git log --pretty=format:"%h" -1 > ./.githash
 
-COPY web/config/config.ts /usr/local/apisix-dashboard/web/config.ts
+COPY web/config/config.ts /usr/local/apisix-dashboard/web/config/config.ts
 
 FROM golang:1.19 as api-builder
 
