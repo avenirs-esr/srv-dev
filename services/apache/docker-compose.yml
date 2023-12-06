@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+      args:
+        OVERLAY_DIR: ${APACHE_OVERLAY_DIR}
     ports:
       - "80:80"
       - "443:443"
