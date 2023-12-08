@@ -47,27 +47,31 @@ function warn(){
 
 function verbose (){
     [ $VERBOSE_FLAG -ge 1 ] && echo -ne "${GREY}[${YELLOW}VERBOSE:1${GREY}]${NC} $*\n"
+    return 0;
 }
 
 function vverbose (){
     [ $VERBOSE_FLAG -ge 2 ] && echo -ne "${GREY}[${YELLOW}VERBOSE:2${GREY}]${NC} $*\n"
+    return 0;
 }
 
 function vvverbose (){
     [ $VERBOSE_FLAG -ge 3 ] && echo -ne "${GREY}[${YELLOW}VERBOSE:3${GREY}]${NC} $*\n"
+    return 0;
 }
 
 function err (){
     [ "$1" = "--no-exit" ] && local -i no_exit=1 || local -i no_exit=0
     >&2 echo -ne "${GREY}[${BOLD_RED}ERROR${GREY}]${BOLD_RED} $*${NC}\n";
     [ $no_exit -ne 1 ] && exit 1
+    return 0
 }
 
 function warn_and_wait(){
     local msg=$1
     local -i count=$2
     [ $count -gt 0  ] || count=4
-    echo "count $count"
+    
     warn "$msg"; 
 
     while [ $count -gt 0 ]
@@ -76,7 +80,7 @@ function warn_and_wait(){
         sleep 1; 
         count=$count-1
     done
-    echo "0"
+    return 0
 }
 
 # Used to initialize the common parts of help string.
@@ -143,20 +147,37 @@ function install_overlay {
     [ -r $overlay_root ] || err "not a readable directory: $overlay_root"
 
     [ -z "$target" ] && err "the target directory parameter is required"
-    [ -e $target ] || err "target directory not found: $target"
-    [ -d $target ] || err "not a directory: $target"
+    #[ -e $target ] || err "target directory not found: $target"
+    #[ -d $target ] || err "not a directory: $target"
     [ -w $overlay_root ] || err "not a writable directory: $target"
 
-    verbose "Processing overlay"
-    local -i files_cpt=0
-    local -i dir_cpt=0
+     # checks the target directory
+    if [ -e $target ]
+    then
+        [ -d $target ] || err "install_overlay target directory \"$target\" is not a directory"
+    else
+        mkdir -p $target && vverbose "install_overlay directory created: $target" || err "install_overlay unable to create target directory $target"
+    fi
+
+    verbose "Processing overlay dir $overlay_root"
+    
     for  f in `ls -A $overlay_root`
     do
-        local source=$overlay_root/$f
-        [ -f $source ] &&  cp $source $target && { files_cpt=$files_cpt+1; vverbose "Overlay file: $source -> $target"; }
-        [ -d $source ] &&  cp -R $source $target &&  { dir_cpt=$dir_cpt+1; vverbose "Overlay directory: $source -> $target"; }
+        if [[ $f =~ .*\.(properties|config)\.template(\.?no-git)? ]]
+        then
+            vvverbose "install_overlay ignored file: $f"
+        else
+            local source=$overlay_root/$f
+            if [ -f $source ]
+            then
+                cp  $source $target &&  vverbose "Overlay file: $source -> $target" ||  err "unable to copy overlay file $source -> $target"
+            elif [ -d $source ] 
+            then
+                install_overlay $source $target/$f  &&  vverbose "Ovelay directory: $source" || err "unable to proccess overlay subdir $source"
+            fi 
+        fi
     done
-     verbose "Overlay processed (Files: $files_cpt, Directories: $dir_cpt)"
+     verbose "Overlay processed"
 
 }
 

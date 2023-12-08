@@ -22,10 +22,16 @@ init_git_repository $CAS_REPOSITORY_DIR $CAS_REMOTE_BRANCH $CAS_LOCAL_BRANCH
 # Network check
 check_network
 
+# CAS properties generation
+cat $CAS_SETTINGS_TEMPLATE_FILE | \
+    sed s/__AVENIRS_OPENLDAP_CONTAINER_NAME__/${AVENIRS_OPENLDAP_CONTAINER_NAME}/g > \
+    $CAS_SETTINGS_FILE
+
 # Overlay files
 install_overlay $CAS_OVERLAY_DIR $CAS_REPOSITORY_DIR
 
 # .env file generation
 echo "AVENIRS_NETWORK=$AVENIRS_NETWORK" > $CAS_ENV_FILE
+echo "AVENIRS_CAS_CONTAINER_NAME=$AVENIRS_CAS_CONTAINER_NAME">> $CAS_ENV_FILE
 
 info "CAS bootstrapping completed."

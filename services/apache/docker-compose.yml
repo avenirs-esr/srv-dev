@@ -1,6 +1,6 @@
 services:
   le-apache:
-    container_name: '${AVENIRS_APACHE_CONTAINER_NAME}'
+    container_name: ${AVENIRS_APACHE_CONTAINER_NAME}
    # image: lets-encrypt-apache:latest
     build:
       context: .

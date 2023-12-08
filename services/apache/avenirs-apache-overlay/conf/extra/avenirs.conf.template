@@ -1,0 +1,36 @@
+SSLProxyEngine on
+
+# Required to accept the self signed certificate used by tomcat for CAS.
+SSLProxyVerify none 
+SSLProxyCheckPeerCN off
+SSLProxyCheckPeerName off
+SSLProxyCheckPeerExpire off
+SSLProxyCheckPeerName off
+
+
+### Was not able to use the envvars with mod_proxy
+ProxyPass "/cas" "https://__AVENIRS_CAS_CONTAINER_NAME__:8443/cas"
+ProxyPassReverse "/cas" "https://__AVENIRS_CAS_CONTAINER_NAME__:8443/cas"
+
+ProxyPass /ldapadmin http://__AVENIRS_LDAP_ADMIN_CONTAINER_NAME__/phpldapadmin
+ProxyPassReverse /ldapadmin http://__AVENIRS_LDAP_ADMIN_CONTAINER_NAME__/phpldapadmin
+
+ProxyPass /apisix-gw http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080
+ProxyPassReverse /apisix-gw http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080
+
+ProxyPass /apisix-api http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9180
+ProxyPassReverse /apisix-api http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9180
+
+ProxyPass /apisix-ui http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000
+ProxyPassReverse /apisix-ui http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000
+
+ProxyPass /apisix-grafana http://__AVENIRS_APISIX_GRAFANA_CONTAINER_NAME__:3000
+ProxyPassReverse /apisix-grafana http://__AVENIRS_APISIX_GRAFANA_CONTAINER_NAME__:3000
+
+### Hacks for APISix Dashbord invalid sub path (release 3.0)
+ProxyPass /apisix/admin http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000/apisix/admin
+ProxyPassReverse /apisix/admin http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000/apisix/admin
+
+ProxyPass /monaco-editor http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000/monaco-editor
+ProxyPassReverse /monaco-editor http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000/monaco-editor
+

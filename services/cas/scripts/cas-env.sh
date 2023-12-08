@@ -15,3 +15,13 @@ CAS_MAIN_BRANCH="master"
 
 # Docker env file
 CAS_ENV_FILE=$CAS_REPOSITORY_DIR/.env
+
+# Container name
+[ -z  "$AVENIRS_CAS_CONTAINER_NAME" ] && AVENIRS_CAS_CONTAINER_NAME="${AVENIRS_CONTAINER_PREFIX}cas"
+
+CAS_SETTINGS_TEMPLATE_FILE=$CAS_OVERLAY_DIR/etc/cas/config/cas.properties.template
+CAS_SETTINGS_FILE=$CAS_REPOSITORY_DIR/etc/cas/config/cas.properties
+
+
+# This is to be sure that this script can be sourced.
+return 0
