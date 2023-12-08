@@ -310,7 +310,7 @@ function reset_git_repository(){
     cd $repository_dir || err "Unable to enter $repository_dir"
     git checkout $main_branch || err "Unable to checkout $main_branch"
    [ -n "`git branch --list $local_branch`" ] \
-        && { git branch -d $local_branch || err "Unable to delete $local_branch"; } \
+        && { git branch -D $local_branch || err "Unable to delete $local_branch"; } \
         || verbose "Branch $local_branch not found"
 
     cd - > /dev/null
