@@ -4,4 +4,4 @@
 node_modules
 .env
 envvars
-.no-git
+*.no-git
