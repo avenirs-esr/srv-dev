@@ -19,6 +19,7 @@ info "APISIX cleaning started."
 
 # Removes the overlay's files
 remove_overlay $APISIX_REPOSITORY_DIR  
+remove_overlay $APISIX_UI_REPOSITORY_DIR  
 
 # Resets the repository
 reset_git_repository $APISIX_REPOSITORY_DIR $APISIX_MAIN_BRANCH $APISIX_LOCAL_BRANCH
