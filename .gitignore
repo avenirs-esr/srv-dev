@@ -3,3 +3,5 @@
 *.ldif.log
 node_modules
 .env
+envvars
+.no-git
