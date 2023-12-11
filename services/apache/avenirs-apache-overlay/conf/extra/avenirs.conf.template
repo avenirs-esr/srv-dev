@@ -34,3 +34,5 @@ ProxyPassReverse /apisix/admin http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME_
 ProxyPass /monaco-editor http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000/monaco-editor
 ProxyPassReverse /monaco-editor http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000/monaco-editor
 
+ProxyPass /user/login http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000/user/login
+ProxyPassReverse /user/login http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000/user/login
