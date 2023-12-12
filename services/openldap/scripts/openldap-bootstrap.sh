@@ -19,7 +19,7 @@ init_commons $*
 info "Openldap bootstrapping started."
 . $OPENLDAP_SCRIPT_DIR/openldap-env.sh $OPENLDAP_SCRIPT_DIR || err "Unable to source $PWD/$OPENLDAP_SCRIPT_DIR/openldap-env.sh"
 
-# Checks
+# Check fixtures script
 [ -f $FIXTURES_SCRIPT ] || err "$FIXTURES_SCRIPT not found."
 [ -x $FIXTURES_SCRIPT ] || err "$FIXTURES_SCRIPT NOT executable."
 
@@ -54,6 +54,5 @@ echo "AVENIRS_LDAP_ADMIN_CONTAINER_NAME=$AVENIRS_LDAP_ADMIN_CONTAINER_NAME" >> $
 
 # Fixtures generation.
 $FIXTURES_SCRIPT_CMD || err "Fixture command exited with error: $FIXTURES_SCRIPT_CMD."
-
 
 info "Openldap bootstrapping completed."

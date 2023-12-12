@@ -59,3 +59,4 @@ services:
 networks: 
   openldap-network:
     external: true
+    name: $AVENIRS_NETWORK
