@@ -1,7 +1,7 @@
 #! /bin/bash
 
 #--------------------------------------#
-# Settings for the openldap scripts         #
+# Settings for the Apache scripts      #
 #--------------------------------------#
 
 APACHE_SCRIPT_DIR=$1
