@@ -25,11 +25,16 @@ info "Openldap bootstrapping started."
 
 
 # Volumes creation
-mkdir -p  $AVENIRS_LDAP_VOLUMES_ROOT/var/lib/ldap && vverbose "Volume OK: $AVENIRS_LDAP_VOLUMES_ROOT/var/lib/ldap" 
-mkdir -p  $AVENIRS_LDAP_VOLUMES_ROOT/etc/ldap/slapd.d && vverbose "Volume OK: $AVENIRS_LDAP_VOLUMES_ROOT/etc/ldap/slapd.d" 
-mkdir -p  $AVENIRS_LDAP_VOLUMES_ROOT/container/service/slapd/assets/certs/ && vverbose "Volume OK: $AVENIRS_LDAP_VOLUMES_ROOT/container/service/slapd/assets/certs" 
-mkdir -p  $LDIF_CUSTOM_DIR && vverbose "Volume OK: $LDIF_CUSTOM_DIR" 
-
+mkdir -p  $AVENIRS_LDAP_VOLUMES_ROOT/var/lib/ldap \
+    && vverbose "Volume OK: $AVENIRS_LDAP_VOLUMES_ROOT/var/lib/ldap" \
+    || err "Unable to create $AVENIRS_LDAP_VOLUMES_ROOT/var/lib/ldap"
+mkdir -p  $AVENIRS_LDAP_VOLUMES_ROOT/etc/ldap/slapd.d \
+    && vverbose "Volume OK: $AVENIRS_LDAP_VOLUMES_ROOT/etc/ldap/slapd.d" \
+    || err "Unable to create $AVENIRS_LDAP_VOLUMES_ROOT/etc/ldap/slapd.d"
+mkdir -p  $AVENIRS_LDAP_VOLUMES_ROOT/container/service/slapd/assets/certs/ \
+    && vverbose "Volume OK: $AVENIRS_LDAP_VOLUMES_ROOT/container/service/slapd/assets/certs" \
+    || err "Unable to create $AVENIRS_LDAP_VOLUMES_ROOT/container/service/slapd/assets/certs"
+mkdir -p  $LDIF_CUSTOM_DIR && vverbose "Volume OK: $LDIF_CUSTOM_DIR" || err "Unable to create $LDIF_CUSTOM_DIR"
 # Network check
 check_network
 
