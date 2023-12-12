@@ -42,6 +42,8 @@ services:
     # fully-qualified domain name for the host.
     domainname: "example.org"
     hostname: "ldap-server"
+    networks:
+      openldap-network:
   phpldapadmin:
     image: osixia/phpldapadmin:latest
     container_name: ${AVENIRS_LDAP_ADMIN_CONTAINER_NAME}
@@ -52,6 +54,8 @@ services:
       - "8080:80"
     depends_on:
       - openldap
+    networks:
+      openldap-network:
 networks: 
-  avenirs-network:
+  openldap-network:
     external: true
