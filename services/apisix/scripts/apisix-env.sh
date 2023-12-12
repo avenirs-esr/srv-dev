@@ -1,7 +1,7 @@
 #! /bin/bash
 
 #--------------------------------------#
-# Settings for the APISIX scripts         #
+# Settings for the APISIX scripts      #
 #--------------------------------------#
 APISIX_SCRIPT_DIR=$1
 
