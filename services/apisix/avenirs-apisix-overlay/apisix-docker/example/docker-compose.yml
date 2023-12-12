@@ -41,7 +41,7 @@ services:
       - ./apisix_conf/config.yaml:/usr/local/apisix/conf/config.yaml:ro
     depends_on:
       - etcd
-    ##network_mode: host
+    
     ports:
       - "9180:9180/tcp"
       - "9080:9080/tcp"
@@ -90,11 +90,6 @@ services:
       - "./grafana_conf/config/grafana.ini:/etc/grafana/grafana.ini"
     networks:
       apisix-network:
-      # apisix:
-
-# networks:
-#   apisix:
-#     driver: bridge
 networks: 
   apisix-network:
     external: true

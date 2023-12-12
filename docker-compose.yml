@@ -10,3 +10,4 @@ include:
   - ./services/apisix/apisix-docker/example/docker-compose.yml
   - ./services/cas/cas-overlay-template/docker-compose.yml
   - ./services/apache/docker-compose.yml
+  - ./services/kafka/docker-compose.yml

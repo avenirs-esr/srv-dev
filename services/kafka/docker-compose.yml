@@ -1,6 +1,11 @@
+# Resources: 
+# - https://docs.confluent.io/platform/current/installation/docker/installation.html
+# - https://www.baeldung.com/ops/kafka-docker-setup
 version: '3'
 services:
   zookeeper:
+   # user: "3000:999"
+    container_name: ${AVENIRS_ZOOKEEPER_CONTAINER_NAME}
     image: confluentinc/cp-zookeeper:latest
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -8,21 +13,31 @@ services:
     ports:
       - 22181:2181
     volumes: 
-      - /tmp/zoo/data:/var/lib/zookeeper/data
-      - /tmp/zoo/log:/var/lib/zookeeper/log
+      - ${AVENIRS_ZOOKEEPER_VOLUMES_ROOT}/data:/var/lib/zookeeper/data
+      - ${AVENIRS_ZOOKEEPER_VOLUMES_ROOT}/log:/var/lib/zookeeper/log    
+    networks:
+      kafka-network:
   
   kafka:
+    #user: "3000:999"
     image: confluentinc/cp-kafka:latest
+    container_name: ${AVENIRS_KAFKA_CONTAINER_NAME}
     depends_on:
       - zookeeper
     ports:
       - 29092:29092
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_ZOOKEEPER_CONNECT: ${AVENIRS_ZOOKEEPER_CONTAINER_NAME}:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://${AVENIRS_KAFKA_CONTAINER_NAME}:9092,PLAINTEXT_HOST://localhost:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     volumes: 
-      - /tmp/broker/data:/var/lib/kafka/data
+      - ${AVENIRS_KAFKA_VOLUMES_ROOT}/data:/var/lib/kafka/data 
+    networks:
+      kafka-network:
+networks: 
+  kafka-network:
+    external: true
+    name: $AVENIRS_NETWORK
