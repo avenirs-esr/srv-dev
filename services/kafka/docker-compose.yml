@@ -37,6 +37,24 @@ services:
       - ${AVENIRS_KAFKA_VOLUMES_ROOT}/data:/var/lib/kafka/data 
     networks:
       kafka-network:
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: ${AVENIRS_KAFKA_UI_CONTAINER_NAME}
+    
+    depends_on:
+      - kafka
+    ports:
+      - 8082:8080
+    environment:
+      DYNAMIC_CONFIG_ENABLED: true
+      KAFKA_CLUSTERS_0_NAME: avenirs-dev
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: avenirs-kafka:9092
+      SERVER_SERVLET_CONTEXT_PATH: /kafka-ui
+    networks:
+      kafka-network:
+    # volumes:
+    #   - ${KAFKA_UI_OVERLAY_REALPATH}/etc/kafkaui/dynamic_config.yaml:/etc/kafkaui/dynamic_config.yaml
 networks: 
   kafka-network:
     external: true

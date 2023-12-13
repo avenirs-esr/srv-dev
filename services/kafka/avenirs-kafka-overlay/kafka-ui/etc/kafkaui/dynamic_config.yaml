@@ -1,0 +1,19 @@
+auth:
+  type: DISABLED
+kafka:
+  clusters:
+  - bootstrapServers: avenirs-kafka:9092
+    name: avenirs-dev
+    properties: {}
+    readOnly: false
+  - bootstrapServers: avenirs-kafka:9092
+    name: foo
+    properties: {}
+    readOnly: false
+  - bootstrapServers: avenirs-kafka:9092
+    name: toto
+    properties: {}
+    readOnly: false
+rbac:
+  roles: []
+webclient: {}

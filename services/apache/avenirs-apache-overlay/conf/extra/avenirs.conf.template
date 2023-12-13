@@ -27,6 +27,9 @@ ProxyPassReverse /apisix-ui http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9
 ProxyPass /apisix-grafana http://__AVENIRS_APISIX_GRAFANA_CONTAINER_NAME__:3000
 ProxyPassReverse /apisix-grafana http://__AVENIRS_APISIX_GRAFANA_CONTAINER_NAME__:3000
 
+ProxyPass /kafka-ui http://__AVENIRS_KAFKA_UI_CONTAINER_NAME__:8080/kafka-ui
+ProxyPassReverse /kafka-ui http://__AVENIRS_KAFKA_UI_CONTAINER_NAME__:8080/kafka-ui
+
 ### Hacks for APISix Dashbord invalid sub path (release 3.0)
 ProxyPass /apisix/admin http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000/apisix/admin
 ProxyPassReverse /apisix/admin http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000/apisix/admin
