@@ -16,32 +16,46 @@ check the branch (if a git submodule), and create a .env file to propagate the s
 ```mermaid
 graph LR;
 subgraph apisix["<big><strong>Apisix<br/></strong></big>"]
-  a_etcd["<big><strong>etcd</strong></big><br/><small>Distributed<br/>key-value<br/>store</small>"] 
-  a_ui["<big><strong>Dashboard</strong></big><br/><small>APIM UI<small>"] <--> a_etcd
-  a_grafana["<big><strong>&nbsp;Grafana&nbsp;</strong></big><br/><small>Metrics<br/>visualisation</small>"] <--> a_etcd
-  a_prometheus["<big><strong>Prometheus</strong></big><br/><small>Metrics</small>"] <--> a_etcd
-  a_core(("<big><strong><font size=6em>Apisix</font></strong></big><br/><small>API manager</small>")) <--> a_etcd
+  apx_etcd["<big><strong>etcd</strong></big><br/><small>Distributed<br/>key-value<br/>store</small>"] 
+  apx_ui["<big><strong>Dashboard</strong></big><br/><small>APIM UI<small>"] <--> apx_etcd
+  apx_grafana["<big><strong>&nbsp;Grafana&nbsp;</strong></big><br/><small>Metrics<br/>visualisation</small>"] <--> apx_etcd
+  apx_prometheus["<big><strong>Prometheus</strong></big><br/><small>Metrics</small>"] <--> apx_etcd
+  apx_core(("<big><strong><font size=6em>Apisix</font></strong></big><br/><small>API manager</small>")) <--> apx_etcd
 
-  a_grafana --> a_ui
-  a_prometheus --> a_grafana
-  a_ui <--> a_core -->a_prometheus
-
-
+  apx_grafana --> apx_ui
+  apx_prometheus --> apx_grafana
+  apx_ui <--> apx_core -->apx_prometheus
 end 
 
-apache["<strong>Apache</strong><br/>Reverse proxy</strong>"] 
 cas["<big ><strong>CAS</strong></big><br/><small>Authentication</small>"] 
-openldap["<big><strong>OpenLDAP</strong></big><br/><small>Directory</small>"] 
-phpldapadmin["<big><strong>PHPLdapAdmin</strong></big><br/><small>LDAP Frontend</small>"] 
 
+subgraph openldap["<big><strong>OpenLDAP<br/></strong></big>"]
+  oldap_openldap["<big><strong>OpenLDAP</strong></big><br/>"] 
+  oldap_phpldapadmin["<big><strong>PHPLdapAdmin</strong></big><br/><small>OpenLDAP Frontend</small>"] 
+  oldap_phpldapadmin<-->oldap_openldap
+end
+apache["<strong>Apache</strong><br/>Reverse proxy</strong>"] 
 
-apache  <--> apisix
+subgraph kafka["<big><strong>Kafka<br/></strong></big>"]
+  kfk_kafka["<big><strong>Kafka</strong></big><br/><small>Distributed event streaming platform</small>"] 
+  kfk_kafka_ui["<big><strong>Kafka UI</strong></big><br/><small>Kafka Frontend</small>"] 
+  kfk_zookeeper["<big><strong>Zookeeper</strong></big><br/><small>Distributed systems settings &amp; coordination</small>"] 
+  kfk_kafka<-->kfk_kafka_ui
+  kfk_kafka<-->kfk_zookeeper
+end
+
+cas <--> oldap_openldap
+apache  <--> apx_ui
+apache  <--> apx_grafana
+apache  <--> apx_prometheus
+apache  <--> apx_core
 apache <--> cas 
-apache <--> phpldapadmin
-openldap <--> cas
-phpldapadmin <--> openldap
+apache <--> oldap_phpldapadmin
+apache <--> kfk_kafka_ui
+
+apache["<strong>Apache</strong><br/>Reverse proxy</strong>"] 
 classDef main fill:white,stroke:#ed184e,stroke-width:4px, min-width:2000px
-class a_core main
+class apx_core main
 
 ```
 ## Tree structure
@@ -65,7 +79,7 @@ class a_core main
     │   │   │      │           └── config.ts
     │   │   │      └── Dockerfile
     │   │   └──  apisix-docker      
-    │   │          ├── grafana_conf
+    │   │          ├── grafanapx_conf
     │   │          │     └── grafana.ini
     │   │          └── example
     │   │                └── docker-compose.yml
@@ -103,10 +117,13 @@ class a_core main
     │   │           └── thekeystore
     │   ├── cas-overlay-template
     │   └── scripts
+    ├── kafka
+    │   └── (...)
     └── openldap                    custom container based on osixia's images
         ├── doc
         ├── fixtures
         └── scripts
+    └── openldap     
 </pre>
 
 ## Scripts
@@ -159,6 +176,7 @@ curl "http://localhost/apisix-gw" --head | grep Server
 - `http://<server>/apisix-grafana/`
 - `http://<server>/ldapadmin/`
 - `http://<server>/cas` -> e.g.:  `http://<server\>/cas/login` 
+- `http://<server>/kafka-ui/`
 
 ### Deployed containers
 
