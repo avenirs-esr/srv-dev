@@ -49,7 +49,7 @@ services:
     environment:
       DYNAMIC_CONFIG_ENABLED: true
       KAFKA_CLUSTERS_0_NAME: avenirs-dev
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: avenirs-kafka:9092
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: ${AVENIRS_KAFKA_CONTAINER_NAME}:9092
       SERVER_SERVLET_CONTEXT_PATH: /kafka-ui
     networks:
       kafka-network:
