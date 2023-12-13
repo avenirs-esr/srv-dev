@@ -1,61 +1,8 @@
 <html>
     <head>
         <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-        <style>
-            h1 {
-                font-size: 3em;
-                font-weight: bold;
-                color: #0a71b4;
-                display: flex;
-                flex-grow: 1;
-                justify-content: center;
-                align-items: center;
-                margin: 0;    
-            }
-            h2 {
-                margin: unset;
-                color: #0a71b4;
-                margin: 1.5em 0 .5em 0;
-            }
-            li {
-                margin-top: .5em;
-            }
-            a:link {
-                color: #0a71b4;
-            }
-            a:visited {
-                color: #6dbcf2;
-            }
-            .title-wrapper {
-                display: flex;
-                justify-content: flex-start;
-                align-items: start;
-
-            }
-            .title {
-                display: flex;
-                flex-direction: column;
-                flex-grow: 1;
-
-            }
-            .title {
-                display: flex;
-                
-                flex-grow: 1;
-                justify-content: center;
-
-            }
-            .subtitle {
-                display: flex;
-                flex-grow: 1;
-                justify-content: center;
-                font-size: 1.5em;
-                color: #505050;
-                font-family: sans-serif;
-                font-weight: bold;
-                margin-top: 1em;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="assets/main.css">
+        
         <title>
             Avenirs - ePortfolio :: Dev
         </title>
@@ -136,44 +83,16 @@
                 </ul>
             </div>
 
-            <h2>APISix example</h2>
+            <h2>Examples</h2>
             <div class="sub-container">
                 <ul>
                     <li>
-                        List the routes<br/>
-                        <pre>curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://&lt;server&gt;/apisix-api/apisix/admin/routes"
-                        </pre>
-                        
+                        <a href="examples/apisix.html" alt="APISIX Examples" aria-label="Example page for Apisix" target="_blank">APISIX</a>
                     </li>
                     <li>
-                        Create a new route<br/>
-                        <pre>curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://&lt;server&gt;/apisix-api/apisix/admin/routes" -X PUT -d '
-{
-  "id": "getting-started-ip",
-  "uri": "/ip",
-  "upstream": {
-    "type": "roundrobin",
-    "nodes": {
-      "httpbin.org:80": 1
-    }
-  }
-}'
-                        </pre>
-                        
+                        <a href="examples/kafka.html" alt="Kafka Examples" aria-label="Example page for Kafka" target="_blank">Kafka</a>
                     </li>
-                    <li>
-                        Test the new route<br/>
-                        <pre>curl "http://&lt;server&gt;/apisix-gw/ip"</pre>
-                        
-                    </li>
-                    <li>
-                        Delete the route<br/>
-                        <pre>curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://&lt;server&gt;/apisix-api/apisix/admin/routes/getting-started-ip" -X DELETE</pre>
-                        
-                    </li>
-                </ul>
-            </div>
-
-        
+                   
+                </ul>    
     </body>
 </html>

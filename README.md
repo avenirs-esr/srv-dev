@@ -56,7 +56,6 @@ apache <--> kfk_kafka_ui
 apache["<strong>Apache</strong><br/>Reverse proxy</strong>"] 
 classDef main fill:white,stroke:#ed184e,stroke-width:4px, min-width:2000px
 class apx_core main
-
 ```
 ## Tree structure
 
