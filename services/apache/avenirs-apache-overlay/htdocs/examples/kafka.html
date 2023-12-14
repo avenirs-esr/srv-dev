@@ -146,43 +146,36 @@
                     Launch two consumers with the same group.
                 </p>
                 <p>
-                <code>
-                      
-                        <span style="color:grey;">srv-dev $</span> 
-                        <p>
-                            Update the topic to increase its number of partitions.
-                        </p>
-                        <p>
-                        <code>
-                              
-                            <span style="color:grey;">srv-dev $</span> 
-                            docker exec -it avenirs-kafka kafka-console-consumer --bootstrap-server localhost:29092 --topic avenirs-topic --consumer-property group.id=dev-group<br/>
-                            <span style="color:grey;">srv-dev $</span> 
-                            docker exec -it avenirs-kafka kafka-console-consumer --bootstrap-server localhost:29092 --topic avenirs-topic --consumer-property group.id=dev-group<br/>
-        
-                                
-                        </code>
-                        </p>
-
-                        <p>
-                            Produce messages with different keys.
-                        </p>
-                        <p>
+                
+                    <code>
                           
-                        <code>
-                              
-                            <span style="color:grey;">srv-dev $</span><br/> 
+                        <span style="color:grey;">srv-dev $</span> 
+                        docker exec -it avenirs-kafka kafka-console-consumer --bootstrap-server localhost:29092 --topic avenirs-topic --consumer-property group.id=dev-group<br/>
+                        <span style="color:grey;">srv-dev $</span> 
+                        docker exec -it avenirs-kafka kafka-console-consumer --bootstrap-server localhost:29092 --topic avenirs-topic --consumer-property group.id=dev-group<br/>
+    
                             
-                            >1: message1<br/>
-                            >2: message2<br/>
-                            >3: message3<br/>
-                            >4: message4<br/>
-                            >
-                        </code>
-                        </p>
-                       
-                </code>
+                    </code>
+                    </p>
+
+                    <p>
+                        Produce messages with different keys (in the console of kafka-console-producer).
+                    </p>
+                    
+                    <p>
+                    <code>
+                          
+                        <span style="color:grey;">srv-dev $</span><br/> 
+                        
+                        >1: message1<br/>
+                        >2: message2<br/>
+                        >3: message3<br/>
+                        >4: message4<br/>
+                        >
+                    </code>
                 </p>
+                       
+               
             </div>
     </body>
 </html>
