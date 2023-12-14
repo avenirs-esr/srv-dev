@@ -10,6 +10,6 @@ COPY $APACHE_OVERLAY_DIR/conf/extra/avenirs.conf.no-git /usr/local/apache2/conf/
 COPY $APACHE_OVERLAY_DIR/conf/extra/httpd-ssl.conf /usr/local/apache2/conf/extra/
 COPY $APACHE_OVERLAY_DIR/conf/httpd.conf /usr/local/apache2/conf/httpd.conf
 COPY $APACHE_OVERLAY_DIR/htdocs/index.html /usr/local/apache2/htdocs/index.html
-COPY $APACHE_OVERLAY_DIR/htdocs/examples /usr/local/apache2/htdocs/
+COPY $APACHE_OVERLAY_DIR/htdocs/examples /usr/local/apache2/htdocs/examples/
 COPY $APACHE_OVERLAY_DIR/htdocs/assets /usr/local/apache2/htdocs/assets
 COPY $APACHE_OVERLAY_DIR/usr/local/apache2/bin/envvars /usr/local/apache2/bin/envvars
