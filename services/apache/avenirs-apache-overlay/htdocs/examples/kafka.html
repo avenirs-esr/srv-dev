@@ -21,12 +21,168 @@
         
         <div class="sub-container">
                 
-                <!-- <h2>
-                    List the routes
+                <h2>
+                    Topic creation
                 </h2>
-                <pre>curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://&lt;server&gt;/apisix-api/apisix/admin/routes"</pre> -->
-                        
+                <code>
+                    <span style="color:grey;">srv-dev $</span> 
+                    docker exec avenirs-kafka kafka-topics --create --bootstrap-server  localhost:29092 --replication-factor 1 --partitions 1 --topic avenirs-topic<br/>
+                    Created topic avenirs-topic.
+                </code>
+
+                <h2>
+                    List topics
+                </h2>
+                <code>
+                    <span style="color:grey;">srv-dev $</span> 
+                    docker exec avenirs-kafka kafka-topics --list --bootstrap-server  localhost:29092<br/>
+                    avenirs-topic
+                </code>
+
+                <h2>
+                    List topics
+                </h2>
+                <code>
+                    <span style="color:grey;">srv-dev $</span> 
+                    docker exec avenirs-kafka kafka-topics --describe --bootstrap-server  localhost:29092 --topic avenirs-topic<br> 
+                    <pre>Topic: avenirs-topic    TopicId: npr_-j_9TBqeKwgc_GtJXg PartitionCount: 1       ReplicationFactor: 1    Configs:</pre>
+                    <pre>Topic: avenirs-topic    Partition: 0    Leader: 1       Replicas: 1     Isr: 1</pre>
+
+                </code>
+
+                <h2>
+                    Message production
+                </h2>
+                This script is interactive, each line will generate a message.<br/><br>
+                <code>
+                    <span style="color:grey;">srv-dev $</span> 
+                    docker exec -it avenirs-kafka kafka-console-producer --broker-list  localhost:29092 --topic avenirs-topic<br/>
+                    >my first message<br/>
+                    >my second message<br/>
+                    >
+                </code>
+
+                <h2>
+                    Message consumption
+                </h2>
+                <p>
+                    Message emitted after the consumer is launched. Enter a new line in the producer console and it should appear in the consumer one.
+                </p>
+                <p>
+                    <code>
+                        <span style="color:grey;">srv-dev $</span> 
+                        docker exec -it avenirs-kafka kafka-console-consumer --bootstrap-server localhost:29092 --topic avenirs-topic
+                    </code>
+                </p>
+                <p>
+                    All the messages including the ones emitted befor the consummer is launched:
+                </p>
+                <p>
+                    <code>
+                        <span style="color:grey;">srv-dev $</span> 
+
+                        docker exec -it avenirs-kafka kafka-console-consumer --bootstrap-server localhost:29092 --topic avenirs-topic --from-beginning <br/>
+                        my first message<br/>
+                        my second message 
+                    </code>
+                </p>
+                <h3> Grouped consummers</h3>
+                <code>
+                    <span style="color:grey;">srv-dev $</span> 
+                    docker exec -it avenirs-kafka kafka-console-consumer --bootstrap-server localhost:29092 --topic avenirs-topic --consumer-property group.id=dev-group<br/>
+                     
+                </code>
+
+                <h2>
+                    Message distribution                
+                </h2>
+                <p>
+                    In this example, a producer and two grouped consummers are created. The messages emitted will be consumed by both consummers.<br/>
+                    N.B.: the strategy of Kafka about key less messages distibution has changed, see 
+                    <a href="https://www.confluent.io/blog/apache-kafka-producer-improvements-sticky-partitioner/" 
+                        alt="Kafffka article about new sticy mode" 
+                        aria-label="Kafka article: sticky partitionner"
+                        target="_blank">
+                        Apache Kafka Producer Improvements with the Sticky Partitioner.
+                    </a><br>
+                </p>
+                <p>
+                    The messages will be produced with a key so they can be consummed alternatively by the two consummers without waiting for a buffer to be filled nor a timeout.<br/>
+                    The key hash determines the consummer.
+                    
+                    
+                </p>
+                <p>
+                    <code>
+                      
+                            <span style="color:grey;">srv-dev $</span> 
+                            docker exec -it avenirs-kafka kafka-console-producer --broker-list  localhost:29092 --topic avenirs-topic --property "parse.key=true" --property "key.separator=:"<br/>
+                            >key1:message with key1<br/>
+                            >key2:message with key2<br/>
+                            >
+                            
+                       
+                    </code>
+                </p>
                 
+                <p>
+                    Update the topic to increase its number of partitions.
+                </p>
+                <p>
+                <code>
+                      
+                        <span style="color:grey;">srv-dev $</span> 
+                        srv-dev $ docker exec avenirs-kafka kafka-topics --alter --bootstrap-server  localhost:29092  --partitions 2 --topic avenirs-topic<br/>
+
+                        <span style="color:grey;">srv-dev $</span> 
+                        docker exec avenirs-kafka kafka-topics --describe --bootstrap-server  localhost:29092 --topic avenirs-topic<br/>
+                        Topic: avenirs-topic    TopicId: npr_-j_9TBqeKwgc_GtJXg PartitionCount: 2       ReplicationFactor: 1    Configs: <br/>
+                                Topic: avenirs-topic    Partition: 0    Leader: 1       Replicas: 1     Isr: 1<br/>
+                                Topic: avenirs-topic    Partition: 1    Leader: 1       Replicas: 1     Isr: 1<br/>
+                </code>
+                </p>
+
+                <p>
+                    Launch two consumers with the same group.
+                </p>
+                <p>
+                <code>
+                      
+                        <span style="color:grey;">srv-dev $</span> 
+                        <p>
+                            Update the topic to increase its number of partitions.
+                        </p>
+                        <p>
+                        <code>
+                              
+                            <span style="color:grey;">srv-dev $</span> 
+                            docker exec -it avenirs-kafka kafka-console-consumer --bootstrap-server localhost:29092 --topic avenirs-topic --consumer-property group.id=dev-group<br/>
+                            <span style="color:grey;">srv-dev $</span> 
+                            docker exec -it avenirs-kafka kafka-console-consumer --bootstrap-server localhost:29092 --topic avenirs-topic --consumer-property group.id=dev-group<br/>
+        
+                                
+                        </code>
+                        </p>
+
+                        <p>
+                            Produce messages with different keys.
+                        </p>
+                        <p>
+                          
+                        <code>
+                              
+                            <span style="color:grey;">srv-dev $</span><br/> 
+                            
+                            >1: message1<br/>
+                            >2: message2<br/>
+                            >3: message3<br/>
+                            >4: message4<br/>
+                            >
+                        </code>
+                        </p>
+                       
+                </code>
+                </p>
             </div>
     </body>
 </html>
