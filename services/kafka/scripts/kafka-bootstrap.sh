@@ -42,5 +42,3 @@ chmod o+rw $AVENIRS_ZOOKEEPER_DATA_VOLUME && verbose "Permissions on $AVENIRS_ZO
 chmod o+rw $AVENIRS_ZOOKEEPER_LOG_VOLUME && verbose "Permissions on $AVENIRS_ZOOKEEPER_LOG_VOLUME OK" || err "Unable to set the permission on $AVENIRS_ZOOKEEPER_LOG_VOLUME"
 
 info "Kafka bootstrapping completed."
-
-echo "${KAFKA_UI_OVERLAY_REALPATH}/etc/kafkaui/dynamic_config.yaml"
