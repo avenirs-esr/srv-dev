@@ -6,7 +6,6 @@
 
 APACHE_SCRIPT_DIR=$1
 . $APACHE_SCRIPT_DIR/../../../scripts/srv-dev-env.sh
-AVENIRS_LDAP_VOLUMES_ROOT=$VOLUMES_ROOT/apache
 
 # Docker env file
 APACHE_ENV_FILE=$APACHE_SCRIPT_DIR/../.env
