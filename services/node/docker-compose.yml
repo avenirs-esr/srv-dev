@@ -1,0 +1,23 @@
+version: '3'
+services:
+  node:
+    restart: unless-stopped
+    #environment:
+    #  - APP_RUNNING_CONTEXT=${APP_RUNNING_CONTEXT}
+
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    #  args:
+    #    APP_RUNNING_CONTEXT: ${APP_RUNNING_CONTEXT}
+    ports:
+      - "8030:3000"
+
+    #volumes:
+    #  - /var/log/docker-containers/audit/node:/usr/src/app/logs
+    networks:
+      - audit-network
+
+networks:
+  audit-network:
+    driver: bridge

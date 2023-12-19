@@ -1,0 +1,36 @@
+{
+  "name": "node-api",
+  "version": "1.0.0",
+  "description": "Avenirs - Node api for dev.",
+  "main": "dist/src/node-api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "watch-node": "nodemon dist/src/node-api.js"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@xxx": "./dist/lib/xxx/src/index.js"
+  },
+  "author": "A. Deman",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.5",
+    "@types/request-promise-native": "^1.0.21",
+    "@types/winston": "^2.4.4",
+    "@types/xml-parser": "^1.2.33",
+    "nodemon": "^3.0.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-query-boolean": "^2.0.0",
+    "request-promise-native": "^1.0.9",
+    "rxjs": "^7.8.1",
+    "winston": "^3.11.0",
+    "xml-parser": "^1.2.1"
+  }
+}
