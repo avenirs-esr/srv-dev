@@ -9,7 +9,7 @@
     "deploy": "bash ./scripts/srv-dev-clean.sh -vv && bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build -d",
     "clean": "docker-compose down; bash ./scripts/srv-dev-clean.sh -vv",
     "purge": "docker-compose down; bash ./scripts/srv-dev-clean.sh -vv; docker system prune -a",
-    "reset":"npm run purge; bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build -d",
+    "reset": "npm run purge; bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build -d",
     "deploy-dev": "npm run clean; bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build"
   },
   "repository": {
@@ -26,5 +26,8 @@
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
     "husky": "^8.0.3"
+  },
+  "dependencies": {
+    "express-requests-logger": "^4.0.0"
   }
 }

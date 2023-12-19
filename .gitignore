@@ -1,7 +1,9 @@
 *~
 \#*
+.\#*
 *.ldif.log
 node_modules
 .env
 envvars
 *.no-git
+**/node-api/dist/
