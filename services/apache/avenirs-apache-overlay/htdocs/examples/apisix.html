@@ -52,8 +52,45 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://&lt;server&gt;/
                 <h2>
                     Delete the routes
                 </h2>
-                <pre>curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://&lt;server&gt;/apisix-api/apisix/admin/routes/getting-started-ip" -X DELETE</pre>
-                    
+                <pre>curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://srv-dev-avenir/apisix-api/apisix/admin/routes/getting-started-ip" -X DELETE</pre>
+               
+                curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://127.0.0.1:9180/apisix/admin/routes" -X PUT -d '
+               
             </div>
     </body>
 </html>
+
+
+curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://srv-dev-avenir/apisix-api/apisix/admin/routes" -X PUT -d '
+        {
+                  "id": "ip-oidc",
+                  "uri": "/ip-oidc",
+                  "upstream": {
+                    "type": "roundrobin",
+                    "nodes": {
+                      "httpbin.org:80": 1
+                    }
+                  }
+                }'
+
+
+
+                curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1"  "http://127.0.0.1:9180/apisix/admin/routes/test-oidc" -X PATCH -d '
+                {
+                    "plugins": {
+                        "openid-connect": {
+                            "_meta": {
+                                "disable": false
+                            },
+                            "bearer_only": true,
+                            "client_id": "APIMClientId",
+                            "client_secret": "ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=",
+                            "discovery": "https://srv-dev-avenir/cas/oidc/.well-known",
+                            "introspection_endpoint": "https://casdev.univ-tln.fr/cas/oidc/introspect",
+                            "redirect_uri": "https://dev-backend.univ-tln.fr/cas-auth-callback",
+                            "scope": "openid profile email",
+                            "set_access_token_header": true,
+                            "token_endpoint_auth_method": "GET"
+                        }
+                    }
+                }'
