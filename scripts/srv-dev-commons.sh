@@ -74,14 +74,13 @@ function warn_and_wait(){
     
     warn "$msg"; 
 
-    while [ $count -ge 0 ]
+    while [ $count -gt 0 ]
     do
-        echo -ne "$count"
-        [ $count -gt 0 ] && echo -ne "..."
+        echo -ne "$count..."
         sleep 1; 
         count=$count-1
     done
-    echo ""
+    echo "0"
     return 0
 }
 
