@@ -12,8 +12,13 @@ NODE_SCRIPT_DIR=$1
 # Docker env file.
 NODE_ENV_FILE=$NODE_SCRIPT_DIR/../.env
 
+# Root of the node api project and build dir.
+NODE_API_ROOT=$NODE_SCRIPT_DIR/../node-api
+NODE_API_BUILD_DIR=$NODE_API_ROOT/dist
+
 # Docker environment.
 [ -z "$AVENIRS_NODE_CONTAINER_NAME" ] && AVENIRS_NODE_CONTAINER_NAME="${AVENIRS_CONTAINER_PREFIX}node"
+[ -z "$AVENIRS_NODE_CONTAINER_PORT" ] && AVENIRS_NODE_CONTAINER_PORT=8030
 
 # This is required to source this script as the test above can fail.
 return 0

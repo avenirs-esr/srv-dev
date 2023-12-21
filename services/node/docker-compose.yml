@@ -1,23 +1,25 @@
 version: '3'
 services:
   node:
+    container_name: ${AVENIRS_NODE_CONTAINER_NAME}
     restart: unless-stopped
     #environment:
     #  - APP_RUNNING_CONTEXT=${APP_RUNNING_CONTEXT}
 
     build:
-      context: .
-      dockerfile: ./Dockerfile
+      context: ./node-api/
+      dockerfile: Dockerfile
     #  args:
     #    APP_RUNNING_CONTEXT: ${APP_RUNNING_CONTEXT}
     ports:
-      - "8030:3000"
+      - "${AVENIRS_NODE_CONTAINER_PORT}:3000"
 
     #volumes:
     #  - /var/log/docker-containers/audit/node:/usr/src/app/logs
+   
     networks:
-      - audit-network
-
-networks:
-  audit-network:
-    driver: bridge
+      - node-network
+networks: 
+  node-network:
+    external: true
+    name: ${AVENIRS_NETWORK}
