@@ -7,3 +7,4 @@ node_modules
 envvars
 *.no-git
 **/node-api/dist/
+**/avenirs-cas-overlay/.gradle/
