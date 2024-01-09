@@ -6,7 +6,7 @@
   "evaluationOrder" : "4001",
   "attributeReleasePolicy" : {
   "@class" : "org.apereo.cas.services.ReturnAllowedAttributeReleasePolicy",
-"   allowedAttributes" : [ "java.util.ArrayList",
+  "   allowedAttributes" : [ "java.util.ArrayList",
       [ "cn",
         "mail",
         "sn",
@@ -14,37 +14,5 @@
         "givenName",
         "displayName"
       ] ]
-}
-}
-
-
-
-{
-  "id": 4001,
-  "name": "NODE-API",
-  "@class": "org.apereo.cas.services.OidcRegisteredService",
-  "bypassApprovalPrompt": true,
-  "clientId": "APIMClientId",
-  "clientSecret": "ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=",
-  "supportedGrantTypes": [ "java.util.HashSet", [ "authorization_code", "refresh_token" ] ],
-  "supportedResponseTypes": [ "java.util.HashSet", [ "code", "token" ] ],
-  "serviceId": "^https?://localhost/node-api/.*",
-  "scopes": [
-    "java.util.HashSet",
-    [
-      "openid",
-      "profile",
-      "email"
-    ]
-  ],
-  "attributeReleasePolicy": {
-    "@class": "org.apereo.cas.services.ReturnMappedAttributeReleasePolicy",
-    "allowedAttributes": {
-	    "@class": "java.util.TreeMap",
-	    "mail": "email",
-	    "cn": "name",
-	    "sn": "family_name",
-	    "givenName": "given_name"
-    }
   }
 }
