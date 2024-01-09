@@ -1,13 +1,34 @@
 {
-  "id": 4000,
-  "name": "APIM",
+  "@class" : "org.apereo.cas.services.CasRegisteredService",
+  "serviceId": "https?://(localhost|.*.avenirs-esr-dev\\.fr)(/.*)?",
+  "name" : "NODE-API",
+  "id" : 4001,
+  "evaluationOrder" : "4001",
+  "attributeReleasePolicy" : {
+  "@class" : "org.apereo.cas.services.ReturnAllowedAttributeReleasePolicy",
+"   allowedAttributes" : [ "java.util.ArrayList",
+      [ "cn",
+        "mail",
+        "sn",
+        "uid",
+        "givenName",
+        "displayName"
+      ] ]
+}
+}
+
+
+
+{
+  "id": 4001,
+  "name": "NODE-API",
   "@class": "org.apereo.cas.services.OidcRegisteredService",
   "bypassApprovalPrompt": true,
   "clientId": "APIMClientId",
   "clientSecret": "ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=",
   "supportedGrantTypes": [ "java.util.HashSet", [ "authorization_code", "refresh_token" ] ],
   "supportedResponseTypes": [ "java.util.HashSet", [ "code", "token" ] ],
-  "serviceId": "^https?://httpbin.org$",
+  "serviceId": "^https?://localhost/node-api/.*",
   "scopes": [
     "java.util.HashSet",
     [
