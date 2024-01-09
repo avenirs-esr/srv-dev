@@ -59,9 +59,43 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://&lt;server&gt;/
             </div>
     </body>
 </html>
+curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisix-api/apisix/admin/routes" -X PUT -d '
+{
+  "id": "ip",
+  "uri": "/ip",
+  "upstream": {
+    "type": "roundrobin",
+    "nodes": {
+      "httpbin.org:80": 1
+    }
+  }
+}'
 
 
-curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://srv-dev-avenir/apisix-api/apisix/admin/routes" -X PUT -d '
+curl "http://localhost/apisix-gw/ip"
+
+curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1"  "http://localhost/apisix-api/apisix/admin/routes/ip" -X PATCH -d '
+                {
+                    "plugins": {
+                        "openid-connect": {
+                            "_meta": {
+                                "disable": false
+                            },
+                            "bearer_only": true,
+                            "client_id": "APIMClientId",
+                            "client_secret": "ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=",
+                            "discovery": "https://localhost/cas/oidc/.well-known",
+                            "introspection_endpoint": "https://localhost/cas/oidc/introspect",
+                            "redirect_uri": "https://httpbin.org",
+                            "scope": "openid profile email",
+                            "set_access_token_header": true,
+                            "token_endpoint_auth_method": "GET"
+                        }
+                    }
+                }'
+
+
+curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisix-api/apisix/admin/routes" -X PUT -d '
         {
                   "id": "ip-oidc",
                   "uri": "/ip-oidc",
@@ -75,22 +109,8 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://srv-dev-avenir/
 
 
 
-                curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1"  "http://127.0.0.1:9180/apisix/admin/routes/test-oidc" -X PATCH -d '
-                {
-                    "plugins": {
-                        "openid-connect": {
-                            "_meta": {
-                                "disable": false
-                            },
-                            "bearer_only": true,
-                            "client_id": "APIMClientId",
-                            "client_secret": "ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=",
-                            "discovery": "https://srv-dev-avenir/cas/oidc/.well-known",
-                            "introspection_endpoint": "https://casdev.univ-tln.fr/cas/oidc/introspect",
-                            "redirect_uri": "https://dev-backend.univ-tln.fr/cas-auth-callback",
-                            "scope": "openid profile email",
-                            "set_access_token_header": true,
-                            "token_endpoint_auth_method": "GET"
-                        }
-                    }
-                }'
+                curl -i  "http://localhost/apisix-gw/ip"  -H "Host: httpbin.org"   -H "Authorization: Bearer eyJjdHkiOiJKV1QiLCJlbmMiOiJBMTkyQ0JDLUhTMzg0IiwiYWxnIjoiZGlyIn0..DmRjm6HbUd6fPimcalC6Fg.AVcGlGX8E1DWW_3QRqrX1ODdK7QNYB2Br8oVlzf51Te6iGy2eA4u2fuzq_vtu7y35GH_1C_VLSiNyDdHE04dnUkA_xzjrQgJxLlw9SvDya1VWgsXKPh26iO_tgN8MaaSw9aLbr7o6mQR9DidEliTGV2aNELvAf8WdotsnjXu0MmAoqtKFkMDeLIvGosze5zbBIVveSlBGlRCk-QoUrj7PksFyyvrTN2BZlgUiLjN17uP5GGWe8orItpLs74TMcsaUZ4__Xrt9GkWMOPaNISllg.aO6d3c910T7Mb3oy-vPiybZ4muecAzMi"
+
+
+
+                
