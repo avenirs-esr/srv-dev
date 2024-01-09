@@ -48,8 +48,13 @@ cas.authn.oauth.access-token.crypto.signing.key=GLeqtgddlBT0GeCMIcifmZzDWP13jYqi
 cas.authn.oauth.access-token.crypto.encryption.key=nxo5B9qSZYdnB4a82d4Sg2Soq8Wh-lUWEL0M54S7Yxs
 cas.authn.oauth.crypto.encryption.key=V4NuNS5DczCgabqQqZA5twIkgGtoMpDV0pFnBykU5EE
 cas.authn.oauth.crypto.signing.key=BznrEjuv5XpfMLP5jzvaEDLBuo2z9SNHMuAWYgFGmmlswM-ZgWUMKas3Y281CDAfbj9gQXn7kpYY7It6Y-k_zw
+cas.authn.oauth.session-replication.cookie.crypto.encryption.key=9zt2BRhud_L8-MIVA3BqLPetD5iCJn_RZog7XWdTBhw
+cas.authn.oauth.session-replication.cookie.crypto.signing.key=b40M7h2mOTiUAnS1-458MZQgN7i4XxIO05XpqI7XjOPKnR3rJdW-Pfg8fQBIK_476noBOpiqxhiN2_HpJYzuMg
+
+
 spring.security.user.name=casuser
 spring.security.user.password=fbd30dc5-7526-48f1-a697-c80dd0276c13
+
 
 
 ### Actuators - dependency for actuators has to be added in  build.gradle
