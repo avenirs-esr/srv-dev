@@ -1,6 +1,8 @@
 cas.server.name=https://localhost:8443
 cas.server.prefix=${cas.server.name}/cas
 cas.authn.oidc.core.issuer=${cas.server.prefix}/oidc
+cas.authn.oidc.core.accepted-issuers-pattern=https:\/\/avenirs-apache:8443\/cas\/.*
+
 
 logging.config=file:/etc/cas/config/log4j2.xml
 
