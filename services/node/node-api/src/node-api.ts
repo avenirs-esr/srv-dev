@@ -65,6 +65,7 @@ app.post('/post_traces', (req, res) => { // https://github.com/login/oauth/autho
 });
 
 // https://casdev.univ-tln.fr/cas/oidc/oidcAuthorize?client_id=APIMClientId&redirect_uri=https://dev-backend.univ-tln.fr/cas-auth-callback&response_type=code&scope=openid profile
+// https://localhost/cas/oidc/oidcAuthorize?client_id=APIMClientId&redirect_uri=https://dev-backend.univ-tln.fr/cas-auth-callback&response_type=code&scope=openid profile
 app.get('/cas-auth-callback', (req, res) => {
   const sessionCode = req?.query?.code;
   //console.log('cas-auth-callback req', req);
