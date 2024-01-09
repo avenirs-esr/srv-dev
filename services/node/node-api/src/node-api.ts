@@ -64,7 +64,7 @@ app.post('/post_traces', (req, res) => { // https://github.com/login/oauth/autho
   console.log('post_traces');
 });
 
-// https://casdev.univ-tln.fr/cas/oidc/oidcAuthorize?client_id=GraviteeClientId&redirect_uri=https://dev-backend.univ-tln.fr/cas-auth-callback&response_type=code&scope=openid profile
+// https://casdev.univ-tln.fr/cas/oidc/oidcAuthorize?client_id=APIMClientId&redirect_uri=https://dev-backend.univ-tln.fr/cas-auth-callback&response_type=code&scope=openid profile
 app.get('/cas-auth-callback', (req, res) => {
   const sessionCode = req?.query?.code;
   //console.log('cas-auth-callback req', req);
@@ -72,11 +72,11 @@ app.get('/cas-auth-callback', (req, res) => {
   //GraviteeClientId
   //ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=
   
-  const uri = 'https://casdev.univ-tln.fr/cas/oidc/oidcAuthorize';
+  const uri = 'https://localhost/cas/oidc/oidcAuthorize';
   console.log('URI', uri);
   console.log('ICI1');
   
-  const url=`${uri}?client_id=GraviteeClientId&client_secret=ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=&redirect_uri=https://dev-backend.univ-tln.fr/cas-auth-callback/access&code=${sessionCode}&scope=openid profile email&response_type=token&response_mode=form_post`
+  const url=`${uri}?client_id=APIMClientId&client_secret=ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=&redirect_uri=http://localhost/node-api/cas-auth-callback/access&code=${sessionCode}&scope=openid profile email&response_type=token&response_mode=form_post`
   console.log('url', url);
 
 if (false) {
