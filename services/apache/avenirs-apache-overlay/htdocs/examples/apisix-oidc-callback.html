@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>OIDC TEST PAGE</title>
+  </head>
+  <body>
+    <script>
+      const urlParams = new URLSearchParams(window.location.href.split('#')?.[1]);
+      const accessToken=urlParams.get('access_token');
+
+      const displayedCmd=`curl -H "Authorization: Bearer ${accessToken?.slice(0, 10) +'...' + accessToken?.slice(-10)}" http://localhost/apisix-gw/ip`
+      
+      console.log('urlParams', urlParams);
+      console.log('Access token', accessToken);
+      function copyCmd(){
+	  const cmd=`curl -H "Authorization: Bearer ${accessToken}" http://localhost/apisix-gw/ip`
+	  navigator.clipboard
+	      .writeText(cmd);
+/*	      .then(
+		  (success) => alert('Command copied'),
+		  (err) => alert('ERROR: unable to copy!')
+	      );*/
+      }
+      
+    </script>
+    <div>
+      <b>Access&nbsp;Token:</b> <small><script>document.write(accessToken)</script></small>
+    </div>
+    <div style="margin-top:1em;">
+      <b>CURL Example : </b><font color="#0a71b4"><script>document.write(displayedCmd);</script></font>
+      <button onClick="copyCmd()">Copy</button>
+    </div>
+
+  </body>
+
+</html>
