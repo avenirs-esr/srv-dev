@@ -8,7 +8,6 @@
   "supportedGrantTypes": [ "java.util.HashSet", [ "authorization_code", "refresh_token" ] ],
   "supportedResponseTypes": [ "java.util.HashSet", [ "code", "token" ] ],
   "serviceId": "^https?://(httpbin.org$|localhost/node-api/cas-auth-callback.*)",
-
   "jwtAccessToken": true,
   "properties" : {
     "@class" : "java.util.HashMap",
