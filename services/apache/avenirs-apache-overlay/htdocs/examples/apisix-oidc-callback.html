@@ -7,13 +7,13 @@
       const urlParams = new URLSearchParams(window.location.href.split('#')?.[1]);
       const accessToken=urlParams.get('access_token');
 
-      const displayedCmd=`curl -H "Authorization: Bearer ${accessToken?.slice(0, 10) +'...' + accessToken?.slice(-10)}" http://localhost/apisix-gw/ip`
+      const displayedCmd=`curl -H "Authorization: Bearer ${accessToken?.slice(0, 10) +'...' + accessToken?.slice(-10)}" http://localhost/apisix-gw/ipoidc`
       
       console.log('urlParams', urlParams);
       console.log('Access token', accessToken);
-      function copyCmd(){
-	  const cmd=`curl -H "Authorization: Bearer ${accessToken}" http://localhost/apisix-gw/ip`
-	  navigator.clipboard
+      function copyCmd(srvdev=false){
+	      const cmd=`curl -H "Authorization: Bearer ${accessToken}" http://${srvdev ? 'srv-dev-avenir.srv-avenir.brgm.recia.net' : 'localhost'}/apisix-gw/ipoidc`
+	      navigator.clipboard
 	      .writeText(cmd);
 /*	      .then(
 		  (success) => alert('Command copied'),
@@ -23,11 +23,18 @@
       
     </script>
     <div>
+      This page retrieves the access token in the browser location and generates a curl example to call an OIDC protected API.
+    </div>
+    <div style="margin-top:1em;">
       <b>Access&nbsp;Token:</b> <small><script>document.write(accessToken)</script></small>
     </div>
     <div style="margin-top:1em;">
-      <b>CURL Example : </b><font color="#0a71b4"><script>document.write(displayedCmd);</script></font>
+      <b>CURL Example (localhost): </b><br/><font color="#0a71b4"><script>document.write(displayedCmd);</script></font>
       <button onClick="copyCmd()">Copy</button>
+    </div>
+    <div style="margin-top:1em;">
+      <b>CURL Example (srv-dev-avenirs): </b><br/><font color="#0a71b4"><script>document.write(displayedCmd);</script></font>
+      <button onClick="copyCmd(true)">Copy</button>
     </div>
 
   </body>

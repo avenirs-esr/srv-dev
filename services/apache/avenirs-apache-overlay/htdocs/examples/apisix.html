@@ -33,7 +33,8 @@
                 <pre>
 curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://&lt;server&gt;/apisix-api/apisix/admin/routes" -X PUT -d '
 {
-  "id": "getting-started-ip",
+  "name": "IP Key Less",
+  "id": "ip",
   "uri": "/ip",
   "upstream": {
     "type": "roundrobin",
@@ -52,17 +53,36 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://&lt;server&gt;/
                 <h2>
                     Delete the routes
                 </h2>
-                <pre>curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://srv-dev-avenir/apisix-api/apisix/admin/routes/getting-started-ip" -X DELETE</pre>
+                <pre>curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://srv-dev-avenir/apisix-api/apisix/admin/routes/ip" -X DELETE</pre>
                
                 curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://127.0.0.1:9180/apisix/admin/routes" -X PUT -d '
                
-            </div>
-    </body>
-</html>
+                <h2>OIDC Protection</h2>
+                <pre>
 curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisix-api/apisix/admin/routes" -X PUT -d '
 {
-  "id": "ip",
-  "uri": "/ip",
+  "name": "IP OIDC",
+  "id": "ip-oidc",
+  "uri": "/ipoidc",
+  "plugins": {
+    "proxy-rewrite": {
+      "uri": "/ip"
+    },
+    "openid-connect": {
+      "_meta": {
+          "disable": false
+      },
+      "bearer_only": true,
+      "client_id": "APIMClientId",
+      "client_secret": "ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=",
+      "discovery": "https://avenirs-apache/cas/oidc/.well-known",
+      "introspection_endpoint": "https://avenirs-apache/cas/oidc/introspect",
+      "redirect_uri": "https://httpbin.org",
+      "scope": "openid profile email",
+      "set_access_token_header": true,
+      "token_endpoint_auth_method": "GET"
+    }
+  },
   "upstream": {
     "type": "roundrobin",
     "nodes": {
@@ -70,47 +90,11 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisi
     }
   }
 }'
+                </pre>
 
-
- 
-
-curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1"  "http://localhost/apisix-api/apisix/admin/routes/ip" -X PATCH -d '
-                {
-                    "plugins": {
-                        "openid-connect": {
-                            "_meta": {
-                                "disable": false
-                            },
-                            "bearer_only": true,
-                            "client_id": "APIMClientId",
-                            "client_secret": "ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=",
-                            "discovery": "https://localhost/cas/oidc/.well-known",
-                            "introspection_endpoint": "https://localhost/cas/oidc/introspect",
-                            "redirect_uri": "https://httpbin.org",
-                            "scope": "openid profile email",
-                            "set_access_token_header": true,
-                            "token_endpoint_auth_method": "GET"
-                        }
-                    }
-                }'
-
-
-curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisix-api/apisix/admin/routes" -X PUT -d '
-        {
-                  "id": "ip-oidc",
-                  "uri": "/ip-oidc",
-                  "upstream": {
-                    "type": "roundrobin",
-                    "nodes": {
-                      "httpbin.org:80": 1
-                    }
-                  }
-                }'
-
-
-
-                curl -i  "http://localhost/apisix-gw/ip"  -H "Host: httpbin.org"   -H "Authorization: Bearer eyJjdHkiOiJKV1QiLCJlbmMiOiJBMTkyQ0JDLUhTMzg0IiwiYWxnIjoiZGlyIn0..DmRjm6HbUd6fPimcalC6Fg.AVcGlGX8E1DWW_3QRqrX1ODdK7QNYB2Br8oVlzf51Te6iGy2eA4u2fuzq_vtu7y35GH_1C_VLSiNyDdHE04dnUkA_xzjrQgJxLlw9SvDya1VWgsXKPh26iO_tgN8MaaSw9aLbr7o6mQR9DidEliTGV2aNELvAf8WdotsnjXu0MmAoqtKFkMDeLIvGosze5zbBIVveSlBGlRCk-QoUrj7PksFyyvrTN2BZlgUiLjN17uP5GGWe8orItpLs74TMcsaUZ4__Xrt9GkWMOPaNISllg.aO6d3c910T7Mb3oy-vPiybZ4muecAzMi"
-
-
-
+                <a href="https://localhost/cas/login?service=https://localhost/node-api/cas-auth-callback" target="_blank">Get an ACCESS TOKEN and test an API call with CURL (Login end point)</a>
+                <a href="https://localhost/cas/oidc/oidcAuthorize?client_id=APIMClientId&redirect_uri=https://localhost/node-api/cas-auth-callback&response_type=code&scope=openid%20profile" target="_blank">Get an ACCESS TOKEN and test an API call with CURL (oidcAuthorize end point)</a>
                 
+            </div>
+    </body>
+</html>
