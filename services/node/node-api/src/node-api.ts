@@ -34,6 +34,7 @@ app.use(audit())
 
 app.get('/health', (req, res) => {
   //  console.log('Headers', req.headers);
+  
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify({ 'state': 'Green state' }));
 });
@@ -42,17 +43,22 @@ app.get('/health', (req, res) => {
 // https://localhost/cas/oidc/oidcAuthorize?client_id=APIMClientId&redirect_uri=https://localhost/node-api/cas-auth-callback&response_type=code&scope=openid profile
 app.get('/cas-auth-callback', (req, res) => {
   const sessionCode = req?.query?.code;
-  //console.log('cas-auth-callback sessionCode', sessionCode);
+  const host=req.headers?.['x-forwarded-host'] || 'localhost'
+  console.log('cas-auth-callback host', host);
+  console.log('cas-auth-callback sessionCode', sessionCode);
   
-  const uri = 'https://localhost/cas/oidc/oidcAuthorize';
+  const uri = `https://${host}/cas/oidc/oidcAuthorize`;
   console.log('URI', uri);
- 
-  const url=`${uri}?client_id=APIMClientId&client_secret=ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=&redirect_uri=http://localhost/node-api/cas-auth-callback/access&code=${sessionCode}&scope=openid profile email&response_type=token`
+  
+  const url=`${uri}?client_id=APIMClientId&client_secret=ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=&redirect_uri=http://${host}/node-api/cas-auth-callback/access&code=${sessionCode}&scope=openid profile email&response_type=token`
+  console.log('url', url);
   res.redirect(url);
 });
 
 app.get('/cas-auth-callback/access', (req, res) => {
-  res.redirect('http://localhost/examples/apisix-oidc-callback.html')
+  const host=req.headers?.['x-forwarded-host'] || 'localhost'
+  console.log('cas-auth-callback/access host', host);
+  res.redirect(`http://${host}/examples/apisix-oidc-callback.html`)
 });
 
 const HOST = '0.0.0.0';
