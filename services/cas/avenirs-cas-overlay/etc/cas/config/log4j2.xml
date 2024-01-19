@@ -23,7 +23,7 @@ Set -Dlog4j2.contextSelector=org.apache.logging.log4j.core.selector.BasicContext
         <!-- -Dlog.stacktraceappender=null to disable stacktrace log -->
         <Property name="log.stacktraceappender">casStackTraceFile</Property>
         <Property name="log.include.location">false</Property>
-        <Property name="org.apereo.cas.oidc.log.level">warn</Property>
+        <Property name="org.apereo.cas.oidc.log.level">trace</Property>
     </Properties>
     <Appenders>
         <Null name="null" />

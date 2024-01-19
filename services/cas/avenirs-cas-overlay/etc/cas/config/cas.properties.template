@@ -3,6 +3,7 @@ cas.server.prefix=${cas.server.name}/cas
 cas.authn.oidc.core.issuer=${cas.server.prefix}/oidc
 cas.authn.oidc.core.accepted-issuers-pattern=https:\/\/(avenirs-apache|localhost|srv-dev-avenirs?(\\.srv-avenir\\.brgm\\.recia\\.net)?)(:8443)?\/cas\/.*
 
+cas.logout.follow-service-redirects=true
 
 logging.config=file:/etc/cas/config/log4j2.xml
 
@@ -28,8 +29,8 @@ cas.authn.ldap[0].bindCredential=admin
 cas.serviceRegistry.json.location=file:/etc/cas/services
 cas.service-registry.json.watcher-enabled=true
 
-cas.authn.oidc.discovery.scopes=openid,profile,email,phone,offline_access,utlnscope
-cas.authn.oidc.discovery.claims=family_name,given_name,cn,givenName,sn,displayName,isMemberOf
+cas.authn.oidc.discovery.scopes=openid,profile,email,phone,offline_access
+cas.authn.oidc.discovery.claims=family_name,given_name,email, mail, cn,givenName,sn,displayName,isMemberOf
 
 
 #cas.interrupt.core.force-execution=true
