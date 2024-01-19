@@ -46,7 +46,6 @@ app.get('/cas-auth-callback', (req, res) => {
 
   const uri = `https://${host}/cas/oidc/oidcAuthorize`;
   console.log('URI', uri);
-
   const url = `${uri}?client_id=APIMClientId&client_secret=ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=&redirect_uri=http://${host}/node-api/cas-auth-callback/access&code=${sessionCode}&scope=openid profile email&response_type=token`
   console.log('url', url);
   res.redirect(url);
