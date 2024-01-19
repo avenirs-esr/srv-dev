@@ -13,4 +13,5 @@ uid: __UID__
 gecos:  __GECOS__
 givenName: __GIVEN_NAME__
 userPassword:__USER_PASSWORD__
+mail:__USER_MAIL__
 

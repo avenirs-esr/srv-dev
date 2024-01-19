@@ -67,11 +67,13 @@ function generate_ldif(){
     local gecos=$5
     local uidNumber=$6
     local gidNumber=$7
+    local mail="$uid@univ.fr"
     vvverbose "uid          $uid"
     vvverbose "givenName    $givenName"
     vvverbose "givenNameCap $givenNameCap"
     vvverbose "sn           $sn"
     vvverbose "cn           $cn"
+    vvverbose "mail        $mail"
     vvverbose "gecos        $gecos"
     vvverbose "uidNumber    $uidNumber"
     vvverbose "gidNumber    $gidNumber"
@@ -84,6 +86,7 @@ function generate_ldif(){
         | sed s"/__GECOS__/$gecos/g" \
         | sed s"/__UID_NUMBER__/$uidNumber/g" \
         | sed s"/__GID_NUMBER__/$gidNumber/g"\
+         | sed s"/__USER_MAIL__/$mail/g"\
         | sed s"%__USER_PASSWORD__%$AVENIRS_LDAP_FIXTURES_PASSWORD%g">>$OUT || err "Unable to write to $OUT"
 
 
