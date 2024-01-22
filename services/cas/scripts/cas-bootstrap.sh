@@ -17,7 +17,7 @@ info "CAS bootstrapping started."
 . $CAS_SCRIPT_DIR/cas-env.sh $CAS_SCRIPT_DIR 2> /dev/null || err "Unable to source $CAS_SCRIPT_DIR/cas-env.sh"
 
 # Initialization of the local branch if needed.
-init_git_repository $CAS_REPOSITORY_DIR $CAS_REMOTE_BRANCH $CAS_LOCAL_BRANCH
+init_git_repository $CAS_REPOSITORY_DIR $REMOTE_CAS_BRANCH $LOCAL_CAS_BRANCH
 
 # Network check
 check_network

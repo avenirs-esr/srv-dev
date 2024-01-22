@@ -9,10 +9,14 @@ CAS_SCRIPT_DIR=$1
 
 CAS_OVERLAY_DIR=$CAS_SCRIPT_DIR/../avenirs-cas-overlay
 CAS_REPOSITORY_DIR=$CAS_SCRIPT_DIR/../cas-overlay-template
-#CAS_REMOTE_BRANCH=remotes/origin/master
-CAS_REMOTE_BRANCH=master
-CAS_LOCAL_BRANCH=local
-CAS_MAIN_BRANCH="master"
+
+# CAS_REMOTE_BRANCH=master
+# CAS_LOCAL_BRANCH=local
+# CAS_MAIN_BRANCH="master"
+
+REMOTE_CAS_BRANCH=remotes/origin/6.6
+LOCAL_CAS_BRANCH=6.6
+MAIN_CAS_BRANCH="master"
 
 # Docker env file
 CAS_ENV_FILE=$CAS_REPOSITORY_DIR/.env

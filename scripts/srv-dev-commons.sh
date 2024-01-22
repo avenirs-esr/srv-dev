@@ -191,7 +191,7 @@ function remove_overlay {
     [ -e $target ] || err "target directory not found: $target"
     [ -d $target ] || err "not a directory: $target"
     
-
+init_git_repository
     verbose "Removing overlay from $target"
     cd $target && git stash -u && cd -
     [ $? -eq 0 ] && info "Overlay removed from $target" || err "Unable to remove overlay from $target"
@@ -278,7 +278,7 @@ function init_git_repository(){
     local remote_branch=$2
     local local_branch=$3
 
-    vvverbose "init_git_repository repository_dir: $repository_dir, main_branch: $main_branch, local_branch: $local_branch"
+    vvverbose "init_git_repository repository_dir: $repository_dir, remote_branch: $remote_branch, local_branch: \"$local_branch\""
 
     [ -n $repository_dir ] || err "init_git_repository: parameter repository_dir is required"
     [ -n $remote_branch ] || err "init_git_repository: parameter remote_branch is required"

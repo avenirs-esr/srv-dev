@@ -29,8 +29,9 @@ cas.authn.ldap[0].bindCredential=admin
 cas.serviceRegistry.json.location=file:/etc/cas/services
 cas.service-registry.json.watcher-enabled=true
 
-cas.authn.oidc.discovery.scopes=openid,profile,email,phone,offline_access
-cas.authn.oidc.discovery.claims=family_name,given_name,email, mail, cn,givenName,sn,displayName,isMemberOf
+cas.authn.oidc.discovery.scopes=openid,profile,email
+#cas.authn.oidc.discovery.claims=family_name,given_name,email, mail, cn,givenName,sn,displayName,isMemberOf
+cas.authn.oidc.discovery.claims=family_name,given_name,email
 
 
 #cas.interrupt.core.force-execution=true
@@ -40,18 +41,14 @@ cas.authn.oidc.discovery.claims=family_name,given_name,email, mail, cn,givenName
 cas.audit.slf4j.use-single-line=true
 
 
-### Added for versino 6.6
-cas.tgc.crypto.encryption.key=1gTJD6r51ZkjomJCInfhWPQroO7SHc9g_Cet91zKcXk
-cas.tgc.crypto.signing.key=vQsMZ9ZYZ4Uow-IwF1EQPcjlwJFAXoGlK0MC93kvQPDqJPjC4KBJ8nGxpYT00uv6YznxPu_kt4G0g0dNy-n6Ww
-cas.webflow.crypto.signing.key=8pdQ42sb2jdhZFbllrStKip9nOJ19XE9WF7r1booeU5-8Vsm_gaxudB3XrKdJQIh4O6DI_W1cjF0l2GdOOQCNQ
-cas.webflow.crypto.encryption.key=SNwi3NgkDUEbPt7tHVwcuQ
-cas.authn.oauth.access-token.crypto.signing.key=GLeqtgddlBT0GeCMIcifmZzDWP13jYqi4qtz0DVDf5jBfPpefaxbdI7sf-CXQqBGJfUUoX0GcJi-8gSkM-i0Tw
-cas.authn.oauth.access-token.crypto.encryption.key=nxo5B9qSZYdnB4a82d4Sg2Soq8Wh-lUWEL0M54S7Yxs
-cas.authn.oauth.crypto.encryption.key=V4NuNS5DczCgabqQqZA5twIkgGtoMpDV0pFnBykU5EE
-cas.authn.oauth.crypto.signing.key=BznrEjuv5XpfMLP5jzvaEDLBuo2z9SNHMuAWYgFGmmlswM-ZgWUMKas3Y281CDAfbj9gQXn7kpYY7It6Y-k_zw
-cas.authn.oauth.session-replication.cookie.crypto.encryption.key=9zt2BRhud_L8-MIVA3BqLPetD5iCJn_RZog7XWdTBhw
-cas.authn.oauth.session-replication.cookie.crypto.signing.key=b40M7h2mOTiUAnS1-458MZQgN7i4XxIO05XpqI7XjOPKnR3rJdW-Pfg8fQBIK_476noBOpiqxhiN2_HpJYzuMg
-
+cas.tgc.crypto.encryption.key=zP5Z_0MdVmL12WJ7PeQzPi2EZi1nSulUnu-7S61fbSY
+cas.tgc.crypto.signing.key=dhS-OLwHNWWDh0bzRzFqPJ80XDI5GpUcQ3ug3aP969DvMXt0zf8AHfM-PGrDVMUcbgC9__lOBtuWbu8I5HeyfA
+cas.webflow.crypto.signing.key=awThxWv-zh2YqwCWn1wyX8OBA8Am3HcM7IPDPNZYoDZDPBqZyNtQtR-2MhoyJYsTtq2MYTV8WYJS9y4x-vGVUA
+cas.webflow.crypto.encryption.key=k8UkXdPk1Ytpt-SAAywODA
+cas.authn.oauth.crypto.encryption.key=rh8ZoOuo5CpU3z5hUcJEi4LOa9RdDkazqIbg4hEefKo
+cas.authn.oauth.crypto.signing.key=XUG6BXA2PJ5iQfE1UO8fxPpu6dftOsJrgXrbhLqq5wyLPOw71u_MPk_XFhrErFf6jc3QnKfYkpF74zbrfh3uIA
+cas.authn.oauth.access-token.crypto.encryption.key=u2kwgj_LmLcporuACc-jIGKBcnzlUDQoNT1_DNx8tBY
+cas.authn.oauth.access-token.crypto.signing.key=E-k6ONNILWuURj67uOJCczx0ItNFfhKZcmVaaPTsIuIXyKocxQTmHKzmWx9-vkyCtbASDh3gYt0fj7f7n4kI8A
 
 spring.security.user.name=casuser
 spring.security.user.password=fbd30dc5-7526-48f1-a697-c80dd0276c13
@@ -72,6 +69,5 @@ spring.security.user.password=fbd30dc5-7526-48f1-a697-c80dd0276c13
 #management.endpoint.resolveAttributes.enabled=true
 #management.endpoint.registeredService.enabled=true
 #cas.monitor.endpoints.endpoint.defaults.access=AUTHENTICATED
-#spring.security.user.name=casuser
-#spring.security.user.password=@r0bbazz
+
 ###
