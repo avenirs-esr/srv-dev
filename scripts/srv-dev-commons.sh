@@ -191,7 +191,6 @@ function remove_overlay {
     [ -e $target ] || err "target directory not found: $target"
     [ -d $target ] || err "not a directory: $target"
     
-init_git_repository
     verbose "Removing overlay from $target"
     cd $target && git stash -u && cd -
     [ $? -eq 0 ] && info "Overlay removed from $target" || err "Unable to remove overlay from $target"

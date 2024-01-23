@@ -14,9 +14,9 @@ CAS_REPOSITORY_DIR=$CAS_SCRIPT_DIR/../cas-overlay-template
 # CAS_LOCAL_BRANCH=local
 # CAS_MAIN_BRANCH="master"
 
-REMOTE_CAS_BRANCH=remotes/origin/6.6
-LOCAL_CAS_BRANCH=6.6
-MAIN_CAS_BRANCH="master"
+CAS_REMOTE_BRANCH=remotes/origin/6.6
+CAS_LOCAL_BRANCH=6.6
+CAS_MAIN_BRANCH="master"
 
 # Docker env file
 CAS_ENV_FILE=$CAS_REPOSITORY_DIR/.env

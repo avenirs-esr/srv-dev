@@ -84,7 +84,36 @@ app.post('/cas-auth-validate', (req, res) => {
     } else {
       const introspectResponse = resp?.body;
       const active = introspectResponse?.active;
-      res.status(active ? 200 : 404).end(JSON.stringify(introspectResponse) + '\n');
+      console.log('cas-auth-validate introspectResponse', introspectResponse);
+      if (!active){
+        console.log('cas-auth-validate not active status will be 404');
+        res.status(404).end(JSON.stringify(introspectResponse) + '\n');
+      } else {
+        if (introspectResponse.token){
+          console.log('cas-auth-validate token found in introspectResponse');
+          needle.post('http://avenirs-apache/cas/oidc/profile',{ token: introspectResponse.token}, options, (err, resp)=> {   
+            console.log('cas-auth-validate in profile');
+            if (err){
+              console.log('cas-auth-validate in profile err', err);
+              res.status(500).end(JSON.stringify(err) + '\n');
+            } else {
+              console.log('cas-auth-validate in profile resp.body', resp.body);
+              res.status(200).end(JSON.stringify({
+                ...introspectResponse,
+                profile: resp?.body
+              }) + '\n');
+            }
+          });
+        } else {
+          res.status(500).end("The token is missing in the introspect response: " + JSON.stringify(err) + '\n');
+        }
+     // needle.post('http://localhost/cas/oidc/introspect',data, options, (err, resp)=> {   
+
+   
+ 
+
+      }
+      // res.status(active ? 200 : 404).end(JSON.stringify(introspectResponse) + '\n');
     }
   });
 });

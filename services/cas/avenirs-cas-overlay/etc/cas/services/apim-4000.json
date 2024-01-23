@@ -18,15 +18,5 @@
       "profile",
       "email"
     ]
-  ],
-  "attributeReleasePolicy": {
-    "@class": "org.apereo.cas.services.ReturnMappedAttributeReleasePolicy",
-    "allowedAttributes": {
-	    "@class": "java.util.TreeMap",
-	    "mail": "email",
-      "sn": "family_name",
-      "family_name":"sn"
-	   
-    }
-  }
+  ]
 }
