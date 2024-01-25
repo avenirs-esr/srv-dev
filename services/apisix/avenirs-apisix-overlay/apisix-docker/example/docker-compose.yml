@@ -18,19 +18,19 @@
 version: "3"
 
 services:
-  apisix-dashboard:
-    container_name: ${AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME}
-    build:
-      context: ../../apisix-dashboard/
-      dockerfile: Dockerfile
-    # image: apache/apisix-dashboard:3.0.1-alpine
-    restart: always
-    volumes:
-    - ./dashboard_conf/conf.yaml:/usr/local/apisix-dashboard/conf/conf.yaml
-    ports:
-    - "9000:9000"
-    networks:
-      apisix-network:
+  # apisix-dashboard:
+  #   container_name: ${AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME}
+  #   build:
+  #     context: ../../apisix-dashboard/
+  #     dockerfile: Dockerfile
+  #   # image: apache/apisix-dashboard:3.0.1-alpine
+  #   restart: always
+  #   volumes:
+  #   - ./dashboard_conf/conf.yaml:/usr/local/apisix-dashboard/conf/conf.yaml
+  #   ports:
+  #   - "9000:9000"
+  #   networks:
+  #     apisix-network:
 
 
   apisix:
