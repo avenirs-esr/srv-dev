@@ -1,4 +1,3 @@
-#cas.server.name=https://srv-dev-avenir.srv-avenir.brgm.recia.net
 cas.server.name=__AVENIRS_CAS_SERVER_NAME__
 cas.server.prefix=${cas.server.name}/cas
 cas.authn.oidc.core.issuer=${cas.server.prefix}/oidc
