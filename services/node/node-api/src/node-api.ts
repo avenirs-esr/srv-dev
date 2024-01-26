@@ -28,7 +28,9 @@ app.use(urlencoded({
 app.use(audit())
 
 
-
+/**
+ * Health method to check quickly if the banckend is responding.
+ */
 app.get('/health', (req, res) => {
   //  console.log('Headers', req.headers);
 
@@ -37,7 +39,11 @@ app.get('/health', (req, res) => {
 });
 
 
-// https://localhost/cas/oidc/oidcAuthorize?client_id=APIMClientId&redirect_uri=https://localhost/node-api/cas-auth-callback&response_type=code&scope=openid profile
+/**
+ * Cas oidc authentication callback. 
+ * Call the cas oidcAuthorize end point to generate a jwt (access token) from a session code.
+ * After authorization cas will redirect to the uri given in parameter (must be declared in service definition of CAS).
+ */
 app.get('/cas-auth-callback', (req, res) => {
   const sessionCode = req?.query?.code;
   const host = req.headers?.['x-forwarded-host'] || 'localhost'
@@ -51,22 +57,27 @@ app.get('/cas-auth-callback', (req, res) => {
   res.redirect(url);
 });
 
+/**
+ * Redirection used after CAS authorization.
+ */
 app.get('/cas-auth-callback/access', (req, res) => {
   const host = req.headers?.['x-forwarded-host'] || 'localhost'
   console.log('cas-auth-callback/access host', host);
-  // res.redirect(`http://${host}/apisix-oidc-callback.html`)
-  res.redirect(`http://${host}:8000/demo/`)
-  //res.redirect(`http://${host}:8000/demo/`)
+  res.redirect(`http://${host}/examples/authentication-webcomp-demo/`)
+  
 });
 
+
+/**
+ * Validates a jwt. If the jwt is valid the claims will be returned.
+ * Uses the introspection end point of CAS.
+ */
 app.post('/cas-auth-validate', (req, res) => {
   const host = req.headers?.['x-forwarded-host'] || 'localhost'
   const token = req.get('x-authorization');
   console.log('cas-auth-validate host', host);
   console.log('cas-auth-validate token', token);
 
-  // const protocol = host === 'localhost' ? 'http://' : 'https://';
-  // const introspectEndPoint = `${protocol}${host}/cas/oidc/introspect`;
   const introspectEndPoint = `http://avenirs-apache/cas/oidc/introspect`;
   console.log('cas-auth-validate introspectEndPoint', introspectEndPoint);
 
@@ -75,6 +86,7 @@ app.post('/cas-auth-validate', (req, res) => {
       'Authorization': 'Basic ' + Buffer.from('APIMClientId:ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=').toString('base64')
     }
   }
+
 
   needle.post(introspectEndPoint, { token }, options, (err: any, resp: needle.NeedleResponse) => {
 
@@ -85,15 +97,15 @@ app.post('/cas-auth-validate', (req, res) => {
       const introspectResponse = resp?.body;
       const active = introspectResponse?.active;
       console.log('cas-auth-validate introspectResponse', introspectResponse);
-      if (!active){
+      if (!active) {
         console.log('cas-auth-validate not active status will be 404');
         res.status(404).end(JSON.stringify(introspectResponse) + '\n');
       } else {
-        if (introspectResponse.token){
+        if (introspectResponse.token) {
           console.log('cas-auth-validate token found in introspectResponse');
-          needle.post('http://avenirs-apache/cas/oidc/profile',{ token: introspectResponse.token}, options, (err, resp)=> {   
+          needle.post('http://avenirs-apache/cas/oidc/profile', { token: introspectResponse.token }, options, (err, resp) => {
             console.log('cas-auth-validate in profile');
-            if (err){
+            if (err) {
               console.log('cas-auth-validate in profile err', err);
               res.status(500).end(JSON.stringify(err) + '\n');
             } else {
@@ -107,26 +119,10 @@ app.post('/cas-auth-validate', (req, res) => {
         } else {
           res.status(500).end("The token is missing in the introspect response: " + JSON.stringify(err) + '\n');
         }
-     // needle.post('http://localhost/cas/oidc/introspect',data, options, (err, resp)=> {   
-
-   
- 
-
       }
-      // res.status(active ? 200 : 404).end(JSON.stringify(introspectResponse) + '\n');
     }
   });
 });
-
-// app.get('/login', (req, res) => {
-//   // const host=req.headers?.['x-forwarded-host'] || 'localhost'
-//   console.log('/login');
-//   const url='https://localhost/cas/oidc/oidcAuthorize?client_id=APIMClientId&redirect_uri=https://localhost/node-api/cas-auth-callback&response_type=code&scope=openid%20profile';
-//   res.redirect(url);
-//   // res.setHeader('Content-Type', 'application/json');
-//   // res.end(JSON.stringify({ 'login': 'Arnaud' }));
-//   // res.redirect(`http://${host}/examples/apisix-oidc-callback.html`)
-// });
 
 const HOST = '0.0.0.0';
 const PORT = 3000;
