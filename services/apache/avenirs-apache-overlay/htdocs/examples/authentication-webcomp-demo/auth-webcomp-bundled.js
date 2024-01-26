@@ -1143,10 +1143,11 @@ class AuthService {
     }
     _fetchEndPoints(settings) {
         const hostname = window.location.hostname;
+        console.log('AuthService _fetchEndPoints hostname', hostname);
         if (hostname === 'localhost' || hostname === '127.0.0.1') {
             return settings?.routes?.local;
         }
-        if (hostname === 'srv-dev-avenir') {
+        if (hostname.includes('srv-dev-avenir')) {
             return settings.routes.dev;
         }
         return settings?.routes?.prod;
