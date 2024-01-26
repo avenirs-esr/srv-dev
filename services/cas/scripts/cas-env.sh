@@ -24,6 +24,12 @@ CAS_ENV_FILE=$CAS_REPOSITORY_DIR/.env
 # Container name
 [ -z  "$AVENIRS_CAS_CONTAINER_NAME" ] && AVENIRS_CAS_CONTAINER_NAME="${AVENIRS_CONTAINER_PREFIX}cas"
 
+# Server name (CAS settings)
+host=`hostname`
+echo "host $host"
+[ "$host" == "srv-dev-avenir" -o "$host" == "srv-dev-avenirs" ] && AVENIRS_CAS_SERVER_NAME="https://`hostname -f`" || AVENIRS_CAS_SERVER_NAME='https://localhost'
+echo "=> $AVENIRS_CAS_SERVER_NAME"
+
 CAS_SETTINGS_TEMPLATE_FILE=$CAS_OVERLAY_DIR/etc/cas/config/cas.properties.template
 CAS_SETTINGS_FILE=$CAS_REPOSITORY_DIR/etc/cas/config/cas.properties
 
