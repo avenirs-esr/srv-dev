@@ -1066,7 +1066,7 @@ class AuthService {
                 cleanStorageFlag = true; // If the jwt is not valid it has to be removed from session storage.
             }
             if (jwt) {
-                const validationEndpoint = `http://${this.backend}/node-api/cas-auth-validate`;
+                const validationEndpoint = this._fetchEndPoints(settings)?.validation;
                 this._introspect(validationEndpoint, jwt)
                     .then(data => {
                     console.log('_initializeJWT data', authenticationData);
@@ -1150,10 +1150,6 @@ class AuthService {
             return settings.routes.dev;
         }
         return settings?.routes?.prod;
-    }
-    get backend() {
-        const hostname = window.location.hostname;
-        return hostname === 'localhost' ? 'localhost' : 'avenirs-apache';
     }
 }
 
@@ -1407,14 +1403,17 @@ const DEFAULT_AUTH_SETTINGS = {
         local: {
             login: 'https://localhost/cas/oidc/oidcAuthorize?client_id=APIMClientId&redirect_uri=https://localhost/node-api/cas-auth-callback&response_type=code&scope=openid%20email%20profile',
             logout: 'https://localhost/cas/oidc/oidcLogout?service=https://localhost/node-api/cas-auth-callback',
+            validation: 'http://localhost/node-api/cas-auth-validate'
         },
         dev: {
-            login: 'https://${this.backend}/cas/oidc/oidcAuthorize?client_id=APIMClientId&redirect_uri=https://localhost/node-api/cas-auth-callback&response_type=code&scope=openid%20email%20profile',
+            login: 'https://avenirs-apache/cas/oidc/oidcAuthorize?client_id=APIMClientId&redirect_uri=https://localhost/node-api/cas-auth-callback&response_type=code&scope=openid%20email%20profile',
             logout: 'https://avenirs-apache/cas/oidc/oidcLogout?service=https://localhost/node-api/cas-auth-callback',
+            validation: 'http://avenirs-apache/node-api/cas-auth-validate'
         },
         prod: {
             login: '',
             logout: '',
+            validation: ''
         },
     }
 };
