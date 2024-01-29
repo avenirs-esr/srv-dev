@@ -40,13 +40,17 @@ RUN if [ "$ENABLE_PROXY" = "true" ] ; then go env -w GOPROXY=https://goproxy.io,
 
 FROM node:16-alpine as fe-builder
 
-ARG ENABLE_PROXY=false
-
 WORKDIR /usr/local/apisix-dashboard
 
 COPY --from=pre-build /usr/local/apisix-dashboard .
 
 WORKDIR /usr/local/apisix-dashboard/web
+
+# The certificate error for the repository https://registry.npm.taobao.org 
+# Can be removed when the certicate error is corrected.
+# A. Deman 01/2024 
+RUN yarn config set "strict-ssl" false -g
+
 
 RUN if [ "$ENABLE_PROXY" = "true" ] ; then yarn config set registry https://registry.npmmirror.com/ ; fi \
     && yarn install \
@@ -54,7 +58,6 @@ RUN if [ "$ENABLE_PROXY" = "true" ] ; then yarn config set registry https://regi
 
 FROM alpine:latest as prod
 
-ARG ENABLE_PROXY=false
 
 RUN if [ "$ENABLE_PROXY" = "true" ] ; then sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories ; fi
 
