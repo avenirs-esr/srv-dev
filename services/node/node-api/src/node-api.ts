@@ -1,10 +1,15 @@
 require('module-alias/register');
+
 console.log('-----------------------');
 process.on('uncaughtException', (error) => {
   console.log('Catched uncaughtException: ', error);
   process.exit(1);
 
+
 })
+const {cas_client_id, cas_client_secret}=require('../settings/node-api-settings.json');
+console.log('cas_client_id', cas_client_id)
+console.log('cas_client_secret', cas_client_secret)
 
 import { json, urlencoded } from 'body-parser';
 import express from 'express';
@@ -27,6 +32,8 @@ app.use(urlencoded({
 
 app.use(audit())
 
+
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = "0";
 
 /**
  * Health method to check quickly if the banckend is responding.
@@ -52,7 +59,7 @@ app.get('/cas-auth-callback', (req, res) => {
 
   const uri = `https://${host}/cas/oidc/oidcAuthorize`;
   console.log('URI', uri);
-  const url = `${uri}?client_id=APIMClientId&client_secret=ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=&redirect_uri=http://${host}/node-api/cas-auth-callback/access&code=${sessionCode}&scope=openid profile email&response_type=token`
+  const url = `${uri}?client_id=${cas_client_id}&client_secret=${cas_client_secret}&redirect_uri=http://${host}/node-api/cas-auth-callback/access&code=${sessionCode}&scope=openid profile email&response_type=token`
   console.log('url', url);
   res.redirect(url);
 });
@@ -83,9 +90,11 @@ app.post('/cas-auth-validate', (req, res) => {
 
   const options = {
     headers: {
-      'Authorization': 'Basic ' + Buffer.from('APIMClientId:ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=').toString('base64')
+      'Authorization': 'Basic ' + Buffer.from(`${cas_client_id}:${cas_client_secret}`).toString('base64')
     }
   }
+
+  console.log('cas-auth-validate options.headers', options.headers);
 
 
   needle.post(introspectEndPoint, { token }, options, (err: any, resp: needle.NeedleResponse) => {
@@ -103,7 +112,7 @@ app.post('/cas-auth-validate', (req, res) => {
       } else {
         if (introspectResponse.token) {
           console.log('cas-auth-validate token found in introspectResponse');
-          needle.post('http://avenirs-apache/cas/oidc/profile', { token: introspectResponse.token }, options, (err, resp) => {
+          needle.post('https://avenirs-apache/cas/oidc/profile', { token: introspectResponse.token }, options, (err, resp) => {
             console.log('cas-auth-validate in profile');
             if (err) {
               console.log('cas-auth-validate in profile err', err);
