@@ -17,6 +17,8 @@ SERVICES=""
 [ -z "$VERBOSE_FLAG" ] &&  export VERBOSE_FLAG=0
 [ -z "$QUIET_FLAG" ] &&  export QUIET_FLAG=0
 [ -z "$HELP_FLAG" ] &&  export HELP_FLAG=0
+[ -z "$PURGE_FLAG" ] &&  export PURGE_FLAG=0
+[ -z "$PURGE_FLAG_INITALIZED" ] &&  export PURGE_FLAG_INITALIZED=0
 [ -z "$COMMONS_INITIALIZED_FLAG" ] &&  export COMMONS_INITIALIZED_FLAG=0
 
 # Constants to format the outputs.
@@ -135,6 +137,26 @@ function init_commons(){
     fi
 }
 
+# Initialization for the purge flag.
+function init_purge_flag(){
+    if [  $PURGE_FLAG_INITALIZED -eq 0 ]
+    then
+        PURGE_FLAG_INITALIZED=1;
+        local updated_remaining_args=""
+        for arg in $REMAINING_ARGS
+        do
+            if [ $arg = "-p" -o "$arg" = "--purge" ]
+            then
+                PURGE_FLAG=1
+                warn "Purge required, the data directory will be deleted"
+            else  
+                 updated_remaining_args="$updated_remaining_args$arg " 
+            fi
+        done
+        REMAINING_ARGS=$updated_remaining_args
+    fi
+}
+
 # Copy the files from a root directory to a project respecting the directory structure.
 # @param $1 Root directory of the overlay.
 # @param $2 target, destination to copy the files.
@@ -199,6 +221,7 @@ function remove_overlay {
 # Fetches the services by scanning the user args or the 
 # services' root directory.
 # No parameter.
+# Should be the las call of initialization functions based on user args (default case throw an error).
 function init_services() {
 
     [ "$COMMONS_INITIALIZED_FLAG" = "0" ] && err "init_commons should be executed before init_services."

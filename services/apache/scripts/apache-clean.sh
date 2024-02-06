@@ -12,6 +12,8 @@
 APACHE_SCRIPT_DIR=`dirname $0`
 . $APACHE_SCRIPT_DIR/../../../scripts/srv-dev-commons.sh
 init_commons $*
+
+
 info "Apache cleaning started."
 . $APACHE_SCRIPT_DIR/apache-env.sh $APACHE_SCRIPT_DIR 2> /dev/null \
     || err "Unable to source $APACHE_SCRIPT_DIR/apache-env.sh"

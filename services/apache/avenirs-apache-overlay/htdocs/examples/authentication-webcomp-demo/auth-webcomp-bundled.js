@@ -1739,6 +1739,8 @@ class DefaultLogger {
         this.level = level;
         this._formatter = _formatter;
         this._appender = _appender;
+        /** The context stacks of the logger. */
+        this._contexts = [];
         /** Flag to determine if the logger is disabled. */
         this.disabled = false;
     }
@@ -1750,7 +1752,7 @@ class DefaultLogger {
      */
     log(level, messageParts) {
         if (level >= this.level && !this.disabled) {
-            this._appender.append(this._formatter.format(this.name, level, messageParts, this._context));
+            this._appender.append(this._formatter.format(this.name, level, messageParts, this._contexts?.[this._contexts.length - 1]));
         }
         return this;
     }
@@ -1816,14 +1818,14 @@ class DefaultLogger {
      * @param {LoggingContext | string }context The new current context or the source (equivalent to {source:...}).
      */
     enter(context) {
-        this._context = typeof context === "string" ? { source: context } : context;
+        this._contexts.push(typeof context === "string" ? { source: context } : context);
         return this;
     }
     /**
      * Leave a logging context.
      */
     leave() {
-        this._context = undefined;
+        this._contexts.pop();
         return this;
     }
 }
@@ -2591,12 +2593,27 @@ class ReactiveDisableAttributeDirective extends f {
         /** The instance used to update the DOM.  */
         this._part = undefined;
         this._logger = new LoggingManager().getLogger('ReactiveDisableAttributeDirective');
-        this._logger.trace('Constructor partInfo.type', partInfo.type, 'PartType.ATTRIBUTE', t.BOOLEAN_ATTRIBUTE);
+        this._logger.enter('constructor').trace('Constructor partInfo.type', partInfo.type, 'PartType.ATTRIBUTE', t.BOOLEAN_ATTRIBUTE).leave();
         // Checks that the partInfo instance is associated to an element.
         if (partInfo.type !== t.ELEMENT) {
             this._logger.fatal('The directive ReactiveDisableAttributeDirective is not used correctly. It should be applyed to an element (e.g. <button>) not to an attribute.');
             throw new Error('The directive ReactiveDisableAttributeDirective shoud be applied to an element');
         }
+    }
+    foo() {
+        this._logger.enter('foo').debug('foo 1');
+        this._logger.debug('foo 2');
+        this.bar();
+        this._logger.debug('foo 3');
+        this.bar();
+        this._logger.debug('foo 4').leave();
+        this.bar();
+    }
+    bar() {
+        this._logger.enter('bar').debug('bar 1');
+        this._logger.debug('bar 2');
+        this._logger.debug('bar 3');
+        this._logger.debug('bar 4').leave();
     }
     /**
      * Lit method.
@@ -2604,7 +2621,7 @@ class ReactiveDisableAttributeDirective extends f {
      * @param reverse If true the attribute disabled is true if the emitted value is false.
      */
     render(observable, reverse) {
-        this._logger.trace('ReactiveDisableAttributeDirective render');
+        this.foo();
         if (this._observable !== observable) {
             this._subscription?.unsubscribe();
             this._observable = observable;
@@ -2624,19 +2641,17 @@ class ReactiveDisableAttributeDirective extends f {
      */
     _updateDOM() {
         if (this.isConnected) {
-            this._logger.trace('ReactiveDisableAttributeDirective _updateDOM this._part', this._part);
-            this._logger.trace('ReactiveDisableAttributeDirective _updateDOM this._part?.element', this._part?.element);
-            this._logger.trace('ReactiveDisableAttributeDirective _updateDOM this._value', this._value);
             if (!this._value) {
-                this._logger.trace('ReactiveDisableAttributeDirective _updateDOM remove attribute');
+                this._logger.enter('_updateDOM').trace('ReactiveDisableAttributeDirective remove attribute');
                 this._part?.element?.removeAttribute('disabled');
             }
             else if (this._part?.element?.getAttribute('disabled') !== 'true') {
                 const value = this._part?.element?.getAttribute('disabled');
-                this._logger.trace('ReactiveDisableAttributeDirective _updateDOM setAttribute disabled initial value', typeof value);
-                this._logger.trace('ReactiveDisableAttributeDirective _updateDOM setAttribute disabled');
+                this._logger.trace('ReactiveDisableAttributeDirective  setAttribute disabled initial value', typeof value);
+                this._logger.trace('ReactiveDisableAttributeDirective  setAttribute disabled');
                 this._part?.element?.setAttribute('disabled', 'true');
             }
+            this._logger.leave();
         }
     }
     /**
@@ -2644,13 +2659,12 @@ class ReactiveDisableAttributeDirective extends f {
      * @param part The AttributePart associated to the directive that can be used to update the DOM.
      */
     update(part, props) {
-        this._logger.trace('ReactiveDisableAttributeDirective this.update part', part.element);
-        this._logger.trace('ReactiveDisableAttributeDirective this.update this._value', this._value);
+        this._logger.enter('update').trace('ReactiveDisableAttributeDirective part', part.element);
+        this._logger.trace('ReactiveDisableAttributeDirective this._value', this._value);
         this._part = part;
         this._updateDOM();
-        //part?.element?.setAttribute('disabled', String(!this._value));
-        this._logger.trace('ReactiveDisableAttributeDirective super.update');
         super.update(part, props);
+        this._logger.leave();
     }
     disconnected() {
         this._logger.trace('ReactiveDisableAttributeDirective disconnected');

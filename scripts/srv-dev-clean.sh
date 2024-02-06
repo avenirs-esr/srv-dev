@@ -10,9 +10,11 @@
 SRV_DEV_SCRIPT_DIR=`dirname $0`
 
 . $SRV_DEV_SCRIPT_DIR/srv-dev-commons.sh
-init_help "`basename $0`" 
+init_help "`basename $0` [-p| --purge]" 
 init_commons $*
 . $SRV_DEV_SCRIPT_DIR/srv-dev-env.sh $SRV_DEV_SCRIPT_DIR 2> /dev/null || err "Unable to source $SRV_DEV_SCRIPT_DIR/srv-dev-env.sh"
+
+init_purge_flag
 init_services
 
 # Clean a service

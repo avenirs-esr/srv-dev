@@ -12,6 +12,8 @@
 KAFKA_SCRIPT_DIR=`dirname $0`
 . $KAFKA_SCRIPT_DIR/../../../scripts/srv-dev-commons.sh
 init_commons $*
+init_purge_flag
+
 info "Kafka cleaning started."
 . $KAFKA_SCRIPT_DIR/kafka-env.sh $KAFKA_SCRIPT_DIR 2> /dev/null \
     || err "Unable to source $KAFKA_SCRIPT_DIR/kafka-env.sh"
@@ -20,10 +22,15 @@ info "Kafka cleaning started."
     && { rm $KAFKA_ENV_FILE && info "Docker environment file deleted: $KAFKA_ENV_FILE" || err "Unable to delete $KAFKA_ENV_FILE"; }\
     || info "File $KAFKA_ENV_FILE not present"
 
-warn_and_wait "Deleting volumes root: $BOLD $AVENIRS_KAFKA_VOLUMES_ROOT$NC and $BOLD $AVENIRS_ZOOKEEPER_VOLUMES_ROOT $NC in 4 seconds. (CtrL + C to abort)"; 
 
-sudo rm -Rf $AVENIRS_KAFKA_VOLUMES_ROOT && info "$AVENIRS_KAFKA_VOLUMES_ROOT deleted" || err "Unable to delete Openldap volumes root: $AVENIRS_KAFKA_VOLUMES_ROOT"
-sudo rm -Rf $AVENIRS_ZOOKEEPER_VOLUMES_ROOT && info "$AVENIRS_ZOOKEEPER_VOLUMES_ROOT deleted" || err "Unable to delete Openldap volumes root: $AVENIRS_ZOOKEEPER_VOLUMES_ROOT"
-
+if [ $PURGE_FLAG -eq 1 ] 
+then
+    info "Purge option provided, containers' directories will be deleted"
+    warn_and_wait "Deleting volumes root: $BOLD $AVENIRS_KAFKA_VOLUMES_ROOT$NC and $BOLD $AVENIRS_ZOOKEEPER_VOLUMES_ROOT $NC in 4 seconds. (CtrL + C to abort)"; 
+    sudo rm -Rf $AVENIRS_KAFKA_VOLUMES_ROOT && info "$AVENIRS_KAFKA_VOLUMES_ROOT deleted" || err "Unable to delete Openldap volumes root: $AVENIRS_KAFKA_VOLUMES_ROOT"
+    sudo rm -Rf $AVENIRS_ZOOKEEPER_VOLUMES_ROOT && info "$AVENIRS_ZOOKEEPER_VOLUMES_ROOT deleted" || err "Unable to delete Openldap volumes root: $AVENIRS_ZOOKEEPER_VOLUMES_ROOT"
+else
+    info "Purge option not provided, containers' directories will not be deleted"
+fi
 
 info "Kafka cleaning completed."
