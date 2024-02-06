@@ -1,7 +1,7 @@
 #! /bin/bash
 
 #--------------------------------------#
-# Node bootstrap                       #
+# Avenirs API bootstrap                #
 #                                      #  
 # - Docker .env file to set            #
 #   environment from settings.         #
