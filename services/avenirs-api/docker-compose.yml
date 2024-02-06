@@ -1,0 +1,14 @@
+version: '3'
+services:
+  cas:
+    container_name: ${AVENIRS_CAS_CONTAINER_NAME}
+    build: .
+    ports:
+     - "8443:8443"
+     - "8081:8080"
+    networks:
+      - cas-network
+networks: 
+  cas-network:
+    external: true
+    name: $AVENIRS_NETWORK
