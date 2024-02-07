@@ -7,22 +7,23 @@
 #   environment from settings.         #
 #--------------------------------------#
 
-NODE_SCRIPT_DIR=`dirname $0`
+AVENIRS_API_SCRIPT_DIR=`dirname $0`
 
 
 # Initialization
-. $NODE_SCRIPT_DIR/../../../scripts/srv-dev-commons.sh
+. $AVENIRS_API_SCRIPT_DIR/../../../scripts/srv-dev-commons.sh
 init_help "`basename $0`"
 init_commons $*
-info "NODE bootstrapping started."
-. $NODE_SCRIPT_DIR/node-env.sh $NODE_SCRIPT_DIR || err "Unable to source $PWD/$NODE_SCRIPT_DIR/node-env.sh"
+info "Avenirs API bootstrapping started."
+. $AVENIRS_API_SCRIPT_DIR/avenirs-api-env.sh $AVENIRS_API_SCRIPT_DIR || err "Unable to source $PWD/$AVENIRS_API_SCRIPT_DIR/avenirs-api-env.sh"
 
 # Network check
 check_network
 
 # .env file generation
-echo "AVENIRS_NODE_CONTAINER_NAME=$AVENIRS_NODE_CONTAINER_NAME" > $NODE_ENV_FILE
-echo "AVENIRS_NODE_CONTAINER_PORT=$AVENIRS_NODE_CONTAINER_PORT" >> $NODE_ENV_FILE
-echo "AVENIRS_NETWORK=$AVENIRS_NETWORK" >> $NODE_ENV_FILE
+echo "AVENIRS_API_CONTAINER_NAME=$AVENIRS_API_CONTAINER_NAME" > $AVENIRS_API_ENV_FILE
+echo "AVENIRS_API_CONTAINER_PORT=$AVENIRS_API_CONTAINER_PORT" >> $AVENIRS_API_ENV_FILE
+echo "AVENIRS_API_VERSION=$AVENIRS_API_VERSION" >> $AVENIRS_API_ENV_FILE
+echo "AVENIRS_NETWORK=$AVENIRS_NETWORK" >> $AVENIRS_API_ENV_FILE
 
-info "Node bootstrapping completed."
+info "Avenirs API bootstrapping completed."
