@@ -53,7 +53,7 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      - openldap
+      - ${AVENIRS_OPENLDAP_CONTAINER_NAME}
     networks:
       openldap-network:
 networks: 
