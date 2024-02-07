@@ -16,6 +16,9 @@ init_commons $*
 . $SRV_DEV_SCRIPT_DIR/srv-dev-env.sh $SRV_DEV_SCRIPT_DIR 2> /dev/null || err "Unable to source $SRV_DEV_SCRIPT_DIR/srv-dev-env.sh"
 init_services
 
+# .env file generation
+echo "AVENIRS_NETWORK=$AVENIRS_NETWORK" >> $SRV_DEV_ENV_FILE
+
 # Bootstrap a service
 function bootstrap_service() {
     local service=$1

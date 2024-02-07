@@ -42,4 +42,9 @@ function clean_services(){
     info "Completed"
 }
 
+
+[ -f $SRV_DEV_ENV_FILE ] \
+    && { rm $SRV_DEV_ENV_FILE && info "Docker environment file deleted: $SRV_DEV_ENV_FILE" || err "Unable to delete $SRV_DEV_ENV_FILE"; }\
+    || info "File $SRV_DEV_ENV_FILE not present"
+
 clean_services

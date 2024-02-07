@@ -7,6 +7,11 @@ SRV_DEV_SCRIPT_DIR=$1
 SERVICES_ROOT="$SRV_DEV_SCRIPT_DIR/../services"
 DOCKER_GROUP="docker"
 
+
+
+# Docker env file
+SRV_DEV_ENV_FILE=$SRV_DEV_SCRIPT_DIR/../.env
+
 # ---- Docker environment variables that can be overridden
 # global
 VOLUMES_ROOT=/var/lib/docker-containers/dev.avenirs-esr.fr

@@ -1,10 +1,9 @@
 version: '3'
 networks:  
   default: 
-    name: avenirs-network
+    name: ${AVENIRS_NETWORK}
     external: true             # Created via bootstrap script
       
-#    driver: bridge
 include:
   - ./services/openldap/docker-compose.yml
   - ./services/apisix/apisix-docker/example/docker-compose.yml
