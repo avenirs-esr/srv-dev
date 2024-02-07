@@ -2,6 +2,8 @@ version: '3'
 services:
   cas:
     container_name: ${AVENIRS_CAS_CONTAINER_NAME}
+    depends_on:
+      - openldap
     build: .
     ports:
      - "8443:8443"
@@ -11,4 +13,4 @@ services:
 networks: 
   cas-network:
     external: true
-    name: $AVENIRS_NETWORK
+    name: ${AVENIRS_NETWORK}
