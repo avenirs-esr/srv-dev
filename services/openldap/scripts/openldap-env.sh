@@ -1,14 +1,15 @@
 #! /bin/bash
 
 #--------------------------------------#
-# Settings for the openldap scripts         #
+# Settings for the openldap scripts    #
+#                                      # 
+# This file is also used by the cas    #
+# service to determine the container   #
+# name (dependency purpose)            #
 #--------------------------------------#
 
 OPENLDAP_SCRIPT_DIR=$1
 . $OPENLDAP_SCRIPT_DIR/../../../scripts/srv-dev-env.sh
-
-
-
 
 # Docker env file
 OPENLDAP_ENV_FILE=$OPENLDAP_SCRIPT_DIR/../.env
