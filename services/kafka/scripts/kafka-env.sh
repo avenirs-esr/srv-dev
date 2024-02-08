@@ -8,7 +8,6 @@ KAFKA_SCRIPT_DIR=$1
 
 # Main settings file. The settings loaded from this file are not overridden.
 . $KAFKA_SCRIPT_DIR/../../../scripts/srv-dev-env.sh
-AVENIRS_LDAP_VOLUMES_ROOT=$VOLUMES_ROOT/apache
 
 
 KAFKA_UI_OVERLAY_DIR=$KAFKA_SCRIPT_DIR/../avenirs-kafka-overlay/kafka-ui
