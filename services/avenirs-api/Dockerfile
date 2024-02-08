@@ -1,13 +1,15 @@
 
 
 FROM eclipse-temurin:17-jdk-alpine as build
-
+ARG OVERLAY_DIR
+ENV AVENIRS_API_OVERLAY_DIR=$OVERLAY_DIR
 WORKDIR /workspace/app
 
 COPY ./avenirs-api/mvnw .
 COPY ./avenirs-api/.mvn .mvn
 COPY ./avenirs-api/pom.xml .
 COPY ./avenirs-api/src src
+COPY ${AVENIRS_API_OVERLAY_DIR}/src/main/resources/env.properties.no-git src/main/resources/env.properties
 
 RUN ./mvnw clean install package -DskipTests
 RUN mkdir -p ./target/dependency && (cd ./target/dependency; jar -xf ../*.jar)

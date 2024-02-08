@@ -8,6 +8,7 @@ services:
       dockerfile: ./Dockerfile
       args:
        AVENIRS_API_VERSION: ${AVENIRS_API_VERSION}
+       OVERLAY_DIR: ${AVENIRS_OVERLAY_BASENAME}
     ports:
       - "${AVENIRS_API_CONTAINER_PORT}:10000"
     

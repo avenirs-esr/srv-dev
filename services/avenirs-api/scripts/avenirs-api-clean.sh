@@ -18,5 +18,10 @@ info "Avenirs API cleaning started."
     && { rm $AVENIRS_API_ENV_FILE && info "Docker environment file deleted: $AVENIRS_API_ENV_FILE" || err "Unable to delete $AVENIRS_API_ENV_FILE"; }\
     || info "File $AVENIRS_API_ENV_FILE not present"
 
+[ -f $AVENIRS_API_SPRING_ENV_FILE ] \
+    && { rm $AVENIRS_API_SPRING_ENV_FILE && info "Docker environment file deleted: $AVENIRS_API_SPRING_ENV_FILE" || err "Unable to delete $AVENIRS_API_SPRING_ENV_FILE"; }\
+    || info "File $AVENIRS_API_SPRING_ENV_FILE not present"
+
+
 
 info "Avenirs API cleaning completed."
