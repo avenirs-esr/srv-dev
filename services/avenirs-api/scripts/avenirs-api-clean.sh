@@ -24,4 +24,7 @@ info "Avenirs API cleaning started."
 
 
 
+# Repository reset
+reset_git_repository $AVENIRS_API_REPOSITORY_DIR $AVENIRS_API_MAIN_BRANCH $AVENIRS_API_LOCAL_BRANCH
+
 info "Avenirs API cleaning completed."

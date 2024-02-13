@@ -17,6 +17,10 @@ init_commons $*
 info "Avenirs API bootstrapping started."
 . $AVENIRS_API_SCRIPT_DIR/avenirs-api-env.sh $AVENIRS_API_SCRIPT_DIR || err "Unable to source $PWD/$AVENIRS_API_SCRIPT_DIR/avenirs-api-env.sh"
 
+
+# Initialization of the local branch.
+init_git_repository $AVENIRS_API_REPOSITORY_DIR $AVENIRS_API_REMOTE_BRANCH $AVENIRS_API_LOCAL_BRANCH
+
 # Network check
 check_network
 
