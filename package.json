@@ -28,6 +28,7 @@
     "husky": "^8.0.3"
   },
   "dependencies": {
-    "express-requests-logger": "^4.0.0"
+    "express-requests-logger": "^4.0.0",
+    "socket.io-client": "^4.7.4"
   }
 }
