@@ -14,14 +14,13 @@ assert(protoc:load [[
       repeated Phone  contacts = 4;
    } ]])
 
--- lua table data
-local dataX = { foo: 'bar'}
+
 local data = {
-   name = "ilse",
-   age  = 18,
-   contacts = {
-      { name = "alice", phonenumber = 12312341234 },
-      { name = "bob",   phonenumber = 45645674567 }
+   sequence: 2
+   cmdKafkaFetch: {
+    topic: "avenirs-notification",
+    partition: 0,
+    offset: 0
    }
 }
 
