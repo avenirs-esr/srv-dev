@@ -1,54 +1,48 @@
-// const socketClient = require('socket.io-client');
-// const socket = socketClient.connect('http://localhost:9080/kafka');
-
-// socket.on('connect', function () {
-//   console.log('connected to server');
-
-//   //Subscribe to the "example-channel"
-//   socket.emit('subscribe', 'avenirs-notification');
-
-//   //Listen for messages from the "example-channel"
-//   socket.on('message', function (message: any) {
-//     console.log('received message:', message);
-//   });
-// });
 import WebSocket from 'ws';
 
-const ws = new WebSocket('ws://localhost:9080/kafka');
-function textToBin(text: string) {
-    var length = text.length,
-        output = [];
-    for (var i = 0;i < length; i++) {
-      var bin = text[i].charCodeAt(0).toString(2);
-      output.push(Array(8-bin.length+1).join("0") + bin);
-    } 
-    return output;
-  }
-ws.on('error', console.error);
-
-ws.on('open', function open() {
-  const array = new Float32Array(5);
-
-  for (var i = 0; i < array.length; ++i) {
-    array[i] = i / 2;
-  }
-  const msg: any = textToBin(JSON.stringify({
-    "req" : "cmd_ping"
-}));
-const x = JSON.stringify({req :{
-    sequence : 7,
-   cmd_kafka_fetch : {
-        topic: "avenirs-api",
-        partition : 0,
-        offset : 0,
+/*
+{
+  "uri": "/ws",
+  "name": "ws",
+  "desc": "Test ws integration",
+  "upstream": {
+    "nodes": [
+      {
+        "host": "avenirs-node",
+        "port": 3003,
+        "weight": 1
+      }
+    ],
+    "timeout": {
+      "connect": 6,
+      "send": 6,
+      "read": 6
     },
-}});
-const m : any = {
-    "topic" : "avenirs-notification",
-    "partition" : "0",
-    "timestamp" : "-1"
-}
+    "type": "roundrobin",
+    "scheme": "http",
+    "pass_host": "pass",
+    "keepalive_pool": {
+      "idle_timeout": 60,
+      "requests": 1000,
+      "size": 320
+    }
+  },
+  "enable_websocket": true,
+  "status": 1
+}*/
 
-  console.log('send')
-  ws.send(x, {binary: true}, (err: any) => console.log('send callback err', err));
+
+  const ws = new WebSocket('ws://localhost/apisix-gw/ws'); // OK
+// const ws = new WebSocket('ws://localhost:3003'); // OK
+
+ws.on('error', console.error);
+let count = 0;
+ws.on('open', function open() {
+  console.log("Opened");
+  ws.send(`Query #${count++}` );
+  ws.send(`Query #${count++}` );
+});
+
+ws.on('message', function message(data) {
+  console.log('received: %s', data);
 });

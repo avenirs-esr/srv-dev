@@ -7,6 +7,6 @@ COPY settings ./settings
 RUN apt-get update && apt-get install -y net-tools apt-utils libaio1 openjdk-17-jdk && npm install -g typescript && npm install && npm run build-ts 
 #VOLUME /usr/src/app/logs
 
-EXPOSE 3000
+EXPOSE 3000 3003
 
 CMD [ "node", "dist/node-api.js" ]

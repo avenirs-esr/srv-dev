@@ -13,6 +13,7 @@ services:
     #    APP_RUNNING_CONTEXT: ${APP_RUNNING_CONTEXT}
     ports:
       - "${AVENIRS_NODE_CONTAINER_PORT}:3000"
+      - "${AVENIRS_WS_CONTAINER_PORT}:3003"
 
     #volumes:
     #  - /var/log/docker-containers/audit/node:/usr/src/app/logs

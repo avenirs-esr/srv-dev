@@ -15,6 +15,9 @@ ProxyPassReverse "/cas" "https://__AVENIRS_CAS_CONTAINER_NAME__:8443/cas"
 ProxyPass /ldapadmin http://__AVENIRS_LDAP_ADMIN_CONTAINER_NAME__/phpldapadmin
 ProxyPassReverse /ldapadmin http://__AVENIRS_LDAP_ADMIN_CONTAINER_NAME__/phpldapadmin
 
+ProxyPass /apisix-gw/ws ws://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/ws
+ProxyPassReverse /apisix-gw/ws ws://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/ws
+
 ProxyPass /apisix-gw http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080
 ProxyPassReverse /apisix-gw http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080
 
@@ -35,6 +38,9 @@ ProxyPassReverse /avenirs-api http://__AVENIRS_API_CONTAINER_NAME__:10000
 
 ProxyPass /node-api http://__AVENIRS_NODE_CONTAINER_NAME__:3000
 ProxyPassReverse /node-api http://__AVENIRS_NODE_CONTAINER_NAME__:3000
+
+ProxyPass /ws ws://__AVENIRS_NODE_CONTAINER_NAME__:3003
+ProxyPassReverse /ws ws://__AVENIRS_NODE_CONTAINER_NAME__:3003
 
 ### Hacks for APISix Dashbord invalid sub path (release 3.0)
 ProxyPass /apisix/admin http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000/apisix/admin

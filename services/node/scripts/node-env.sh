@@ -19,6 +19,7 @@ NODE_API_BUILD_DIR=$NODE_API_ROOT/dist
 # Docker environment.
 [ -z "$AVENIRS_NODE_CONTAINER_NAME" ] && AVENIRS_NODE_CONTAINER_NAME="${AVENIRS_CONTAINER_PREFIX}node"
 [ -z "$AVENIRS_NODE_CONTAINER_PORT" ] && AVENIRS_NODE_CONTAINER_PORT=8030
+[ -z "$AVENIRS_WS_CONTAINER_PORT" ] && AVENIRS_WS_CONTAINER_PORT=8031
 
 # This is required to source this script as the test above can fail.
 return 0
