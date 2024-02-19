@@ -1,20 +1,6 @@
-// const socketClient = require('socket.io-client');
-// const socket = socketClient.connect('http://localhost:9080/kafka');
-
-// socket.on('connect', function () {
-//   console.log('connected to server');
-
-//   //Subscribe to the "example-channel"
-//   socket.emit('subscribe', 'avenirs-notification');
-
-//   //Listen for messages from the "example-channel"
-//   socket.on('message', function (message: any) {
-//     console.log('received message:', message);
-//   });
-// });
 import * as protobuf from 'protobufjs'
-
 import WebSocket from 'ws';
+
 const PROTO_FILE = __dirname + '/../../../assets/pubsub.proto';
 console.log("Loading protobuf file: " + PROTO_FILE);
 
@@ -26,7 +12,6 @@ protobuf.load(PROTO_FILE, function (err, root) {
   }
   if (root) {
     console.log("Protobuf loaded");
-
 
     const ws = new WebSocket('ws://localhost:9080/kafka');
 
@@ -71,7 +56,3 @@ protobuf.load(PROTO_FILE, function (err, root) {
     process.exit(1);
   }
 });
-
-
-// ws.send(x, {binary: true}, (err: any) => console.log('send callback err', err));
-
