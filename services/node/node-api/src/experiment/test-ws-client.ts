@@ -32,7 +32,8 @@ import WebSocket from 'ws';
 }*/
 
 
-  const ws = new WebSocket('ws://localhost/apisix-gw/ws'); // OK
+  const ws = new WebSocket('ws://localhost:10000/notification/ws'); // OK
+  //const ws = new WebSocket('ws://localhost/apisix-gw/ws'); // OK
 // const ws = new WebSocket('ws://localhost:3003'); // OK
 
 ws.on('error', console.error);
@@ -43,6 +44,6 @@ ws.on('open', function open() {
   ws.send(`Query #${count++}` );
 });
 
-ws.on('message', function message(data) {
+ws.on('message', function message(data:any) {
   console.log('received: %s', data);
 });
