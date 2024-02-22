@@ -1,0 +1,227 @@
+<html>
+
+<head>
+    <title>Avenirs - Notitfications</title>
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script>
+         function submitForm(){
+            console.log('submitForm');
+            const data = new FormData(document.getElementById("notificationForm"));
+            console.log('submitForm data', data);
+            fetch("http://localhost:9080/notification/create", { method: "post", body: data })
+        }
+    </script>
+    <script type="importmap">
+        {
+            "imports": {
+                "@stomp/stompjs": "https://ga.jspm.io/npm:@stomp/stompjs@7.0.0/esm6/index.js"
+            }  
+        }
+    </script>
+
+    <script type="module">
+        import { Client } from '@stomp/stompjs';
+
+        const client = new Client({
+            brokerURL: 'ws://localhost/apisix-gw/rt-notification',
+            onConnect: () => {
+                console.log('Stomp client connected')
+                client.subscribe('/realtime', message => {
+                    console.log(`Received: ${message.body}`);
+                    const ul = document.getElementById("recievedNotifications");
+                    const li = document.createElement('li');
+                    li.appendChild(document.createTextNode(message.body));
+                    ul.appendChild(li);
+                });
+                console.log('Stom sending query')
+                client.publish({ destination: '/rt-notification', body: JSON.stringify({ user: "deman" }) });
+            },
+        });
+
+        client.activate();
+       
+    </script>
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: #fafafa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        h1 {
+            color: 0a71b4;
+            font-family: sans-serif;
+        }
+
+        .main-container {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .col {
+            display: flex;
+            flex-grow: 1;
+
+            flex-direction: column;
+            /* border: 1px solid blue; */
+        }
+
+        .left {
+            border-right: 1px solid #0a71b4;
+        }
+        .right {
+            flex-grow: 1.5
+        }
+
+        .inner-container {
+            display: flex;
+            flex-grow: 1;
+            margin: 0.5em;
+            flex-direction: column;
+
+        }
+
+        h3 {
+            color: #0a71b4;
+        }
+        #recievedNotifications {
+            color: gray;
+            font-size: .8em;
+        }
+        #notificationForm {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="col left">
+            <div class="inner-container">
+                <div class="title-container">
+                    <h3>Send notification</h3>
+                </div>
+                <form id="notificationForm">
+                <label for="audience">Choose the audience:</label>
+
+                <select	name="audience" id="audience">
+                    <option value="*">Everyone</option>
+                    <option value="gribonvald">Julien Gribonvald</option>
+                    <option value="deman">Arnaud Deman</option>
+                </select>
+
+                <label for="messageBody">Message body</label>
+    
+                <textarea	rows="4" cols="50" maxlength="80" name="messageBody" id="messageBody"></textarea>
+                <button type="button" onclick="submitForm()">Submit</button>
+            </form>
+            </div>
+
+
+        </div>
+
+
+        </div>
+        <div class="col right">
+            <div class="inner-container">
+                <div class="title-container">
+                    <h3>Recieved response for user id: deman</h3>
+                </div>
+                <ul id="recievedNotifications">
+                    
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
+<!--
+<script type="text/javascript">
+
+ 
+ var stompClient = null;
+ 
+ function setConnected(connected) {
+ document.getElementById('connect').disabled = connected;
+ document.getElementById('disconnect').disabled = !connected;
+ document.getElementById('conversationDiv').style.visibility 
+ = connected ? 'visible' : 'hidden';
+ document.getElementById('response').innerHTML = '';
+ }
+ 
+ function connect() {
+ var socket = new SockJS('http://localhost:10000/messages');
+ stompClient = Stomp.over(socket); 
+ stompClient.connect({}, function(frame) {
+ setConnected(true);
+ console.log('Connected: ' + frame);
+ stompClient.subscribe('/notification/rt', function(messageOutput) {
+ showMessageOutput(JSON.parse(messageOutput.body));
+ });
+ });
+ }
+ 
+ function disconnect() {
+ if(stompClient != null) {
+ stompClient.disconnect();
+ }
+ setConnected(false);
+ console.log("Disconnected");
+ }
+ 
+ function sendMessage() {
+ var from = document.getElementById('from').value;
+ var text = document.getElementById('text').value;
+ stompClient.send("/messages", {}, 
+ JSON.stringify({'from':from, 'text':text}));
+ }
+ 
+ function showMessageOutput(messageOutput) {
+ var response = document.getElementById('response');
+ var p = document.createElement('p');
+ p.style.wordWrap = 'break-word';
+ p.appendChild(document.createTextNode(messageOutput.from + ": " 
+ + messageOutput.text + " (" + messageOutput.time + ")"));
+ response.appendChild(p);
+ }
+ </script>
+ </head>
+ <body onload&#61;&#34;disconnect()&#34;>
+ <div>
+ <div>
+ <input type="text" id="from" placeholder="Choose a nickname"/>
+ </div>
+ <br />
+ <div>
+ <button id="connect" onclick="connect();">Connect</button>
+ <button id="disconnect" disabled="disabled" onclick="disconnect();">
+ Disconnect
+ </button>
+ </div>
+ <br />
+ <div id="conversationDiv">
+ <input type="text" id="text" placeholder="Write a message..."/>
+ <button id="sendMessage" onclick="sendMessage();">Send</button>
+ <p id="response"></p>
+ </div>
+ </div>
+
+ </body>
+</html>
+-->
