@@ -31,9 +31,13 @@ import WebSocket from 'ws';
   "status": 1
 }*/
 
-
-  const ws = new WebSocket('ws://localhost:10000/notification/ws'); // OK
-  //const ws = new WebSocket('ws://localhost/apisix-gw/ws'); // OK
+//const ws = new WebSocket('ws://localhost:9080/notification') 
+// const ws = new WebSocket('ws://localhost:9080/ws') //OK
+  const ws = new WebSocket('ws://localhost:10001'); // KO
+ // const ws = new WebSocket('ws://localhost/apisix-gw/notification'); // KO
+  // const ws = new WebSocket('ws://localhost/apisix-gw/notification'); // KO
+  // const ws = new WebSocket('ws://localhost/apisix-gw/ws'); // OK
+ // const ws = new WebSocket('ws://localhost/apisix-gw/notification'); // OK
 // const ws = new WebSocket('ws://localhost:3003'); // OK
 
 ws.on('error', console.error);

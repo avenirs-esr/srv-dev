@@ -8,13 +8,14 @@ import { Client } from '@stomp/stompjs';
   Object.assign(global, { WebSocket });
   
   const client = new Client({
-    brokerURL: 'http://localhost:10000/messages',
+    // brokerURL: 'http://localhost:9080/rt-notification', // OK via apisix gw directly
+    brokerURL: 'ws://localhost/apisix-gw/rt-notification', // OK Via Apache frontal
     onConnect: () => {
       console.log("Stomp client connected");
-      client.subscribe('/notification/rt', message =>
+      client.subscribe('/realtime', message =>
         console.log(`Received: ${message.body}`)
       );
-      client.publish({ destination: '/messages', body:JSON.stringify({user : "gribonvald", text: "barxxxx"} )});
+      client.publish({ destination: '/rt-notification', body:JSON.stringify({user : "gribonvald"} )});
     },
 
     onStompError:(frame) =>{
