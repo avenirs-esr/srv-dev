@@ -15,7 +15,7 @@ check the branch (if a git submodule), and create a .env file to propagate the s
 
 ```mermaid
 graph LR;
-subgraph apisix[Apisix>]
+subgraph apisix[Apisix]
   apx_etcd[etcd<br/>Distributed<br/>key-value<br/>store] 
   apx_ui[Dashboard<br/>APIM UI] <--> apx_etcd
   apx_grafana[GrafanaMetrics<br/>visualisation] <--> apx_etcd
