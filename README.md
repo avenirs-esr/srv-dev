@@ -56,7 +56,7 @@ apache  <--> apx_core
 apache <--> cas 
 apache <--> oldap_phpldapadmin
 apache <--> kfk_kafka_ui
-apache <--> avenirs
+
 avenirs <-->apx_core
 avenirs <-->apx_core
 avenirs <-->kfk_kafka
