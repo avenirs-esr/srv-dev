@@ -34,7 +34,7 @@ subgraph openldap[OpenLDAP<br/>]
   oldap_phpldapadmin[PHPLdapAdmin<br/>OpenLDAP Frontend] 
   oldap_phpldapadmin<-->oldap_openldap
 end
-apache[Apache<br/>Reverse proxy] 
+
 
 subgraph kafka[Kafka]
   kfk_kafka[Kafka<br/>Distributed event streaming platform] 
@@ -44,6 +44,10 @@ subgraph kafka[Kafka]
   kfk_kafka<-->kfk_zookeeper
 end
 
+subgraph avenirs[Avenirs API]
+  avrs_java[Java <br/> Spring boot <br/> Tomcat]
+  avrs_nodejs[Nodejs <br/> Express]
+end
 cas <--> oldap_openldap
 apache  <--> apx_ui
 apache  <--> apx_grafana
@@ -52,8 +56,12 @@ apache  <--> apx_core
 apache <--> cas 
 apache <--> oldap_phpldapadmin
 apache <--> kfk_kafka_ui
+apache <--> avenirs
+avenirs <-->apx_core
+avenirs <-->apx_core
+avenirs <-->kfk_kafka
 
-apache[Apache] 
+apache[Apache <br/> Reverse proxy <br/>server web] 
 classDef main fill:white,stroke:#ed184e,stroke-width:4px, min-width:2000px
 class apx_core main
 ```
