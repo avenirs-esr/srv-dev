@@ -17,29 +17,29 @@ check the branch (if a git submodule), and create a .env file to propagate the s
 graph LR;
 subgraph apisix[Apisix>]
   apx_etcd[etcd<br/>Distributed<br/>key-value<br/>store] 
-  apx_ui["<big><strong>Dashboard</strong></big><br/><small>APIM UI<small>"] <--> apx_etcd
-  apx_grafana["<big><strong>&nbsp;Grafana&nbsp;</strong></big><br/><small>Metrics<br/>visualisation</small>"] <--> apx_etcd
-  apx_prometheus["<big><strong>Prometheus</strong></big><br/><small>Metrics</small>"] <--> apx_etcd
-  apx_core(("<big><strong><font size=6em>Apisix</font></strong></big><br/><small>API manager</small>")) <--> apx_etcd
+  apx_ui[Dashboard<br/>APIM UI] <--> apx_etcd
+  apx_grafana[GrafanaMetrics<br/>visualisation] <--> apx_etcd
+  apx_prometheus[Prometheus<br/>Metrics] <--> apx_etcd
+  apx_core((Apisix<br/>API manager)) <--> apx_etcd
 
   apx_grafana --> apx_ui
   apx_prometheus --> apx_grafana
   apx_ui <--> apx_core -->apx_prometheus
 end 
 
-cas["<big ><strong>CAS</strong></big><br/><small>Authentication</small>"] 
+cas[CAS<br/>Authentication] 
 
-subgraph openldap["<big><strong>OpenLDAP<br/></strong></big>"]
-  oldap_openldap["<big><strong>OpenLDAP</strong></big><br/>"] 
-  oldap_phpldapadmin["<big><strong>PHPLdapAdmin</strong></big><br/><small>OpenLDAP Frontend</small>"] 
+subgraph openldap[OpenLDAP<br/>]
+  oldap_openldap[OpenLDAP<br/>] 
+  oldap_phpldapadmin[PHPLdapAdmin<br/>OpenLDAP Frontend] 
   oldap_phpldapadmin<-->oldap_openldap
 end
-apache["<strong>Apache</strong><br/>Reverse proxy</strong>"] 
+apache[Apache<br/>Reverse proxy] 
 
-subgraph kafka["<big><strong>Kafka<br/></strong></big>"]
-  kfk_kafka["<big><strong>Kafka</strong></big><br/><small>Distributed event streaming platform</small>"] 
-  kfk_kafka_ui["<big><strong>Kafka UI</strong></big><br/><small>Kafka Frontend</small>"] 
-  kfk_zookeeper["<big><strong>Zookeeper</strong></big><br/><small>Distributed systems settings &amp; coordination</small>"] 
+subgraph kafka[Kafka]
+  kfk_kafka[Kafka<br/>Distributed event streaming platform] 
+  kfk_kafka_ui[Kafka UI<br/>Kafka Frontend] 
+  kfk_zookeeper[Zookeeper<br/>Distributed systems settings & coordination] 
   kfk_kafka<-->kfk_kafka_ui
   kfk_kafka<-->kfk_zookeeper
 end
@@ -53,7 +53,7 @@ apache <--> cas
 apache <--> oldap_phpldapadmin
 apache <--> kfk_kafka_ui
 
-apache["<strong>Apache</strong><br/>Reverse proxy</strong>"] 
+apache[Apache] 
 classDef main fill:white,stroke:#ed184e,stroke-width:4px, min-width:2000px
 class apx_core main
 ```
