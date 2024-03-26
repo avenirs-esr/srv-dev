@@ -1,16 +1,17 @@
 import * as needle from 'needle';
 
 
-const token = 'eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImNhcy1ZbkpZS29OQiIsIm9yZy5hcGVyZW8uY2FzLnNlcnZpY2VzLlJlZ2lzdGVyZWRTZXJ2aWNlIjoiNDAwMCJ9.eyJzdWIiOiJkZW1hbiIsIm9hdXRoQ2xpZW50SWQiOiJBUElNQ2xpZW50SWQiLCJyb2xlcyI6W10sImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0L2NhcyIsImNsaWVudF9pZCI6IkFQSU1DbGllbnRJZCIsImdyYW50X3R5cGUiOiJub25lIiwicGVybWlzc2lvbnMiOltdLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiZW1haWwiXSwic2VydmVySXBBZGRyZXNzIjoiMTcyLjE4LjAuMTQiLCJsb25nVGVybUF1dGhlbnRpY2F0aW9uUmVxdWVzdFRva2VuVXNlZCI6ZmFsc2UsInN0YXRlIjoiIiwiZXhwIjoxNzExNDc2OTAyLCJpYXQiOjE3MTE0NDgxMDIsImp0aSI6IkFULTEtVmIxUTRoSVdSLURkcVBWbGJnclRUVkp3LVpVa2p3TWciLCJlbWFpbCI6ImRlbWFuQHVuaXYuZnIiLCJjbGllbnRJcEFkZHJlc3MiOiIxNzIuMTguMC4xIiwiaXNGcm9tTmV3TG9naW4iOnRydWUsImF1dGhlbnRpY2F0aW9uRGF0ZSI6IjIwMjQtMDMtMjZUMTA6MTU6MDEuMzMxMzM1WiIsInN1Y2Nlc3NmdWxBdXRoZW50aWNhdGlvbkhhbmRsZXJzIjoiTGRhcEF1dGhlbnRpY2F0aW9uSGFuZGxlciIsInVzZXJBZ2VudCI6Ik1vemlsbGEvNS4wIChYMTE7IExpbnV4IHg4Nl82NDsgcnY6MTI1LjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvMTI1LjAiLCJnaXZlbl9uYW1lIjoiREVNQU4gQXJuYXVkIiwibm9uY2UiOiIiLCJjcmVkZW50aWFsVHlwZSI6IlVzZXJuYW1lUGFzc3dvcmRDcmVkZW50aWFsIiwic2FtbEF1dGhlbnRpY2F0aW9uU3RhdGVtZW50QXV0aE1ldGhvZCI6InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjEuMDphbTpwYXNzd29yZCIsImF1ZCI6IkFQSU1DbGllbnRJZCIsImF1dGhlbnRpY2F0aW9uTWV0aG9kIjoiTGRhcEF1dGhlbnRpY2F0aW9uSGFuZGxlciIsInNjb3BlcyI6WyJvcGVuaWQiLCJwcm9maWxlIiwiZW1haWwiXSwiZmFtaWx5X25hbWUiOiJERU1BTiJ9.Lg2LLuOb_GgO7I4CxcXjaq7ncolpYmLUzQ-TuelfeZt_euzZF5fyIIYtXf7uuWfE5smJ6o7iAlrv66hR1bFSeqraOYtpJDV3fOZx0GMJ3WEDKOruJ1Oum7_opdTqp9eHAiaP21ywBrF8MuFmiy_vkVUldx9M2jPsSvzP4LclGQqRKNAVb8pWj4KHrR856TObBHO6WoLdI2d0EMeVYujjaMKkqoXtw-JogEludlFypShtjBN8NkA239m6gllvcPt8_26NoaH--nl5FaakpakZi__lSvlO_jo1-YxCrCRxptknix2tg6By_4KcimRqDSwkeUVUe27N67YgO_dtAaOqJw';
+const token = 'AT-2-0TOREXYGbxc6LSXmaep0BgeXrFN-j4GW';
 
 const options= {
     headers: { 
-        'Authorization': 'Basic ' + Buffer.from('APIMClientId:ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=' ).toString('base64')
+       //'Authorization': 'Basic ' + Buffer.from('APIMClientId:ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=' ).toString('base64')
+        'Authorization': 'Basic ' + Buffer.from('TestIntrospect:foo' ).toString('base64')
      }
 }
 async function fetchProfile() {
      //needle.post('http://localhost/cas/oidc/profile',{token}, options, (err, resp)=> {   
-      needle.post('http://localhost/cas/oidc/introspect',{token}, options, (err, resp)=> {   
+      needle.post('http://localhost/cas/oidc/introspect',{ token }, options, (err, resp)=> {   
 
     console.log('resp?.body', resp?.body);
     
