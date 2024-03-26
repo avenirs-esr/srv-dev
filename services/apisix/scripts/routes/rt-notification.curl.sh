@@ -1,6 +1,6 @@
 #! /bin/bash
 
-curl --location --request PUT 'http://127.0.0.1:9180/apisix/admin/consumers' \
+curl --location --request PUT 'http://127.0.0.1:9180/apisix/admin/routes/rt-notification' \
 --header 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' \
 --header 'Content-Type: application/json' \
 --data-raw '{
