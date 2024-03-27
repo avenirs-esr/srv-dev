@@ -11,61 +11,15 @@ check the branch (if a git submodule), and create a .env file to propagate the s
 - Docker-compose >=2.2.0 for the support of "include".
 
 
-## Docker Containers
+## Architecture experimentation
+<figure>
+<img src="https://avenirs-esr.github.io/dev-doc/assets/images/arch.svg" alt="Architecture diagram">
+<figure>
+<figcaption>
+Technical architecture experimentation
+</<figcaption>
 
-```mermaid
-graph LR;
-subgraph apisix[Apisix]
-  apx_etcd[etcd<br/>Distributed<br/>key-value<br/>store] 
-  apx_ui[Dashboard<br/>APIM UI] <--> apx_etcd
-  apx_grafana[GrafanaMetrics<br/>visualisation] <--> apx_etcd
-  apx_prometheus[Prometheus<br/>Metrics] <--> apx_etcd
-  apx_core((Apisix<br/>API manager)) <--> apx_etcd
-
-  apx_grafana --> apx_ui
-  apx_prometheus --> apx_grafana
-  apx_ui <--> apx_core -->apx_prometheus
-end 
-
-cas[CAS<br/>Authentication] 
-
-subgraph openldap[OpenLDAP<br/>]
-  oldap_openldap[OpenLDAP<br/>] 
-  oldap_phpldapadmin[PHPLdapAdmin<br/>OpenLDAP Frontend] 
-  oldap_phpldapadmin<-->oldap_openldap
-end
-
-
-subgraph kafka[Kafka]
-  kfk_kafka[Kafka<br/>Distributed event streaming platform] 
-  kfk_kafka_ui[Kafka UI<br/>Kafka Frontend] 
-  kfk_zookeeper[Zookeeper<br/>Distributed systems settings and coordination] 
-  kfk_kafka<-->kfk_kafka_ui
-  kfk_kafka<-->kfk_zookeeper
-end
-
-subgraph avenirs[Avenirs API]
-  avrs_java[Java <br/> Spring boot <br/> Tomcat]
-  avrs_nodejs[Nodejs <br/> Express]
-end
-cas <--> oldap_openldap
-apache  <--> apx_ui
-apache  <--> apx_grafana
-apache  <--> apx_prometheus
-apache  <--> apx_core
-apache <--> cas 
-apache <--> oldap_phpldapadmin
-apache <--> kfk_kafka_ui
-
-avenirs <-->apx_core
-avenirs <-->apx_core
-avenirs <-->kfk_kafka
-
-apache[Apache <br/> Reverse proxy <br/>server web] 
-classDef main fill:white,stroke:#ed184e,stroke-width:4px, min-width:2000px
-class apx_core main
-```
-## Tree structure
+## Tree structure  (extract)
 
 <pre>
 . 
