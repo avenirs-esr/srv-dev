@@ -1,0 +1,44 @@
+version: '3'
+services:
+  postgresql-primary:
+    container_name: ${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER} 
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB} 
+    ports:
+      - "65432:5432"
+    networks:
+      - postgres-network
+  postgresql-secondary1:
+    container_name: ${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER} 
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB} 
+    depends_on:
+      - postgresql-primary
+    ports:
+      - "65433:5432"
+
+    networks:
+      - postgres-network
+  postgresql-secondary2:
+    container_name: ${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER} 
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB} 
+    depends_on:
+      - postgresql-primary
+    ports:
+      - "65434:5432"
+    networks:
+      - postgres-network
+networks: 
+  postgres-network:
+    external: true
+    name: ${AVENIRS_NETWORK}
