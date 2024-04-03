@@ -2,42 +2,61 @@ version: '3'
 services:
   postgresql-primary:
     container_name: ${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}
+    hostname: ${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}
     image: postgres:latest
+    command: ["postgres", "-c", "config_file=/etc/postgresql.conf"]
+    restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER} 
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB} 
+    volumes:
+      - ${AVENIRS_POSTGRESQL_PRIMARY_VOLUME}:/var/lib/postgresql/data
+      - ./${POSTGRESQL_OVERLAY_BASENAME}/primary_postgresql.conf:/etc/postgresql.conf
+      - ./${POSTGRESQL_OVERLAY_BASENAME}/primary_pg_hba.conf:/etc/pg_hba.conf
+      - ./${POSTGRESQL_OVERLAY_BASENAME}/init/:/docker-entrypoint-initdb.d
     ports:
       - "65432:5432"
     networks:
       - postgres-network
+ 
   postgresql-secondary1:
     container_name: ${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}
+    hostname: ${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}
     image: postgres:latest
+    restart: always
+
     environment:
       POSTGRES_USER: ${POSTGRES_USER} 
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB} 
+    volumes:
+      - ${AVENIRS_POSTGRESQL_SECONDARY1_VOLUME}:/var/lib/postgresql
     depends_on:
       - postgresql-primary
     ports:
       - "65433:5432"
-
     networks:
       - postgres-network
+
   postgresql-secondary2:
     container_name: ${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}
+    hostname: ${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}
     image: postgres:latest
+    restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER} 
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB} 
+    volumes:
+      - ${AVENIRS_POSTGRESQL_SECONDARY2_VOLUME}:/var/lib/postgresql
     depends_on:
       - postgresql-primary
     ports:
       - "65434:5432"
     networks:
       - postgres-network
+
 networks: 
   postgres-network:
     external: true
