@@ -1,5 +1,6 @@
 <html>
 
+
 <head>
     <title>Avenirs - Notitfications</title>
     <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon">
@@ -8,8 +9,13 @@
          function submitForm(){
             console.log('submitForm');
             const data = new FormData(document.getElementById("notificationForm"));
-            console.log('submitForm data', data);
-            fetch("http://localhost:9080/notification/create", { method: "post", body: data })
+             console.log('submitForm data', data);
+	     const host=window.location.host || 'localhost'
+	     const port = host==='localhost' ? ':9080': ''
+             //fetch("https://srv-dev-avenir.srv-avenir.brgm.recia.net/apisix-gw/notification/create", { method: "post", body: data })
+	     fetch(`https://${host}${port}/apisix-gw/notification/create`, { method: "post", body: data })
+	     
+
         }
     </script>
     <script type="importmap">
@@ -22,9 +28,10 @@
 
     <script type="module">
         import { Client } from '@stomp/stompjs';
-
+        const host=window.location.host|| 'localhost'
         const client = new Client({
-            brokerURL: 'ws://localhost/apisix-gw/rt-notification',
+            brokerURL: `wss://${host}/apisix-gw/rt-notification`,
+//	              brokerURL: 'wss://srv-dev-avenir.srv-avenir.brgm.recia.net/apisix-gw/rt-notification',
             onConnect: () => {
                 console.log('Stomp client connected')
                 client.subscribe('/realtime', message => {
