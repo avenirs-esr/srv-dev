@@ -339,4 +339,60 @@ function reset_git_repository(){
     cd - > /dev/null
 }
 
+# Initializes data volumes.
+# N.B.: does not handle the privileges set on the volumes.
+# @param $1 The service name.
+# @param $2... The volumes.
+function init_volumes(){
+    local service=$1
+    shift
+    local volumes=$*
+    vvverbose "init_volume service: $service, volumes:"
+    # two loops are required in order to seperate the outputs
+    for volume in $volumes
+    do
+        vvverbose "    -$volume"
+    done
+
+    for volume in $volumes
+    do
+        if [ -d $volume ]
+        then
+            verbose "Service $service, volume $volume found"
+        else
+            verbose "Service $service, volume $volume has to be created"
+            mkdir -p  $volume && vverbose "Service $service, volume created: $volume" || err "Service $service, unable to create volume $volume"
+        fi
+    done
+}
+
+# Deletes data volumes.
+# N.B.: The volumes are deleted only if the purge option is set (cli arg).
+# @param $1 The service name.
+# @param $2... The volumes.
+function reset_volumes(){
+    local service=$1
+    shift
+    local volumes=$*
+    vvverbose "reset_volume service: $service, volumes: $volume"
+    if [ $PURGE_FLAG -eq 1 ] 
+    then
+        info "Service $service, purge option provided, volumes $volumes will be deleted."
+        warn_and_wait "Service $service, deleting volumes: $BOLD$volumes$NC in 4 seconds. (CtrL + C to abort)"; 
+        for volume in $volumes
+        do
+            if [ -d $volume ]
+            then
+                vvverbose "Service $service, reset_volume: $volume exists"
+                sudo rm -Rf $volume && info "Service $service, $volume deleted" || err "Service $service, unable to delete volume: $volume"
+            else
+                vvverbose "Service $service, reset_volume: $volume does not exist"
+            fi
+        done
+    else
+        info "Service $service, purge option not provided, volumes $volumes are kept."
+    fi
+
+}
+
 

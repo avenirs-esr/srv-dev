@@ -1,0 +1,117 @@
+version: '3'
+services:
+  postgresql-primary:
+    container_name: ${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}
+    hostname: ${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}
+    image: postgres:latest
+    command: ["postgres", "-c", "config_file=/etc/postgresql.conf"]
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER} 
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB} 
+    volumes:
+      - ${AVENIRS_POSTGRESQL_PRIMARY_VOLUME}:/var/lib/postgresql/data
+      - ${AVENIRS_POSTGRESQL_ARCHIVE_VOLUME}:/var/lib/postgresql/archive
+      - ./${POSTGRESQL_OVERLAY_BASENAME}/primary_postgresql.conf:/etc/postgresql.conf
+      - ./${POSTGRESQL_OVERLAY_BASENAME}/primary_pg_hba.conf:/etc/pg_hba.conf
+      - ./${POSTGRESQL_OVERLAY_BASENAME}/init/:/docker-entrypoint-initdb.d
+    ports:
+      - "65432:5432"
+    networks:
+      - postgres-network
+ 
+  postgresql-secondary1:
+    container_name: ${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}
+    hostname: ${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}
+    image: postgres:latest
+    command: |
+      bash -c "
+      if [ -e /var/lib/postgresql/data/standby.signal ]
+      then 
+        echo '${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}: Already initialized'
+      else
+        echo '${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}: Loading data from ${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}'
+
+        until pg_basebackup --pgdata=/var/lib/postgresql/data -R --slot=replication_slot1 --host=${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME} -U pgrepl --port=5432
+        do
+          echo '${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}: Waiting for primary to connect...'
+        sleep 1s
+        done
+        echo 'Data loaded, starting ${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}...'
+        touch /var/lib/postgresql/data/standby.signal
+        echo '${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}: standby.signal created in data dir'
+        chmod 0700 /var/lib/postgresql/data
+        chown -R postgres /var/lib/postgresql/data
+        echo '${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}: privileges set'
+      fi
+      echo '${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}: starting...'
+      su - postgres -c '/usr/lib/postgresql/16/bin/postgres -D /var/lib/postgresql/data -c config_file=/etc/postgresql.conf'
+      "
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER} 
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB} 
+    volumes:
+      - ${AVENIRS_POSTGRESQL_SECONDARY1_VOLUME}:/var/lib/postgresql/data
+      - ${AVENIRS_POSTGRESQL_ARCHIVE_VOLUME}:/var/lib/postgresql/archive
+      - ./${POSTGRESQL_OVERLAY_BASENAME}/secondaries_postgresql.conf:/etc/postgresql.conf
+      - ./${POSTGRESQL_OVERLAY_BASENAME}/secondaries_pg_hba.conf:/etc/pg_hba.conf
+    depends_on:
+      - postgresql-primary
+    ports:
+      - "65433:5432"
+    networks:
+      - postgres-network
+
+  postgresql-secondary2:
+    container_name: ${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}
+    hostname: ${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}
+    image: postgres:latest
+    command: |
+      bash -c "
+      if [ -e /var/lib/postgresql/data/standby.signal ]
+      then 
+        echo '${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}: Already initialized'
+      else
+        echo '${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}: Loading data from ${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}'
+
+        until pg_basebackup --pgdata=/var/lib/postgresql/data -R --slot=replication_slot2 --host=${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME} -U pgrepl --port=5432
+        do
+          echo '${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}: Waiting for primary to connect...'
+        sleep 1s
+        done
+        echo 'Data loaded, starting ${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}...'
+        touch /var/lib/postgresql/data/standby.signal
+        echo '${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}: standby.signal created in data dir'
+        chmod 0700 /var/lib/postgresql/data
+        chown -R postgres /var/lib/postgresql/data
+        echo '${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}: privileges set'
+      fi
+      echo '${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}: starting...'
+      su - postgres -c '/usr/lib/postgresql/16/bin/postgres -D /var/lib/postgresql/data -c config_file=/etc/postgresql.conf'
+      "
+    restart: always
+
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER} 
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB} 
+    volumes:
+      - ${AVENIRS_POSTGRESQL_SECONDARY2_VOLUME}:/var/lib/postgresql/data
+      - ${AVENIRS_POSTGRESQL_ARCHIVE_VOLUME}:/var/lib/postgresql/archive
+      - ./${POSTGRESQL_OVERLAY_BASENAME}/secondaries_postgresql.conf:/etc/postgresql.conf
+      - ./${POSTGRESQL_OVERLAY_BASENAME}/secondaries_pg_hba.conf:/etc/pg_hba.conf
+    depends_on:
+      - postgresql-primary
+    ports:
+      - "65434:5432"
+    networks:
+      - postgres-network
+
+  
+networks: 
+  postgres-network:
+    external: true
+    name: ${AVENIRS_NETWORK}

@@ -17,7 +17,7 @@ init_commons $*
 init_services
 
 # .env file generation
-echo "AVENIRS_NETWORK=$AVENIRS_NETWORK" >> $SRV_DEV_ENV_FILE
+echo "AVENIRS_NETWORK=$AVENIRS_NETWORK" > $SRV_DEV_ENV_FILE
 
 # Bootstrap a service
 function bootstrap_service() {
