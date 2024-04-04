@@ -1,0 +1,42 @@
+<html>
+
+
+<head>
+    <title>Avenirs - Postgres</title>
+    <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon">
+
+</head>
+
+<h1>Postgres replication test (Streaming replication)</h1>
+
+<h2>Settings</h2>
+<b>Containers:</b> avenirs-pgsql-primary, avenirs-pgsql-primary1, avenirs-pgsql-primary<br/>
+<b>Database:</b> avenirs_eportfolio<br/>
+<b>User:</b> pguser<br/>
+<b>Password:</b> pgpaswword<br/>
+<b>Test table:</b> sandbox <br/>
+
+<h2>Steps</h2>
+The test consists in inserting data in the table sandbox on the master and to check the replication on the two secondaries 
+
+
+<h3>Primary</h3>
+<pre>
+docker exec -it avenirs-pgsql-primary psql -U pguser avenirs_eportfolio            # password: pgpassword
+select * from sandbox;
+insert into sandbox (sdb_short_txt, sdb_long_txt) VALUES ('new short text', 'new long txt');
+</pre>
+
+<h3>Secondary1</h3>
+<pre>
+docker exec -it avenirs-pgsql-secondary1 psql -U pguser avenirs_eportfolio         # password: pgpassword
+select * from sandbox;
+
+</pre>
+
+<h3>Secondary2</h3>
+<pre>
+docker exec -it avenirs-pgsql-secondary2 psql -U pguser avenirs_eportfolio         # password: pgpassword
+select * from sandbox;
+
+</pre>
