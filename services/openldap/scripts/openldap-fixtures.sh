@@ -24,6 +24,8 @@ OUT=$SCRIPT_DIR/openldap-fixtures.ldif
 TEMPLATE=$SCRIPT_DIR/openldap-template.ldif
 BRANCHES=$SCRIPT_DIR/openldap-branches.ldif
 
+# Flag to force fixture re-generation
+OUT_FETCH_FLAG=0
 
 # Flag to fetch the output file name
 OUT_FETCH_FLAG=0
@@ -88,14 +90,7 @@ function generate_ldif(){
         | sed s"/__GID_NUMBER__/$gidNumber/g"\
          | sed s"/__USER_MAIL__/$mail/g"\
         | sed s"%__USER_PASSWORD__%$AVENIRS_LDAP_FIXTURES_PASSWORD%g">>$OUT || err "Unable to write to $OUT"
-
-
-      
 }
-
-
-    
-    
     
 for arg in $*
 do
@@ -103,6 +98,7 @@ do
         "--out" | "-o")
             OUT_FETCH_FLAG=1
         ;;
+       
         *)
             [ $OUT_FETCH_FLAG -eq 1 ] && { OUT=$arg; OUT_FETCH_FLAG=0; }
         ;;
@@ -115,8 +111,6 @@ done
 touch $OUT 2>/dev/null || { 
     dir=`dirname $OUT`
     warn "Deleting $dir"
-    echo "dir $dir"
-    warn_and_wait "The directory $dir and all its files will be deleted in 4s (CTRL+C to abort)"
     sudo rm -Rf $dir || err "Unable to delete directory $dir (fixtures process)"
     mkdir $dir || err "Unable to create directory $dir (fixtures process)"
     touch $OUT || err "Unable to create file $OUT (fixtures process)"
