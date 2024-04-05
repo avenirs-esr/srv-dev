@@ -19,15 +19,8 @@ info "Openldap cleaning started."
     || err "Unable to source $OPENLDAP_SCRIPT_DIR/openldap-env.sh"
 
 
-if [ $PURGE_FLAG -eq 1 ] 
-then
-    info "Purge option provided, containers' directories will be deleted"
-    warn_and_wait "Deleting volume root: $BOLD $AVENIRS_LDAP_VOLUMES_ROOT $NC in 4 seconds. (CtrL + C to abort)"; 
-
-    sudo rm -Rf $AVENIRS_LDAP_VOLUMES_ROOT && info "$AVENIRS_LDAP_VOLUMES_ROOT deleted" || err "Unable to delete Openldap volumes root: $AVENIRS_LDAP_VOLUMES_ROOT"
-else
-    info "Purge option not provided, containers' directories will not be deleted"
-fi
+# Volumes reset
+reset_volumes "openldap" $AVENIRS_LDAP_VOLUMES_ROOT
 
 [ -f $OPENLDAP_ENV_FILE ] \
     && { rm $OPENLDAP_ENV_FILE && info "Docker environment file deleted: $OPENLDAP_ENV_FILE" || err "Unable to delete $OPENLDAP_ENV_FILE"; }\

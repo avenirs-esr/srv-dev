@@ -23,14 +23,9 @@ info "Kafka cleaning started."
     || info "File $KAFKA_ENV_FILE not present"
 
 
-if [ $PURGE_FLAG -eq 1 ] 
-then
-    info "Purge option provided, containers' directories will be deleted"
-    warn_and_wait "Deleting volumes root: $BOLD $AVENIRS_KAFKA_VOLUMES_ROOT$NC and $BOLD $AVENIRS_ZOOKEEPER_VOLUMES_ROOT $NC in 4 seconds. (CtrL + C to abort)"; 
-    sudo rm -Rf $AVENIRS_KAFKA_VOLUMES_ROOT && info "$AVENIRS_KAFKA_VOLUMES_ROOT deleted" || err "Unable to delete Openldap volumes root: $AVENIRS_KAFKA_VOLUMES_ROOT"
-    sudo rm -Rf $AVENIRS_ZOOKEEPER_VOLUMES_ROOT && info "$AVENIRS_ZOOKEEPER_VOLUMES_ROOT deleted" || err "Unable to delete Openldap volumes root: $AVENIRS_ZOOKEEPER_VOLUMES_ROOT"
-else
-    info "Purge option not provided, containers' directories will not be deleted"
-fi
+# Volumes reset
+reset_volumes "kafka" $AVENIRS_KAFKA_VOLUMES_ROOT\
+     $AVENIRS_ZOOKEEPER_VOLUMES_ROOT
+
 
 info "Kafka cleaning completed."
