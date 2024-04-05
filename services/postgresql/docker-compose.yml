@@ -110,6 +110,15 @@ services:
     networks:
       - postgres-network
 
+  adminer:
+    image: adminer:latest
+    container_name: ${AVENIRS_POSTGRESQL_UI_CONTAINER_NAME}
+    hostname: ${AVENIRS_POSTGRESQL_UI_CONTAINER_NAME}
+    restart: always
+    ports:
+        - 18080:8080
+    networks:
+      - postgres-network
   
 networks: 
   postgres-network:

@@ -43,6 +43,12 @@ ProxyPassReverse /apisix-ui http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9
 ProxyPass /apisix-grafana http://__AVENIRS_APISIX_GRAFANA_CONTAINER_NAME__:3000
 ProxyPassReverse /apisix-grafana http://__AVENIRS_APISIX_GRAFANA_CONTAINER_NAME__:3000
 
+ProxyPass /pgsql-ui http://__AVENIRS_POSTGRESQL_UI_CONTAINER_NAME__:8080
+ProxyPassReverse /pgsql-ui http://__AVENIRS_POSTGRESQL_UI_CONTAINER_NAME__:8080
+
+ProxyPass /sql-ui http://__AVENIRS_POSTGRESQL_UI_CONTAINER_NAME__:8080
+ProxyPassReverse /sql-ui http://__AVENIRS_POSTGRESQL_UI_CONTAINER_NAME__:8080
+
 ProxyPass /kafka-ui http://__AVENIRS_KAFKA_UI_CONTAINER_NAME__:8080/kafka-ui
 ProxyPassReverse /kafka-ui http://__AVENIRS_KAFKA_UI_CONTAINER_NAME__:8080/kafka-ui
 
