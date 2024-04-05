@@ -8,7 +8,7 @@
 # ------------------------------------------------------------------
 
 # Arguments without the common ones: -h, -v, etc.
-REMAINING_ARGS=""
+[ -z "$REMAINING_ARGS" ] &&  export REMAINING_ARGS=""
 
 # Services fetched from the arguments or by scanning the service directory.
 SERVICES=""
@@ -130,10 +130,12 @@ function init_commons(){
             esac
 
         done;
-        vverbose 'init_commons executed (first call)'
+        vverbose "init_commons executed (first call)"
+        vvverbose "init_commons REMAINING_ARGS: $REMAINING_ARGS"
         export COMMONS_INITIALIZED_FLAG=1
     else  
-        vvverbose 'init_commons already executed (skipping)'
+        vvverbose "init_commons already executed (skipping) RA $REMAINING_ARGS"
+        vvverbose "init_commons REMAINING_ARGS: $REMAINING_ARGS"
     fi
 }
 
