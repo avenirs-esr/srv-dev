@@ -12,7 +12,6 @@
 KAFKA_SCRIPT_DIR=`dirname $0`
 . $KAFKA_SCRIPT_DIR/../../../scripts/srv-dev-commons.sh
 init_commons $*
-init_purge_flag
 
 info "Kafka cleaning started."
 . $KAFKA_SCRIPT_DIR/kafka-env.sh $KAFKA_SCRIPT_DIR 2> /dev/null \

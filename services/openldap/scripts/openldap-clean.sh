@@ -12,7 +12,6 @@
 OPENLDAP_SCRIPT_DIR=`dirname $0`
 . $OPENLDAP_SCRIPT_DIR/../../../scripts/srv-dev-commons.sh
 init_commons $*
-init_purge_flag
 
 info "Openldap cleaning started."
 . $OPENLDAP_SCRIPT_DIR/openldap-env.sh $OPENLDAP_SCRIPT_DIR 2> /dev/null \
