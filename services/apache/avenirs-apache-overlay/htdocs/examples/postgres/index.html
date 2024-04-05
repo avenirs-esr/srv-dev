@@ -26,6 +26,10 @@ docker exec -it avenirs-pgsql-primary psql -U pguser avenirs_eportfolio         
 select * from sandbox;
 insert into sandbox (sdb_short_txt, sdb_long_txt) VALUES ('new short text', 'new long txt');
 </pre>
+<a href="https://localhost/sql-ui?pgsql=avenirs-pgsql-primary&username=pguser&db=avenirs_eportfolio&ns=public&password=pgpassword" target="_blank">
+    Connexion to primary via UI
+</a>
+<br>password: pgpassword
 
 <h3>Secondary1</h3>
 <pre>
@@ -33,10 +37,17 @@ docker exec -it avenirs-pgsql-secondary1 psql -U pguser avenirs_eportfolio      
 select * from sandbox;
 
 </pre>
+<a href="https://localhost/sql-ui?pgsql=avenirs-pgsql-secondary1&username=pguser&db=avenirs_eportfolio&ns=public" target="_blank">
+    Connexion to secondary #1 via UI
+</a> 
+<br>password: pgpassword
 
 <h3>Secondary2</h3>
 <pre>
 docker exec -it avenirs-pgsql-secondary2 psql -U pguser avenirs_eportfolio         # password: pgpassword
 select * from sandbox;
-
 </pre>
+<a href="https://localhost/sql-ui?pgsql=avenirs-pgsql-secondary2&username=pguser&db=avenirs_eportfolio&ns=public" target="_blank">
+    Connexion to secondary #2 via UI
+</a>
+<br>password: pgpassword
