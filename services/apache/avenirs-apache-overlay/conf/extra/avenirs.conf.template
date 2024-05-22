@@ -15,9 +15,6 @@ ProxyPassReverse "/cas" "https://__AVENIRS_CAS_CONTAINER_NAME__:8443/cas"
 ProxyPass /ldapadmin http://__AVENIRS_LDAP_ADMIN_CONTAINER_NAME__/phpldapadmin
 ProxyPassReverse /ldapadmin http://__AVENIRS_LDAP_ADMIN_CONTAINER_NAME__/phpldapadmin
 
-ProxyPass /apisix-gw/ws ws://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/ws
-ProxyPassReverse /apisix-gw/ws ws://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/ws
-
 # ---- Websocket specific settings
 ProxyPass /apisix-gw/ws ws://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/ws
 ProxyPassReverse /apisix-gw/ws ws://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/ws
