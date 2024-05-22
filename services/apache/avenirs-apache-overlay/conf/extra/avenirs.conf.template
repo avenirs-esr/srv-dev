@@ -27,10 +27,6 @@ ProxyPassReverse /apisix-gw/rt-notification ws://__AVENIRS_APISIX_API_CONTAINER_
 ProxyPass /apisix-gw http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080
 ProxyPassReverse /apisix-gw http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080
 
-
-ProxyPass /apisix-gw http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080
-ProxyPassReverse /apisix-gw http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080
-
 ProxyPass /apisix-api http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9180
 ProxyPassReverse /apisix-api http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9180
 
