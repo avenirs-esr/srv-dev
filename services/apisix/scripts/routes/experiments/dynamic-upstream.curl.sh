@@ -20,65 +20,56 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisi
         
         },
         "serverless-pre-function": {
-        "functions": [
-            "return function(conf, ctx) 
-        
-        
-            -- Import neccessary libraries
-            local core = require(\"apisix.core\");
-            local http = require(\"resty.http\")
-            local jwt = require(\"resty.jwt\");
-            local inspect = require(\"inspect\");
-            local cjson = require(\"cjson\");
+            "functions": [
+                "return function(conf, ctx) 
 
-            ngx.log(ngx.ERR, \"serverless pre function\");
+                local core = require(\"apisix.core\");
+                local http = require(\"resty.http\")
+                local jwt = require(\"resty.jwt\");
+                local inspect = require(\"inspect\");
+                local cjson = require(\"cjson\");
 
-            --local body={};
-            --body[\"foo\"]=\"bar\";
-            local bearer = core.request.header(ctx, \"Authorization\");
-            local token = \"\";
-            if bearer ~= nil then
-             local _, _, payload = string.find(bearer, \"Bearer%s+(.+)\");
-             token=payload
-            
-            end
-            ngx.log(ngx.ERR, \"serverless pre function token \", token);
-           
+                ngx.log(ngx.ERR, \"serverless pre function\");
 
-            local httpc = http.new();
-            local res, err = httpc:request_uri(\"http://avenirs-apache/node-api/select-upstream\", {
-            
-                method = \"GET\",
-                headers = {
-                    [\"Content-Type\"] = \"application/json\",
-                    [\"x-authorization\"] = token
-                },
-                query={[\"foo\"] = \"bar\"}
-                -- body = core.request.get_body()
-               
-            });
-            -- ngx.log(ngx.ERR, \"IN serverless pre function res \", inspect(res));
-            -- ngx.log(ngx.ERR, \"IN serverless pre function err \", inspect(err));
+                local bearer = core.request.header(ctx, \"Authorization\");
+                local token = \"\";
+                if bearer ~= nil then
+                 local _, _, payload = string.find(bearer, \"Bearer%s+(.+)\");
+                 token=payload
+                end
+                ngx.log(ngx.ERR, \"serverless pre function token \", token);
 
-            if res and res.body ~= nill 
-            then 
-              local body = cjson.decode(res.body);
-              local upstream = body.upstream;
-              local endPoint = body.endPoint;
-              ngx.log(ngx.ERR, \"IN serverless pre function body \", inspect(body));
-              ngx.log(ngx.ERR, \"IN serverless pre function upstream \", upstream);
-              ngx.log(ngx.ERR, \"IN serverless pre function endPoint \", endPoint);
+                local httpc = http.new();
+                local res, err = httpc:request_uri(\"http://avenirs-apache/node-api/select-upstream\", {
+                
+                    method = \"GET\",
+                    headers = {
+                        [\"Content-Type\"] = \"application/json\",
+                        [\"x-authorization\"] = token
+                    },
+                    query={[\"foo\"] = \"bar\"}
+                    -- body = core.request.get_body()
 
-              core.request.set_header(ctx, \"avenirsUpstream\", upstream);
-              core.request.set_header(ctx, \"avenirsEndPoint\", endPoint) ;
-            else
-              ngx.log(ngx.ERR, \"Serverless error while trying to select the upstream: \", err);
-            end  
+                });
 
-        end"],
-      "phase": "rewrite"
-    },
+                if res and res.body ~= nill 
+                then 
+                  local body = cjson.decode(res.body);
+                  local upstream = body.upstream;
+                  local endPoint = body.endPoint;
+                  ngx.log(ngx.ERR, \"IN serverless pre function body \", inspect(body));
+                  ngx.log(ngx.ERR, \"IN serverless pre function upstream \", upstream);
+                  ngx.log(ngx.ERR, \"IN serverless pre function endPoint \", endPoint);
 
+                  core.request.set_header(ctx, \"avenirsUpstream\", upstream);
+                  core.request.set_header(ctx, \"avenirsEndPoint\", endPoint) ;
+                else
+                  ngx.log(ngx.ERR, \"Serverless error while trying to select the upstream: \", err);
+                end  
+
+            end"],
+            "phase": "rewrite"
+        },
         "proxy-rewrite": {
             "uri": "/$http_avenirsEndPoint"
         },
