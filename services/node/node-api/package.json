@@ -46,7 +46,7 @@
     "strong-pubsub-kafka": "^1.0.5",
     "strong-pubsub-mqtt": "^0.1.0",
     "winston": "^3.11.0",
-    "ws": "^8.16.0",
+    "ws": "^8.17.1",
     "xml-parser": "^1.2.1"
   }
 }
