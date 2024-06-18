@@ -1,0 +1,52 @@
+# #! /bin/bash
+
+#----------------------------------------#
+# Bootstrap script for Avenirs portfolio #
+#                                        #  
+#----------------------------------------#
+
+AVENIRS_PORTFOLIO_SCRIPT_DIR=`dirname $0`
+
+# Initialization
+. $AVENIRS_PORTFOLIO_SCRIPT_DIR/../../../scripts/srv-dev-commons.sh
+init_commons $*
+info "Avenirs portfolio bootstrapping started."
+
+. $AVENIRS_PORTFOLIO_SCRIPT_DIR/avenirs-portfolio-env.sh $AVENIRS_PORTFOLIO_SCRIPT_DIR 2> /dev/null \
+    || err "Unable to source $AVENIRS_PORTFOLIO_SCRIPT_DIR/avenirs-portfolio-env.sh"
+
+# Initialization of the local branch of avenirs-portfolio-storage if needed.
+cd $AVENIRS_PORTFOLIO_STORAGE_REPOSITORY_DIR || err "Unable to enter $AVENIRS_PORTFOLIO_STORAGE_REPOSITORY_DIR"
+if [ -z "`git branch   | grep $AVENIRS_PORTFOLIO_STORAGE_LOCAL_BRANCH`" ]
+then
+    verbose "Switching to branch $AVENIRS_PORTFOLIO_STORAGE_REMOTE_BRANCH (local branch $AVENIRS_PORTFOLIO_STORAGE_LOCAL_BRANCH)"
+    git checkout -B $AVENIRS_PORTFOLIO_STORAGE_LOCAL_BRANCH $AVENIRS_PORTFOLIO_STORAGE_REMOTE_BRANCH || err "unable to create branch $AVENIRS_PORTFOLIO_STORAGE_LOCAL_BRANCH from $AVENIRS_PORTFOLIO_STORAGE_REMOTE_BRANCH"
+else 
+    verbose "Local APISIX branch found $AVENIRS_PORTFOLIO_STORAGE_LOCAL_BRANCH"
+fi
+cd - >/dev/null
+
+# git branches 
+init_git_repository $AVENIRS_PORTFOLIO_STORAGE_REPOSITORY_DIR $AVENIRS_PORTFOLIO_STORAGE_REMOTE_BRANCH $AVENIRS_PORTFOLIO_STORAGE_LOCAL_BRANCH
+
+# Network check
+check_network
+
+# Overlay files
+echo "install_overlay $AVENIRS_PORTFOLIO_STORAGE_OVERLAY_DIR $AVENIRS_PORTFOLIO_STORAGE_REPOSITORY_DIR"
+install_overlay $AVENIRS_PORTFOLIO_STORAGE_OVERLAY_DIR $AVENIRS_PORTFOLIO_STORAGE_REPOSITORY_DIR
+
+
+# .env file generation
+echo "AVENIRS_NETWORK=$AVENIRS_NETWORK" > $AVENIRS_PORTFOLIO_ENV_FILE
+echo "AVENIRS_PORTFOLIO_STORAGE_CONTAINER_NAME=$AVENIRS_PORTFOLIO_STORAGE_CONTAINER_NAME" >> $AVENIRS_PORTFOLIO_ENV_FILE
+echo "AVENIRS_PORTFOLIO_STORAGE_VERSION=$AVENIRS_PORTFOLIO_STORAGE_VERSION" >> $AVENIRS_PORTFOLIO_ENV_FILE
+echo "AVENIRS_PORTFOLIO_STORAGE_OVERLAY_DIR=$AVENIRS_PORTFOLIO_STORAGE_OVERLAY_DIR" >> $AVENIRS_PORTFOLIO_ENV_FILE
+echo "AVENIRS_PORTFOLIO_STORAGE_OVERLAY_BASENAME=$AVENIRS_PORTFOLIO_STORAGE_OVERLAY_BASENAME" >> $AVENIRS_PORTFOLIO_ENV_FILE
+echo "AVENIRS_PORTFOLIO_STORAGE_SPRING_ENV_FILE=$AVENIRS_PORTFOLIO_STORAGE_SPRING_ENV_FILE" >> $AVENIRS_PORTFOLIO_ENV_FILE
+
+# Spring env properties
+echo "spring.datasource.url=jdbc:postgresql://$AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME:65432/avenirs_access_control" > $AVENIRS_PORTFOLIO_STORAGE_SPRING_ENV_FILE;
+
+info "Avenirs portfolio bootstrapping completed."
+

@@ -1,0 +1,37 @@
+#! /bin/bash
+
+#---------------------------------------------#
+# Settings for the Avenirs portffolio scripts #
+#---------------------------------------------#
+AVENIRS_PORTFOLIO_SCRIPT_DIR=$1
+
+# Global settings file. The settings loaded from this file are not overridden.
+. $AVENIRS_PORTFOLIO_SCRIPT_DIR/../../../scripts/srv-dev-env.sh
+
+# Docker settings. Can be overridden in srv-dev.env.sh
+[ -z "$AVENIRS_PORTFOLIO_CONTAINER_PREFIX" ] && AVENIRS_PORTFOLIO_CONTAINER_PREFIX="${AVENIRS_CONTAINER_PREFIX}portfolio-"
+[ -z "$AVENIRS_PORTFOLIO_STORAGE_CONTAINER_NAME" ] && AVENIRS_PORTFOLIO_STORAGE_CONTAINER_NAME="${AVENIRS_PORTFOLIO_CONTAINER_PREFIX}storage"
+
+
+
+# Git submodule.
+AVENIRS_PORTFOLIO_STORAGE_REPOSITORY_DIR=$AVENIRS_PORTFOLIO_SCRIPT_DIR/../avenirs-portfolio-storage
+
+# Docker env file
+AVENIRS_PORTFOLIO_ENV_FILE=$AVENIRS_PORTFOLIO_SCRIPT_DIR/../.env
+
+# Git submodule / local / remote branches and overlay settings.
+
+[ -z  "$AVENIRS_PORTFOLIO_OVERLAY_DIR" ] && AVENIRS_PORTFOLIO_OVERLAY_DIR=$AVENIRS_PORTFOLIO_SCRIPT_DIR/../avenirs-portfolio-overlay/
+AVENIRS_PORTFOLIO_OVERLAY_BASENAME=`basename $AVENIRS_PORTFOLIO_OVERLAY_DIR`
+
+[ -z  "$AVENIRS_PORTFOLIO_STORAGE_OVERLAY_DIR" ] && AVENIRS_PORTFOLIO_STORAGE_OVERLAY_DIR=$AVENIRS_PORTFOLIO_OVERLAY_DIR/avenirs-portfolio-storage/
+AVENIRS_PORTFOLIO_STORAGE_OVERLAY_BASENAME=$AVENIRS_PORTFOLIO_OVERLAY_BASENAME/`basename $AVENIRS_PORTFOLIO_STORAGE_OVERLAY_DIR`
+[ -z  "$AVENIRS_PORTFOLIO_STORAGE_VERSION" ] && AVENIRS_PORTFOLIO_STORAGE_VERSION="0.0.1"
+
+AVENIRS_PORTFOLIO_STORAGE_REMOTE_BRANCH=remotes/origin/access_control
+AVENIRS_PORTFOLIO_STORAGE_LOCAL_BRANCH=access_control
+AVENIRS_PORTFOLIO_STORAGE_MAIN_BRANCH="main"
+
+# Spring boot env file
+AVENIRS_PORTFOLIO_STORAGE_SPRING_ENV_FILE=$AVENIRS_PORTFOLIO_STORAGE_OVERLAY_DIR/src/main/resources/env.properties.no-git
