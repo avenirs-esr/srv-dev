@@ -186,8 +186,9 @@ function install_overlay {
 
     verbose "Processing overlay dir $overlay_root"
     
-    for  f in `ls -A $overlay_root`
+    for  f in `ls -A  -I .gitignore $overlay_root `
     do
+
         if [[ $f =~ .*\.(properties|config)\.template(\.?no-git)? ]]
         then
             vvverbose "install_overlay ignored file: $f"
@@ -334,6 +335,7 @@ function reset_git_repository(){
 
     cd $repository_dir || err "Unable to enter $repository_dir"
     git checkout $main_branch || err "Unable to checkout $main_branch"
+    
    [ -n "`git branch --list $local_branch`" ] \
         && { git branch -D $local_branch || err "Unable to delete $local_branch"; } \
         || verbose "Branch $local_branch not found"
