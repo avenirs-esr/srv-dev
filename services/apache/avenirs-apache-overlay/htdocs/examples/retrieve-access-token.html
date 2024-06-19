@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>OIDC TEST PAGE</title>
+  </head>
+  <body>
+  
+    <label for="access_token">Access token</label>
+    <div id="access_token">
+      
+    </div>
+    <!-- <a id="login" href="http://localhost/cas/oidc/oidcAuthorize?client_id=APIMClientId&redirect_uri=http://localhost/api-pf/oidc-callback&response_type=code&scope=openid%20email%20profile"> -->
+    <a id="authenticateURL" hidden>
+      <button  id="authenticate">
+        Authenticate
+      </button>
+</a>
+    <button id="copyToClipboard" onClick="copyAccessTokenToClipboard()" hidden>
+      Copy
+      </button>
+    <div></div>
+    <!-- <div>
+      This page retrieves the access token in the browser location and generates a curl example to call an OIDC protected API.
+    </div>
+    <div style="margin-top:1em;">
+      <b>Access&nbsp;Token:</b> <small><script>document.write(accessToken)</script></small>
+    </div>
+    <div style="margin-top:1em;">
+      <b>CURL Example (localhost): </b><br/><font color="#0a71b4"><script>document.write(displayedCmdLocalhost);</script></font>
+      <button onClick="copyCmd()">Copy</button>
+    </div>
+    <div style="margin-top:1em;">
+      <b>CURL Example (srv-dev-avenirs): </b><br/><font color="#0a71b4"><script>document.write(displayedCmdSrvDev);</script></font>
+      <button onClick="copyCmd(true)">Copy</button>
+    </div> -->
+
+  </body>
+  <script>
+    const urlParams = new URLSearchParams(window.location.href.split('#')?.[1]);
+    const accessToken=urlParams.get('access_token');
+    document.getElementById("access_token").innerText = accessToken || "NO ACCESS TOKEN";
+    const displayedCmdLocalhost=`curl -H "Authorization: Bearer ${accessToken?.slice(0, 10) +'...' + accessToken?.slice(-10)}" http://localhost/apisix-gw/ipoidc`
+    const displayedCmdSrvDev=`curl -H "Authorization: Bearer ${accessToken?.slice(0, 10) +'...' + accessToken?.slice(-10)}" http://srv-dev-avenir.srv-avenir.brgm.recia.net/apisix-gw/ipoidc`
+    
+    console.log('urlParams', urlParams);
+    console.log('Access token', accessToken);
+
+    const host=window.location.host || 'localhost'
+    const href = `http://${host}/cas/oidc/oidcAuthorize?client_id=APIMClientId&redirect_uri=http://${host}/api-pf/oidc-callback&response_type=code&scope=openid%20email%20profile`
+    if (accessToken != null) {
+      document.getElementById("copyToClipboard").removeAttribute("hidden");
+       document.getElementById("authenticateURL").setAttribute("hidden", "true");
+      } else {
+        document.getElementById("authenticateURL").setAttribute("href", href);
+        document.getElementById("authenticateURL").removeAttribute("hidden");
+
+    }
+
+    function copyAccessTokenToClipboard(){
+      console.log('Copied Access token', accessToken);
+      navigator.clipboard
+      .writeText(accessToken);
+/*	      .then(
+    (success) => alert('Command copied'),
+    (err) => alert('ERROR: unable to copy!')
+      );*/
+    }
+    
+  </script>
+
+</html>
