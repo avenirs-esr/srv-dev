@@ -2,10 +2,7 @@ version: '3'
 services:
   avenirs-portfolio-storage:
     container_name: ${AVENIRS_PORTFOLIO_STORAGE_CONTAINER_NAME}
-    depends_on:
-      - postgresql-primary 
-      - postgresql-secondary1 
-      - postgresql-secondary2
+   
    # image: lets-encrypt-apache:latest
     build:
       context: .
@@ -21,10 +18,7 @@ services:
 
   avenirs-portfolio-security:
     container_name: ${AVENIRS_PORTFOLIO_SECURITY_CONTAINER_NAME}
-    depends_on:
-      - postgresql-primary 
-      - postgresql-secondary1 
-      - postgresql-secondary2
+   
    # image: lets-encrypt-apache:latest
     build:
       context: .
