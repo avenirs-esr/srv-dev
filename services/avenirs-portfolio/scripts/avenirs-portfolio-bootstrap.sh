@@ -80,7 +80,7 @@ echo "AVENIRS_PORTFOLIO_SECURITY_OIDC_FILE=$AVENIRS_PORTFOLIO_SECURITY_OIDC_FILE
 clientId=`cat $AVENIRS_PORTFOLIO_SCRIPT_DIR/../../cas/avenirs-cas-overlay/etc/cas/services/oidc-callback.json  | grep clientId | cut -d ':' -f 2 | sed "s/\( *\"\,\? *\)//g"`
 clientSecret=`cat $AVENIRS_PORTFOLIO_SCRIPT_DIR/../../cas/avenirs-cas-overlay/etc/cas/services/oidc-callback.json  | grep clientSecret | cut -d ':' -f 2 | sed "s/\( *\"\,\? *\)//g"`
 #echo "spring.datasource.url=jdbc:postgresql://$AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME:5432/avenirs_access_control" > $AVENIRS_PORTFOLIO_SECURITY_SPRING_ENV_FILE;
-echo -ne "{\nclientId:$clientId,\nclientSecret:$clientSecret\n}\n">$AVENIRS_PORTFOLIO_SECURITY_OIDC_FILE;
+echo -ne "{\nclientId:$clientId\nclientSecret:$clientSecret\n}\n">$AVENIRS_PORTFOLIO_SECURITY_OIDC_FILE;
 
 
 

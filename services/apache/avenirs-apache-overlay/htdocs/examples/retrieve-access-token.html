@@ -8,7 +8,6 @@
     <div id="access_token">
       
     </div>
-    <!-- <a id="login" href="http://localhost/cas/oidc/oidcAuthorize?client_id=APIMClientId&redirect_uri=http://localhost/api-pf/oidc-callback&response_type=code&scope=openid%20email%20profile"> -->
     <a id="authenticateURL" hidden>
       <button  id="authenticate">
         Authenticate
@@ -18,21 +17,6 @@
       Copy
       </button>
     <div></div>
-    <!-- <div>
-      This page retrieves the access token in the browser location and generates a curl example to call an OIDC protected API.
-    </div>
-    <div style="margin-top:1em;">
-      <b>Access&nbsp;Token:</b> <small><script>document.write(accessToken)</script></small>
-    </div>
-    <div style="margin-top:1em;">
-      <b>CURL Example (localhost): </b><br/><font color="#0a71b4"><script>document.write(displayedCmdLocalhost);</script></font>
-      <button onClick="copyCmd()">Copy</button>
-    </div>
-    <div style="margin-top:1em;">
-      <b>CURL Example (srv-dev-avenirs): </b><br/><font color="#0a71b4"><script>document.write(displayedCmdSrvDev);</script></font>
-      <button onClick="copyCmd(true)">Copy</button>
-    </div> -->
-
   </body>
   <script>
     const urlParams = new URLSearchParams(window.location.href.split('#')?.[1]);
@@ -45,9 +29,9 @@
     console.log('Access token', accessToken);
 
     const host=window.location.host || 'localhost'
-    const href = `http://${host}/cas/oidc/oidcAuthorize?client_id=APIMClientId&redirect_uri=http://${host}/api-pf/oidc-callback&response_type=code&scope=openid%20email%20profile`
+    const href = `http://${host}/cas/oidc/oidcAuthorize?client_id=OIDCClientId&redirect_uri=http://${host}/apisix-gw/oidc/callback&response_type=code&scope=openid%20email%20profile`
     if (accessToken != null) {
-      document.getElementById("copyToClipboard").removeAttribute("hidden");
+       document.getElementById("copyToClipboard").removeAttribute("hidden");
        document.getElementById("authenticateURL").setAttribute("hidden", "true");
       } else {
         document.getElementById("authenticateURL").setAttribute("href", href);
