@@ -8,12 +8,6 @@ SSLProxyCheckPeerExpire off
 SSLProxyCheckPeerName off
 
 
-### Can be removed
-#ProxyPass /api-pf http://__AVENIRS_PORTFOLIO_SECURITY_CONTAINER_NAME__:12000
-#ProxyPassReverse /api-pf http://__AVENIRS_PORTFOLIO_SECURITY_CONTAINER_NAME__:12000
-
-
-
 ### Was not able to use the envvars with mod_proxy
 
 ProxyPass "/cas" "https://__AVENIRS_CAS_CONTAINER_NAME__:8443/cas"
