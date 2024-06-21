@@ -67,6 +67,24 @@ app.get('/cas-auth-callback', (req, res) => {
 /**
  * Redirection used after CAS authorization.
  */
+app.post('/debug', (req, res) => {
+console.log('/debug req.headers', req.headers);
+console.log('/debug req.body', req.body);
+console.log('/debug req.query', req.query);
+
+res.json(req.headers);
+})
+app.get('/debug', (req, res) => {
+  console.log('/debug req.headers', req.headers);
+  console.log('/debug req.body', req.body);
+  console.log('/debug req.query', req.query);
+  
+  res.json(req.headers);
+  })
+
+/**
+ * Redirection used after CAS authorization.
+ */
 app.get('/cas-auth-callback/access', (req, res) => {
   const host = req.headers?.['x-forwarded-host'] || 'localhost'
   console.log('cas-auth-callback/access host', host);

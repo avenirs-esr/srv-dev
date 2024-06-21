@@ -1,6 +1,6 @@
 version: '3'
 services:
-  avenirs-storage-portfolio:
+  avenirs-portfolio-storage:
     container_name: ${AVENIRS_PORTFOLIO_STORAGE_CONTAINER_NAME}
     depends_on:
       - postgresql-primary 
@@ -15,6 +15,25 @@ services:
        OVERLAY_DIR: ${AVENIRS_PORTFOLIO_STORAGE_OVERLAY_BASENAME}
     ports:
       - "${AVENIRS_PORTFOLIO_STORAGE_CONTAINER_PORT}:11000"
+    
+    networks:
+      - avenirs-api-network
+
+  avenirs-portfolio-security:
+    container_name: ${AVENIRS_PORTFOLIO_SECURITY_CONTAINER_NAME}
+    depends_on:
+      - postgresql-primary 
+      - postgresql-secondary1 
+      - postgresql-secondary2
+   # image: lets-encrypt-apache:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile-avenirs-portfolio-security
+      args:
+       AVENIRS_PORTFOLIO_SECURITY_VERSION: ${AVENIRS_PORTFOLIO_SECURITY_VERSION}
+       OVERLAY_DIR: ${AVENIRS_PORTFOLIO_SECURITY_OVERLAY_BASENAME}
+    ports:
+      - "${AVENIRS_PORTFOLIO_SECURITY_CONTAINER_PORT}:12000"
     
     networks:
       - avenirs-api-network

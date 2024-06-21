@@ -9,7 +9,8 @@ COPY ./avenirs-portfolio-storage/mvnw .
 COPY ./avenirs-portfolio-storage/.mvn .mvn
 COPY ./avenirs-portfolio-storage/pom.xml .
 COPY ./avenirs-portfolio-storage/src src
-COPY ${AVENIRS_PORTFOLIO_STORAGE_OVERLAY_DIR}/src/main/resources/env.properties.no-git src/main/resources/env.properties
+#COPY ${AVENIRS_PORTFOLIO_STORAGE_OVERLAY_DIR}/src/main/resources/env.properties.no-git src/main/resources/env.properties
+COPY ${AVENIRS_PORTFOLIO_STORAGE_SPRING_ENV_FILE} src/main/resources/
 
 RUN ./mvnw clean install package -DskipTests
 RUN mkdir -p ./target/dependency && (cd ./target/dependency; jar -xf ../*.jar)
