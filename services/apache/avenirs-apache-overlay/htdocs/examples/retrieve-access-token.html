@@ -22,14 +22,13 @@
     const urlParams = new URLSearchParams(window.location.href.split('#')?.[1]);
     const accessToken=urlParams.get('access_token');
     document.getElementById("access_token").innerText = accessToken || "NO ACCESS TOKEN";
-    const displayedCmdLocalhost=`curl -H "Authorization: Bearer ${accessToken?.slice(0, 10) +'...' + accessToken?.slice(-10)}" http://localhost/apisix-gw/ipoidc`
-    const displayedCmdSrvDev=`curl -H "Authorization: Bearer ${accessToken?.slice(0, 10) +'...' + accessToken?.slice(-10)}" http://srv-dev-avenir.srv-avenir.brgm.recia.net/apisix-gw/ipoidc`
     
     console.log('urlParams', urlParams);
     console.log('Access token', accessToken);
 
     const host=window.location.host || 'localhost'
     const href = `http://${host}/cas/oidc/oidcAuthorize?client_id=OIDCClientId&redirect_uri=http://${host}/apisix-gw/oidc/callback&response_type=code&scope=openid%20email%20profile`
+    console.log('Login URL:', href);
     if (accessToken != null) {
        document.getElementById("copyToClipboard").removeAttribute("hidden");
        document.getElementById("authenticateURL").setAttribute("hidden", "true");
