@@ -4,7 +4,7 @@
   "@class": "org.apereo.cas.services.OidcRegisteredService",
   "bypassApprovalPrompt": true,
   "clientId": "OIDCClientId",
-  "clientSecret": "ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=",
+  "clientSecret": "OIDCsecret2",
   "supportedGrantTypes": [ "java.util.HashSet", [ "authorization_code", "refresh_token" ] ],
   "supportedResponseTypes": [ "java.util.HashSet", [ "code", "token" ] ],
   "serviceId": "^https?://((srv-dev-avenirs?(\\.srv-avenirs?\\.brgm\\.recia\\.net)?)|localhost)/apisix-gw/oidc(/.*)*",
