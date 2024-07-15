@@ -67,6 +67,24 @@ app.get('/cas-auth-callback', (req, res) => {
 /**
  * Redirection used after CAS authorization.
  */
+app.post('/debug', (req, res) => {
+console.log('/debug req.headers', req.headers);
+console.log('/debug req.body', req.body);
+console.log('/debug req.query', req.query);
+
+res.json(req.headers);
+})
+app.get('/debug', (req, res) => {
+  console.log('/debug req.headers', req.headers);
+  console.log('/debug req.body', req.body);
+  console.log('/debug req.query', req.query);
+  
+  res.json(req.headers);
+  })
+
+/**
+ * Redirection used after CAS authorization.
+ */
 app.get('/cas-auth-callback/access', (req, res) => {
   const host = req.headers?.['x-forwarded-host'] || 'localhost'
   console.log('cas-auth-callback/access host', host);
@@ -132,6 +150,98 @@ app.post('/cas-auth-validate', (req, res) => {
     }
   });
 });
+
+
+
+
+async function _introspect(token :string ){
+  const introspectEndPoint = `http://avenirs-apache/cas/oidc/introspect`;
+  console.log('_introspect introspectEndPoint', introspectEndPoint);
+
+  const options = {
+    headers: {
+      'Authorization': 'Basic ' + Buffer.from(`${cas_client_id}:${cas_client_secret}`).toString('base64')
+    }
+  }
+
+  console.log('_introspect', options.headers);
+
+return new Promise((resolve, reject) => {
+   needle.post(introspectEndPoint, { token }, options, (err: any, resp: needle.NeedleResponse) => {
+    console.log('_introspect err', err);
+    console.log('_introspect resp?.body', resp?.body);
+    return err ? reject(err): resolve(resp?.body);
+  });
+});
+}
+/** ---- dynamic upstream experimentation ---- **/
+
+/**
+ * Select upstream
+ */
+app.get('/select-upstream', async (req, res) => {
+  console.log('Dynamic Upstream experimentation: select-upstream');
+  console.log('Dynamic Upstream experimentation: select-upstream headers', JSON.stringify(req.header));
+  console.log('Dynamic Upstream experimentation:select body : ' + JSON.stringify(req.body));
+  console.log('Dynamic Upstream experimentation:select query : ' + JSON.stringify(req.query));
+  res.setHeader('Content-Type', 'application/json');
+  const introspect : any = await _introspect(req.header('x-authorization'))
+  console.log('Dynamic Upstream experimentation: introspect', introspect);
+  console.log('Dynamic Upstream experimentation: introspect?.uniqueSecurityName: ', introspect?.uniqueSecurityName);
+  const payload1={
+    upstream: 'univ1',
+    endPoint: '/node-api/endPoint1'
+  };
+  const payload2={
+    upstream: 'univ2',
+    endPoint: 'endPoint2'
+  };
+
+  const payload = introspect?.uniqueSecurityName === 'deman' ? payload1 : payload2;
+  //const payload = payload1;
+  console.log('Dynamic Upstream experimentation: select-upstream payload', JSON.stringify(payload));
+  res.status(200).end(JSON.stringify(payload) + '\n');
+  
+});
+
+
+
+/**
+ * endPoint 1 
+ */
+app.get('/endPoint1', (req, res) => {
+  console.log('Dynamic Upstream experimentation endPoint1');
+  console.log('Dynamic Upstream experimentation: endPoint1  headers : ' + JSON.stringify(req.headers));
+  res.setHeader('Content-Type', 'application/json');
+  const payload={upstream: 'upstream #1'};
+  res.status(200).end(JSON.stringify(payload) + '\n');
+});
+
+
+
+/**
+ * endPoint 2
+ */
+app.get('/endPoint2', (req, res) => {
+  console.log('Dynamic Upstream experimentation /endPoint2');
+  console.log('Dynamic Upstream experimentation: endPoint2  headers : ' + JSON.stringify(req.headers));
+  res.setHeader('Content-Type', 'application/json');
+  const payload={upstream: 'upstream #2'};
+  res.status(200).end(JSON.stringify(payload) + '\n');
+});
+
+
+/**
+ * Upstream 2
+ */
+app.get('/ds', (req, res) => {
+  console.log('Dynamic Upstream experimentation /ds2');
+  console.log('Dynamic Upstream experimentation: ds  headers : ' + JSON.stringify(req.headers));
+  res.setHeader('Content-Type', 'application/json');
+  const payload={upstream: 'ds'};
+  res.status(200).end(JSON.stringify(payload) + '\n');
+});
+
 
 const HOST = '0.0.0.0';
 const PORT = 3000;
