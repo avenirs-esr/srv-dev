@@ -48,7 +48,7 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisi
 
                 ngx.log(ngx.ERR, \"IN serverless pre function resource \", resource);
                 local httpc = http.new();
-                local res, err = httpc:request_uri(\"https://avenirs-apache/apisix-gw/access-control\", {
+                local res, err = httpc:request_uri(\"http://avenirs-apache/apisix-gw/access-control\", {
                 
                     method = \"GET\",
                     headers = {
