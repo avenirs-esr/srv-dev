@@ -19,6 +19,7 @@ WORKDIR /workspace/app
 ARG AVENIRS_PORTFOLIO_SECURITY_VERSION=0.0.1
 VOLUME /tmp
 ARG DEPENDENCY=/workspace/app/target/dependency
+COPY avenirs-portfolio-overlay/avenirs-portfolio-security/opt/java/openjdk/lib/security/cacerts /opt/java/openjdk/lib/security/cacerts
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build /workspace/app/target/avenirs-portfolio-security-${AVENIRS_PORTFOLIO_SECURITY_VERSION}-SNAPSHOT.jar /app/avenirs-portfolio-security.jar
