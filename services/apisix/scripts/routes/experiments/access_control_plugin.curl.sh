@@ -38,8 +38,17 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisi
                 end
                 ngx.log(ngx.ERR, \"serverless pre function token \", token);
 
+
+                local method = core.request.get_method(ctx);
+                local resource = ctx.var.arg_resource;
+                if resource == nill 
+                then
+                  resource = ctx.var.post_arg_resource;
+                end
+
+                ngx.log(ngx.ERR, \"IN serverless pre function resource \", resource);
                 local httpc = http.new();
-                local res, err = httpc:request_uri(\"http://192.168.1.107:12000/access-control\", {
+                local res, err = httpc:request_uri(\"https://avenirs-apache/apisix-gw/access-control\", {
                 
                     method = \"GET\",
                     headers = {
@@ -47,11 +56,10 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisi
                         [\"x-authorization\"] = token
                     },
                     query={
-                    [\"uri\"] =  ctx.var.request_uri,
-                    [\"method\"] = core.request.get_method(ctx)
+                      [\"uri\"] =  ctx.var.uri,
+                      [\"resource\"] = resource,
+                      [\"method\"] = method
                     }
-                    -- body = core.request.get_body()
-
                 });
 
                 if res and res.body ~= nill 
@@ -60,17 +68,24 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisi
                   local upstream = body.upstream;
                   local endPoint = body.endPoint;
                   ngx.log(ngx.ERR, \"IN serverless pre function body \", inspect(body));
-                  ngx.log(ngx.ERR, \"IN serverless pre function upstream \", upstream);
-                  ngx.log(ngx.ERR, \"IN serverless pre function endPoint \", endPoint);
+                  ngx.log(ngx.ERR, \"IN serverless pre function body.granted \", body.granted);
 
-                  core.request.set_header(ctx, \"avenirsUpstream\", upstream);
-                  core.request.set_header(ctx, \"avenirsEndPoint\", endPoint) ;
+                   if body.granted
+                   then
+                      ngx.log(ngx.ERR, \"Granted\", inspect(body));
+                    else
+                      ngx.log(ngx.ERR, \"Not granted \", inspect(body));
+                      return 401, \"Access not granted\"
+                    end
+                  core.request.set_header(ctx, \"avenirsEndPoint\",\"node-api/\"..ctx.var.uri) ;
                 else
-                  ngx.log(ngx.ERR, \"Serverless error while trying to select the upstream: \", err);
+                  ngx.log(ngx.ERR, \"Serverless error while trying to check access control: \", err);
                 end  
-
             end"],
             "phase": "rewrite"
+        },
+        "proxy-rewrite": {
+            "uri": "/$http_avenirsEndPoint"
         }
     }
   
