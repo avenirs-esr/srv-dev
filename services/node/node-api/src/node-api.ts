@@ -38,7 +38,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = "0";
 /**
  * Health method to check quickly if the banckend is responding.
  */
-app.get('/health', (req, res) => {
+app.get('/health', (req: any, res: any) => {
   //  console.log('Headers', req.headers);
 
   res.setHeader('Content-Type', 'application/json');
@@ -51,7 +51,7 @@ app.get('/health', (req, res) => {
  * Call the cas oidcAuthorize end point to generate a jwt (access token) from a session code.
  * After authorization cas will redirect to the uri given in parameter (must be declared in service definition of CAS).
  */
-app.get('/cas-auth-callback', (req, res) => {
+app.get('/cas-auth-callback', (req: any, res: any) => {
   const sessionCode = req?.query?.code;
   const host = req.headers?.['x-forwarded-host'] || 'localhost'
   console.log('cas-auth-callback host', host);
@@ -67,14 +67,14 @@ app.get('/cas-auth-callback', (req, res) => {
 /**
  * Redirection used after CAS authorization.
  */
-app.post('/debug', (req, res) => {
+app.post('/debug', (req: any, res: any) => {
 console.log('/debug req.headers', req.headers);
 console.log('/debug req.body', req.body);
 console.log('/debug req.query', req.query);
 
 res.json(req.headers);
 })
-app.get('/debug', (req, res) => {
+app.get('/debug', (req: any, res: any) => {
   console.log('/debug req.headers', req.headers);
   console.log('/debug req.body', req.body);
   console.log('/debug req.query', req.query);
@@ -85,7 +85,7 @@ app.get('/debug', (req, res) => {
 /**
  * Redirection used after CAS authorization.
  */
-app.get('/cas-auth-callback/access', (req, res) => {
+app.get('/cas-auth-callback/access', (req: any, res: any) => {
   const host = req.headers?.['x-forwarded-host'] || 'localhost'
   console.log('cas-auth-callback/access host', host);
   res.redirect(`http://${host}/examples/authentication-webcomp-demo/`)
@@ -97,7 +97,7 @@ app.get('/cas-auth-callback/access', (req, res) => {
  * Validates a jwt. If the jwt is valid the claims will be returned.
  * Uses the introspection end point of CAS.
  */
-app.post('/cas-auth-validate', (req, res) => {
+app.post('/cas-auth-validate', (req: any, res: any) => {
   const host = req.headers?.['x-forwarded-host'] || 'localhost'
   const token = req.get('x-authorization');
   console.log('cas-auth-validate host', host);
@@ -130,7 +130,7 @@ app.post('/cas-auth-validate', (req, res) => {
       } else {
         if (introspectResponse.token) {
           console.log('cas-auth-validate token found in introspectResponse');
-          needle.post('https://avenirs-apache/cas/oidc/profile', { token: introspectResponse.token }, options, (err, resp) => {
+          needle.post('https://avenirs-apache/cas/oidc/profile', { token: introspectResponse.token }, options, (err: any, resp: any) => {
             console.log('cas-auth-validate in profile');
             if (err) {
               console.log('cas-auth-validate in profile err', err);
@@ -174,12 +174,32 @@ return new Promise((resolve, reject) => {
   });
 });
 }
+
+/** ---- Access control experimentation ---- **/
+app.get('/display', async (req: any, res: any) => {
+  console.log("=>", req.query?.resource);
+  const host = req.headers?.['x-forwarded-host'] || 'localhost'
+  const token = req.get('x-authorization')||"";
+  const resource = req.query?.resource
+  res.status(200).end(JSON.stringify({
+    uri: "/display", host, resource, token }));
+});
+
+app.post('/edit', async (req: any, res: any) => {
+  console.log("display edit =>", req.body);
+  const host = req.headers?.['x-forwarded-host'] || 'localhost'
+  const token = req.get('x-authorization')|| req.get('Authorization') || "";
+  const resource = req.query?.resource
+  res.status(200).end(JSON.stringify({uri: "/edit", host, resource, token }));
+});
+
+
 /** ---- dynamic upstream experimentation ---- **/
 
 /**
  * Select upstream
  */
-app.get('/select-upstream', async (req, res) => {
+app.get('/select-upstream', async (req: any, res: any) => {
   console.log('Dynamic Upstream experimentation: select-upstream');
   console.log('Dynamic Upstream experimentation: select-upstream headers', JSON.stringify(req.header));
   console.log('Dynamic Upstream experimentation:select body : ' + JSON.stringify(req.body));
@@ -209,7 +229,7 @@ app.get('/select-upstream', async (req, res) => {
 /**
  * endPoint 1 
  */
-app.get('/endPoint1', (req, res) => {
+app.get('/endPoint1', (req: any, res: any) => {
   console.log('Dynamic Upstream experimentation endPoint1');
   console.log('Dynamic Upstream experimentation: endPoint1  headers : ' + JSON.stringify(req.headers));
   res.setHeader('Content-Type', 'application/json');
@@ -222,7 +242,7 @@ app.get('/endPoint1', (req, res) => {
 /**
  * endPoint 2
  */
-app.get('/endPoint2', (req, res) => {
+app.get('/endPoint2', (req: any, res: any) => {
   console.log('Dynamic Upstream experimentation /endPoint2');
   console.log('Dynamic Upstream experimentation: endPoint2  headers : ' + JSON.stringify(req.headers));
   res.setHeader('Content-Type', 'application/json');
@@ -234,7 +254,7 @@ app.get('/endPoint2', (req, res) => {
 /**
  * Upstream 2
  */
-app.get('/ds', (req, res) => {
+app.get('/ds', (req: any, res: any) => {
   console.log('Dynamic Upstream experimentation /ds2');
   console.log('Dynamic Upstream experimentation: ds  headers : ' + JSON.stringify(req.headers));
   res.setHeader('Content-Type', 'application/json');
