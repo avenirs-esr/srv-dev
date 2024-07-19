@@ -13,7 +13,7 @@ check the branch (if a git submodule), and create a .env file to propagate the s
 
 ## Architecture experimentation
 <figure>
-<img src="https://avenirs-esr.github.io/dev-doc/assets/images/arch.svg" alt="Architecture diagram">
+<img src="https://avenirs-esr.github.io/dev-doc/assets/images/docker-containers.png" alt="Architecture diagram">
 <figure>
 <figcaption>
 Technical architecture experimentation
@@ -104,7 +104,7 @@ npm run deploy
 This instructions will :
 1. Download the project and all its  submodules (--recurse option).
 2. Run the bootstratp scripts (the main one and the ones associated to each service).
-3. Download / générate the docker images.
+3. Download / generate the docker images.
 4. Run the containers associated to each service (via docker-compose).
 
 Available npm scripts :
