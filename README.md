@@ -25,7 +25,7 @@ Technical architecture experimentation
 . 
 ├── docker-compose.yml              Main docker compose file
 ├── scripts                         Main Scripts directory
-│   ├── srv-dev-bootstrap.sh        Main bootsrapping script
+│   ├── srv-dev-bootstrap.sh        Main bootstrapping script
 │   ├── srv-dev-clean.sh            Removes all the bootstrap modifications
 │   ├── srv-dev-commons.sh          Helpers and constants for the bash scripts
 │   └── srv-dev-env.sh              Main environment file : can override the services environment files.
