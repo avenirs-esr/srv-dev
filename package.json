@@ -11,7 +11,7 @@
     "purge": "docker-compose down; bash ./scripts/srv-dev-clean.sh -vv; docker system prune -a",
     "reset": "npm run purge; bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build -d",
     "deploy-dev": "npm run clean; bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build",
-    "ls-containers": "docker ps --last 8 --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}'"
+    "ls-containers": "docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}'"
     
   },
   "repository": {
