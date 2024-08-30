@@ -1,4 +1,3 @@
-version: '3'
 services:
   avenirs-portfolio-storage:
     container_name: ${AVENIRS_PORTFOLIO_STORAGE_CONTAINER_NAME}

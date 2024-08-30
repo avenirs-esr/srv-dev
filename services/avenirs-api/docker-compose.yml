@@ -1,4 +1,3 @@
-version: '3'
 services:
   avenirs-api:
     container_name: ${AVENIRS_API_CONTAINER_NAME}

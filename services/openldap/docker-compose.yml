@@ -1,4 +1,3 @@
-version: '3'
 services:
   openldap:
     container_name: ${AVENIRS_OPENLDAP_CONTAINER_NAME}

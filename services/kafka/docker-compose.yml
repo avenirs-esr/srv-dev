@@ -1,7 +1,6 @@
 # Resources: 
 # - https://docs.confluent.io/platform/current/installation/docker/installation.html
 # - https://www.baeldung.com/ops/kafka-docker-setup
-version: '3'
 services:
   zookeeper:
    # user: "3000:999"
