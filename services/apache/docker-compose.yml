@@ -1,4 +1,3 @@
-version: '3'
 services:
   le-apache:
     container_name: ${AVENIRS_APACHE_CONTAINER_NAME}

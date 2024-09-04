@@ -14,9 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-version: "3"
-
 services:
   apisix-dashboard:
     container_name: ${AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME}

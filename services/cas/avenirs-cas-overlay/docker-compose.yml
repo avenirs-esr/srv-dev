@@ -1,4 +1,3 @@
-version: '3'
 services:
   cas:
     container_name: ${AVENIRS_CAS_CONTAINER_NAME}

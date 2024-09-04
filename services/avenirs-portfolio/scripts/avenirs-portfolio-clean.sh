@@ -20,18 +20,20 @@ info "Avenirs portfolio cleaning started."
 
 
 # ---- avenirs-portfolio-storage
-# Removes the overlay's files
-remove_overlay $AVENIRS_PORTFOLIO_STORAGE_REPOSITORY_DIR  
 
 # Resets the repository
 reset_git_repository $AVENIRS_PORTFOLIO_STORAGE_REPOSITORY_DIR $AVENIRS_PORTFOLIO_STORAGE_MAIN_BRANCH $AVENIRS_PORTFOLIO_STORAGE_LOCAL_BRANCH
 
-# ---- avenirs-portfolio-security
 # Removes the overlay's files
-remove_overlay $AVENIRS_PORTFOLIO_SECURITY_REPOSITORY_DIR  
+remove_overlay $AVENIRS_PORTFOLIO_STORAGE_REPOSITORY_DIR  
+
+# ---- avenirs-portfolio-security
 
 # Resets the repository
 reset_git_repository $AVENIRS_PORTFOLIO_SECURITY_REPOSITORY_DIR $AVENIRS_PORTFOLIO_SECURITY_MAIN_BRANCH $AVENIRS_PORTFOLIO_SECURITY_LOCAL_BRANCH
+
+# Removes the overlay's files
+remove_overlay $AVENIRS_PORTFOLIO_SECURITY_REPOSITORY_DIR  
 
 
 info "Avenirs portfolio cleaning completed."

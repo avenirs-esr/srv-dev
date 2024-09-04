@@ -1,4 +1,3 @@
-version: '3'
 services:
   postgresql-primary:
     container_name: ${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}
