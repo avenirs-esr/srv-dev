@@ -37,7 +37,6 @@ cas.authn.oidc.discovery.scopes=openid,profile,email
 #cas.authn.oidc.discovery.claims=family_name,given_name,email, mail, cn,givenName,sn,displayName,isMemberOf
 cas.authn.oidc.discovery.claims=family_name,given_name,email
 
-
 #cas.interrupt.core.force-execution=true
 #cas.interrupt.groovy.location=file:/etc/cas/config/interrupt/interrupt-inquirer.groovy
 #cas.interrupt.core.trigger-mode=AFTER_SSO
