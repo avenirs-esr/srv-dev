@@ -26,6 +26,7 @@ services:
     image: postgres:latest
     command: |
       bash -c "
+      export PATH=/usr/lib/postgresql/*:\$PATH
       if [ -e /var/lib/postgresql/data/standby.signal ]
       then 
         echo '${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}: Already initialized'
@@ -45,7 +46,7 @@ services:
         echo '${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}: privileges set'
       fi
       echo '${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}: starting...'
-      su - postgres -c '/usr/lib/postgresql/16/bin/postgres -D /var/lib/postgresql/data -c config_file=/etc/postgresql.conf'
+      su - postgres -c 'postgres -D /var/lib/postgresql/data -c config_file=/etc/postgresql.conf'
       "
     restart: always
     environment:
@@ -70,6 +71,7 @@ services:
     image: postgres:latest
     command: |
       bash -c "
+      export PATH=/usr/lib/postgresql/*:\$PATH
       if [ -e /var/lib/postgresql/data/standby.signal ]
       then 
         echo '${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}: Already initialized'
@@ -89,7 +91,7 @@ services:
         echo '${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}: privileges set'
       fi
       echo '${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}: starting...'
-      su - postgres -c '/usr/lib/postgresql/16/bin/postgres -D /var/lib/postgresql/data -c config_file=/etc/postgresql.conf'
+      su - postgres -c 'postgres -D /var/lib/postgresql/data -c config_file=/etc/postgresql.conf'
       "
     restart: always
 
