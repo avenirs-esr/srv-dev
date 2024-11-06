@@ -10,3 +10,12 @@
 [submodule "services/avenirs-api/avenirs-api"]
 	path = services/avenirs-api/avenirs-api
 	url = git@github.com:avenirs-esr/avenirs-api.git
+[submodule "services/avenirs-backend/avenirs-portfolio-storage"]
+	path = services/avenirs-portfolio/avenirs-portfolio-storage
+	url = git@github.com:avenirs-esr/avenirs-portfolio-storage
+[submodule "services/avenirs-portfolio/avenirs-portfolio-storage"]
+	path = services/avenirs-portfolio/avenirs-portfolio-storage
+	url = git@github.com:avenirs-esr/avenirs-portfolio-storage.git
+[submodule "services/avenirs-portfolio/avenirs-portfolio-security"]
+	path = services/avenirs-portfolio/avenirs-portfolio-security
+	url = git@github.com:avenirs-esr/avenirs-portfolio-security

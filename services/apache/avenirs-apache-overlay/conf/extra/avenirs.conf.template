@@ -9,6 +9,7 @@ SSLProxyCheckPeerName off
 
 
 ### Was not able to use the envvars with mod_proxy
+
 ProxyPass "/cas" "https://__AVENIRS_CAS_CONTAINER_NAME__:8443/cas"
 ProxyPassReverse "/cas" "https://__AVENIRS_CAS_CONTAINER_NAME__:8443/cas"
 

@@ -18,6 +18,10 @@ info "APISIX cleaning started."
 . $APISIX_SCRIPT_DIR/apisix-env.sh $APISIX_SCRIPT_DIR 2> /dev/null \
     || err "Unable to source $APISIX_SCRIPT_DIR/apisix-env.sh"
 
+
+# Empty folder generated with root as owner if the dockers are started without proper intialization
+[ -d $APISIX_SCRIPT_DIR/../apisix-docker/example/dashboard_conf/conf.yaml ] && sudo rmdir $APISIX_SCRIPT_DIR/../apisix-docker/example/dashboard_conf/conf.yaml
+
 # Removes the overlay's files
 remove_overlay $APISIX_REPOSITORY_DIR  
 remove_overlay $APISIX_UI_REPOSITORY_DIR  

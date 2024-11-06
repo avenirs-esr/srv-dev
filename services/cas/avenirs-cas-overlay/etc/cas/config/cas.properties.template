@@ -24,7 +24,7 @@ cas.authn.ldap[0].bindCredential=admin
 ### obso cas.authn.ldap[0].useSsl=false
 
 cas.authn.oidc.core.claims-map.email=mail
-cas.authn.oidc.core.claims-map.given_name=cn
+cas.authn.oidc.core.claims-map.given_name=givenName
 cas.authn.oidc.core.claims-map.family_name=sn
 
 #cas.authn.attribute-repository.groovy[0].location=file:/etc/cas/config/attributes-repository.groovy
@@ -36,7 +36,6 @@ cas.service-registry.json.watcher-enabled=true
 cas.authn.oidc.discovery.scopes=openid,profile,email
 #cas.authn.oidc.discovery.claims=family_name,given_name,email, mail, cn,givenName,sn,displayName,isMemberOf
 cas.authn.oidc.discovery.claims=family_name,given_name,email
-
 
 #cas.interrupt.core.force-execution=true
 #cas.interrupt.groovy.location=file:/etc/cas/config/interrupt/interrupt-inquirer.groovy

@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>OIDC TEST PAGE</title>
+  </head>
+  <body>
+  
+    <label for="access_token">Access token</label>
+    <div id="access_token">
+      
+    </div>
+    <a id="authenticateURL" hidden>
+      <button  id="authenticate">
+        Authenticate
+      </button>
+</a>
+    <button id="copyToClipboard" onClick="copyAccessTokenToClipboard()" hidden>
+      Copy
+      </button>
+    <div></div>
+  </body>
+  <script>
+    const urlParams = new URLSearchParams(window.location.href.split('#')?.[1]);
+    const accessToken=urlParams.get('access_token');
+    document.getElementById("access_token").innerText = accessToken || "NO ACCESS TOKEN";
+    
+    console.log('urlParams', urlParams);
+    console.log('Access token', accessToken);
+
+    const host=window.location.host || 'localhost'
+    const href = `https://${host}/cas/oidc/oidcAuthorize?client_id=OIDCClientId&redirect_uri=https://${host}/apisix-gw/oidc/callback&response_type=code&scope=openid%20email%20profile`
+    console.log('Login URL:', href);
+    if (accessToken != null) {
+       document.getElementById("copyToClipboard").removeAttribute("hidden");
+       document.getElementById("authenticateURL").setAttribute("hidden", "true");
+      } else {
+        document.getElementById("authenticateURL").setAttribute("href", href);
+        document.getElementById("authenticateURL").removeAttribute("hidden");
+
+    }
+
+    function copyAccessTokenToClipboard(){
+      console.log('Copied Access token', accessToken);
+      navigator.clipboard
+      .writeText(accessToken);
+/*	      .then(
+    (success) => alert('Command copied'),
+    (err) => alert('ERROR: unable to copy!')
+      );*/
+    }
+    
+  </script>
+
+</html>

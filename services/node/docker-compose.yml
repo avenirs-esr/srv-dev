@@ -1,4 +1,3 @@
-version: '3'
 services:
   node:
     container_name: ${AVENIRS_NODE_CONTAINER_NAME}

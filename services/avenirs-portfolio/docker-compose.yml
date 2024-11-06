@@ -1,0 +1,38 @@
+services:
+  avenirs-portfolio-storage:
+    container_name: ${AVENIRS_PORTFOLIO_STORAGE_CONTAINER_NAME}
+   
+   # image: lets-encrypt-apache:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile-avenirs-portfolio-storage
+      args:
+       AVENIRS_PORTFOLIO_STORAGE_VERSION: ${AVENIRS_PORTFOLIO_STORAGE_VERSION}
+       OVERLAY_DIR: ${AVENIRS_PORTFOLIO_STORAGE_OVERLAY_BASENAME}
+    ports:
+      - "${AVENIRS_PORTFOLIO_STORAGE_CONTAINER_PORT}:11000"
+    environment:
+      - JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_ENCRYPTOR_PASSWORD}
+    networks:
+      - avenirs-api-network
+
+  avenirs-portfolio-security:
+    container_name: ${AVENIRS_PORTFOLIO_SECURITY_CONTAINER_NAME}
+   
+   # image: lets-encrypt-apache:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile-avenirs-portfolio-security
+      args:
+       AVENIRS_PORTFOLIO_SECURITY_VERSION: ${AVENIRS_PORTFOLIO_SECURITY_VERSION}
+       OVERLAY_DIR: ${AVENIRS_PORTFOLIO_SECURITY_OVERLAY_BASENAME}
+    ports:
+      - "${AVENIRS_PORTFOLIO_SECURITY_CONTAINER_PORT}:12000"
+    environment:
+      - JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_ENCRYPTOR_PASSWORD}
+    networks:
+      - avenirs-api-network
+networks: 
+  avenirs-api-network:
+    external: true
+    name: ${AVENIRS_NETWORK}
