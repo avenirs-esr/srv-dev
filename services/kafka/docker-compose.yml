@@ -6,6 +6,7 @@ services:
    # user: "3000:999"
     container_name: ${AVENIRS_ZOOKEEPER_CONTAINER_NAME}
     image: confluentinc/cp-zookeeper:latest
+    restart: always
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -21,6 +22,7 @@ services:
     #user: "3000:999"
     image: confluentinc/cp-kafka:latest
     container_name: ${AVENIRS_KAFKA_CONTAINER_NAME}
+    restart: always
     depends_on:
       - zookeeper
     ports:
@@ -40,6 +42,7 @@ services:
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
     container_name: ${AVENIRS_KAFKA_UI_CONTAINER_NAME}
+    restart: always
     
     depends_on:
       - kafka

@@ -1,6 +1,7 @@
 services:
   cas:
     container_name: ${AVENIRS_CAS_CONTAINER_NAME}
+    restart: always
     depends_on:
       - openldap
     build: .

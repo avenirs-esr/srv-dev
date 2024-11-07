@@ -1,7 +1,7 @@
 services:
   node:
     container_name: ${AVENIRS_NODE_CONTAINER_NAME}
-    restart: unless-stopped
+    restart: always
     #environment:
     #  - APP_RUNNING_CONTEXT=${APP_RUNNING_CONTEXT}
 

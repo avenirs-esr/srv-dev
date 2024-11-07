@@ -2,6 +2,7 @@ services:
   openldap:
     container_name: ${AVENIRS_OPENLDAP_CONTAINER_NAME}
     image: osixia/openldap:1.5.0
+    restart: always
     environment:
       LDAP_LOG_LEVEL: "256"
       LDAP_ORGANISATION: ${LDAP_ORGANISATION}
@@ -46,6 +47,7 @@ services:
   phpldapadmin:
     image: osixia/phpldapadmin:latest
     container_name: ${AVENIRS_LDAP_ADMIN_CONTAINER_NAME}
+    restart: always
     environment:
       PHPLDAPADMIN_LDAP_HOSTS: "openldap"
       PHPLDAPADMIN_HTTPS: "false"

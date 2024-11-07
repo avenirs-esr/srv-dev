@@ -1,13 +1,13 @@
 services:
   avenirs-api:
     container_name: ${AVENIRS_API_CONTAINER_NAME}
-   # image: lets-encrypt-apache:latest
     build:
       context: .
       dockerfile: ./Dockerfile
       args:
        AVENIRS_API_VERSION: ${AVENIRS_API_VERSION}
        OVERLAY_DIR: ${AVENIRS_OVERLAY_BASENAME}
+    restart: always
     ports:
       - "${AVENIRS_API_CONTAINER_PORT}:10000"
     
