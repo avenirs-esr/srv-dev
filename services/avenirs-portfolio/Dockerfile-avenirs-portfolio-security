@@ -7,7 +7,6 @@ COPY ./avenirs-portfolio-security/mvnw .
 COPY ./avenirs-portfolio-security/.mvn .mvn
 COPY ./avenirs-portfolio-security/pom.xml .
 COPY ./avenirs-portfolio-security/src src
-COPY ./avenirs-portfolio-overlay/avenirs-portfolio-security/src/main/resources/oidc-settings.json src/main/resources/
 COPY avenirs-portfolio-overlay/avenirs-portfolio-security/src/main/resources/env.properties src/main/resources/
 
 RUN ./mvnw clean install package -DskipTests
