@@ -38,6 +38,7 @@ function bootstrap_services() {
     for service in $SERVICES
     do
         bootstrap_service $service
+        # TODO: check exit statut(JASYPT)
     done
     info "---"
     info "Bootstrapped services: $SERVICES"
