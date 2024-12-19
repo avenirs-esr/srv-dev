@@ -1,6 +1,6 @@
 {
   "id": 4400,
-  "name": "APIM",
+  "name": "OIDC callback",
   "@class": "org.apereo.cas.services.OidcRegisteredService",
   "bypassApprovalPrompt": true,
   "clientId": "OIDCClientId",
