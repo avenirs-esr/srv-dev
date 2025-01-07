@@ -82,5 +82,22 @@ echo "spring.datasource.url=jdbc:postgresql://$AVENIRS_POSTGRESQL_PRIMARY_CONTAI
 [ "`hostname`" = "srv-dev-avenir" ] && swagger_root="srv-dev-avenir.srv-avenir.brgm.recia.net" || swagger_root="localhost"
 echo "app.server.url=http://$swagger_root/avenirs-portfolio-security" >> $AVENIRS_PORTFOLIO_SECURITY_SPRING_ENV_FILE;
 
+info "Database initialization for avenirs-portfolio-security" 
+JASYPT_UTIL_SCRIPT=$AVENIRS_PORTFOLIO_SCRIPT_DIR/../avenirs-portfolio-security/scripts/jasypt-decrypt
+AVENIRS_PORTFOLIO_SECURITY_CLEAN_DB=$AVENIRS_PORTFOLIO_SCRIPT_DIR/../avenirs-portfolio-security/src/main/resources/db/clean.sql
+AVENIRS_PORTFOLIO_SECURITY_INIT_DB=$AVENIRS_PORTFOLIO_SCRIPT_DIR/../avenirs-portfolio-security/src/main/resources/db/init-db.sql
+AVENIRS_PORTFOLIO_SECURITY_CLEAN_TEST_DB=$AVENIRS_PORTFOLIO_SCRIPT_DIR/../avenirs-portfolio-security/src/test/resources/db/clean-test-db.sql
+AVENIRS_PORTFOLIO_SECURITY_INIT_TEST_DB=$AVENIRS_PORTFOLIO_SCRIPT_DIR/../avenirs-portfolio-security/src/test/resources/db/init-test-db.sql
+
+# Drop databases
+cat $AVENIRS_PORTFOLIO_SECURITY_CLEAN_DB  | psql -p 65432 -h localhost -U pguser template1 2>/dev/null
+cat $AVENIRS_PORTFOLIO_SECURITY_CLEAN_TEST_DB  | psql -p 65432 -h localhost -U pguser template1 2>/dev/null
+
+# Init databases
+$JASYPT_UTIL_SCRIPT $AVENIRS_PORTFOLIO_SECURITY_INIT_DB | psql -p 65432 -h localhost -U pguser template1 
+$JASYPT_UTIL_SCRIPT $AVENIRS_PORTFOLIO_SECURITY_INIT_TEST_DB | psql -p 65432 -h localhost -U pguser template1 
+info "Avenirs portfolio databases initialized."
+
 info "Avenirs portfolio bootstrapping completed."
+
 
