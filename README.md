@@ -113,6 +113,8 @@ Available npm scripts :
 - npm run purge: idem as clean + docker system prune -a
 - npm run reset: resets all the services as if they were just installed
 - npm run dev: idem as deploy without detaching the containers
+- npm run sync-modules: synchronize the submodules and set the head to the master or main branch (handles detached head)
+- npm run sync: synchronizes everythind (without detached head)
 
 
 

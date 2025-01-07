@@ -8,7 +8,7 @@
   "supportedGrantTypes": [ "java.util.HashSet", [ "authorization_code", "refresh_token", "password" ] ],
   "supportedResponseTypes": [ "java.util.HashSet", [ "code", "token" ] ],
   "serviceId": "^https?://((srv-dev-avenirs?(\\.srv-avenirs?\\.brgm\\.recia\\.net)?)|localhost)/apisix-gw/oidc(/.*)*",
-  "jwtAccessToken": true,
+  "jwtAccessToken": false,
  
 
   "scopes": [
