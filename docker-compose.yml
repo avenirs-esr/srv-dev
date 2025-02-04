@@ -4,6 +4,7 @@ networks:
     external: true             # Created via bootstrap script
       
 include:
+  - ./services/postgresql/docker-compose.yml
   - ./services/openldap/docker-compose.yml
   - ./services/apisix/apisix-docker/example/docker-compose.yml
   - ./services/cas/cas-overlay-template/docker-compose.yml
@@ -12,4 +13,3 @@ include:
   - ./services/node/docker-compose.yml
   - ./services/avenirs-portfolio/docker-compose.yml
   - ./services/avenirs-api/docker-compose.yml
-  - ./services/postgresql/docker-compose.yml

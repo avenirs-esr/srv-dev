@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-FROM alpine:latest as pre-build
+FROM alpine:3.18 as pre-build
 
 ARG APISIX_DASHBOARD_VERSION=master
 
@@ -56,7 +56,7 @@ RUN if [ "$ENABLE_PROXY" = "true" ] ; then yarn config set registry https://regi
     && yarn install \
     && yarn build
 
-FROM alpine:latest as prod
+FROM alpine:3.18 as prod
 
 
 RUN if [ "$ENABLE_PROXY" = "true" ] ; then sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories ; fi
