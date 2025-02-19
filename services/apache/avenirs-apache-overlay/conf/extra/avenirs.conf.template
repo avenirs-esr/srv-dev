@@ -32,7 +32,7 @@ ProxyPass /apisix-api http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9180
 ProxyPassReverse /apisix-api http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9180
 
 ProxyPass /apisix-ui http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000
-ProxyPassReverse /apisix-ui http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000
+ProxyPassReverse /apisix-ui http://s:9000
 
 ProxyPass /apisix-grafana http://__AVENIRS_APISIX_GRAFANA_CONTAINER_NAME__:3000
 ProxyPassReverse /apisix-grafana http://__AVENIRS_APISIX_GRAFANA_CONTAINER_NAME__:3000
