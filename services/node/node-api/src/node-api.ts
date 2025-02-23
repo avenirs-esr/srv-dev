@@ -237,16 +237,15 @@ app.get("/ac-in-apim", async (req: any, res: any) => {
   res.status(200).end(JSON.stringify({ uri: "/ac-alone", host, action }));
 });
 
-app.get("/git", async (req: any, res: any) => {
-  const host = req.headers?.["x-forwarded-host"] || "localhost";
-  const acEndPoint = host === 'localhost' ? 'http://localhost:12000/access-control/authorize' : 'http://avenirs-apache/avenirs-portfolio-security/access-control/authorize';
+app.get("/ac-inlined", async (req: any, res: any) => {
+  //const acEndPoint = 'http://localhost:12000/access-control/authorize';
+  const acEndPoint = 'http://avenirs-apache/avenirs-portfolio-security/access-control/authorize';
   const token = req.get("x-authorization") || req.get("Authorization") || "";
   const uri = "/ac_integration";
   const method = "GET";
   const resourceId = req.query?.resourceId;
 
   console.log("ac-inlined acEndPoint", acEndPoint);
-  console.log("ac-inlined host", host);
   console.log("ac-inlined uri", uri);
   console.log("ac-inlined method", method);
   console.log("ac-inlined resourceId", resourceId);
@@ -275,7 +274,7 @@ app.get("/git", async (req: any, res: any) => {
       } else if (resp.statusCode === 200) {
         res
           .status(200)
-          .end(JSON.stringify({ uri: "/ac-inlined", host, method }));
+          .end(JSON.stringify({ uri: "/ac-inlined", method }));
       } else {
         res.status(500).json({ error: "Unexpected Internal Server Error" });
       }
@@ -286,9 +285,8 @@ app.get("/git", async (req: any, res: any) => {
 });
 
 app.post("/access-token", async (req: any, res: any) => {
-  //const loginEndPoint = `http://avenirs-apache/avenirs-portfolio-security/access-control/authorize`;
-  const host = req.headers?.["x-forwarded-host"] || "localhost";
-  const loginEndPoint = host === 'localhost' ? 'http://localhost:12000/oidc/login': 'http://avenirs-apache/avenirs-portfolio-security/oidc/login';
+  //const loginEndPoint = 'http://localhost:12000/oidc/login';
+  const loginEndPoint = 'http://avenirs-apache/avenirs-portfolio-security/oidc/login';
   const login = req.query?.login || 'deman';
   const password = req.query?.password || 'Azerty123';
   const params = {
