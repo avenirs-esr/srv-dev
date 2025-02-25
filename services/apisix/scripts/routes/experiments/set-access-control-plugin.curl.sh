@@ -1,6 +1,14 @@
 #! /bin/bash
 
-curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisix-api/apisix/admin/plugin_configs" -X PUT -d '
+END_POINT="http://localhost/apisix-api/apisix/admin/plugin_configs"
+
+[ "$1" = "-d" -o "$1" = "--srv-dev" ] \
+&& { END_POINT="http://srv-dev-avenir.srv-avenir.brgm.recia.net/apisix-api/apisix/admin/plugin_configs"; shift; } 
+echo -ne "\nUsing end point: $END_POINT\n\n"
+
+
+
+curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "$END_POINT" -X PUT -d '
 {
   "id": "avenirs-access-control",
   "desc": "Avenirs access control based on openid-connect and serveless-pre-function",
@@ -36,11 +44,16 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisi
                  local _, _, payload = string.find(bearer, \"Bearer%s+(.+)\");
                  token=payload
                 end
-                ngx.log(ngx.ERR, \"serverless pre function token \", token);
 
-
+                local masked_token = string.sub(token, 1, 4) .. string.rep(\"*\", math.max(0, #token - 4))
                 local method = core.request.get_method(ctx);
                 local resource = ctx.var.arg_resource;
+                local uri=ctx.var.uri
+
+                ngx.log(ngx.ERR, \"serverless pre function token \", masked_token)
+                ngx.log(ngx.ERR, \"serverless pre uri \", uri)
+                ngx.log(ngx.ERR, \"serverless pre method \", method)
+                
                 if resource == nill 
                 then
                   resource = ctx.var.post_arg_resource;
@@ -48,7 +61,7 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisi
 
                 ngx.log(ngx.ERR, \"IN serverless pre function resource \", resource);
                 local httpc = http.new();
-                local res, err = httpc:request_uri(\"http://avenirs-apache/apisix-gw/access-control\", {
+                local res, err = httpc:request_uri(\"http://avenirs-apache/avenirs-portfolio-security/access-control/authorize\", {
                 
                     method = \"GET\",
                     headers = {
@@ -56,7 +69,7 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisi
                         [\"x-authorization\"] = token
                     },
                     query={
-                      [\"uri\"] =  ctx.var.uri,
+                      [\"uri\"] =  uri,
                       [\"resource\"] = resource,
                       [\"method\"] = method
                     }
@@ -64,6 +77,7 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisi
 
                 if res and res.body ~= nill 
                 then 
+                  ngx.log(ngx.ERR, \"IN serverless pre function res.body \", res.body);
                   local body = cjson.decode(res.body);
                   local upstream = body.upstream;
                   local endPoint = body.endPoint;
@@ -90,3 +104,6 @@ curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "http://localhost/apisi
     }
   
 }'
+
+
+echo -ne "\n\n"
