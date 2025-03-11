@@ -6,5 +6,8 @@ node_modules
 .env
 envvars
 *.no-git
+*.nogit
+*.no-git.*
+*.nogit.*
 **/node-api/dist/
 **/avenirs-cas-overlay/.gradle/
