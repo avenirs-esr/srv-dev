@@ -1,0 +1,59 @@
+services:
+  debezium:
+    image: debezium/connect:2.2
+    container_name: ${AVENIRS_DEBEZIUM_CONTAINER_NAME}
+    ports:
+      - "8083:8083"
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      GROUP_ID: 1
+      CONFIG_STORAGE_TOPIC: debezium-connect-configs
+      OFFSET_STORAGE_TOPIC: debezium-connect-offsets
+      STATUS_STORAGE_TOPIC: debezium-connect-status
+      PLUGIN_PATH: /kafka/connect
+      CONNECTOR_CLASS: io.debezium.connector.postgresql.PostgresConnector
+      DATABASE_HOSTNAME: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: znn
+      DATABASE_PASSWORD: znn
+      DATABASE_DBNAME: znn
+      DATABASE_SERVER_NAME: znn_server
+      PLUGIN_NAME: pgoutput
+    depends_on:
+      - kafka
+      - postgres
+
+  register-connector:
+    image: curlimages/curl
+    container_name: register-connector
+    depends_on:
+      - connect
+    entrypoint: >
+      sh -c "
+      echo 'Waiting for Kafka Connect...';
+      
+      while ! curl -s http://connect:8083/ | grep -q 'kafka'; do
+        sleep 5;
+      done;
+      curl -X POST -H 'Content-Type: application/json' -d '{
+        \"name\": \"postgres-connector\",
+        \"config\": {
+          \"connector.class\": \"io.debezium.connector.postgresql.PostgresConnector\",
+          \"database.hostname\": \"postgres\",
+          \"database.port\": \"5432\",
+          \"database.user\": \"znn\",
+          \"database.password\": \"znn\",
+          \"database.dbname\": \"znn\",
+          \"database.server.name\": \"znn_server\",
+          \"plugin.name\": \"pgoutput\",
+          \"publication.name\": \"znn_publications\",
+          \"slot.name\": \"znn_slot\",
+          \"topic.prefix\": \"znn_rt\",
+          \"key.converter\": \"org.apache.kafka.connect.json.JsonConverter\",
+          \"value.converter\": \"org.apache.kafka.connect.json.JsonConverter\",
+          \"key.converter.schemas.enable\": \"false\",
+          \"value.converter.schemas.enable\": \"false\",
+          \"tombstones.on.delete\": \"false\"
+        }
+      }' http://connect:8083/connectors"
+
