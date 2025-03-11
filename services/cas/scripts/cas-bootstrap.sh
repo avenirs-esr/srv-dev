@@ -1,7 +1,7 @@
 # #! /bin/bash
 
 #--------------------------------------#
-# CASBootstrap script CAS              #
+# Bootstrap script for CAS             #
 #                                      #  
 # Initialize the repository and copy   #
 # the files from the overlay directory #
