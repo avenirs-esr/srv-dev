@@ -13,3 +13,4 @@ include:
   - ./services/node/docker-compose.yml
   - ./services/avenirs-portfolio/docker-compose.yml
   - ./services/avenirs-api/docker-compose.yml
+  - ./services/debezium/docker-compose.yml

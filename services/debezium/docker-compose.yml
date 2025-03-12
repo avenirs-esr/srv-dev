@@ -12,48 +12,80 @@ services:
       STATUS_STORAGE_TOPIC: debezium-connect-status
       PLUGIN_PATH: /kafka/connect
       CONNECTOR_CLASS: io.debezium.connector.postgresql.PostgresConnector
-      DATABASE_HOSTNAME: postgres
+      DATABASE_HOSTNAME: ${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}
       DATABASE_PORT: 5432
-      DATABASE_USER: znn
-      DATABASE_PASSWORD: znn
-      DATABASE_DBNAME: znn
-      DATABASE_SERVER_NAME: znn_server
+      DATABASE_USER: debezium
+      DATABASE_PASSWORD: p@@ss4DBZCDC
+      DATABASE_DBNAME: realtime_db
+      DATABASE_SERVER_NAME: avenirs_realtime
       PLUGIN_NAME: pgoutput
     depends_on:
       - kafka
-      - postgres
+      - postgresql-secondary1
+    networks:
+      - debezium-network
+
+  init-database:
+    image: docker:cli
+    container_name: init-database
+    volumes:
+      - ./init/init_cdc_primary.sql:/scripts/init_cdc_primary.sql
+      - ./init/init_cdc_secondary.sql:/scripts/init_cdc_secondary.sql
+      - ./init/init_db.sh:/scripts/init_db.sh
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: >
+      sh -c "
+        chmod +x /scripts/init_db.sh;
+        /scripts/init_db.sh;
+      "
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME: ${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}
+      AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME: ${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}
+      AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME: ${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}
+    networks:
+      - debezium-network
+    restart: "no"
 
   register-connector:
     image: curlimages/curl
     container_name: register-connector
     depends_on:
-      - connect
+      - debezium
+      - init-database
+    networks:
+      - debezium-network
     entrypoint: >
       sh -c "
       echo 'Waiting for Kafka Connect...';
       
-      while ! curl -s http://connect:8083/ | grep -q 'kafka'; do
+      while ! curl -s http://${AVENIRS_DEBEZIUM_CONTAINER_NAME}:8083/ | grep -q 'kafka'; do
         sleep 5;
       done;
       curl -X POST -H 'Content-Type: application/json' -d '{
         \"name\": \"postgres-connector\",
         \"config\": {
           \"connector.class\": \"io.debezium.connector.postgresql.PostgresConnector\",
-          \"database.hostname\": \"postgres\",
+          \"database.hostname\": \"${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}\",
           \"database.port\": \"5432\",
-          \"database.user\": \"znn\",
-          \"database.password\": \"znn\",
-          \"database.dbname\": \"znn\",
-          \"database.server.name\": \"znn_server\",
+          \"database.user\": \"debezium\",
+          \"database.password\": \"p@@ss4DBZCDC\",
+          \"database.dbname\": \"realtime_db\",
+          \"database.server.name\": \"avenirs_realtime\",
           \"plugin.name\": \"pgoutput\",
-          \"publication.name\": \"znn_publications\",
-          \"slot.name\": \"znn_slot\",
-          \"topic.prefix\": \"znn_rt\",
+          \"publication.name\": \"realtime_pub\",
+          \"slot.name\": \"debezium_slot\",
+          \"topic.prefix\": \"avenirs_rt\",
           \"key.converter\": \"org.apache.kafka.connect.json.JsonConverter\",
           \"value.converter\": \"org.apache.kafka.connect.json.JsonConverter\",
           \"key.converter.schemas.enable\": \"false\",
           \"value.converter.schemas.enable\": \"false\",
           \"tombstones.on.delete\": \"false\"
         }
-      }' http://connect:8083/connectors"
+      }' http://${AVENIRS_DEBEZIUM_CONTAINER_NAME}:8083/connectors"
 
+networks: 
+  debezium-network:
+    external: true
+    name: $AVENIRS_NETWORK
