@@ -12,48 +12,29 @@ services:
       STATUS_STORAGE_TOPIC: debezium-connect-status
       PLUGIN_PATH: /kafka/connect
       CONNECTOR_CLASS: io.debezium.connector.postgresql.PostgresConnector
-      DATABASE_HOSTNAME: ${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}
+      DATABASE_HOSTNAME: ${AVENIRS_POSTGRESQL_SECONDARY_CDC_CONTAINER_NAME}
       DATABASE_PORT: 5432
       DATABASE_USER: debezium
       DATABASE_PASSWORD: p@@ss4DBZCDC
       DATABASE_DBNAME: realtime_db
       DATABASE_SERVER_NAME: avenirs_realtime
       PLUGIN_NAME: pgoutput
+      SLOT_NAME: debezium_slot
+      PUBLICATION_NAME: realtime_pub
+      PUBLICATION_AUTOCREATE_MODE: disabled
     depends_on:
       - kafka
-      - postgresql-secondary1
+      - postgresql-secondary-cdc
     networks:
       - debezium-network
 
-  init-database:
-    image: docker:cli
-    container_name: init-database
-    volumes:
-      - ./init/init_cdc_primary.sql:/scripts/init_cdc_primary.sql
-      - ./init/init_cdc_secondary.sql:/scripts/init_cdc_secondary.sql
-      - ./init/init_db.sh:/scripts/init_db.sh
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: >
-      sh -c "
-        chmod +x /scripts/init_db.sh;
-        /scripts/init_db.sh;
-      "
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME: ${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}
-      AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME: ${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}
-      AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME: ${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}
-    networks:
-      - debezium-network
-    restart: "no"
+  
 
   register-connector:
     image: curlimages/curl
     container_name: register-connector
     depends_on:
       - debezium
-      - init-database
     networks:
       - debezium-network
     entrypoint: >
@@ -67,7 +48,7 @@ services:
         \"name\": \"postgres-connector\",
         \"config\": {
           \"connector.class\": \"io.debezium.connector.postgresql.PostgresConnector\",
-          \"database.hostname\": \"${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}\",
+          \"database.hostname\": \"${AVENIRS_POSTGRESQL_SECONDARY_CDC_CONTAINER_NAME}\",
           \"database.port\": \"5432\",
           \"database.user\": \"debezium\",
           \"database.password\": \"p@@ss4DBZCDC\",

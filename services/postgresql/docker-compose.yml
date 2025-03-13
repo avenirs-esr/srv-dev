@@ -14,7 +14,7 @@ services:
       - ${AVENIRS_POSTGRESQL_ARCHIVE_VOLUME}:/var/lib/postgresql/archive
       - ./${POSTGRESQL_OVERLAY_BASENAME}/primary_postgresql.conf:/etc/postgresql.conf
       - ./${POSTGRESQL_OVERLAY_BASENAME}/primary_pg_hba.conf:/etc/pg_hba.conf
-      - ./${POSTGRESQL_OVERLAY_BASENAME}/init/:/docker-entrypoint-initdb.d
+      - ./${POSTGRESQL_OVERLAY_BASENAME}/init/primary/:/docker-entrypoint-initdb.d
     ports:
       - "65432:5432"
     networks:
@@ -111,6 +111,28 @@ services:
     networks:
       - postgres-network
 
+  postgresql-secondary-cdc:
+    container_name: ${AVENIRS_POSTGRESQL_SECONDARY_CDC_CONTAINER_NAME}
+    hostname: ${AVENIRS_POSTGRESQL_SECONDARY_CDC_CONTAINER_NAME}
+    image: postgres:latest
+    command: ["postgres", "-c", "config_file=/etc/postgresql.conf"]
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER} 
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB} 
+    volumes:
+      - ${AVENIRS_POSTGRESQL_SECONDARY_CDC_VOLUME}:/var/lib/postgresql/data
+      - ./${POSTGRESQL_OVERLAY_BASENAME}/secondary_cdc_postgresql.conf:/etc/postgresql.conf
+      - ./${POSTGRESQL_OVERLAY_BASENAME}/secondary_cdc_pg_hba.conf:/etc/pg_hba.conf
+      - ./${POSTGRESQL_OVERLAY_BASENAME}/init/secondary-cdc/:/docker-entrypoint-initdb.d
+    depends_on:
+      - postgresql-primary
+    ports:
+      - "65435:5432"
+    networks:
+      - postgres-network
+
   adminer:
     image: adminer:latest
     container_name: ${AVENIRS_POSTGRESQL_UI_CONTAINER_NAME}
@@ -120,6 +142,7 @@ services:
         - 18080:8080
     networks:
       - postgres-network
+  
   
 networks: 
   postgres-network:

@@ -1,0 +1,14 @@
+CREATE DATABASE realtime_db;
+
+\c realtime_db
+
+CREATE TABLE public.sample (
+    sdb_id SERIAL PRIMARY KEY,
+    sdb_short_txt VARCHAR(40) NOT NULL,
+    sdb_long_txt TEXT,
+    sdb_creation TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+GRANT SELECT ON TABLE public.sample TO pgrepl;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO pgrepl;
+
+CREATE PUBLICATION cdc_pub FOR ALL TABLES;
