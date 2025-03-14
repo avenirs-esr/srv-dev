@@ -34,10 +34,13 @@ services:
       - "${AVENIRS_PORTFOLIO_SECURITY_CONTAINER_PORT}:12000"
     environment:
       - JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_ENCRYPTOR_PASSWORD}
+      - POSTGRESQL_PRIMARY_HOST=postgresql-primary
+      - PGPASSWORD=pguser
     depends_on:
       - postgresql-primary
     networks:
       - avenirs-api-network
+
 networks: 
   avenirs-api-network:
     external: true

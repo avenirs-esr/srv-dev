@@ -19,3 +19,6 @@
 	path = services/avenirs-portfolio/avenirs-portfolio-security
 	url = git@github.com:avenirs-esr/avenirs-portfolio-security
 	branch = main
+[submodule "services/realtime-worker/avenirs-portfolio-realtime-worker"]
+	path = services/realtime-worker/avenirs-portfolio-realtime-worker
+	url = git@github.com:arnauddeman/avenirs-portfolio-realtime-worker.git
