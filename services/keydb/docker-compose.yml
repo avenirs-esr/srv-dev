@@ -1,0 +1,17 @@
+services:
+  keydb:
+    image: eqalpha/keydb:latest
+    container_name: ${AVENIRS_KEYDB_CONTAINER_NAME}
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ${AVENIRS_KEYDB_DATA_VOLUME}:/data  # Persistance des données
+#      - ./keydb.conf:/etc/keydb/keydb.conf  # Optionnel : config personnalisée
+    command: ["keydb-server", "/etc/keydb/keydb.conf"]
+    networks:
+      - keydb-network
+networks: 
+  keydb-network:
+    external: true
+    name: $AVENIRS_NETWORK
