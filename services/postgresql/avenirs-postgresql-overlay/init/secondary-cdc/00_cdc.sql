@@ -3,11 +3,9 @@ CREATE USER debezium WITH PASSWORD 'p@@ss4DBZCDC' LOGIN REPLICATION;
 
 CREATE DATABASE realtime_db;
 
--- Accorder tous les privilèges nécessaires à l'utilisateur debezium
 ALTER DATABASE realtime_db OWNER TO debezium;
 \c realtime_db
 
--- Accorder des privilèges à l'utilisateur debezium
 GRANT ALL PRIVILEGES ON DATABASE realtime_db TO debezium;
 GRANT USAGE ON SCHEMA public TO debezium;
 GRANT ALL PRIVILEGES ON SCHEMA public TO debezium;
