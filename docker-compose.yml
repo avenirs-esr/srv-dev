@@ -15,3 +15,4 @@ include:
   - ./services/avenirs-api/docker-compose.yml
   - ./services/debezium/docker-compose.yml
   - ./services/keydb/docker-compose.yml
+  - ./services/realtime-worker/docker-compose.yml

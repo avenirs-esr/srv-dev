@@ -17,8 +17,12 @@ init_commons $*
 info "Realtime worker bootstrapping started."
 . $REALTIME_WORKER_SCRIPT_DIR/realtime-worker-env.sh $REALTIME_WORKER_SCRIPT_DIR || err "Unable to source $PWD/$REALTIME_WORKER_SCRIPT_DIR/realtime-worker-env.sh"
 
+
+
 # Network check
 check_network
+
+#init_git_repository $REALTIME_WORKER_ROOT $AVENIRS_REALTIME_WORKER_REMOTE_BRANCH $AVENIRS_REALTIME_WORKER_LOCAL_BRANCH
 
 # .env file generation
 echo "AVENIRS_REALTIME_WORKER_CONTAINER_NAME=$AVENIRS_REALTIME_WORKER_CONTAINER_NAME" > $REALTIME_WORKER_ENV_FILE

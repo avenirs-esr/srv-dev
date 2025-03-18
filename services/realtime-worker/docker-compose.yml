@@ -1,0 +1,22 @@
+services:
+  realtime-worker:
+    container_name: ${AVENIRS_REALTIME_WORKER_CONTAINER_NAME}
+    restart: always
+    environment:
+      - NODE_ENV=dev
+      - NODE_TARGET=container
+    build:
+      context: ./avenirs-portfolio-realtime-worker/
+      dockerfile: Dockerfile
+    volumes:
+      - ./logs:/usr/src/app/logs
+    networks:
+      - realtime-worker-network
+    depends_on:
+      - kafka
+      - keydb
+
+networks: 
+  realtime-worker-network:
+    external: true
+    name: ${AVENIRS_NETWORK}
