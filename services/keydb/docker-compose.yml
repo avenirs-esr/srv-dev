@@ -6,8 +6,8 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - ${AVENIRS_KEYDB_DATA_VOLUME}:/data  # Persistance des données
-#      - ./keydb.conf:/etc/keydb/keydb.conf  # Optionnel : config personnalisée
+      - ${AVENIRS_KEYDB_DATA_VOLUME}:/data  
+#      - ./keydb.conf:/etc/keydb/keydb.conf 
     command: ["keydb-server", "/etc/keydb/keydb.conf"]
     networks:
       - keydb-network
