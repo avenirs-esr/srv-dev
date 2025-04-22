@@ -18,55 +18,9 @@ WORKDIR /workspace/app
 ARG AVENIRS_PORTFOLIO_SECURITY_VERSION=0.0.1
 VOLUME /tmp
 ARG DEPENDENCY=/workspace/app/target/dependency
-
-# Installation des dépendances nécessaires pour PostgreSQL
-RUN apk add --no-cache postgresql-client bash
-
 COPY avenirs-portfolio-overlay/avenirs-portfolio-security/opt/java/openjdk/lib/security/cacerts /opt/java/openjdk/lib/security/cacerts
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build /workspace/app/target/avenirs-portfolio-security-${AVENIRS_PORTFOLIO_SECURITY_VERSION}-SNAPSHOT.jar /app/avenirs-portfolio-security.jar
 
-# Création du script d'initialisation de la base de données et du point d'entrée
-RUN mkdir -p /app/scripts
-COPY ./avenirs-portfolio-security/scripts/jasypt-decrypt /app/scripts/
-RUN chmod +x /app/scripts/jasypt-decrypt
-
-# Création du script entrypoint qui initialise la base de données puis lance l'application
-RUN echo '#!/bin/bash\n\
-\n\
-# Attente que la base de données PostgreSQL primaire soit prête\n\
-echo "Attente de la disponibilité de PostgreSQL..."\n\
-until PGPASSWORD=${PGPASSWORD} psql -h ${POSTGRESQL_PRIMARY_HOST} -p 5432 -U pguser -d template1 -c "\\q" 2>/dev/null; do\n\
-  echo "PostgreSQL primaire n'\''est pas encore prêt - attente..."\n\
-  sleep 2\n\
-done\n\
-\n\
-echo "PostgreSQL primaire est prêt, initialisation de la base de données..."\n\
-\n\
-# Initialisation de la base de données\n\
-echo "\\connect template1;\n\
-SELECT pg_terminate_backend(pid)\n\
-FROM pg_stat_activity\n\
-WHERE datname = '\''avenirs_access_control'\'' AND pid <> pg_backend_pid();\n\
-DROP DATABASE IF EXISTS avenirs_access_control;\n\
-DROP ROLE IF EXISTS avenirs_security_admin;\n\
-DROP ROLE IF EXISTS avenirs_security_admin_role;" | PGPASSWORD=${PGPASSWORD} psql -h ${POSTGRESQL_PRIMARY_HOST} -p 5432 -U pguser template1 2>/dev/null\n\
-\n\
-# Exécution du script init-db.sql avec déchiffrement à la volée\n\
-cat /workspace/app/src/main/resources/db/init-db.sql | /app/scripts/jasypt-decrypt | PGPASSWORD=${PGPASSWORD} psql -h ${POSTGRESQL_PRIMARY_HOST} -p 5432 -U pguser template1\n\
-\n\
-# Initialisation de la base de test si nécessaire\n\
-if [ -f "/workspace/app/src/test/resources/db/clean-test-db.sql" ]; then\n\
-  cat /workspace/app/src/test/resources/db/clean-test-db.sql | PGPASSWORD=${PGPASSWORD} psql -h ${POSTGRESQL_PRIMARY_HOST} -p 5432 -U pguser template1 2>/dev/null\n\
-  cat /workspace/app/src/test/resources/db/init-test-db.sql | /app/scripts/jasypt-decrypt | PGPASSWORD=${PGPASSWORD} psql -h ${POSTGRESQL_PRIMARY_HOST} -p 5432 -U pguser template1\n\
-fi\n\
-\n\
-echo "Bases de données avenirs-portfolio initialisées avec succès."\n\
-\n\
-# Lancement de l'\''application Java\n\
-exec java -server -noverify -Xmx2048M -jar /app/avenirs-portfolio-security.jar\n\
-' > /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
-
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["java", "-server", "-noverify", "-Xmx2048M", "-jar", "/app/avenirs-portfolio-security.jar"]

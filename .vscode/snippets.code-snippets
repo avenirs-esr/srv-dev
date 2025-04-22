@@ -1,0 +1,8 @@
+{
+	
+	"Back to TOC": {
+	  "prefix": ["_toc", "back-to-toc"],
+	  "body": ["[⇧](#table-of-contents)"],
+	  "description": "Back to Table of Contents"
+	}
+}

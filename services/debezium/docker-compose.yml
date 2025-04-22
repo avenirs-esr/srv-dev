@@ -32,7 +32,7 @@ services:
 
   register-connector:
     image: curlimages/curl
-    container_name: register-connector
+    container_name: ${AVENIRS_REGISTER_DEBEZIUM_CONNECTOR}
     depends_on:
       - debezium
     networks:

@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+        "type": "node",
+        "request": "attach",
+        "name": "Attach to Realtime Worker",
+        "port": 9229,
+        "sourceMaps": true,
+        "outFiles": [
+          "${workspaceFolder}/services/realtime-worker/avenirs-portfolio-realtime-worker/dist/**/*.js"
+        ],
+        "skipFiles": ["<node_internals>/**", "node_modules/**"]
+      }
+  
+  ]
+}
