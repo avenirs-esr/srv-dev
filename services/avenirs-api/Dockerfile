@@ -1,6 +1,6 @@
 
 
-FROM eclipse-temurin:17-jdk-alpine as build
+FROM eclipse-temurin:17-jdk as build
 ARG OVERLAY_DIR
 ENV AVENIRS_API_OVERLAY_DIR=$OVERLAY_DIR
 WORKDIR /workspace/app
@@ -15,7 +15,7 @@ RUN ./mvnw clean install package -DskipTests
 RUN mkdir -p ./target/dependency && (cd ./target/dependency; jar -xf ../*.jar)
 
 
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jdk
 WORKDIR /workspace/app
 ARG AVENIRS_API_VERSION=0.0.0
 VOLUME /tmp
