@@ -4,7 +4,7 @@
 # Utilitary functions and common options shared by the scripts.
 # - Display methods: info, warn, etc.
 # - intialization methods.
-# - helpers.          
+# - helpers.
 # ------------------------------------------------------------------
 
 # Arguments without the common ones: -h, -v, etc.
@@ -73,13 +73,13 @@ function warn_and_wait(){
     local msg=$1
     local -i count=$2
     [ $count -gt 0  ] || count=4
-    
-    warn "$msg"; 
+
+    warn "$msg";
 
     while [ $count -gt 0 ]
     do
         echo -ne "$count..."
-        sleep 1; 
+        sleep 1;
         count=$count-1
     done
     echo "0"
@@ -116,7 +116,7 @@ function init_commons(){
                  ;;
                  "--verbose" | "-v")
                     VERBOSE_FLAG=$[VERBOSE_FLAG+1]
-                    
+
                 ;;
                  "--vverbose" | "-vv")
                     VERBOSE_FLAG=2
@@ -124,7 +124,7 @@ function init_commons(){
                  "--vvverbose" | "-vvv")
                     VERBOSE_FLAG=3
                 ;;
-                *) 
+                *)
                     REMAINING_ARGS="$REMAINING_ARGS$arg "
                 ;;
             esac
@@ -133,7 +133,7 @@ function init_commons(){
         vverbose "init_commons executed (first call)"
         vvverbose "init_commons REMAINING_ARGS: $REMAINING_ARGS"
         export COMMONS_INITIALIZED_FLAG=1
-    else  
+    else
         vvverbose "init_commons already executed (skipping) RA $REMAINING_ARGS"
         vvverbose "init_commons REMAINING_ARGS: $REMAINING_ARGS"
     fi
@@ -151,8 +151,8 @@ function init_purge_flag(){
             then
                 PURGE_FLAG=1
                 warn "Purge required, the data directory will be deleted"
-            else  
-                 updated_remaining_args="$updated_remaining_args$arg " 
+            else
+                 updated_remaining_args="$updated_remaining_args$arg "
             fi
         done
         REMAINING_ARGS=$updated_remaining_args
@@ -163,7 +163,7 @@ function init_purge_flag(){
 # @param $1 Root directory of the overlay.
 # @param $2 target, destination to copy the files.
 function install_overlay {
-   
+
     local overlay_root=$1
     local target=$2
     [ -z "$overlay_root" ] && err "the overlay directory parameter is required"
@@ -185,7 +185,7 @@ function install_overlay {
     fi
 
     verbose "Processing overlay dir $overlay_root"
-    
+
     for  f in `ls -A  -I .gitignore $overlay_root `
     do
 
@@ -197,10 +197,10 @@ function install_overlay {
             if [ -f $source ]
             then
                 cp  $source $target &&  vverbose "Overlay file: $source -> $target" ||  err "unable to copy overlay file $source -> $target"
-            elif [ -d $source ] 
+            elif [ -d $source ]
             then
                 install_overlay $source $target/$f  &&  vverbose "Ovelay directory: $source" || err "unable to proccess overlay subdir $source"
-            fi 
+            fi
         fi
     done
      verbose "Overlay processed"
@@ -209,19 +209,19 @@ function install_overlay {
 
 # Reverts the modifications from a github sub module.
 function remove_overlay {
-   
+
     local target=$1
-    
+
     [ -z "$target" ] && err "the target directory parameter is required"
     [ -e $target ] || err "target directory not found: $target"
     [ -d $target ] || err "not a directory: $target"
-    
+
     verbose "Removing overlay from $target"
     cd $target && git stash -u && cd -
     [ $? -eq 0 ] && info "Overlay removed from $target" || err "Unable to remove overlay from $target"
 }
 
-# Fetches the services by scanning the user args or the 
+# Fetches the services by scanning the user args or the
 # services' root directory.
 # No parameter.
 # Should be the las call of initialization functions based on user args (default case throw an error).
@@ -231,14 +231,14 @@ function init_services() {
 
     local -i fetch_service_flag=0
     local -i cpt=0
-   
+
     # Fetches the services from the command line argumants.
     for arg in $REMAINING_ARGS
     do
-        
+
         case $arg in
             "--service" | "-s")
-               
+
                 fetch_service_flag=1
             ;;
             *)
@@ -249,7 +249,7 @@ function init_services() {
                     vverbose "Required service to bootstrap: $service"
                     local service_path=$SERVICES_ROOT/$service
                     vverbose "Required service path: $service_path"
-                    
+
                     # Checks that the directory corresponding to the service exists.
                     [ -d $service_path ] || err "Invalid service $service: directory not found $service_path"
                     SERVICES="$SERVICES$service "
@@ -273,20 +273,20 @@ function init_services() {
 }
 
 # Checks the docker network and create it if required.
-# This is done in the boostrap script because if done 
-# in the main docker-compose file, sometime docker try to 
+# This is done in the boostrap script because if done
+# in the main docker-compose file, sometime docker try to
 # use it before is actually created.
 # No parameter.
 function check_network(){
-   
+
     [ -z "$AVENIRS_NETWORK" ] && err "AVENIRS_NETWORK unset (should be defined in srv-dev-env.sh)"
     vverbose "Using network $AVENIRS_NETWORK"
 
     docker network inspect $AVENIRS_NETWORK > /dev/null 2>&1
     if [ $? -eq 0 ]
-    then 
+    then
         verbose "Network $AVENIRS_NETWORK found"
-    else    
+    else
         verbose "Network $AVENIRS_NETWORK need to be created."
         docker network create "$AVENIRS_NETWORK" --driver bridge  \
             && info "Network $AVENIRS_NETWORK created" \
@@ -310,13 +310,13 @@ function init_git_repository(){
     [ -n $local_branch ] || err "init_git_repository: parameter local_branch is required"
 
     cd $repository_dir || err "Unable to enter $repository_dir"
-    
+
     if [ -z "`git branch --list $local_branch`" ]
     then
         verbose "Switching to branch $remote_branch (local branch $local_branch)"
         vvverbose "init_git_repository git command: git checkout -B $local_branch $remote_branch"
         git checkout -B $local_branch $remote_branch || err "unable to create branch $local_branch from $remote_branch"
-    else 
+    else
         verbose "Local branch found $local_branch"
     fi
     cd - >/dev/null
@@ -335,7 +335,7 @@ function reset_git_repository(){
 
     cd $repository_dir || err "Unable to enter $repository_dir"
     git checkout $main_branch || err "Unable to checkout $main_branch"
-    
+
    [ -n "`git branch --list $local_branch`" ] \
         && { git branch -D $local_branch || err "Unable to delete $local_branch"; } \
         || verbose "Branch $local_branch not found"
@@ -379,10 +379,10 @@ function reset_volumes(){
     shift
     local volumes=$*
     vvverbose "reset_volume service: $service, volumes: $volume"
-    if [ $PURGE_FLAG -eq 1 ] 
+    if [ $PURGE_FLAG -eq 1 ]
     then
         info "Service $service, purge option provided, volumes $volumes will be deleted."
-        warn_and_wait "Service $service, deleting volumes: $BOLD$volumes$NC in 4 seconds. (CtrL + C to abort)"; 
+        warn_and_wait "Service $service, deleting volumes: $BOLD$volumes$NC in 4 seconds. (CtrL + C to abort)";
         for volume in $volumes
         do
             if [ -d $volume ]
@@ -405,7 +405,7 @@ OVERRIDE_FILE="docker-compose.override.yml"
 function initialize_override_file() {
     OS=$(detect_os)
     vverbose "Detected OS: $OS"
-    if [ ! -f "$OVERRIDE_FILE" ] && [ "$OS" = "Linux" ]; then
+    if [ ! -f "$OVERRIDE_FILE" ] && [ "$OS" != "Windows" ]; then
         verbose "Creating docker-compose.override.yml..."
         cat > "$OVERRIDE_FILE" <<EOL
 services:

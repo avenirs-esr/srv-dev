@@ -2,8 +2,8 @@ OS=$(detect_os)
 
 vvverbose "Detected OS: $OS"
 
-if [ "$OS" = "Linux" ]; then
-  verbose "Update docker-compose.override.yml for Linux..."
+if [ "$OS" != "Windows" ]; then
+  verbose "Update docker-compose.override.yml for non Windows OS..."
 
   sync_env_variables "./services/kafka/.env" "./.env"
 
@@ -13,5 +13,5 @@ if [ "$OS" = "Linux" ]; then
 
   verbose "docker-compose.override.yml updated successfully."
 else
-  vverbose "Not Linux. Skipping override generation. (Using default Docker named volumes)"
+  vverbose "Windows. Skipping override generation. (Using default Docker named volumes)"
 fi

@@ -46,15 +46,34 @@ function bootstrap_services() {
     info "Completed"
 }
 
-function check_prerequisites(){
-    # Checks the docker group
+check_docker_group() {
     [ -n "$DOCKER_GROUP" ] || err "DOCKER_GROUP is missing in srv-dev-env.sh"
     verbose "Using docker group: $DOCKER_GROUP"
+    local entry=""
+    OS=$(detect_os)
 
-    local entry=`cat /etc/group | grep -e "^$DOCKER_GROUP:"`
-    
-    [ -z "$entry" ] && err "Group $DOCKER_GROUP not found"
-    verbose "Docker group \"$DOCKER_GROUP\" found"
+    if [ $OS = "Mac" ]; then
+        entry=$(dscl . -list /Groups | grep -e "^$DOCKER_GROUP$")
+    else
+        entry=$(grep -e "^$DOCKER_GROUP:" /etc/group)
+    fi
+
+    if [ -z "$entry" ]; then
+        verbose "Group $DOCKER_GROUP not found"
+        if [ $OS = "Mac" ]; then
+            dscl . -create /Groups/$DOCKER_GROUP
+        else
+            groupadd $DOCKER_GROUP
+        fi
+        verbose "Group $DOCKER_GROUP created"
+    else
+        verbose "Docker group \"$DOCKER_GROUP\" found"
+    fi
+}
+
+function check_prerequisites(){
+    # Checks the docker group
+    check_docker_group
 
     # Checks that the user is member of Docker group
     vvverbose "Checking that user $USER is member of docker group $DOCKER_GROUP"
@@ -65,7 +84,7 @@ function check_prerequisites(){
     # Checks the docker volume roots
     [ -n "$VOLUMES_ROOT" ] || err "VOLUMES_ROOT is missing in srv-dev-env.sh"
     [ -e $VOLUMES_ROOT -a ! -d $VOLUMES_ROOT ] && err "Volumes root $VOLUMES_ROOT exists but is not a directory"
-    
+
     if [ ! -e $VOLUMES_ROOT ]
     then
         vvverbose "Volumes root not found: $VOLUMES_ROOT, trying to create"
@@ -74,12 +93,12 @@ function check_prerequisites(){
         sudo chmod g+u $VOLUMES_ROOT || err "Unable to change permission on $VOLUMES_ROOT (chmod g+u)"
         sudo chmod g+s $VOLUMES_ROOT || err "Unable to change permission on $VOLUMES_ROOT (chmod g+s)"
         info "Volume root $VOLUMES_ROOT created."
-    else    
+    else
         info "Volumes root checked $VOLUMES_ROOT"
     fi
 
-    
-    
+
+
 }
 check_prerequisites
 check_network
