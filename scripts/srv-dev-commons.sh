@@ -529,4 +529,11 @@ function sync_env_variables() {
 
     verbose "Env sync complete!"
 }
+# Removes a file
+# @param $1 The file to remove
+function remove_file(){
+    local file=$1
+    [ -f $file ] && rm -f $file && vverbose "File $file deleted" || warn "File $file does not exist"
+}
+
 
