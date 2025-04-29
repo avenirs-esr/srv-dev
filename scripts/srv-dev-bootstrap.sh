@@ -15,6 +15,7 @@ init_help "$(basename $0)" "[-s|--services service [-s|--service service (...)]"
 init_commons $*
 . $SRV_DEV_SCRIPT_DIR/srv-dev-env.sh $SRV_DEV_SCRIPT_DIR 2> /dev/null || err "Unable to source $SRV_DEV_SCRIPT_DIR/srv-dev-env.sh"
 init_services
+initialize_override_file
 
 # .env file generation
 echo "AVENIRS_NETWORK=$AVENIRS_NETWORK" > $SRV_DEV_ENV_FILE
