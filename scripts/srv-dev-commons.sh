@@ -403,19 +403,23 @@ OVERRIDE_FILE="docker-compose.override.yml"
 
 # Function to initialize the docker-compose.override.yml file
 function initialize_override_file() {
-    if [ -f "$OVERRIDE_FILE" ]; then
-        echo "docker-compose.override.yml already exists. Deleting it..."
-        rm "$OVERRIDE_FILE"
-    fi
     OS=$(detect_os)
-
-    echo "Detected OS: $OS"
-
-    if [ "$OS" = "Linux" ]; then
-        echo "Creating base docker-compose.override.yml..."
+    vverbose "Detected OS: $OS"
+    if [ ! -f "$OVERRIDE_FILE" ] && [ "$OS" = "Linux" ]; then
+        verbose "Creating docker-compose.override.yml..."
         cat > "$OVERRIDE_FILE" <<EOL
-    services:
+services:
 EOL
+    fi
+}
+
+# Function to remove the docker-compose.override.yml file
+function remove_override_file() {
+    if [ -f "$OVERRIDE_FILE" ]; then
+        verbose "Removing docker-compose.override.yml..."
+        rm "$OVERRIDE_FILE"
+    else
+        vverbose "docker-compose.override.yml does not exist. Nothing to remove."
     fi
 }
 
@@ -428,35 +432,44 @@ function add_service_volume() {
   local volume_line=$2
 
   if grep -qE "^[[:space:]]*$service_name:" "$OVERRIDE_FILE"; then
-    echo "Service $service_name already exists."
+    vverbose "Service $service_name already exists."
 
     if grep -EA1000 "^[[:space:]]*$service_name:" "$OVERRIDE_FILE" | grep -q "^[[:space:]]*volumes:"; then
-      echo "Volumes block already exists. Adding new volume line..."
+      vverbose "Volumes block already exists. Adding new volume line..."
 
       if ! grep -A1000 "^[[:space:]]+$service_name:" "$OVERRIDE_FILE" | grep -qF "$volume_line"; then
         sed -i "/^[[:space:]]*$service_name:/,/^[^[:space:]]/ {
             /^[[:space:]]*volumes:/a\      - $volume_line
         }" "$OVERRIDE_FILE"
-        echo "Added volume line: $volume_line"
+        verbose "Added volume line: $volume_line"
       else
-        echo "Volume $volume_line already present, skipping."
+        vverbose "Volume $volume_line already present, skipping."
       fi
 
     else
-      echo "No volumes block found. Creating one..."
+      verbose "No volumes block found. Creating one..."
 
       sed -i "/^[[:space:]]*$service_name:/a\    volumes:\n      - $volume_line" "$OVERRIDE_FILE"
     fi
 
   else
-    echo "Service $service_name does not exist. Adding new service block..."
+    verbose "Service $service_name does not exist. Adding new service block..."
 
-    cat >> "$OVERRIDE_FILE" <<EOL
+    previous_line=$(grep -v '^[[:space:]]*$' "$OVERRIDE_FILE" | tail -n 1)
+    if [[ "$previous_line" == "services:" ]]; then
+        cat >> "$OVERRIDE_FILE" <<EOL
+  $service_name:
+    volumes:
+      - $volume_line
+EOL
+    else
+        cat >> "$OVERRIDE_FILE" <<EOL
 
   $service_name:
     volumes:
       - $volume_line
 EOL
+    fi
   fi
 }
 
@@ -487,16 +500,16 @@ function sync_env_variables() {
     local target_env_file=$2
 
     if [ ! -f "$source_env_file" ]; then
-        echo "Source env file '$source_env_file' not found"
+        verbose "Source env file '$source_env_file' not found"
         return 1
     fi
 
     if [ ! -f "$target_env_file" ]; then
-        echo "Target env file '$target_env_file' not found. Creating it"
+        verbose "Target env file '$target_env_file' not found. Creating it"
         touch "$target_env_file"
     fi
 
-    echo "Syncing variables from $source_env_file ➔ $target_env_file"
+    verbose "Syncing variables from $source_env_file ➔ $target_env_file"
 
     while IFS= read -r line || [[ -n "$line" ]]; do
         if [[ -z "$line" || "$line" == \#* ]]; then
@@ -507,13 +520,13 @@ function sync_env_variables() {
 
         if grep -q "^$var_name=" "$target_env_file"; then
             sed -i "s|^$var_name=.*|$line|" "$target_env_file"
-            echo "Updated $var_name"
+            verbose "Updated $var_name"
         else
             echo "$line" >> "$target_env_file"
-            echo "Added $var_name"
+            verbose "Added $var_name"
         fi
     done < "$source_env_file"
 
-    echo "Env sync complete!"
+    verbose "Env sync complete!"
 }
 
