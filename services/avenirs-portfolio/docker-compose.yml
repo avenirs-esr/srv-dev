@@ -2,7 +2,7 @@ services:
   avenirs-portfolio-storage:
     container_name: ${AVENIRS_PORTFOLIO_STORAGE_CONTAINER_NAME}
    
-   # image: lets-encrypt-apache:latest
+   
     build:
       context: .
       dockerfile: ./Dockerfile-avenirs-portfolio-storage
@@ -22,7 +22,6 @@ services:
   avenirs-portfolio-security:
     container_name: ${AVENIRS_PORTFOLIO_SECURITY_CONTAINER_NAME}
    
-   # image: lets-encrypt-apache:latest
     build:
       context: .
       dockerfile: ./Dockerfile-avenirs-portfolio-security
