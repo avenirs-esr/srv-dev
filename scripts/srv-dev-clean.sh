@@ -17,6 +17,8 @@ init_commons $*
 init_purge_flag
 init_services
 
+remove_override_file
+
 # Clean a service
 function clean_service(){
     local service=$1

@@ -399,4 +399,134 @@ function reset_volumes(){
 
 }
 
+OVERRIDE_FILE="docker-compose.override.yml"
+
+# Function to initialize the docker-compose.override.yml file
+function initialize_override_file() {
+    OS=$(detect_os)
+    vverbose "Detected OS: $OS"
+    if [ ! -f "$OVERRIDE_FILE" ] && [ "$OS" = "Linux" ]; then
+        verbose "Creating docker-compose.override.yml..."
+        cat > "$OVERRIDE_FILE" <<EOL
+services:
+EOL
+    fi
+}
+
+# Function to remove the docker-compose.override.yml file
+function remove_override_file() {
+    if [ -f "$OVERRIDE_FILE" ]; then
+        verbose "Removing docker-compose.override.yml..."
+        rm "$OVERRIDE_FILE"
+    else
+        vverbose "docker-compose.override.yml does not exist. Nothing to remove."
+    fi
+}
+
+# Function to add a service and its volumes to the docker-compose.override.yml file
+# @param $1 Service name
+# @param $2 Volume lines to add
+# Example: add_service_volume "my_service" "my_volume:/path/in/container"
+function add_service_volume() {
+  local service_name=$1
+  local volume_line=$2
+
+  if grep -qE "^[[:space:]]*$service_name:" "$OVERRIDE_FILE"; then
+    vverbose "Service $service_name already exists."
+
+    if grep -EA1000 "^[[:space:]]*$service_name:" "$OVERRIDE_FILE" | grep -q "^[[:space:]]*volumes:"; then
+      vverbose "Volumes block already exists. Adding new volume line..."
+
+      if ! grep -A1000 "^[[:space:]]+$service_name:" "$OVERRIDE_FILE" | grep -qF "$volume_line"; then
+        sed -i "/^[[:space:]]*$service_name:/,/^[^[:space:]]/ {
+            /^[[:space:]]*volumes:/a\      - $volume_line
+        }" "$OVERRIDE_FILE"
+        verbose "Added volume line: $volume_line"
+      else
+        vverbose "Volume $volume_line already present, skipping."
+      fi
+
+    else
+      verbose "No volumes block found. Creating one..."
+
+      sed -i "/^[[:space:]]*$service_name:/a\    volumes:\n      - $volume_line" "$OVERRIDE_FILE"
+    fi
+
+  else
+    verbose "Service $service_name does not exist. Adding new service block..."
+
+    previous_line=$(grep -v '^[[:space:]]*$' "$OVERRIDE_FILE" | tail -n 1)
+    if [[ "$previous_line" == "services:" ]]; then
+        cat >> "$OVERRIDE_FILE" <<EOL
+  $service_name:
+    volumes:
+      - $volume_line
+EOL
+    else
+        cat >> "$OVERRIDE_FILE" <<EOL
+
+  $service_name:
+    volumes:
+      - $volume_line
+EOL
+    fi
+  fi
+}
+
+# Function to detect the operating system
+# Returns the OS name (Linux, Mac, Windows, etc.)
+function detect_os() {
+    unameOut="$(uname -s)"
+    case "${unameOut}" in
+        Linux*)
+            if grep -qi microsoft /proc/version 2>/dev/null; then
+                os=Windows
+            else
+                os=Linux
+            fi
+            ;;
+        Darwin*)    os=Mac;;
+        CYGWIN*|MINGW*|MSYS*)    os=Windows;;
+        *)          os="UNKNOWN:${unameOut}"
+    esac
+    echo ${os}
+}
+
+# Function to sync environment variables from one file to another
+# @param $1 Source env file
+# @param $2 Target env file
+function sync_env_variables() {
+    local source_env_file=$1
+    local target_env_file=$2
+
+    if [ ! -f "$source_env_file" ]; then
+        verbose "Source env file '$source_env_file' not found"
+        return 1
+    fi
+
+    if [ ! -f "$target_env_file" ]; then
+        verbose "Target env file '$target_env_file' not found. Creating it"
+        touch "$target_env_file"
+    fi
+
+    verbose "Syncing variables from $source_env_file ➔ $target_env_file"
+
+    while IFS= read -r line || [[ -n "$line" ]]; do
+        if [[ -z "$line" || "$line" == \#* ]]; then
+            continue
+        fi
+
+        var_name=$(echo "$line" | cut -d '=' -f 1)
+
+        if grep -q "^$var_name=" "$target_env_file"; then
+            sed -i "s|^$var_name=.*|$line|" "$target_env_file"
+            verbose "Updated $var_name"
+        else
+            echo "$line" >> "$target_env_file"
+            verbose "Added $var_name"
+        fi
+    done < "$source_env_file"
+
+    verbose "Env sync complete!"
+}
 

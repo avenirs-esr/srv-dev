@@ -10,8 +10,8 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB} 
     volumes:
-      - ${AVENIRS_POSTGRESQL_PRIMARY_VOLUME}:/var/lib/postgresql/data
-      - ${AVENIRS_POSTGRESQL_ARCHIVE_VOLUME}:/var/lib/postgresql/archive
+      - postgres_primary_data:/var/lib/postgresql/data
+      - postgres_primary_archive:/var/lib/postgresql/archive
       - ./${POSTGRESQL_OVERLAY_BASENAME}/primary_postgresql.conf:/etc/postgresql.conf
       - ./${POSTGRESQL_OVERLAY_BASENAME}/primary_pg_hba.conf:/etc/pg_hba.conf
       - ./${POSTGRESQL_OVERLAY_BASENAME}/init/:/docker-entrypoint-initdb.d
@@ -45,7 +45,7 @@ services:
         echo '${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}: privileges set'
       fi
       echo '${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}: starting...'
-      su - postgres -c 'export PATH=`find /usr/lib/postgresql/ -type d -name bin`:$PATH && postgres -D /var/lib/postgresql/data -c config_file=/etc/postgresql.conf'
+      exec gosu postgres postgres -D /var/lib/postgresql/data -c config_file=/etc/postgresql.conf
       "
     restart: always
     environment:
@@ -53,8 +53,8 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB} 
     volumes:
-      - ${AVENIRS_POSTGRESQL_SECONDARY1_VOLUME}:/var/lib/postgresql/data
-      - ${AVENIRS_POSTGRESQL_ARCHIVE_VOLUME}:/var/lib/postgresql/archive
+      - postgres_secondary1_data:/var/lib/postgresql/data
+      - postgres_secondary_archive:/var/lib/postgresql/archive
       - ./${POSTGRESQL_OVERLAY_BASENAME}/secondaries_postgresql.conf:/etc/postgresql.conf
       - ./${POSTGRESQL_OVERLAY_BASENAME}/secondaries_pg_hba.conf:/etc/pg_hba.conf
     depends_on:
@@ -70,7 +70,6 @@ services:
     image: postgres:latest
     command: |
       bash -c "
-      export PATH=`find /usr/lib/postgresql/ -type d -name bin`:\$PATH
       if [ -e /var/lib/postgresql/data/standby.signal ]
       then 
         echo '${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}: Already initialized'
@@ -90,9 +89,8 @@ services:
         echo '${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}: privileges set'
       fi
       echo '${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}: starting...'
-      
-      su - postgres -c 'export PATH=`find /usr/lib/postgresql/ -type d -name bin`:$PATH && postgres -D /var/lib/postgresql/data -c config_file=/etc/postgresql.conf'
-      "
+
+      exec gosu postgres postgres -D /var/lib/postgresql/data -c config_file=/etc/postgresql.conf      "
     restart: always
 
     environment:
@@ -100,8 +98,8 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB} 
     volumes:
-      - ${AVENIRS_POSTGRESQL_SECONDARY2_VOLUME}:/var/lib/postgresql/data
-      - ${AVENIRS_POSTGRESQL_ARCHIVE_VOLUME}:/var/lib/postgresql/archive
+      - postgres_secondary2_data:/var/lib/postgresql/data
+      - postgres_secondary_archive:/var/lib/postgresql/archive
       - ./${POSTGRESQL_OVERLAY_BASENAME}/secondaries_postgresql.conf:/etc/postgresql.conf
       - ./${POSTGRESQL_OVERLAY_BASENAME}/secondaries_pg_hba.conf:/etc/pg_hba.conf
     depends_on:
@@ -125,3 +123,10 @@ networks:
   postgres-network:
     external: true
     name: ${AVENIRS_NETWORK}
+
+volumes:
+  postgres_primary_data:
+  postgres_primary_archive:
+  postgres_secondary1_data:
+  postgres_secondary2_data:
+  postgres_secondary_archive:

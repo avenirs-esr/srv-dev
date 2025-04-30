@@ -107,6 +107,13 @@ This instructions will :
 3. Download / generate the docker images.
 4. Run the containers associated to each service (via docker-compose).
 
+⚠️ Warning OS compatibility :  
+**On Windows**, .sh files are CRLF by default, so you need to switch them to LF for scripts to work.   
+To do this, a .ps1 script has been created. To run it, open a powershell and place yourself in the srv-dev folder you've just cloned. Then run the following command:
+<pre>
+.\convert-sh-to-lf.ps1
+</pre>
+
 Available npm scripts :
 - npm run deploy: bootstrap each service and run the containers.
 - npm run clean: stop the containers and reset all modifications made via the bootstrap scripts.
