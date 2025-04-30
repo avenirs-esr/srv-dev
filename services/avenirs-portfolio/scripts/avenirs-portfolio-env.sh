@@ -65,18 +65,19 @@ AVENIRS_PORTFOLIO_SECURITY_MAIN_BRANCH="main"
 AVENIRS_PORTFOLIO_SECURITY_SPRING_ENV_FILE=$AVENIRS_PORTFOLIO_SECURITY_OVERLAY_DIR/src/main/resources/env.properties
 
 # Database initialization
+PGSQL_INIT_DIR=$POSTGRESQL_OVERLAY_DIR/init
 JASYPT_UTIL_SCRIPT=$AVENIRS_PORTFOLIO_SCRIPT_DIR/../avenirs-portfolio-security/scripts/jasypt-decrypt
 AVENIRS_PORTFOLIO_SECURITY_CLEAN_DB=$AVENIRS_PORTFOLIO_SCRIPT_DIR/../avenirs-portfolio-security/src/main/resources/db/clean.sql
-AVENIRS_PORTFOLIO_SECURITY_CLEAN_DB_CLEAR=$POSTGRESQL_OVERLAY_DIR/10_avenirs-security_clean.generated.sql
+AVENIRS_PORTFOLIO_SECURITY_CLEAN_DB_CLEAR=$PGSQL_INIT_DIR/10_avenirs-security_clean.generated.sql
 
 AVENIRS_PORTFOLIO_SECURITY_INIT_DB=$AVENIRS_PORTFOLIO_SCRIPT_DIR/../avenirs-portfolio-security/src/main/resources/db/init-db.sql
-AVENIRS_PORTFOLIO_SECURITY_INIT_DB_CLEAR=$POSTGRESQL_OVERLAY_DIR/11_avenirs-security_init-db.generated.sql
+AVENIRS_PORTFOLIO_SECURITY_INIT_DB_CLEAR=$PGSQL_INIT_DIR/11_avenirs-security_init-db.generated.sql
 
 AVENIRS_PORTFOLIO_SECURITY_CLEAN_TEST_DB=$AVENIRS_PORTFOLIO_SCRIPT_DIR/../avenirs-portfolio-security/src/test/resources/db/clean-test-db.sql
-AVENIRS_PORTFOLIO_SECURITY_CLEAN_TEST_DB_CLEAR=$POSTGRESQL_OVERLAY_DIR/12_avenirs-security_clean-test-db.generated.sql
+AVENIRS_PORTFOLIO_SECURITY_CLEAN_TEST_DB_CLEAR=$PGSQL_INIT_DIR/12_avenirs-security_clean-test-db.generated.sql
 
 AVENIRS_PORTFOLIO_SECURITY_INIT_TEST_DB=$AVENIRS_PORTFOLIO_SCRIPT_DIR/../avenirs-portfolio-security/src/test/resources/db/init-test-db.sql
-AVENIRS_PORTFOLIO_SECURITY_INIT_TEST_DB_CLEAR=$POSTGRESQL_OVERLAY_DIR/13_avenirs-security_init-test-db.generated.sql
+AVENIRS_PORTFOLIO_SECURITY_INIT_TEST_DB_CLEAR=$PGSQL_INIT_DIR/13_avenirs-security_init-test-db.generated.sql
 
 
 
