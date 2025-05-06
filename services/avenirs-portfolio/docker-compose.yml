@@ -1,24 +1,4 @@
 services:
-  avenirs-portfolio-storage:
-    container_name: ${AVENIRS_PORTFOLIO_STORAGE_CONTAINER_NAME}
-   
-   
-    build:
-      context: .
-      dockerfile: ./Dockerfile-avenirs-portfolio-storage
-      args:
-       AVENIRS_PORTFOLIO_STORAGE_VERSION: ${AVENIRS_PORTFOLIO_STORAGE_VERSION}
-       OVERLAY_DIR: ${AVENIRS_PORTFOLIO_STORAGE_OVERLAY_BASENAME}
-    restart: always
-    ports:
-      - "${AVENIRS_PORTFOLIO_STORAGE_CONTAINER_PORT}:11000"
-    environment:
-      - JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_ENCRYPTOR_PASSWORD}
-    depends_on:
-      - postgresql-primary
-    networks:
-      - avenirs-api-network
-
   avenirs-portfolio-security:
     container_name: ${AVENIRS_PORTFOLIO_SECURITY_CONTAINER_NAME}
    
