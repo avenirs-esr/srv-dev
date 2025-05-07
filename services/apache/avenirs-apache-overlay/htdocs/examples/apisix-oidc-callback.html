@@ -7,13 +7,13 @@
       const urlParams = new URLSearchParams(window.location.href.split('#')?.[1]);
       const accessToken=urlParams.get('access_token');
 
-      const displayedCmdLocalhost=`curl -H "Authorization: Bearer ${accessToken?.slice(0, 10) +'...' + accessToken?.slice(-10)}" http://localhost/apisix-gw/ipoidc`
-      const displayedCmdSrvDev=`curl -H "Authorization: Bearer ${accessToken?.slice(0, 10) +'...' + accessToken?.slice(-10)}" http://srv-dev-avenir.srv-avenir.brgm.recia.net/apisix-gw/ipoidc`
+      const displayedCmdLocalhost=`curl -H "Authorization: Bearer ${accessToken?.slice(0, 10) +'...' + accessToken?.slice(-10)}" http://localhost/apim/ipoidc`
+      const displayedCmdSrvDev=`curl -H "Authorization: Bearer ${accessToken?.slice(0, 10) +'...' + accessToken?.slice(-10)}" http://srv-dev-avenir.srv-avenir.brgm.recia.net/apim/ipoidc`
       
       console.log('urlParams', urlParams);
       console.log('Access token', accessToken);
       function copyCmd(srvdev=false){
-	      const cmd=`curl -H "Authorization: Bearer ${accessToken}" http://${srvdev ? 'srv-dev-avenir.srv-avenir.brgm.recia.net' : 'localhost'}/apisix-gw/ipoidc`
+	      const cmd=`curl -H "Authorization: Bearer ${accessToken}" http://${srvdev ? 'srv-dev-avenir.srv-avenir.brgm.recia.net' : 'localhost'}/apim/ipoidc`
 	      navigator.clipboard
 	      .writeText(cmd);
 /*	      .then(

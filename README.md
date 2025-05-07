@@ -128,7 +128,7 @@ Available npm scripts :
 
 ## Test
 <pre>
-curl "http://localhost/apisix-gw" --head | grep Server
+curl "http://localhost/apim" --head | grep Server
 </pre>
 <pre>
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -141,7 +141,7 @@ curl "http://localhost/apisix-gw" --head | grep Server
 ## End-points
 
 - `http://<server>/apisix-api/`
-- `http://<server>/apisix-gw/`
+- `http://<server>/apim/`
 - `http://<server>/apisix-ui/`
 - `http://<server>/apisix-prometheus/`
 - `http://<server>/apisix-grafana/`

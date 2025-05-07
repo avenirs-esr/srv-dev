@@ -10,7 +10,7 @@ const TOKEN="eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImNhcy15dmlTWUphSCIsIm9
   
   const client = new Client({
     // brokerURL: 'http://localhost:9080/rt-notification', // OK via apisix gw directly
-    // brokerURL: 'ws://localhost/apisix-gw/rt-notification', // OK Via Apache frontal
+    // brokerURL: 'ws://localhost/apim/rt-notification', // OK Via Apache frontal
     connectHeaders:{
       "Authorization": `Bearer ${TOKEN}`
     },

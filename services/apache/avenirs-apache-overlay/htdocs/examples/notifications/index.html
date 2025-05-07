@@ -12,8 +12,8 @@
              console.log('submitForm data', data);
 	     const host=window.location.host || 'localhost'
 	     const port = host==='localhost' ? ':9080': ''
-             //fetch("https://srv-dev-avenir.srv-avenir.brgm.recia.net/apisix-gw/notification/create", { method: "post", body: data })
-	     fetch(`https://${host}${port}/apisix-gw/notification/create`, { method: "post", body: data })
+             //fetch("https://srv-dev-avenir.srv-avenir.brgm.recia.net/apim/notification/create", { method: "post", body: data })
+	     fetch(`https://${host}${port}/apim/notification/create`, { method: "post", body: data })
 	     
 
         }
@@ -30,8 +30,8 @@
         import { Client } from '@stomp/stompjs';
         const host=window.location.host|| 'localhost'
         const client = new Client({
-            brokerURL: `wss://${host}/apisix-gw/rt-notification`,
-//	              brokerURL: 'wss://srv-dev-avenir.srv-avenir.brgm.recia.net/apisix-gw/rt-notification',
+            brokerURL: `wss://${host}/apim/rt-notification`,
+//	              brokerURL: 'wss://srv-dev-avenir.srv-avenir.brgm.recia.net/apim/rt-notification',
             onConnect: () => {
                 console.log('Stomp client connected')
                 client.subscribe('/realtime', message => {
