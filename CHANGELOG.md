@@ -18,11 +18,13 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 #### ✨ Added
 - remove_file function to handle verbose and warning messages.
+- scripts/jasypt which wontains a wrapper for jasyp jasypt-util.sh and jasypt jar.
 
 
 #### 🛠 Changed
 - purge npm script: removes the volumes.
 - docker compose file in avenirs-portfolio service to disable avenirs-portfolio-storage. 
+- avenirs-portfolio-security service is enabled. As it uses jasypt, **the environment variable JASYPT_ENCRYPTOR_PASSWORD must be set.**
 
 #### 🐛 Fixed
 - avenirs-portfolio-security service database initialisation see [issue #7](https://github.com/avenirs-esr/srv-dev/issues/7)

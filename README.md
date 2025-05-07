@@ -9,6 +9,7 @@ check the branch (if a git submodule), and create a .env file to propagate the s
 - Git, 
 - Docker (tested with 24.0.6) 
 - Docker-compose >=2.2.0 for the support of "include".
+- JASYPT_ENCRYPTOR_PASSWORD environment variable must be set (jasypt is used for the bootstrapping stage).
 
 
 ## Architecture experimentation
