@@ -8,7 +8,7 @@ END_POINT="http://localhost/node-api/ac-in-apim"
 && { END_POINT="http://srv-dev-avenir.srv-avenir.brgm.recia.net/node-api/ac-in-apim"; shift; } 
 
 [ "$1" = "-a" -o "$1" = "--apim" ] \
-&& { END_POINT="http://srv-dev-avenir.srv-avenir.brgm.recia.net/apisix-gw/ac-in-apim"; shift; } 
+&& { END_POINT="http://srv-dev-avenir.srv-avenir.brgm.recia.net/apim/ac-in-apim"; shift; } 
 
 
 echo -ne "\nUsing end point: $END_POINT\n\n"

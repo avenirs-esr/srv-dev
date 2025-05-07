@@ -34,10 +34,10 @@ import WebSocket from 'ws';
 //const ws = new WebSocket('ws://localhost:9080/notification') 
 // const ws = new WebSocket('ws://localhost:9080/ws') //OK
   const ws = new WebSocket('ws://localhost:10001'); // KO
- // const ws = new WebSocket('ws://localhost/apisix-gw/notification'); // KO
-  // const ws = new WebSocket('ws://localhost/apisix-gw/notification'); // KO
-  // const ws = new WebSocket('ws://localhost/apisix-gw/ws'); // OK
- // const ws = new WebSocket('ws://localhost/apisix-gw/notification'); // OK
+ // const ws = new WebSocket('ws://localhost/apim/notification'); // KO
+  // const ws = new WebSocket('ws://localhost/apim/notification'); // KO
+  // const ws = new WebSocket('ws://localhost/apim/ws'); // OK
+ // const ws = new WebSocket('ws://localhost/apim/notification'); // OK
 // const ws = new WebSocket('ws://localhost:3003'); // OK
 
 ws.on('error', console.error);

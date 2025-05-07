@@ -27,7 +27,7 @@
     console.log('Access token', accessToken);
 
     const host=window.location.host || 'localhost'
-    const href = `https://${host}/cas/oidc/oidcAuthorize?client_id=OIDCClientId&redirect_uri=https://${host}/apisix-gw/oidc/callback&response_type=code&scope=openid%20email%20profile`
+    const href = `https://${host}/cas/oidc/oidcAuthorize?client_id=OIDCClientId&redirect_uri=https://${host}/apim/oidc/callback&response_type=code&scope=openid%20email%20profile`
     console.log('Login URL:', href);
     if (accessToken != null) {
        document.getElementById("copyToClipboard").removeAttribute("hidden");
