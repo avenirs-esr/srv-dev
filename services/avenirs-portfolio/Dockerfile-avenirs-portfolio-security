@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21-jdk-alpine as build
+FROM eclipse-temurin:21-jdk as build
 ARG OVERLAY_DIR
 ENV AVENIRS_PORTFOLIO_SECURITY_OVERLAY_DIR=$OVERLAY_DIR
 WORKDIR /workspace/app
@@ -13,7 +13,7 @@ RUN ./mvnw clean install package -DskipTests
 RUN mkdir -p ./target/dependency && (cd ./target/dependency; jar -xf ../*.jar)
 
 
-FROM eclipse-temurin:21-jdk-alpine
+FROM eclipse-temurin:21-jdk
 WORKDIR /workspace/app
 ARG AVENIRS_PORTFOLIO_SECURITY_VERSION=0.0.1
 VOLUME /tmp

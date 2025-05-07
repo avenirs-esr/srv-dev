@@ -19,14 +19,6 @@ info "Avenirs portfolio cleaning started."
     || err "Unable to source $AVENIRS_PORTFOLIO_SCRIPT_DIR/avenirs-portfolio-env.sh"
 
 
-# ---- avenirs-portfolio-storage
-
-# Resets the repository
-reset_git_repository $AVENIRS_PORTFOLIO_STORAGE_REPOSITORY_DIR $AVENIRS_PORTFOLIO_STORAGE_MAIN_BRANCH $AVENIRS_PORTFOLIO_STORAGE_LOCAL_BRANCH
-
-# Removes the overlay's files
-remove_overlay $AVENIRS_PORTFOLIO_STORAGE_REPOSITORY_DIR  
-
 # ---- avenirs-portfolio-security
 
 # Resets the repository
@@ -34,6 +26,13 @@ reset_git_repository $AVENIRS_PORTFOLIO_SECURITY_REPOSITORY_DIR $AVENIRS_PORTFOL
 
 # Removes the overlay's files
 remove_overlay $AVENIRS_PORTFOLIO_SECURITY_REPOSITORY_DIR  
+
+# Removes the generated database sql files
+remove_file $AVENIRS_PORTFOLIO_SECURITY_CLEAN_DB_CLEAR 
+remove_file $AVENIRS_PORTFOLIO_SECURITY_CLEAN_TEST_DB_CLEAR
+remove_file $AVENIRS_PORTFOLIO_SECURITY_INIT_DB_CLEAR
+remove_file $AVENIRS_PORTFOLIO_SECURITY_INIT_TEST_DB_CLEAR
+verbose "Database initialization files removed."
 
 
 info "Avenirs portfolio cleaning completed."
