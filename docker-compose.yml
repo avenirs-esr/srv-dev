@@ -11,5 +11,4 @@ include:
   - ./services/apache/docker-compose.yml
   - ./services/kafka/docker-compose.yml
   - ./services/node/docker-compose.yml
-  #- ./services/avenirs-portfolio/docker-compose.yml
-  - ./services/avenirs-api/docker-compose.yml
+  - ./services/avenirs-portfolio/docker-compose.yml

@@ -7,14 +7,6 @@
 [submodule "services/apisix/apisix-dashboard"]
 	path = services/apisix/apisix-dashboard
 	url = https://github.com/apache/apisix-dashboard.git
-[submodule "services/avenirs-api/avenirs-api"]
-	path = services/avenirs-api/avenirs-api
-	url = git@github.com:avenirs-esr/avenirs-api.git
-	branch = main
-[submodule "services/avenirs-backend/avenirs-portfolio-storage"]
-	path = services/avenirs-portfolio/avenirs-portfolio-storage
-	url = git@github.com:avenirs-esr/avenirs-portfolio-storage
-	branch = main
 [submodule "services/avenirs-portfolio/avenirs-portfolio-security"]
 	path = services/avenirs-portfolio/avenirs-portfolio-security
 	url = git@github.com:avenirs-esr/avenirs-portfolio-security

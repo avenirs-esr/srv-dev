@@ -38,9 +38,9 @@ init_volumes "kafka" $AVENIRS_KAFKA_DATA_VOLUME \
     $AVENIRS_ZOOKEEPER_DATA_VOLUME \
     $AVENIRS_ZOOKEEPER_LOG_VOLUME
 
-chmod o+rw $AVENIRS_KAFKA_DATA_VOLUME && verbose "Permissions on $AVENIRS_KAFKA_DATA_VOLUME OK" || err "Unable to set the permission on $AVENIRS_KAFKA_DATA_VOLUME"
-chmod o+rw $AVENIRS_ZOOKEEPER_DATA_VOLUME && verbose "Permissions on $AVENIRS_ZOOKEEPER_DATA_VOLUME OK" || err "Unable to set the permission on $AVENIRS_ZOOKEEPER_DATA_VOLUME"
-chmod o+rw $AVENIRS_ZOOKEEPER_LOG_VOLUME && verbose "Permissions on $AVENIRS_ZOOKEEPER_LOG_VOLUME OK" || err "Unable to set the permission on $AVENIRS_ZOOKEEPER_LOG_VOLUME"
+sudo chmod o+rw $AVENIRS_KAFKA_DATA_VOLUME && verbose "Permissions on $AVENIRS_KAFKA_DATA_VOLUME OK" || err "Unable to set the permission on $AVENIRS_KAFKA_DATA_VOLUME"
+sudo chmod o+rw $AVENIRS_ZOOKEEPER_DATA_VOLUME && verbose "Permissions on $AVENIRS_ZOOKEEPER_DATA_VOLUME OK" || err "Unable to set the permission on $AVENIRS_ZOOKEEPER_DATA_VOLUME"
+sudo chmod o+rw $AVENIRS_ZOOKEEPER_LOG_VOLUME && verbose "Permissions on $AVENIRS_ZOOKEEPER_LOG_VOLUME OK" || err "Unable to set the permission on $AVENIRS_ZOOKEEPER_LOG_VOLUME"
 
 # OS detection
 . $KAFKA_SCRIPT_DIR/kafka-detect-os.sh
