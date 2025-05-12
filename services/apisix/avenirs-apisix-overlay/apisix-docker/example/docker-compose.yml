@@ -20,6 +20,8 @@ services:
     build:
       context: ../../apisix-dashboard/
       dockerfile: Dockerfile
+      args:
+        APISIX_DASHBOARD_VERSION: release/3.0
     # image: apache/apisix-dashboard:3.0.1-alpine
     restart: always
     volumes:
