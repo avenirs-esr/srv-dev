@@ -13,14 +13,14 @@ PASSWORD="user_0_pwd"
 if [ "$1" = "-u" -o "$1" = "--user"  ] 
 then
      shift
-     [ -nz "$1" ] && { USER=$1; shift; } || { echo "Missing user."; exit 1; }
+     [ -n "$1" ] && { USER=$1; shift; } || { echo "Missing user."; exit 1; }
      
 fi
 
 if [ "$1" = "-p" -o "$1" = "--password"  ] 
 then
      shift
-     [ -nz "$1" ] && { PASSWORD=$1; shift; } || { echo "Missing password."; exit 1; }
+     [ -n "$1" ] && { PASSWORD=$1; shift; } || { echo "Missing password."; exit 1; }
      
 fi
 
