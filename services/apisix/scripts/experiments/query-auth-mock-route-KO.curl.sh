@@ -3,7 +3,7 @@ AT="foo"
 END_POINT="localhost/apim/auth-mock-test"
 
 [ "$1" = "-d" -o "$1" = "--srv-dev" ] \
-&& { END_POINT="http://srv-dev-avenir.srv-avenir.brgm.recia.net/auth-mock-test"; shift; } 
+&& { END_POINT="http://srv-dev-avenir.srv-avenir.brgm.recia.net/apim/auth-mock-test"; shift; } 
 echo -ne "\nUsing end point: $END_POINT\n\n"
 
 
