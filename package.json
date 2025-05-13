@@ -13,7 +13,7 @@
     "deploy-dev": "npm run clean; bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build",
     "ls-containers": "docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}'",
     "sync-modules": " git submodule foreach --recursive 'branch=$(git config -f $toplevel/.gitmodules submodule.$name.branch || echo master); echo Switching $name to branch $branch; git checkout $branch || git checkout -b $branch origin/$branch; git pull origin $branch'",
-      "sync": "git pull --recurse-submodules && git submodule update --remote --recursive && npm run sync-modules"
+    "sync": "git pull --recurse-submodules && git submodule update --remote --recursive && npm run sync-modules"
     
   },
   "repository": {
