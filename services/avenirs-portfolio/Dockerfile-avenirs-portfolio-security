@@ -9,6 +9,7 @@ COPY ./avenirs-portfolio-security/pom.xml .
 COPY ./avenirs-portfolio-security/src src
 COPY avenirs-portfolio-overlay/avenirs-portfolio-security/src/main/resources/env.properties src/main/resources/
 
+RUN chmod +x ./mvnw
 RUN ./mvnw clean install package -DskipTests
 RUN mkdir -p ./target/dependency && (cd ./target/dependency; jar -xf ../*.jar)
 
