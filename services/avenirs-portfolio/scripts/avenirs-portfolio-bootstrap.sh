@@ -2,7 +2,7 @@
 
 #----------------------------------------#
 # Bootstrap script for Avenirs portfolio #
-#                                        #  
+#                                        #
 #----------------------------------------#
 
 AVENIRS_PORTFOLIO_SCRIPT_DIR=`dirname $0`
@@ -62,7 +62,7 @@ echo "app.server.url=http://$swagger_root/avenirs-portfolio-security" >> $AVENIR
 
 
 # Database initialization files generation
-info "Database initialization files generation for avenirs-portfolio-security" 
+info "Database initialization files generation for avenirs-portfolio-security"
 
 cat $AVENIRS_PORTFOLIO_SECURITY_CLEAN_DB  > $AVENIRS_PORTFOLIO_SECURITY_CLEAN_DB_CLEAR
 vverbose "Created $AVENIRS_PORTFOLIO_SECURITY_CLEAN_DB_CLEAR"
@@ -77,7 +77,17 @@ $JASYPT_UTIL_SCRIPT $AVENIRS_PORTFOLIO_SECURITY_INIT_TEST_DB > $AVENIRS_PORTFOLI
 vverbose "Created $AVENIRS_PORTFOLIO_SECURITY_INIT_TEST_DB_CLEAR"
 
 
-info "Avenirs portfolio databases initialization files generated."
+info "Avenirs portfolio security databases initialization files generated."
+
+info "Database initialization files generation for avenirs-portfolio-api"
+
+cat $AVENIRS_PORTFOLIO_API_CLEAN_DB  > $AVENIRS_PORTFOLIO_API_CLEAN_DB_CLEAR
+vverbose "Created $AVENIRS_PORTFOLIO_API_CLEAN_DB_CLEAR"
+
+$JASYPT_UTIL_SCRIPT $AVENIRS_PORTFOLIO_API_INIT_DB > $AVENIRS_PORTFOLIO_API_INIT_DB_CLEAR
+vverbose "Created $AVENIRS_PORTFOLIO_API_INIT_DB_CLEAR"
+
+info "Avenirs portfolio api databases initialization files generated."
 
 info "Avenirs portfolio bootstrapping completed."
 

@@ -2,7 +2,7 @@
 
 #--------------------------------------#
 # Clean script for Avenirs portfolio   #
-#                                      #  
+#                                      #
 # Removes all the modifications:       #
 # - Reverts the modifications from the #
 #   repositories                       #
@@ -31,13 +31,17 @@ reset_git_repository $AVENIRS_PORTFOLIO_API_REPOSITORY_DIR $AVENIRS_PORTFOLIO_AP
 reset_git_repository $AVENIRS_PORTFOLIO_SECURITY_REPOSITORY_DIR $AVENIRS_PORTFOLIO_SECURITY_MAIN_BRANCH $AVENIRS_PORTFOLIO_SECURITY_LOCAL_BRANCH
 
 # Removes the overlay's files
-remove_overlay $AVENIRS_PORTFOLIO_SECURITY_REPOSITORY_DIR  
+remove_overlay $AVENIRS_PORTFOLIO_SECURITY_REPOSITORY_DIR
 
 # Removes the generated database sql files
-remove_file $AVENIRS_PORTFOLIO_SECURITY_CLEAN_DB_CLEAR 
+remove_file $AVENIRS_PORTFOLIO_SECURITY_CLEAN_DB_CLEAR
 remove_file $AVENIRS_PORTFOLIO_SECURITY_CLEAN_TEST_DB_CLEAR
 remove_file $AVENIRS_PORTFOLIO_SECURITY_INIT_DB_CLEAR
 remove_file $AVENIRS_PORTFOLIO_SECURITY_INIT_TEST_DB_CLEAR
+
+remove_file $AVENIRS_PORTFOLIO_API_CLEAN_DB_CLEAR
+remove_file $AVENIRS_PORTFOLIO_API_INIT_DB_CLEAR
+
 verbose "Database initialization files removed."
 
 
