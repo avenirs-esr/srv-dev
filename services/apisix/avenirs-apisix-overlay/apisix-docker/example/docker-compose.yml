@@ -20,7 +20,8 @@ services:
     build:
       context: ../../apisix-dashboard/
       dockerfile: Dockerfile
-    # image: apache/apisix-dashboard:3.0.1-alpine
+      args:
+        APISIX_DASHBOARD_VERSION: release/3.0
     restart: always
     volumes:
     - ./dashboard_conf/conf.yaml:/usr/local/apisix-dashboard/conf/conf.yaml
@@ -87,6 +88,17 @@ services:
       - "./grafana_conf/config/grafana.ini:/etc/grafana/grafana.ini"
     networks:
       apisix-network:
+  apisix-init:
+    container_name: ${AVENIRS_APISIX_INIT_CONTAINER_NAME}
+    image: curlimages/curl:latest
+    depends_on:
+      - apisix
+      - apisix-dashboard
+    volumes:
+      - ../../scripts/initialization:/scripts
+    command: sh -c "sh /scripts/init-routes.sh 2>&1"
+    networks:
+      - apisix-network    
 networks: 
   apisix-network:
     external: true

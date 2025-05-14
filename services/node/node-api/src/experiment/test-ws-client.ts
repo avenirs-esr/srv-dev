@@ -1,45 +1,6 @@
 import WebSocket from 'ws';
-
-/*
-{
-  "uri": "/ws",
-  "name": "ws",
-  "desc": "Test ws integration",
-  "upstream": {
-    "nodes": [
-      {
-        "host": "avenirs-node",
-        "port": 3003,
-        "weight": 1
-      }
-    ],
-    "timeout": {
-      "connect": 6,
-      "send": 6,
-      "read": 6
-    },
-    "type": "roundrobin",
-    "scheme": "http",
-    "pass_host": "pass",
-    "keepalive_pool": {
-      "idle_timeout": 60,
-      "requests": 1000,
-      "size": 320
-    }
-  },
-  "enable_websocket": true,
-  "status": 1
-}*/
-
-//const ws = new WebSocket('ws://localhost:9080/notification') 
-// const ws = new WebSocket('ws://localhost:9080/ws') //OK
-  const ws = new WebSocket('ws://localhost:10001'); // KO
- // const ws = new WebSocket('ws://localhost/apisix-gw/notification'); // KO
-  // const ws = new WebSocket('ws://localhost/apisix-gw/notification'); // KO
-  // const ws = new WebSocket('ws://localhost/apisix-gw/ws'); // OK
- // const ws = new WebSocket('ws://localhost/apisix-gw/notification'); // OK
-// const ws = new WebSocket('ws://localhost:3003'); // OK
-
+const ws = new WebSocket('ws://localhost/apim/ws'); // OK
+ 
 ws.on('error', console.error);
 let count = 0;
 ws.on('open', function open() {

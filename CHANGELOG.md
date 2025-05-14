@@ -9,16 +9,26 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
-
+| [1.1.0] | 2025-05-13 | [PR(#14)](https://github.com/avenirs-esr/srv-dev/pull/14)  |
 | [1.0.2] | 2025-05-12 | [PR(#13)](https://github.com/avenirs-esr/srv-dev/pull/13)  |
 | [1.0.1] | 2025-05-06 | [PR(#12)](https://github.com/avenirs-esr/srv-dev/pull/12)  |
 | [1.0.0] | 2025-04-20 | [PR(#11)](https://github.com/avenirs-esr/srv-dev/pull/11)  |
 
 ---
+### [1.0.2] - 2025-05-12 - [PR(#14)](https://github.com/avenirs-esr/srv-dev/pull/14)
+
+#### ✨ Added
+- Authentication mock
+- Initialisation process for APISIX routes and plugins
+
+
 ### [1.0.2] - 2025-05-12 - [PR(#13)](https://github.com/avenirs-esr/srv-dev/pull/13)
 
 #### ✨ Added
 - avenirs-portfolio-api integrated as submodule.
+
+#### 🐛 Fixed
+- Missing chmod +x in Docker file for the services under avenirs-portfolio.
 
 ---
 
@@ -27,7 +37,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 #### ✨ Added
 - remove_file function to handle verbose and warning messages.
-- scripts/jasypt which wontains a wrapper for jasyp jasypt-util.sh and jasypt jar.
+- scripts/jasypt which contains a wrapper for jasyp jasypt-util.sh and jasypt jar.
 
 
 #### 🛠 Changed

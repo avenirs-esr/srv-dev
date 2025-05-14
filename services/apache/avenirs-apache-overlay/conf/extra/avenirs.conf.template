@@ -17,22 +17,22 @@ ProxyPass /ldapadmin http://__AVENIRS_LDAP_ADMIN_CONTAINER_NAME__/phpldapadmin
 ProxyPassReverse /ldapadmin http://__AVENIRS_LDAP_ADMIN_CONTAINER_NAME__/phpldapadmin
 
 # ---- Websocket specific settings
-ProxyPass /apisix-gw/ws ws://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/ws
-ProxyPassReverse /apisix-gw/ws ws://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/ws
+ProxyPass /apim/ws ws://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/ws
+ProxyPassReverse /apim/ws ws://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/ws
 
-ProxyPass /apisix-gw/rt-notification ws://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/rt-notification
-ProxyPassReverse /apisix-gw/rt-notification ws://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/rt-notification
+ProxyPass /apim/rt-notification ws://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/rt-notification
+ProxyPassReverse /apim/rt-notification ws://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/rt-notification
 # ----
 
 # ---- The entry below must be after the settings for Websockets
-ProxyPass /apisix-gw http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080
-ProxyPassReverse /apisix-gw http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080
+ProxyPass /apim http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080
+ProxyPassReverse /apim http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080
 
 ProxyPass /apisix-api http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9180
 ProxyPassReverse /apisix-api http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9180
 
 ProxyPass /apisix-ui http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000
-ProxyPassReverse /apisix-ui http://s:9000
+ProxyPassReverse /apisix-ui http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000
 
 ProxyPass /apisix-grafana http://__AVENIRS_APISIX_GRAFANA_CONTAINER_NAME__:3000
 ProxyPassReverse /apisix-grafana http://__AVENIRS_APISIX_GRAFANA_CONTAINER_NAME__:3000

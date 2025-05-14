@@ -40,7 +40,7 @@ app.use(audit());
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
 
 /**
- * Health method to check quickly if the banckend is responding.
+ * Health method to check quickly if the backend is responding.
  */
 app.get("/health", (req: any, res: any) => {
   //  console.log('Headers', req.headers);
@@ -400,6 +400,21 @@ app.get("/ds", (req: any, res: any) => {
   const payload = { upstream: "ds" };
   res.status(200).end(JSON.stringify(payload) + "\n");
 });
+
+/** ---- Authentication mock experimentation ---- **/
+app.get("/auth-mock-test", (req: any, res: any) => {
+  console.log("Authentication mock experimentation");
+  
+  res.setHeader("Content-Type", "application/json");
+  const payload = { state: "OK (auth-mock-test)" };
+  res.status(200).end(JSON.stringify(payload) + "\n");
+});
+
+
+
+
+/** ---- end of experimentations ---- **/
+
 
 const HOST = "0.0.0.0";
 const PORT = 3000;
