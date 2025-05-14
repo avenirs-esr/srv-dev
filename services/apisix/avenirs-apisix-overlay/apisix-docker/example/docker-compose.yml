@@ -22,7 +22,6 @@ services:
       dockerfile: Dockerfile
       args:
         APISIX_DASHBOARD_VERSION: release/3.0
-    # image: apache/apisix-dashboard:3.0.1-alpine
     restart: always
     volumes:
     - ./dashboard_conf/conf.yaml:/usr/local/apisix-dashboard/conf/conf.yaml

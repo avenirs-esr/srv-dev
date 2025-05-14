@@ -9,9 +9,7 @@ const TOKEN="eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6ImNhcy15dmlTWUphSCIsIm9
   Object.assign(global, { WebSocket });
   
   const client = new Client({
-    // brokerURL: 'http://localhost:9080/rt-notification', // OK via apisix gw directly
-    // brokerURL: 'ws://localhost/apim/rt-notification', // OK Via Apache frontal
-    connectHeaders:{
+     connectHeaders:{
       "Authorization": `Bearer ${TOKEN}`
     },
     brokerURL: 'ws://localhost:10000/rt-notification', // Direct avenirs-api

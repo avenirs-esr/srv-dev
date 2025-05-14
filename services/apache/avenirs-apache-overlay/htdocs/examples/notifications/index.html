@@ -7,13 +7,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
     <script>
          function submitForm(){
-            console.log('submitForm');
             const data = new FormData(document.getElementById("notificationForm"));
-             console.log('submitForm data', data);
 	     const host=window.location.host || 'localhost'
 	     const port = host==='localhost' ? ':9080': ''
-             //fetch("https://srv-dev-avenir.srv-avenir.brgm.recia.net/apim/notification/create", { method: "post", body: data })
-	     fetch(`https://${host}${port}/apim/notification/create`, { method: "post", body: data })
+         fetch(`https://${host}${port}/apim/notification/create`, { method: "post", body: data })
 	     
 
         }
@@ -31,17 +28,13 @@
         const host=window.location.host|| 'localhost'
         const client = new Client({
             brokerURL: `wss://${host}/apim/rt-notification`,
-//	              brokerURL: 'wss://srv-dev-avenir.srv-avenir.brgm.recia.net/apim/rt-notification',
             onConnect: () => {
-                console.log('Stomp client connected')
                 client.subscribe('/realtime', message => {
-                    console.log(`Received: ${message.body}`);
                     const ul = document.getElementById("recievedNotifications");
                     const li = document.createElement('li');
                     li.appendChild(document.createTextNode(message.body));
                     ul.appendChild(li);
                 });
-                console.log('Stom sending query')
                 client.publish({ destination: '/rt-notification', body: JSON.stringify({ user: "deman" }) });
             },
         });
@@ -158,77 +151,3 @@
 </body>
 
 </html>
-<!--
-<script type="text/javascript">
-
- 
- var stompClient = null;
- 
- function setConnected(connected) {
- document.getElementById('connect').disabled = connected;
- document.getElementById('disconnect').disabled = !connected;
- document.getElementById('conversationDiv').style.visibility 
- = connected ? 'visible' : 'hidden';
- document.getElementById('response').innerHTML = '';
- }
- 
- function connect() {
- var socket = new SockJS('http://localhost:10000/messages');
- stompClient = Stomp.over(socket); 
- stompClient.connect({}, function(frame) {
- setConnected(true);
- console.log('Connected: ' + frame);
- stompClient.subscribe('/notification/rt', function(messageOutput) {
- showMessageOutput(JSON.parse(messageOutput.body));
- });
- });
- }
- 
- function disconnect() {
- if(stompClient != null) {
- stompClient.disconnect();
- }
- setConnected(false);
- console.log("Disconnected");
- }
- 
- function sendMessage() {
- var from = document.getElementById('from').value;
- var text = document.getElementById('text').value;
- stompClient.send("/messages", {}, 
- JSON.stringify({'from':from, 'text':text}));
- }
- 
- function showMessageOutput(messageOutput) {
- var response = document.getElementById('response');
- var p = document.createElement('p');
- p.style.wordWrap = 'break-word';
- p.appendChild(document.createTextNode(messageOutput.from + ": " 
- + messageOutput.text + " (" + messageOutput.time + ")"));
- response.appendChild(p);
- }
- </script>
- </head>
- <body onload&#61;&#34;disconnect()&#34;>
- <div>
- <div>
- <input type="text" id="from" placeholder="Choose a nickname"/>
- </div>
- <br />
- <div>
- <button id="connect" onclick="connect();">Connect</button>
- <button id="disconnect" disabled="disabled" onclick="disconnect();">
- Disconnect
- </button>
- </div>
- <br />
- <div id="conversationDiv">
- <input type="text" id="text" placeholder="Write a message..."/>
- <button id="sendMessage" onclick="sendMessage();">Send</button>
- <p id="response"></p>
- </div>
- </div>
-
- </body>
-</html>
--->
