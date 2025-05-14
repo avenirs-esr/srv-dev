@@ -19,12 +19,6 @@ info "Avenirs portfolio cleaning started."
     || err "Unable to source $AVENIRS_PORTFOLIO_SCRIPT_DIR/avenirs-portfolio-env.sh"
 
 
-# ---- avenirs-portfolio-api
-
-# Resets the repository
-reset_git_repository $AVENIRS_PORTFOLIO_API_REPOSITORY_DIR $AVENIRS_PORTFOLIO_API_MAIN_BRANCH $AVENIRS_PORTFOLIO_API_LOCAL_BRANCH
-
-
 # ---- avenirs-portfolio-security
 
 # Resets the repository

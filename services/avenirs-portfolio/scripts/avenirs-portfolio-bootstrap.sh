@@ -15,11 +15,6 @@ info "Avenirs portfolio bootstrapping started."
 . $AVENIRS_PORTFOLIO_SCRIPT_DIR/avenirs-portfolio-env.sh $AVENIRS_PORTFOLIO_SCRIPT_DIR 2> /dev/null \
     || err "Unable to source $AVENIRS_PORTFOLIO_SCRIPT_DIR/avenirs-portfolio-env.sh"
 
-
-
-# ---- avenirs-portfolio-api
-init_git_repository $AVENIRS_PORTFOLIO_API_REPOSITORY_DIR $AVENIRS_PORTFOLIO_API_REMOTE_BRANCH $AVENIRS_PORTFOLIO_API_LOCAL_BRANCH
-
 # Network check
 check_network
 
