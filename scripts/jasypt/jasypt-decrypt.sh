@@ -20,9 +20,12 @@
 # && sed "s|ENC($encrypted)|$decrypted|" src/main/resources/db/init-db.sql \
 # | psql -p 65432 -h localhost -U pguser template1
 
+JASYPT_SCRIPT_DIR=`dirname $0`
+. $JASYPT_SCRIPT_DIR/../srv-dev-commons.sh
+
 OS=$(detect_os)
 if [ "$OS" == "Windows" ]; then
-  # Charger la variable d'environnement Windows
+  # Load the Windows environment variable
   JASYPT_ENCRYPTOR_PASSWORD=$(powershell.exe -Command "[System.Environment]::GetEnvironmentVariable('JASYPT_ENCRYPTOR_PASSWORD')")
   JASYPT_ENCRYPTOR_PASSWORD=$(echo "$JASYPT_ENCRYPTOR_PASSWORD" | tr -d '\r' | awk '{$1=$1};1')
   export JASYPT_ENCRYPTOR_PASSWORD
