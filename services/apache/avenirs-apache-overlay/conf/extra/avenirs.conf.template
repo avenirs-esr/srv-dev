@@ -55,6 +55,17 @@ ProxyPassReverse /avenirs-portfolio-security/api-docs http://__AVENIRS_PORTFOLIO
 ProxyPass /avenirs-portfolio-security http://__AVENIRS_PORTFOLIO_SECURITY_CONTAINER_NAME__:12000
 ProxyPassReverse /avenirs-portfolio-security http://__AVENIRS_PORTFOLIO_SECURITY_CONTAINER_NAME__:12000
 
+
+ProxyPass /avenirs-portfolio-api/swagger-ui http://__AVENIRS_PORTFOLIO_API_CONTAINER_NAME__:10000/avenirs-portfolio-api/swagger-ui
+ProxyPassReverse /avenirs-portfolio-api/swagger-ui http://__AVENIRS_PORTFOLIO_API_CONTAINER_NAME__:10001/avenirs-portfolio-api/swagger-ui
+
+ProxyPass /avenirs-portfolio-api/api-docs http://__AVENIRS_PORTFOLIO_API_CONTAINER_NAME__:10000/avenirs-portfolio-api/api-docs
+ProxyPassReverse /avenirs-portfolio-api/api-docs http://__AVENIRS_PORTFOLIO_API_CONTAINER_NAME__:10001/avenirs-portfolio-api/api-docs
+
+ProxyPass /avenirs-portfolio-api http://__AVENIRS_PORTFOLIO_API_CONTAINER_NAME__:10000
+ProxyPassReverse /avenirs-portfolio-api http://__AVENIRS_PORTFOLIO_API_CONTAINER_NAME__:10000
+
+
 ProxyPass /node-api http://__AVENIRS_NODE_CONTAINER_NAME__:3000
 ProxyPassReverse /node-api http://__AVENIRS_NODE_CONTAINER_NAME__:3000
 
