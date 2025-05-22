@@ -9,6 +9,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+| [1.3.0] | 2025-05-22 | [PR(#17)](https://github.com/avenirs-esr/srv-dev/pull/17)  |
 | [1.2.0] | 2025-05-19 | [PR(#3)](https://github.com/avenirs-esr/avenirs-portfolio-api/pull/3)  |
 | [1.1.1] | 2025-05-15 | [PR(#16)](https://github.com/avenirs-esr/srv-dev/pull/16)  |
 | [1.1.0] | 2025-05-13 | [PR(#14)](https://github.com/avenirs-esr/srv-dev/pull/14)  |
@@ -17,6 +18,13 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 | [1.0.0] | 2025-04-20 | [PR(#11)](https://github.com/avenirs-esr/srv-dev/pull/11)  |
 
 ---
+
+### [1.3.0] - 2025-05-22 - _[API]_ [PR(#17)](https://github.com/avenirs-esr/srv-dev/pull/17)
+
+#### ✨ Added
+- avenirs-portfolio-api : spring env file generation to inject fixtures in database.
+- avenirs-apache: reverse proxy configuration for avenirs-portfolio-api.
+
 ### [1.2.0] - 2025-05-19 - _[API]_ [PR(#3)](https://github.com/avenirs-esr/avenirs-portfolio-api/pull/3)
 
 #### ✨ Added
