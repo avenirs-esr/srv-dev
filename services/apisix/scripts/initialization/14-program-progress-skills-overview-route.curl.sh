@@ -2,7 +2,7 @@
 
 END_POINT="http://avenirs-apache/apisix-api/apisix/admin/routes"
 
-curl -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" -i "$END_POINT" -X PUT -d '
+curl -H "X-API-KEY: $APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
 {
   "name": "program-progress-skills-overview-route",
   "id": "program-progress-skills-overview-route",
