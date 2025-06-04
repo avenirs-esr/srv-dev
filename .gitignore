@@ -4,6 +4,7 @@
 *.ldif.log
 node_modules
 .env
+secret_env
 docker-compose.override.yml
 envvars
 *.no-git
