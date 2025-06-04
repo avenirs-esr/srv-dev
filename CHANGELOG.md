@@ -9,6 +9,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+| [1.3.0] | 2025-05-22 | [PR(#17)](https://github.com/avenirs-esr/srv-dev/pull/17)  |
 | [1.2.0] | 2025-05-19 | [PR(#3)](https://github.com/avenirs-esr/avenirs-portfolio-api/pull/3)  |
 | [1.1.1] | 2025-05-15 | [PR(#16)](https://github.com/avenirs-esr/srv-dev/pull/16)  |
 | [1.1.0] | 2025-05-13 | [PR(#14)](https://github.com/avenirs-esr/srv-dev/pull/14)  |
@@ -17,6 +18,54 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 | [1.0.0] | 2025-04-20 | [PR(#11)](https://github.com/avenirs-esr/srv-dev/pull/11)  |
 
 ---
+
+### [1.3.0] - 2025-05-22 - _[API]_ [PR(#17)](https://github.com/avenirs-esr/srv-dev/pull/17)
+
+#### ✨ Added
+- Apisix routes for avenirs-portfolio-api's endpoints.
+- avenirs-portfolio-api : spring env file generation to inject fixtures in database.
+- avenirs-apache: 
+    - reverse proxy configuration for avenirs-portfolio-api.
+    - end points information removed from index page.
+
+#### 🛠 Changed
+- The file for Apisix api keys: *services/apisix/secret_env* must be downloaded from vaultwarden.
+
+##### Curl query samples
+
+**Profile overview on localhost**
+```bash
+curl -k  --header "Authorization: Bearer AT-1..."  \
+-X GET "https://localhost/apim/me/user/student/overview"\
+-H "Accept: application/json"
+```
+
+**Profile overview on srv-dev-avenir**
+```bash
+curl -k  --header "Authorization: Bearer AT-1..."  \
+-X GET "https://srv-dev-avenir.srv-avenir.brgm.recia.net/apim/me/user/student/overview"\
+-H "Accept: application/json"
+```
+
+**Profile update on localhost**
+```bash
+curl -k --header "Authorization: Bearer AT-1-..."   -X PUT "https://localhost/apim/me/user/student/update"   -H "Content-Type: application/json"   -H "Accept: application/json"   -d '{
+  "firstname": "Camille2",
+  "lastname": "Laurent2",
+  "email": "camille2.laurent2@univ.fr",
+  "bio": "New bio"
+}' 
+```
+
+**Profile update on srv-dev-avenir**
+
+curl -k --header "Authorization: Bearer AT-1-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r"   -X PUT "https://srv-dev-avenir.srv-avenir.brgm.recia.net/apim/me/user/student/update"   -H "Content-Type: application/json"   -H "Accept: application/json"   -d '{
+  "firstname": "Camille2",
+  "lastname": "Laurent2",
+  "email": "camille2.laurent2@univ.fr",
+  "bio": "New bio"
+}'
+
 ### [1.2.0] - 2025-05-19 - _[API]_ [PR(#3)](https://github.com/avenirs-esr/avenirs-portfolio-api/pull/3)
 
 #### ✨ Added

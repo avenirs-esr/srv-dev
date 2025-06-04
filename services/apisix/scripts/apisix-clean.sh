@@ -22,6 +22,8 @@ info "APISIX cleaning started."
 # Empty folder generated with root as owner if the dockers are started without proper intialization
 [ -d $APISIX_SCRIPT_DIR/../apisix-docker/example/dashboard_conf/conf.yaml ] && sudo rmdir $APISIX_SCRIPT_DIR/../apisix-docker/example/dashboard_conf/conf.yaml
 
+sudo chown $USER $APISIX_SCRIPT_DIR/../apisix-docker/example/dashboard_conf
+
 # Removes the overlay's files
 remove_overlay $APISIX_REPOSITORY_DIR  
 remove_overlay $APISIX_UI_REPOSITORY_DIR  
