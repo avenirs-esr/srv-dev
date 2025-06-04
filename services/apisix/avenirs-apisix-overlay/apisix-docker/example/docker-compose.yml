@@ -98,7 +98,8 @@ services:
       - apisix-dashboard
     volumes:
       - ../../scripts/initialization:/scripts
-    command: sh -c "sh /scripts/init-routes.sh 2>&1"
+      - ../../secret_env:/scripts/secret_env
+    command: sh -c "sh /scripts/init-routes.sh 2>&1; tail -f /dev/null"
     networks:
       - apisix-network    
 networks: 
