@@ -27,6 +27,10 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 - avenirs-apache: 
     - reverse proxy configuration for avenirs-portfolio-api.
     - end points information removed from index page.
+
+#### 🛠 Changed
+- The file for Apisix api keys: *services/apisix/secret_env* must be downloaded from vaultwarden.
+
 ##### Curl query samples
 
 **Profile overview on localhost**
