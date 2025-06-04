@@ -99,7 +99,7 @@ services:
     volumes:
       - ../../scripts/initialization:/scripts
       - ../../secret_env:/scripts/secret_env
-    command: sh -c "sh /scripts/init-routes.sh 2>&1; tail -f /dev/null"
+    command: sh -c "sh /scripts/init-routes.sh 2>&1"
     networks:
       - apisix-network    
 networks: 
