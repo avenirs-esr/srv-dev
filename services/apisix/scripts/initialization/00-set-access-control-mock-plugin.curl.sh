@@ -22,10 +22,18 @@ JSON_CONTENT=$(cat <<EOF
                 local cjson = require(\"cjson\");
 
                 local token_to_uuid = {
-                  [\"AT-1-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r\"] = \"49a6840d-d62e-401f-9fd0-8668696c1749\",
-                  [\"AT-2-b38sDr3jDnMjph-SSEWqvCJJ6de5XE9s\"] = \"ce86b264-b390-49a1-9365-7d531ecc2c73\",
-                  [\"AT-3-z43sDr3jDnMjph-SSEWqvCJJ6de5XE9s\"] = \"8946b501-99ef-4163-b428-52e20f56ebc7\",
-                  [\"AT-4-foo34ZEjDnMjph-SSEWqvCJJ6de5XE9s\"] = \"306344d2-27d3-411d-b14a-d522d329abf2\"
+                  [\"AT-1-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r\"] = \"9fe9516a-a528-4870-8f15-89187e368610\",
+                  [\"AT-2-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r\"] = \"ddb5120e-c69e-4c7a-8a77-b7aa5017ca2a\",
+                  [\"AT-3-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r\"] = \"ae7740ef-2847-4973-890e-5151707609cd\",
+                  [\"AT-4-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r\"] = \"79fd2bea-4b64-42c7-9c22-06b139be2a51\",
+                  [\"AT-5-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r\"] = \"cbf64061-a1c3-4876-9877-df2fdbb5d938\",
+                  [\"AT-6-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r\"] = \"93281b1f-b752-409e-8fd6-50ac2389763a\",
+                  [\"AT-7-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r\"] = \"806ed466-2adc-45fd-9f68-703965b3779c\",
+                  [\"AT-8-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r\"] = \"59323334-5b1d-49c2-90d5-1fd2de97efe6\",
+                  [\"AT-9-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r\"] = \"e484d7c1-bc00-403e-9522-b06ec544ecb4\",
+                  [\"AT-10-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r\"] = \"ad979265-7d67-4306-8d1a-55256b44e5ab\",
+                  [\"AT-11-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r\"] = \"626849de-5a42-4d14-8073-c0e4aa109150\",
+                  [\"AT-12-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r\"] = \"56a75a55-2f69-456d-a92d-323149a5ab7f\",
                 }
 
                 ngx.log(ngx.ERR, \"serverless pre function\");
@@ -66,10 +74,8 @@ JSON_CONTENT=$(cat <<EOF
             local h = hmac:new(hmac_key, hmac.ALGOS.SHA256)
             h:update(payload)
             local signature = h:final(nil, true)
-ngx.log(ngx.ERR, \"serverless pre function signature_bin \",signature_bin)
 
             --local signature_hex = str.to_hex(signature_bin)
---ngx.log(ngx.ERR, \"serverless pre function signature_hex \",signature_hex)
             core.request.set_header(ctx, \"X-Signed-Context\", user_id)
             core.request.set_header(ctx, \"X-Context-Signature\", signature)
             core.request.set_header(ctx, \"X-Context-Kid\", current_kid)

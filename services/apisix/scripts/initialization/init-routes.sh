@@ -13,7 +13,7 @@ echo "----"
 for f in /scripts/*.curl.sh
 do 
     echo $f
-    $f
+    sh $f
 done
 if [ $? -eq 0 ]
 then
