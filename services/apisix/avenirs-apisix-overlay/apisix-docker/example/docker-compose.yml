@@ -37,6 +37,8 @@ services:
     restart: always
     volumes:
       - ./apisix_conf/config.yaml:/usr/local/apisix/conf/config.yaml:ro
+    env_file:
+      - ../../secret_env
     depends_on:
       - etcd
     
@@ -98,7 +100,6 @@ services:
       - apisix-dashboard
     volumes:
       - ../../scripts/initialization:/scripts
-      - ../../secret_env:/scripts/secret_env
     command: sh -c "sh /scripts/init-routes.sh 2>&1"
     networks:
       - apisix-network    
