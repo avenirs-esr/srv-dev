@@ -76,7 +76,7 @@ JSON_CONTENT=$(cat <<EOF
             local signature = h:final(nil, true)
 
             --local signature_hex = str.to_hex(signature_bin)
-            core.request.set_header(ctx, \"X-Signed-Context\", user_id)
+            core.request.set_header(ctx, \"X-Signed-Context\", user_context)
             core.request.set_header(ctx, \"X-Context-Signature\", signature)
             core.request.set_header(ctx, \"X-Context-Kid\", current_kid)
             core.request.set_header(ctx, \"avenirsEndPoint\",ctx.var.uri) ;
