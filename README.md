@@ -157,7 +157,7 @@ An example can be found in *services/avenirs-portfolio/scripts/avenirs-portfolio
 N.B.: Theses scripts are executed when the container is started for the first time.
 
 ## APISIX Initialisation
-**Note:** The file for Apisix api keys: *services/apisix/secret_env* must be downloaded from vaultwarden.
+**Note:** The file for Apisix api keys: *services/apisix/secret_env* must be downloaded from vaultwarden.<br>
 The APISIX initialization scripts can be placed in the folder: *services/apisix/scripts/initialization.*<br/>
 Theses scripts are executed by a specific initialization container and the entry point is
 *init-routes.sh.*<br/>

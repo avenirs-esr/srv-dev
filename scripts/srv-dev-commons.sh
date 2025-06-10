@@ -189,7 +189,7 @@ function install_overlay {
     for  f in `ls -A  -I .gitignore $overlay_root `
     do
 
-        if [[ $f =~ .*\.(properties|config)\.template(\.?no-git)? ]]
+        if [[ $f =~ .*\.(properties|config|yaml|yml)\.template(\.?no-git)? ]]
         then
             vvverbose "install_overlay ignored file: $f"
         else
@@ -199,7 +199,7 @@ function install_overlay {
                 cp  $source $target &&  vverbose "Overlay file: $source -> $target" ||  err "unable to copy overlay file $source -> $target"
             elif [ -d $source ]
             then
-                install_overlay $source $target/$f  &&  vverbose "Ovelay directory: $source" || err "unable to proccess overlay subdir $source"
+                install_overlay $source $target/$f  &&  vverbose "Overlay directory: $source" || err "unable to proccess overlay subdir $source"
             fi
         fi
     done

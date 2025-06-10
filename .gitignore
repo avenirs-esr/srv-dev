@@ -12,3 +12,4 @@ envvars
 **/node-api/dist/
 **/avenirs-cas-overlay/.gradle/
 **/.idea
+**/apisix_conf/config.yaml

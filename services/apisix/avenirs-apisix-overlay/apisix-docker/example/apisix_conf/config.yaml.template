@@ -31,11 +31,11 @@ deployment:
 
     admin_key:
       - name: "admin"
-        key: ${APISIX_ADMIN_KEY}
+        key: __APISIX_ADMIN_KEY__
         role: admin                 # admin: manage all configuration data
 
       - name: "viewer"
-        key: ${APISIX_VIEWER_KEY}
+        key: __APISIX_VIEWER_KEY__
         role: viewer
 
   etcd:

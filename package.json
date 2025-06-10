@@ -6,7 +6,7 @@
   "scripts": {
     "test": "",
     "prepare": "husky install",
-    "deploy": "bash ./scripts/srv-dev-clean.sh -vv && bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build -d",
+    "deploy": "bash ./scripts/check-prerequisites.sh -vv && bash ./scripts/srv-dev-clean.sh -vv && bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build -d",
     "clean": "docker-compose down; bash ./scripts/srv-dev-clean.sh -vv",
     "purge": "docker-compose down -v; bash ./scripts/srv-dev-clean.sh -vv --purge; docker system prune -a --volumes",
     "reset": "npm run purge; bash ./scripts/srv-dev-bootstrap.sh -vv && docker-compose up --build -d",
