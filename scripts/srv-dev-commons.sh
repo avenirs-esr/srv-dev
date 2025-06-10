@@ -189,7 +189,7 @@ function install_overlay {
     for  f in `ls -A  -I .gitignore $overlay_root `
     do
 
-        if [[ $f =~ .*\.(properties|config)\.template(\.?no-git)? ]]
+        if [[ $f =~ .*\.(properties|config|yaml|yml)\.template(\.?no-git)? ]]
         then
             vvverbose "install_overlay ignored file: $f"
         else
