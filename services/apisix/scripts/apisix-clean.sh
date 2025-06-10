@@ -19,7 +19,15 @@ info "APISIX cleaning started."
     || err "Unable to source $APISIX_SCRIPT_DIR/apisix-env.sh"
 
 
-# Empty folder generated with root as owner if the dockers are started without proper intialization
+# Removes the generated config file
+if [ -f $APISIX_CONFIG ] 
+then
+    rm -f $APISIX_CONFIG && vverbose "APISIX config file $APISIX_CONFIG removed." || err "Unable to remove APISIX config file $APISIX_CONFIG"
+else 
+    vverbose "APISIX config file $APISIX_CONFIG not present, nothing to remove."
+fi
+
+# Empty folder generated with root as owner if the dockers are started without proper initialization
 [ -d $APISIX_SCRIPT_DIR/../apisix-docker/example/dashboard_conf/conf.yaml ] && sudo rmdir $APISIX_SCRIPT_DIR/../apisix-docker/example/dashboard_conf/conf.yaml
 
 sudo chown $USER $APISIX_SCRIPT_DIR/../apisix-docker/example/dashboard_conf

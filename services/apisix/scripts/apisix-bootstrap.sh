@@ -36,6 +36,12 @@ init_git_repository $APISIX_REPOSITORY_DIR $APISIX_REMOTE_BRANCH $APISIX_LOCAL_B
 # Network check
 check_network
 
+# Generates APISIX config file with specified apis keys
+. $APISIX_SCRIPT_DIR/../secret_env || err "Unable to load secret_env. This file can be downloaded from vault or generated from secret_env.sample"
+cat $APISIX_CONFIG_TEMPLATE | sed "s/__APISIX_ADMIN_KEY__/$APISIX_ADMIN_KEY/g" | sed "s/__APISIX_VIEWER_KEY__/$APISIX_VIEWER_KEY/g" > $APISIX_CONFIG
+[ $? -eq 0 ] && verbose "APISIX config file generated." || err "Unable to generate APISIX config file"
+
+
 # Overlay files
 install_overlay $APISIX_OVERLAY_DIR $APISIX_REPOSITORY_DIR
 install_overlay $APISIX_UI_OVERLAY_DIR $APISIX_UI_REPOSITORY_DIR
