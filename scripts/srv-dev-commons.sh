@@ -199,7 +199,7 @@ function install_overlay {
                 cp  $source $target &&  vverbose "Overlay file: $source -> $target" ||  err "unable to copy overlay file $source -> $target"
             elif [ -d $source ]
             then
-                install_overlay $source $target/$f  &&  vverbose "Ovelay directory: $source" || err "unable to proccess overlay subdir $source"
+                install_overlay $source $target/$f  &&  vverbose "Overlay directory: $source" || err "unable to proccess overlay subdir $source"
             fi
         fi
     done
