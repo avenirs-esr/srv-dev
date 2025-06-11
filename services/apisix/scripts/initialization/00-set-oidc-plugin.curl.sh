@@ -10,8 +10,8 @@ JSON_CONTENT=$(cat <<EOF
   "desc": "Avenirs OpenID Connect authentication configuration",
   "plugins": {
     "openid-connect": {
-      "client_id": "APIMClientId",
-      "client_secret": "ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=",
+      "client_id": "$APISIX_OIDC_CLIENT_ID",
+      "client_secret": "$APISIX_OIDC_CLIENT_SECRET",
       "discovery": "https://avenirs-apache/cas/oidc/.well-known",
       "introspection_endpoint": "https://avenirs-apache/cas/oidc/introspect",
       "redirect_uri": "https?://avenirs-apache/node-api/cas-auth-callback(.*)",
