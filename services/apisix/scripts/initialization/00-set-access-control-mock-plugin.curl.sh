@@ -3,7 +3,7 @@
 END_POINT="http://avenirs-apisix-api:9180/apisix/admin/plugin_configs"
 
 
-SON_CONTENT=$(cat <<EOF
+JSON_CONTENT=$(cat <<EOF
 {
   "id": "avenirs-access-control-mock",
   "desc": "Avenirs access control mock based on serveless-pre-function",
