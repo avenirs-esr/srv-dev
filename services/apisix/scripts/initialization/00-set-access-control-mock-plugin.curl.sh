@@ -1,6 +1,6 @@
 #! /bin/sh
 
-END_POINT="http://avenirs-apache/apisix-api/apisix/admin/plugin_configs"
+END_POINT="http://avenirs-apisix-api:9180/apisix/admin/plugin_configs"
 
 
 JSON_CONTENT=$(cat <<EOF
@@ -47,7 +47,7 @@ JSON_CONTENT=$(cat <<EOF
                 ngx.log(ngx.ERR, \"serverless pre function token \",token)
                 
                 local user_id = token_to_uuid[token]
-               if user_id == nil then
+                if user_id == nil then
                  return 403, {
                   message = \"Forbidden: invalid token\",
                   status = 403,
@@ -60,7 +60,7 @@ JSON_CONTENT=$(cat <<EOF
            
             local now = ngx.time()
             local user_context = {
-                uid = user_id,
+                sub = user_id,
                 iat = now,
                 exp = now + 300
             }
@@ -73,13 +73,13 @@ JSON_CONTENT=$(cat <<EOF
             local hmac_key = hmac_keys[current_kid]
             local h = hmac:new(hmac_key, hmac.ALGOS.SHA256)
             h:update(payload)
-            local signature = h:final(nil, true)
-
-            --local signature_hex = str.to_hex(signature_bin)
-            core.request.set_header(ctx, \"X-Signed-Context\", user_id)
-            core.request.set_header(ctx, \"X-Context-Signature\", signature)
+            local signature_bin = h:final(nil, false)
+            local signature_base64 = ngx.encode_base64(signature_bin)
+            core.request.set_header(ctx, \"X-Signed-Context\", payload)
+            core.request.set_header(ctx, \"X-Context-Signature\", signature_base64)
             core.request.set_header(ctx, \"X-Context-Kid\", current_kid)
-            core.request.set_header(ctx, \"avenirsEndPoint\",ctx.var.uri) ;
+            ngx.req.clear_header(\"Authorization\")
+            core.request.set_header(ctx, \"avenirsEndPoint\",ctx.var.uri)
                 
                 
             end"

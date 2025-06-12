@@ -9,6 +9,8 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+| [1.3.2] | 2025-06-11 | [PR(#21)](https://github.com/avenirs-esr/srv-dev/pull/21)  |
+| [1.3.1] | 2025-06-10 | [PR(#20)](https://github.com/avenirs-esr/srv-dev/pull/20)  |
 | [1.3.0] | 2025-05-22 | [PR(#17)](https://github.com/avenirs-esr/srv-dev/pull/17)  |
 | [1.2.0] | 2025-05-19 | [PR(#3)](https://github.com/avenirs-esr/avenirs-portfolio-api/pull/3)  |
 | [1.1.1] | 2025-05-15 | [PR(#16)](https://github.com/avenirs-esr/srv-dev/pull/16)  |
@@ -18,6 +20,23 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 | [1.0.0] | 2025-04-20 | [PR(#11)](https://github.com/avenirs-esr/srv-dev/pull/11)  |
 
 ---
+
+### [1.3.2] - 2025-06-11 - [PR(#21)](https://github.com/avenirs-esr/srv-dev/pull/21)
+
+#### ✨ Changed
+- OIDC plugin definition
+- auth mock adapted in order to work with avenirs-portfolio-api.
+- oidc-client/secret for apisix in secret_env (see vaultwarden).
+- route initialization scripts refactored to avoid reverse proxy.
+
+### [1.3.1] - 2025-06-10 - [PR(#20)](https://github.com/avenirs-esr/srv-dev/pull/20)
+
+#### ✨ Changed
+- Prerequisites script that can stop the process if on prerequisite is not met.
+- Use a template fir apisix config file.
+
+#### 🐛 Fixed
+- invalid environment variables substitution in apisix config file.
 
 ### [1.3.0] - 2025-05-22 - _[API]_ [PR(#17)](https://github.com/avenirs-esr/srv-dev/pull/17)
 
