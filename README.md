@@ -159,9 +159,11 @@ N.B.: Theses scripts are executed when the container is started for the first ti
 ## APISIX Initialisation
 **Note:** The file for Apisix api keys: *services/apisix/secret_env* must be downloaded from vaultwarden.<br>
 The APISIX initialization scripts can be placed in the folder: *services/apisix/scripts/initialization.*<br/>
+**apisix-generate-routes-from-open-api.sh** can be used to generate the routes from the openapi.json file.<br/>
 Theses scripts are executed by a specific initialization container and the entry point is
 *init-routes.sh.*<br/>
-N.B: the extension curl.sh is used to filter the scripts, e.g.: 01-set-auth-mock-test-route.curl.sh.
+N.B: the extension curl.sh is used to filter the scripts, e.g.: 10-updateprofile-route.curl.sh.
+
 
 ## Deployed containers
 
