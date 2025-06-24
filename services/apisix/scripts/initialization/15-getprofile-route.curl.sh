@@ -4,12 +4,11 @@ END_POINT="http://avenirs-apisix-api:9180/apisix/admin/routes"
 
 curl -H "X-API-KEY: $APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
 {
-  "name": "me-user-profile-overview-route",
-  "id": "me-user-profile-overview-route",
-  "uri": "/me/user/*/overview",
+  "name": "getprofile-route",
+  "id": "getprofile-route",
+  "uri": "/me/user/{profile}/overview",
   "methods": ["GET"],
   "plugin_config_id": "avenirs-access-control-mock",
-  
   "upstream": {
     "type": "roundrobin",
     "nodes": {
