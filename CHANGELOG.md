@@ -9,6 +9,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+| [1.3.2] | 2025-06-24 | [PR(#22)](https://github.com/avenirs-esr/srv-dev/pull/22)  |
 | [1.3.2] | 2025-06-11 | [PR(#21)](https://github.com/avenirs-esr/srv-dev/pull/21)  |
 | [1.3.1] | 2025-06-10 | [PR(#20)](https://github.com/avenirs-esr/srv-dev/pull/20)  |
 | [1.3.0] | 2025-05-22 | [PR(#17)](https://github.com/avenirs-esr/srv-dev/pull/17)  |
@@ -20,6 +21,11 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 | [1.0.0] | 2025-04-20 | [PR(#11)](https://github.com/avenirs-esr/srv-dev/pull/11)  |
 
 ---
+
+### [1.3.2] - 2025-06-24 - [PR(#22)](https://github.com/avenirs-esr/srv-dev/pull/22)
+
+#### ✨ Changed
+- apisix-generate-routes-from-open-api.sh can be used to generate the routes from Open API specification.
 
 ### [1.3.2] - 2025-06-11 - [PR(#21)](https://github.com/avenirs-esr/srv-dev/pull/21)
 
