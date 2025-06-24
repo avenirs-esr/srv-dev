@@ -8,6 +8,9 @@ secret_env
 docker-compose.override.yml
 envvars
 *.no-git
+*.nogit
+*.no-git.*
+*.nogit.*
 *.generated.*
 **/node-api/dist/
 **/avenirs-cas-overlay/.gradle/
