@@ -6,7 +6,7 @@ curl -H "X-API-KEY: $APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
 {
   "name": "getphoto-route",
   "id": "getphoto-route",
-  "uri": "/photo/{profile}/{fileName}",
+  "uri": "/photo/*/*",
   "methods": ["GET"],
   "plugin_config_id": "avenirs-access-control-mock",
   "upstream": {

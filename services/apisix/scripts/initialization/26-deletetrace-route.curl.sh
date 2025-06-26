@@ -4,10 +4,10 @@ END_POINT="http://avenirs-apisix-api:9180/apisix/admin/routes"
 
 curl -H "X-API-KEY: $APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
 {
-  "name": "updateprofilecover-route",
-  "id": "updateprofilecover-route",
-  "uri": "/me/user/*/update/cover",
-  "methods": ["PUT"],
+  "name": "deletetrace-route",
+  "id": "deletetrace-route",
+  "uri": "/me/traces/*",
+  "methods": ["DELETE"],
   "plugin_config_id": "avenirs-access-control-mock",
   "upstream": {
     "type": "roundrobin",

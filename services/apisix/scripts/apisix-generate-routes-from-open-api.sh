@@ -39,6 +39,7 @@ jq -c '
     }
 ' $OPEN_API_FILE | while read -r json; do
   uri=$(echo "$json" | jq -r '.uri')
+  uri=$(echo "$uri" | sed -E 's/\{[^}]+\}/*/g')
   method=$(echo "$json" | jq -r '.method')
   operation=$(echo "$json" | jq -r '.operation')
   route_id="${operation}-route"

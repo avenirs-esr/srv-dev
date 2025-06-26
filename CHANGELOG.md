@@ -9,6 +9,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+| [1.3.3] | 2025-06-26 | [PR(#25)](https://github.com/avenirs-esr/srv-dev/pull/25)  |
 | [1.3.3] | 2025-06-26 | [PR(#24)](https://github.com/avenirs-esr/srv-dev/pull/24)  |
 | [1.3.2] | 2025-06-24 | [PR(#22)](https://github.com/avenirs-esr/srv-dev/pull/22)  |
 | [1.3.2] | 2025-06-11 | [PR(#21)](https://github.com/avenirs-esr/srv-dev/pull/21)  |
@@ -22,6 +23,10 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 | [1.0.0] | 2025-04-20 | [PR(#11)](https://github.com/avenirs-esr/srv-dev/pull/11)  |
 
 ---
+### [1.3.4] - 2025-06-26 - [PR(#24)](https://github.com/avenirs-esr/srv-dev/pull/24)
+
+#### 🐛 Fixed
+- Invalid path segments in apisix routes generation from OpenAPI specification.
 
 ### [1.3.3] - 2025-06-26 - [PR(#24)](https://github.com/avenirs-esr/srv-dev/pull/24)
 
