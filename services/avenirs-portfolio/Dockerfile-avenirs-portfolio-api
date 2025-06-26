@@ -17,6 +17,6 @@ VOLUME /tmp
 ARG DEPENDENCY=/workspace/app/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
-COPY --from=build /workspace/app/target/avenirs-portfolio-api-${AVENIRS_PORTFOLIO_API_VERSION}-SNAPSHOT.jar /app/avenirs-portfolio-api.jar
+COPY --from=build /workspace/app/target/avenirs-portfolio-api-*-SNAPSHOT.jar /app/avenirs-portfolio-api.jar
 
 ENTRYPOINT ["java", "-server", "-noverify", "-Xmx2048M", "-jar", "/app/avenirs-portfolio-api.jar"]
