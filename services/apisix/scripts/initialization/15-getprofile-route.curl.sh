@@ -6,7 +6,7 @@ curl -H "X-API-KEY: $APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
 {
   "name": "getprofile-route",
   "id": "getprofile-route",
-  "uri": "/me/user/{profile}/overview",
+  "uri": "/me/user/*/overview",
   "methods": ["GET"],
   "plugin_config_id": "avenirs-access-control-mock",
   "upstream": {

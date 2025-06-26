@@ -6,7 +6,7 @@ curl -H "X-API-KEY: $APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
 {
   "name": "updateprofile-route",
   "id": "updateprofile-route",
-  "uri": "/me/user/{profile}/update",
+  "uri": "/me/user/*/update",
   "methods": ["PUT"],
   "plugin_config_id": "avenirs-access-control-mock",
   "upstream": {
