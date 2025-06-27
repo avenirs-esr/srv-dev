@@ -7,7 +7,7 @@ curl -H "X-API-KEY: $APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
   "name": "getskillsoverview-route",
   "id": "getskillsoverview-route",
   "uri": "/me/program-progress/overview",
-  "methods": ["GET"],
+  "methods": ["GET", "OPTIONS"],
   "plugin_config_id": "avenirs-access-control-mock",
   "upstream": {
     "type": "roundrobin",

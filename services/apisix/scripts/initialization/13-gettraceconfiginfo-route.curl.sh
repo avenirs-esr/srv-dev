@@ -7,7 +7,7 @@ curl -H "X-API-KEY: $APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
   "name": "gettraceconfiginfo-route",
   "id": "gettraceconfiginfo-route",
   "uri": "/traces/config",
-  "methods": ["GET"],
+  "methods": ["GET", "OPTIONS"],
   "plugin_config_id": "avenirs-access-control-mock",
   "upstream": {
     "type": "roundrobin",

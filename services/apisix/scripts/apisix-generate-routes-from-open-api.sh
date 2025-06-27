@@ -55,7 +55,7 @@ curl -H "X-API-KEY: \$APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
   "name": "$route_id",
   "id": "$route_id",
   "uri": "$uri",
-  "methods": ["$method"],
+  "methods": ["$method", "OPTIONS"],
   "plugin_config_id": "$PLUGIN_ID",
   "upstream": {
     "type": "roundrobin",

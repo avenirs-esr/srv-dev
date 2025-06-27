@@ -7,7 +7,7 @@ curl -H "X-API-KEY: $APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
   "name": "updateprofilephoto-route",
   "id": "updateprofilephoto-route",
   "uri": "/me/user/*/update/photo",
-  "methods": ["PUT"],
+  "methods": ["PUT", "OPTIONS"],
   "plugin_config_id": "avenirs-access-control-mock",
   "upstream": {
     "type": "roundrobin",

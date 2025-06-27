@@ -13,6 +13,10 @@ JSON_CONTENT=$(cat <<EOF
       "functions": [
         "return function(conf, ctx) 
 
+                if ctx.var.request_method == \"OPTIONS\" then
+                  return
+                end
+
                 local core = require(\"apisix.core\");
                 local http = require(\"resty.http\");
                 local hmac = require(\"resty.hmac\");

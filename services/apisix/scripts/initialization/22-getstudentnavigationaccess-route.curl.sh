@@ -7,7 +7,7 @@ curl -H "X-API-KEY: $APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
   "name": "getstudentnavigationaccess-route",
   "id": "getstudentnavigationaccess-route",
   "uri": "/me/navigation-access",
-  "methods": ["GET"],
+  "methods": ["GET", "OPTIONS"],
   "plugin_config_id": "avenirs-access-control-mock",
   "upstream": {
     "type": "roundrobin",
