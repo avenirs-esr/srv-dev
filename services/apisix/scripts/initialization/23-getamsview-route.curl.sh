@@ -14,7 +14,7 @@ curl -H "X-API-KEY: $APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
         "disable": false
       },
       "allow_credential": false,
-      "allow_headers": "Authorization",
+      "allow_headers": "authorization,content-type,accept-language",
       "allow_methods": "*",
       "allow_origins": "*",
       "expose_headers": "*",
