@@ -9,7 +9,8 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
- [1.4.0] | 2025-06-26 | [PR(#26)](https://github.com/avenirs-esr/srv-dev/pull/26)  |
+| [1.5.0] | 2025-06-30 | [PR(#27)](https://github.com/avenirs-esr/srv-dev/pull/27)  |
+| [1.4.0] | 2025-06-26 | [PR(#26)](https://github.com/avenirs-esr/srv-dev/pull/26)  |
 | [1.3.3] | 2025-06-26 | [PR(#25)](https://github.com/avenirs-esr/srv-dev/pull/25)  |
 | [1.3.3] | 2025-06-26 | [PR(#24)](https://github.com/avenirs-esr/srv-dev/pull/24)  |
 | [1.3.2] | 2025-06-24 | [PR(#22)](https://github.com/avenirs-esr/srv-dev/pull/22)  |
@@ -24,6 +25,13 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 | [1.0.0] | 2025-04-20 | [PR(#11)](https://github.com/avenirs-esr/srv-dev/pull/11)  |
 
 ---
+
+### [1.5.0] - 2025-06-30 - [PR(#27)](https://github.com/avenirs-esr/srv-dev/pull/27)
+
+#### ✨ Added
+- configuration for preflight queries (OPTIONS).
+- cors configuration.
+
 ### [1.4.0] - 2025-06-26 - [PR(#26)](https://github.com/avenirs-esr/srv-dev/pull/26)
 
 #### ✨ Added
