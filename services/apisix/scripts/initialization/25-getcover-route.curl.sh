@@ -7,7 +7,20 @@ curl -H "X-API-KEY: $APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
   "name": "getcover-route",
   "id": "getcover-route",
   "uri": "/cover/*/*",
-  "methods": ["GET"],
+  "methods": ["GET", "OPTIONS"],
+  "plugins": {
+    "cors": {
+      "_meta": {
+        "disable": false
+      },
+      "allow_credential": false,
+      "allow_headers": "authorization,content-type,accept-language",
+      "allow_methods": "*",
+      "allow_origins": "*",
+      "expose_headers": "*",
+      "max_age": 5
+    }
+  },
   "plugin_config_id": "avenirs-access-control-mock",
   "upstream": {
     "type": "roundrobin",

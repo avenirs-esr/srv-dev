@@ -3,7 +3,7 @@
 # Section to adapt
 SWAGGER_URL="http://localhost:10000/avenirs-portfolio-api/api-docs"
 END_POINT="http://avenirs-apisix-api:9180/apisix/admin/routes"
-PLUGIN_ID="avenirs-access-control-mock"
+AC_PLUGIN_ID="avenirs-access-control-mock"
 COUNT_START=10
 # End Section to adapt
 
@@ -55,8 +55,21 @@ curl -H "X-API-KEY: \$APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
   "name": "$route_id",
   "id": "$route_id",
   "uri": "$uri",
-  "methods": ["$method"],
-  "plugin_config_id": "$PLUGIN_ID",
+  "methods": ["$method", "OPTIONS"],
+  "plugins": {
+    "cors": {
+      "_meta": {
+        "disable": false
+      },
+      "allow_credential": false,
+      "allow_headers": "authorization,content-type,accept-language",
+      "allow_methods": "*",
+      "allow_origins": "*",
+      "expose_headers": "*",
+      "max_age": 5
+    }
+  },
+  "plugin_config_id": "$AC_PLUGIN_ID",
   "upstream": {
     "type": "roundrobin",
     "nodes": {
