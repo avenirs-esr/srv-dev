@@ -9,6 +9,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+| [1.5.1] | 2025-07-03 | [PR(#28)](https://github.com/avenirs-esr/srv-dev/pull/28)  |
 | [1.5.0] | 2025-06-30 | [PR(#27)](https://github.com/avenirs-esr/srv-dev/pull/27)  |
 | [1.4.0] | 2025-06-26 | [PR(#26)](https://github.com/avenirs-esr/srv-dev/pull/26)  |
 | [1.3.3] | 2025-06-26 | [PR(#25)](https://github.com/avenirs-esr/srv-dev/pull/25)  |
@@ -25,6 +26,10 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 | [1.0.0] | 2025-04-20 | [PR(#11)](https://github.com/avenirs-esr/srv-dev/pull/11)  |
 
 ---
+### [1.5.1] - 2025-07-03 - [PR(#28)](https://github.com/avenirs-esr/srv-dev/pull/28)
+
+#### 🐛 Fixed
+- submodules in detached HEAD state.
 
 ### [1.5.0] - 2025-06-30 - [PR(#27)](https://github.com/avenirs-esr/srv-dev/pull/27)
 
