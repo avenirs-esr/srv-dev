@@ -38,5 +38,9 @@ remove_file $AVENIRS_PORTFOLIO_API_INIT_DB_CLEAR
 
 verbose "Database initialization files removed."
 
+# ---- avenirs-cofolio-client
+remove_overlay $AVENIRS_COFOLIO_CLIENT_REPOSITORY_DIR
+remove_file $AVENIRS_COFOLIO_CLIENT_ENV_FILE
+
 
 info "Avenirs portfolio cleaning completed."

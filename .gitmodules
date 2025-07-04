@@ -18,3 +18,6 @@
 	path = services/avenirs-portfolio/avenirs-portfolio-api
 	url = git@github.com:avenirs-esr/avenirs-portfolio-api
 	branch = main
+[submodule "services/avenirs-portfolio/avenirs-cofolio-client"]
+	path = services/avenirs-portfolio/avenirs-cofolio-client
+	url = git@github.com:avenirs-esr/avenirs-cofolio-client.git
