@@ -14,10 +14,10 @@
     "ls-containers": "docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}'",
     "sync-modules": " git submodule foreach --recursive 'branch=$(git config -f $toplevel/.gitmodules submodule.$name.branch || echo master); echo Switching $name to branch $branch; git checkout $branch || git checkout -b $branch origin/$branch; git pull origin $branch'",
     "sync": "git pull --recurse-submodules && git submodule update --remote --recursive && npm run sync-modules",
-    "restart-api": "cd services/avenirs-portfolio/avenirs-portfolio-api && mvn spotless:apply && npm run deploy && docker logs --follow avenirs-portfolio-api",
-    "reset-db": "npm run clean-db && npm run init-db",
-    "clean-db": "dotenv -e .env -- sh -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p 65432 -U $POSTGRES_USER -d template1 -f services/postgresql/avenirs-postgresql-overlay/init/10_avenirs-api_clean.generated.sql'",
-    "init-db": "dotenv -e .env -- sh -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p 65432 -U $POSTGRES_USER -d template1 -f services/postgresql/avenirs-postgresql-overlay/init/11_avenirs-api_init-db.generated.sql'"
+    "api:restart": "cd services/avenirs-portfolio/avenirs-portfolio-api && mvn spotless:apply && npm run deploy && docker logs --follow avenirs-portfolio-api",
+    "api:reset-db": "npm run clean-db && npm run init-db",
+    "api:clean-db": "dotenv -e .env -- sh -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p 65432 -U $POSTGRES_USER -d template1 -f services/postgresql/avenirs-postgresql-overlay/init/10_avenirs-api_clean.generated.sql'",
+    "api:init-db": "dotenv -e .env -- sh -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p 65432 -U $POSTGRES_USER -d template1 -f services/postgresql/avenirs-postgresql-overlay/init/11_avenirs-api_init-db.generated.sql'"
   },
   "repository": {
     "type": "git",
