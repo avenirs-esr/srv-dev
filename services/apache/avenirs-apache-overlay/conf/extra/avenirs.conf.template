@@ -10,6 +10,9 @@ SSLProxyCheckPeerName off
 
 ### Was not able to use the envvars with mod_proxy
 
+ProxyPass "/cofolio" "http://__AVENIRS_COFOLIO_CLIENT_CONTAINER_NAME__"
+ProxyPassReverse "/cofolio" "http://__AVENIRS_COFOLIO_CLIENT_CONTAINER_NAME__"
+
 ProxyPass "/cas" "https://__AVENIRS_CAS_CONTAINER_NAME__:8443/cas"
 ProxyPassReverse "/cas" "https://__AVENIRS_CAS_CONTAINER_NAME__:8443/cas"
 
@@ -81,3 +84,4 @@ ProxyPassReverse /monaco-editor http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME
 
 ProxyPass /user/login http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000/user/login
 ProxyPassReverse /user/login http://__AVENIRS_APISIX_DASHBOARD_CONTAINER_NAME__:9000/user/login
+

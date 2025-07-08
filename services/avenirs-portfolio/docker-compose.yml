@@ -38,6 +38,22 @@ services:
     networks:
       - avenirs-api-network
 
+  avenirs-cofolio-client:
+    container_name: ${AVENIRS_COFOLIO_CLIENT_CONTAINER_NAME}
+   
+    build:
+      context: ./avenirs-cofolio-client
+      dockerfile: ../Dockerfile-avenirs-cofolio-client
+      args:
+       OVERLAY_DIR: ${AVENIRS_COFOLIO_CLIENT_OVERLAY_BASENAME}
+    restart: always
+    ports:
+      - "${AVENIRS_COFOLIO_CLIENT_CONTAINER_PORT}:80"
+    depends_on:
+      - avenirs-portfolio-api
+    networks:
+      - avenirs-api-network
+
 networks: 
   avenirs-api-network:
     external: true
