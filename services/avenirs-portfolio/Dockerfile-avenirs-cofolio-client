@@ -14,10 +14,10 @@ server {
     listen 80;
     server_name localhost;
 
-    location ^~ /cofolio {
-        alias /usr/share/nginx/html/cofolio/;
+    location /cofolio/ {
+        root /usr/share/nginx/html;
         index index.html;
-        try_files $uri $uri/ /index.html;
+        try_files $uri $uri/ /cofolio/index.html;
     }
     
 }
