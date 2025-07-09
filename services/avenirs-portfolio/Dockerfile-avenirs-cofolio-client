@@ -17,7 +17,7 @@ server {
     location /cofolio/ {
         alias /usr/share/nginx/html/cofolio/;
         index index.html;
-        try_files $uri $uri/ /cofolio/index.html;
+        try_files $uri $uri/ /index.html;
     }
     
 }
