@@ -48,8 +48,8 @@ AVENIRS_COFOLIO_CLIENT_CONTAINER_PORT=10005
 
 
 AVENIRS_PORTFOLIO_BACKEND_URL="http://localhost/apim/"
-if [ -f "$SRV_DEV_SCRIPT_DIR/../.env" ]; then
-  . "$SRV_DEV_SCRIPT_DIR/../.env"
+if [ -f "$SRV_DEV_SCRIPT_DIR/../backend-url.generated.env" ]; then
+  . "$SRV_DEV_SCRIPT_DIR/../backend-url.generated.env"
 fi
 
 
