@@ -1,28 +1,48 @@
-#!/bin/bash
+#!/bin/sh
 
 # Section to adapt
-SWAGGER_URL="http://localhost:10000/avenirs-portfolio-api/api-docs"
+SWAGGER_URL="http://avenirs-portfolio-api:10000/avenirs-portfolio-api/api-docs"
 END_POINT="http://avenirs-apisix-api:9180/apisix/admin/routes"
 AC_PLUGIN_ID="avenirs-access-control-mock"
 COUNT_START=10
 # End Section to adapt
 
+wait_for_endpoint() {
+  local url="$1"
+  local timeout=${2:-300}  # Timeout en secondes (défaut: 5 minutes)
+  local interval=${3:-5}   # Intervalle entre les tentatives (défaut: 5 secondes)
+  local elapsed=0
+  
+  echo "Waiting for endpoint $url to be available..."
+  
+  while [ $elapsed -lt $timeout ]; do
+    if curl -s --head --fail "$url" > /dev/null 2>&1; then
+      echo "Endpoint $url is available!"
+      return 0
+    fi
+    
+    echo "Endpoint $url not available yet. Retrying in $interval seconds..."
+    sleep $interval
+    elapsed=$((elapsed + interval))
+  done
+  
+  echo "Timeout reached. Endpoint $url is not available after $timeout seconds."
+  return 1
+}
 
-# Initialization
+
+
 GENERATE_FROM_SWAGGER_SCRIPT_DIR=`dirname $0`
-. $GENERATE_FROM_SWAGGER_SCRIPT_DIR/../../../scripts/srv-dev-commons.sh
-init_commons $*
-OUTPUT_DIR="${GENERATE_FROM_SWAGGER_SCRIPT_DIR}/initialization"
+OUTPUT_DIR="/scripts/"
 OPEN_API_FILE="$GENERATE_FROM_SWAGGER_SCRIPT_DIR/openapi.nogit.json"
-declare -i count=0
+count=0
 i=$COUNT_START || 1
 
-
-[ -d "$OUTPUT_DIR" ] && verbose "Output directory $OUTPUT_DIR found." || err "Output directory $OUTPUT_DIR not found."
-info "Fetching OpenAPI definition..."
+wait_for_endpoint "$SWAGGER_URL" 300 5 || exit 1
+echo "Fetching OpenAPI definition..."
 curl -s "$SWAGGER_URL" -o $OPEN_API_FILE
-info "OpenAPI definition fetched in $OPEN_API_FILE."
-info "Generating routes..."
+echo "OpenAPI definition fetched in $OPEN_API_FILE."
+echo "Generating routes..."
 
 
 jq -c '
@@ -43,7 +63,7 @@ jq -c '
   method=$(echo "$json" | jq -r '.method')
   operation=$(echo "$json" | jq -r '.operation')
   route_id="${operation}-route"
-  script_name=$(printf "%02d-%s.curl.sh" "$i" "$route_id")
+  script_name=$(printf "%02d-%s.generated.curl.sh" "$i" "$route_id")
 
   cat > "$OUTPUT_DIR/$script_name" <<EOF
 #! /bin/sh

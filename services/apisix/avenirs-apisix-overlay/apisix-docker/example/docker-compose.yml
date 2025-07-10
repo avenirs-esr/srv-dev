@@ -94,15 +94,16 @@ services:
       apisix-network:
   apisix-init:
     container_name: ${AVENIRS_APISIX_INIT_CONTAINER_NAME}
-    image: curlimages/curl:latest
+    image: alpine:latest
     depends_on:
       - apisix
       - apisix-dashboard
+      - avenirs-portfolio-api
     env_file:
       - ../../secret_env
     volumes:
       - ../../scripts/initialization:/scripts
-    command: sh -c "sh /scripts/init-routes.sh 2>&1"
+    command: sh -c "apk update && apk add --no-cache curl jq bash && bash /scripts/generate-routes-from-open-api.sh 2>&1 && bash /scripts/init-routes.sh 2>&1; tail -f /dev/null"
     networks:
       - apisix-network    
 networks: 
