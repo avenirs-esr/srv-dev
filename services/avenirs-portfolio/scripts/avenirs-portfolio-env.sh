@@ -14,6 +14,11 @@ AVENIRS_PORTFOLIO_ENV_FILE=$AVENIRS_PORTFOLIO_SCRIPT_DIR/../.env
 # Docker settings. Can be overridden in srv-dev.env.sh
 [ -z "$AVENIRS_PORTFOLIO_CONTAINER_PREFIX" ] && AVENIRS_PORTFOLIO_CONTAINER_PREFIX="${AVENIRS_CONTAINER_PREFIX}portfolio-"
 
+AVENIRS_PORTFOLIO_BACKEND_URL="http://localhost/apim/"
+if [ -f "$AVENIRS_PORTFOLIO_SCRIPT_DIR/../../../backend-url.generated.env" ]; then
+   . "$AVENIRS_PORTFOLIO_SCRIPT_DIR/../../../backend-url.generated.env"
+fi
+
 
 # Import required to generate the initialization database scripts in the Postgres container entry point.
 . $AVENIRS_PORTFOLIO_SCRIPT_DIR/../../postgresql/scripts/postgresql-env.sh $AVENIRS_PORTFOLIO_SCRIPT_DIR/../../postgresql/scripts/ 2> /dev/null \
