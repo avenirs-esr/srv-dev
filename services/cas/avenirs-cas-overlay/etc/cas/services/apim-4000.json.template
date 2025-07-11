@@ -3,11 +3,11 @@
   "name": "APIM",
   "@class": "org.apereo.cas.services.OidcRegisteredService",
   "bypassApprovalPrompt": true,
-  "clientId": "APIMClientId",
-  "clientSecret": "ErT322hVLHzIi9Z5tbu58yzUvzVqlsh3T0tmKRV41bu004wqY664TM=",
+  "clientId": "__SEC_APISIX_OIDC_CLIENT_ID__",
+  "clientSecret": "__SEC_APISIX_OIDC_CLIENT_SECRET__",
   "supportedGrantTypes": [ "java.util.HashSet", [ "authorization_code", "refresh_token" ] ],
   "supportedResponseTypes": [ "java.util.HashSet", [ "code", "token" ] ],
-  "serviceId": "^https?://(httpbin.org$|((srv-dev-avenirs?(\\.srv-avenirs?\\.brgm\\.recia\\.net)?)|localhost)/node-api/cas-auth-callback)(/.*)*",
+  "serviceId": "^https?://(httpbin.org$|((srv-(dev|recette|qualif)(\\.srv-avenirs?\\.brgm\\.recia\\.net)?)|localhost)/node-api/cas-auth-callback)(/.*)*",
   "jwtAccessToken": true,
  
 

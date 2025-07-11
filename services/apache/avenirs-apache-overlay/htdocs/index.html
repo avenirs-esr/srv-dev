@@ -1,23 +1,87 @@
 <html>
-    <head>
-        <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-        <link rel="stylesheet" type="text/css" href="assets/main.css">
-        
-        <title>
-            Avenirs - ePortfolio :: Dev
-        </title>
-    </head>
-    <body>
-        <div class="title-wrapper">
-            <img src="assets/images/avenir-esr-logo_medium.jpg" alt="Avenir(s) ESR Logo" width=""> 
-            <div class="title">
+  <head>
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="assets/main.css" />
 
-                <h1>Avenirs - ePortfolio </h1>
-                <div class="subtitle">
-                    Development Environment
-                </div>
-            </div>
+    <title>Avenirs - ePortfolio :: Dev</title>
+  </head>
+  <body>
+    <div class="title-wrapper">
+      <img
+        src="assets/images/avenir-esr-logo_medium.jpg"
+        alt="Avenir(s) ESR Logo"
+        width=""
+      />
+      <div class="title">
+        <h1>Avenirs - ePortfolio</h1>
+      </div>
+    </div>
+    <div class="center-wrapper">
+      <div class="main-container">
+        <h2>Development Environment</h2>
 
+        <h3>Services</h3>
+        <div class="sub-container">
+          <ul>
+            
+            <li><a href="/apisix-ui" target="_blank">Apisix UI</a></li>
+            <li>
+              <a href="/apisix-prometheus" target="_blank">Apisix Prometheus</a>
+            </li>
+            <li>
+              <a href="/apisix-grafana" target="_blank">Apisix Grafana</a>
+            </li>
+            <li><a href="/cas/login" target="_blank">CAS</a></li>
+            <li><a href="/kafka-ui" target="_blank">Kafka UI</a></li>
+            <li><a href="/ldapadmin" target="_blank">PHPLdapAdmin</a></li>
+            <li>Postgresql UI</li>
+            <ul>
+              <li>
+                <a
+                  id="sqlUIPrimary"
+                  href="/sql-ui?pgsql=avenirs-pgsql-primary"
+                  target="_blank"
+                >
+                  Connexion to primary via UI
+                </a>
+              </li>
+              <li>
+                <a
+                  id="sqlUISecondary1"
+                  href="/sql-ui?pgsql=avenirs-pgsql-secondary1"
+                  target="_blank"
+                >
+                  Connexion to secondary #1 via UI
+                </a>
+              </li>
+              <li>
+                <a
+                  id="sqlUISecondary2"
+                  href="/sql-ui?pgsql=avenirs-pgsql-secondary2"
+                  target="_blank"
+                >
+                  Connexion to secondary #2 via UI
+                </a>
+              </li>
+            </ul>
+          </ul>
         </div>
-    </body>
+
+        <h3>Resources</h3>
+
+        <ul>
+          <li>
+            <a href="https://github.com/avenirs-esr/srv-dev/" target="_blank">
+              Srv-dev GitHub Project
+            </a>
+          </li>
+          <li>
+            <a href="https://avenirs-esr.github.io/dev-doc/" target="_blank">
+              Avenirs ePortfolio ESR - Developer Documentation
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
 </html>

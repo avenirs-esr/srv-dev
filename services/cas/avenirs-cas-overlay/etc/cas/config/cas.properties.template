@@ -1,4 +1,4 @@
-cas.server.name=__AVENIRS_CAS_SERVER_NAME__
+cas.server.name=__DYN_AVENIRS_CAS_SERVER_NAME__
 cas.server.prefix=${cas.server.name}/cas
 cas.authn.oidc.core.issuer=${cas.server.prefix}/oidc
 cas.authn.oidc.core.accepted-issuers-pattern=https:\/\/(avenirs-apache|localhost|srv-dev-avenirs?(\\.srv-avenir\\.brgm\\.recia\\.net)?)(:8443)?\/cas\/.*
@@ -12,7 +12,7 @@ cas.authn.accept.users=
 ### Connexion LDAP
 ### obso cas.authn.ldap[0].providerClass=org.ldaptive.provider.unboundid.UnboundIDProvider
 cas.authn.ldap[0].type=AUTHENTICATED
-cas.authn.ldap[0].ldapUrl=ldap://__AVENIRS_OPENLDAP_CONTAINER_NAME__:389
+cas.authn.ldap[0].ldapUrl=ldap://__DYN_AVENIRS_OPENLDAP_CONTAINER_NAME__:389
 cas.authn.ldap[0].baseDn=dc=ldap-dev,dc=avenirs-esr,dc=fr
 cas.authn.ldap[0].subtreeSearch=true
 cas.authn.ldap[0].searchFilter=uid=\{user\}
@@ -47,17 +47,17 @@ cas.authn.oidc.discovery.claims=family_name,given_name,email
 cas.audit.slf4j.use-single-line=true
 
 
-cas.tgc.crypto.encryption.key=zP5Z_0MdVmL12WJ7PeQzPi2EZi1nSulUnu-7S61fbSY
-cas.tgc.crypto.signing.key=dhS-OLwHNWWDh0bzRzFqPJ80XDI5GpUcQ3ug3aP969DvMXt0zf8AHfM-PGrDVMUcbgC9__lOBtuWbu8I5HeyfA
-cas.webflow.crypto.signing.key=awThxWv-zh2YqwCWn1wyX8OBA8Am3HcM7IPDPNZYoDZDPBqZyNtQtR-2MhoyJYsTtq2MYTV8WYJS9y4x-vGVUA
-cas.webflow.crypto.encryption.key=k8UkXdPk1Ytpt-SAAywODA
-cas.authn.oauth.crypto.encryption.key=rh8ZoOuo5CpU3z5hUcJEi4LOa9RdDkazqIbg4hEefKo
-cas.authn.oauth.crypto.signing.key=XUG6BXA2PJ5iQfE1UO8fxPpu6dftOsJrgXrbhLqq5wyLPOw71u_MPk_XFhrErFf6jc3QnKfYkpF74zbrfh3uIA
-cas.authn.oauth.access-token.crypto.encryption.key=u2kwgj_LmLcporuACc-jIGKBcnzlUDQoNT1_DNx8tBY
-cas.authn.oauth.access-token.crypto.signing.key=E-k6ONNILWuURj67uOJCczx0ItNFfhKZcmVaaPTsIuIXyKocxQTmHKzmWx9-vkyCtbASDh3gYt0fj7f7n4kI8A
+cas.tgc.crypto.encryption.key=__SEC_CAS_TGC_CRYPTO_ENCRYPTION_KEY__
+cas.tgc.crypto.signing.key=__SEC_CAS_TGC_CRYPTO_SIGNING_KEY__
+cas.webflow.crypto.signing.key=__SEC_CAS_WEBFLOW_CRYPTO_SIGNING_KEY__
+cas.webflow.crypto.encryption.key=__SEC_CAS_WEBFLOW_CRYPTO_ENCRYPTION_KEY__
+cas.authn.oauth.crypto.encryption.key=__SEC_CAS_AUTHN_OAUTH_CRYPTO_ENCRYPTION_KEY__
+cas.authn.oauth.crypto.signing.key=__SEC_CAS_AUTHN_OAUTH_CRYPTO_SIGNING_KEY__
+cas.authn.oauth.access-token.crypto.encryption.key=__SEC_CAS_AUTHN_OAUTH_ACCESS_TOKEN_CRYPTO_ENCRYPTION_KEY__
+cas.authn.oauth.access-token.crypto.signing.key=__SEC_CAS_AUTHN_OAUTH_ACCESS_TOKEN_CRYPTO_SIGNING_KEY__
 
 spring.security.user.name=casuser
-spring.security.user.password=fbd30dc5-7526-48f1-a697-c80dd0276c13
+spring.security.user.password=__SEC_CAS_SPRING_SECURITY_USER_PASSWORD__
 
 
 

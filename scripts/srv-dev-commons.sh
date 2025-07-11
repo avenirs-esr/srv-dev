@@ -95,7 +95,7 @@ function invalid_arg(){
     err "Invalid Argument: $1\n\n$USAGE_STRING"
 }
 
-# Initialization for the common options: help, verbose, etc.
+# Initialization for the common options: help, secrets, verbose, etc.
 function init_commons(){
 
     if [ "$COMMONS_INITIALIZED_FLAG" = "0" ]
@@ -130,6 +130,7 @@ function init_commons(){
             esac
 
         done;
+        init_secrets
         vverbose "init_commons executed (first call)"
         vvverbose "init_commons REMAINING_ARGS: $REMAINING_ARGS"
         export COMMONS_INITIALIZED_FLAG=1
@@ -139,6 +140,74 @@ function init_commons(){
     fi
 }
 
+# secrets initialization
+function init_secrets(){
+    info "SECRETS_INITIALIZED_FLAG $SECRETS_INITIALIZED_FLAG (init_secrets)"
+    if [ "$SECRETS_INITIALIZED_FLAG" != "1" ]
+    then
+        info "Initializing secrets (init_secrets)"
+        export SECRETS_INITIALIZED_FLAG=1
+        local current_dir=$(pwd)
+        while [ "$current_dir" != "/" ]; do
+            vverbose "current_dir: $current_dir (init_secrets)"
+            if [ -f "$current_dir/.secrets.env" ]; then
+                info "Secrets found at $current_dir/.secrets.env (init_secrets)"
+                info "Loading secrets from $current_dir/.secrets.env (init_secrets)"
+                . $current_dir/.secrets.env
+                return 0
+            fi
+
+            local base_dir=$(basename "$current_dir")
+            if [ "$base_dir" = "srv-dev" ]; then
+                err "No .secrets.env found in srv-dev or its subdirectories (init_secrets)"
+            fi
+
+            current_dir=$(dirname "$current_dir")
+        done
+        err "Secrets file .secrets.env not found in any parent directory download it from vaultwarden or create it manually from .secrets.env.example (init_secrets)"
+    else  
+      info "Secrets already initialized (init_secrets)"  
+    fi
+}
+
+# Substitutes environment variables in a template file with their values.
+# secrets start with SEC_ prefix and dynamics with DYN_ prefix.
+# @param $1 Template file
+# @param $2 Output file Optional if the name is the same as the template file minus the .template extension
+
+function substitute_secrets_and_dynamics() {
+    local template_file="$1"
+    local output_file="$2"
+    
+    [ "$SECRETS_INITIALIZED_FLAG" != "1" ] && err "Secrets not initialized (substitute_secrets)"
+    
+    [ -z "$output_file" ] && output_file="${template_file%.template}"
+    
+    info "Substituting secrets in $template_file to $output_file (substitute_secrets)"
+    
+    local temp_file=$(mktemp)
+    cp "$template_file" "$temp_file"
+    > "$output_file"
+    
+    local patterns=$(grep -o "__\(SEC\|DYN\)_[A-Za-z0-9_]*__" "$template_file" | sort | uniq)
+    
+    for pattern in $patterns; do
+        local var_name=${pattern#__}
+        var_name=${var_name%__}
+        
+        local var_value=${!var_name}
+        
+        [ -z "$var_value" ] && err "Environment variable $var_name not found for pattern $pattern (substitute_secrets)"
+        
+        verbose "Substituting $pattern with value from $var_name (substitute_secrets)"
+        sed "s|${pattern}|${var_value}|g" "$temp_file" > "$output_file"
+        cp "$output_file" "$temp_file"
+    done
+    
+    rm "$temp_file"
+    info "Substitution completed in $output_file (substitute_secrets)"
+    return 0
+}
 # Initialization for the purge flag.
 function init_purge_flag(){
     if [  $PURGE_FLAG_INITALIZED -eq 0 ]

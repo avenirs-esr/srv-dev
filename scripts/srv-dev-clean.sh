@@ -1,5 +1,5 @@
 # #! /bin/bash
-
+set -eo pipefail
 #--------------------------------------#
 # Clean script for the dev env         #
 #                                      #  

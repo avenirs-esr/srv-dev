@@ -9,6 +9,8 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+
+| [1.8.0] | 2025-07-11 | [PR(#35)](https://github.com/avenirs-esr/srv-dev/pull/35) 
 | [1.7.0] | 2025-07-10 | [PR(#34)](https://github.com/avenirs-esr/srv-dev/pull/34) 
 | [1.6.1] | 2025-07-10 | [PR(#33)](https://github.com/avenirs-esr/srv-dev/pull/33)  |
 | [1.6.0] | 2025-07-08 | [PR(#29)](https://github.com/avenirs-esr/srv-dev/pull/29)  |
@@ -29,6 +31,23 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 | [1.0.0] | 2025-04-20 | [PR(#11)](https://github.com/avenirs-esr/srv-dev/pull/11)  |
 
 ---
+### [1.8.0] - 2025-07-11 - [PR(#35)](https://github.com/avenirs-esr/srv-dev/pull/35)
+
+#### ✨ Added
+- secrets management.
+
+#### 🛠 Changed
+- All the secrets are stored in .secret.env
+- new function in srv-dev-commons.sh substitute_secrets_and_dynamics which handles secrets and dynamic variables substitution in template files.
+Affected services:
+- CAS
+- APISIX 
+   - API
+   - UI
+   - Grafana
+- OpenLDAP
+- PostgreSQL (only root password)
+
 ### [1.7.0] - 2025-07-10 - [PR(#34)](https://github.com/avenirs-esr/srv-dev/pull/34)
 
 #### ✨ Added

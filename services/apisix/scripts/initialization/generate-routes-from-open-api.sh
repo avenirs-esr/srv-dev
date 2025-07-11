@@ -70,7 +70,7 @@ jq -c '
 
 END_POINT="$END_POINT"
 
-curl -H "X-API-KEY: \$APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
+curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
 {
   "name": "$route_id",
   "id": "$route_id",
