@@ -18,8 +18,6 @@ OPENLDAP_ENV_FILE=$OPENLDAP_SCRIPT_DIR/../.env
 [ -z  "$LDAP_ORGANISATION" ] && LDAP_ORGANISATION="avenirs-esr.fr"
 [ -z  "$LDAP_DOMAIN" ] && LDAP_DOMAIN="ldap-dev.avenirs-esr.fr"
 [ -z  "$LDAP_BASE_DN" ] && LDAP_BASE_DN="dc=ldap-dev,dc=avenirs-esr,dc=fr"
-[ -z  "$LDAP_ADMIN_PASSWORD" ] && LDAP_ADMIN_PASSWORD="admin"
-[ -z  "$LDAP_CONFIG_PASSWORD" ] && LDAP_CONFIG_PASSWORD="config"
 [ -z  "$LDAP_READONLY_USER" ] && LDAP_READONLY_USER="true"
 [ -z  "$LDAP_READONLY_USER_USERNAME" ] && LDAP_READONLY_USER_USERNAME="readonly"
 [ -z  "$LDAP_READONLY_USER_PASSWORD" ] && LDAP_READONLY_USER_PASSWORD="readonly"

@@ -182,7 +182,7 @@ JSON_CONTENT=$(cat <<EOF
 EOF
 )
 
-curl -H "X-API-KEY: $APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d "$JSON_CONTENT"
+curl -H "X-API-KEY: $SEC_APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d "$JSON_CONTENT"
 
 
 echo -ne "\n\n"

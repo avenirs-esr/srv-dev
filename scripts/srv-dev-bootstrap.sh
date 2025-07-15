@@ -1,5 +1,5 @@
 # #! /bin/bash
-
+set -eo pipefail
 #--------------------------------------#
 # Bootstrap script for the dev env     #
 #                                      #

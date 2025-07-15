@@ -15,4 +15,12 @@ envvars
 **/node-api/dist/
 **/avenirs-cas-overlay/.gradle/
 **/.idea
+
+# Files with secrets
 **/apisix_conf/config.yaml
+**/dashboard_conf/conf.yaml
+**/grafana_conf/config/grafana.ini
+.secrets.env
+cas.properties
+apim-4000.json
+

@@ -164,10 +164,10 @@ root_url = %(protocol)s://%(domain)s:%(http_port)s/apisix-grafana
 ;admin_user = admin
 
 # default admin password, can be changed before first start of grafana,  or in profile settings
-;admin_password = admin
+admin_password = __SEC_APISIX_GRAFANA_ADMIN_PASSWORD__
 
 # used for signing
-;secret_key = SW2YcwTIb9zpOOhoPsMm
+secret_key = __SEC_APISIX_GRAFANA_SECRET_KEY__
 
 # disable gravatar profile images
 ;disable_gravatar = false

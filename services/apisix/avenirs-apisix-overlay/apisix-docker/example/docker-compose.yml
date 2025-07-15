@@ -23,6 +23,8 @@ services:
       args:
         APISIX_DASHBOARD_VERSION: release/3.0
     restart: always
+    env_file:
+      - ../../../../.secrets.env
     volumes:
     - ./dashboard_conf/conf.yaml:/usr/local/apisix-dashboard/conf/conf.yaml
     ports:
@@ -38,7 +40,7 @@ services:
     volumes:
       - ./apisix_conf/config.yaml:/usr/local/apisix/conf/config.yaml:ro
     env_file:
-      - ../../secret_env
+      - ../../../../.secrets.env
     depends_on:
       - etcd
     
@@ -94,15 +96,16 @@ services:
       apisix-network:
   apisix-init:
     container_name: ${AVENIRS_APISIX_INIT_CONTAINER_NAME}
-    image: curlimages/curl:latest
+    image: alpine:latest
     depends_on:
       - apisix
       - apisix-dashboard
+      - avenirs-portfolio-api
     env_file:
-      - ../../secret_env
+      - ../../../../.secrets.env
     volumes:
       - ../../scripts/initialization:/scripts
-    command: sh -c "sh /scripts/init-routes.sh 2>&1"
+    command: sh -c "apk update && apk add --no-cache curl jq bash && bash /scripts/generate-routes-from-open-api.sh 2>&1 && bash /scripts/init-routes.sh 2>&1"
     networks:
       - apisix-network    
 networks: 

@@ -22,11 +22,11 @@ init_git_repository $CAS_REPOSITORY_DIR $CAS_REMOTE_BRANCH $CAS_LOCAL_BRANCH
 # Network check
 check_network
 
-# CAS properties generation
-cat $CAS_SETTINGS_TEMPLATE_FILE | \
-    sed s/__AVENIRS_OPENLDAP_CONTAINER_NAME__/${AVENIRS_OPENLDAP_CONTAINER_NAME}/g | \
-    sed s#__AVENIRS_CAS_SERVER_NAME__#${AVENIRS_CAS_SERVER_NAME}#g > \
-    $CAS_SETTINGS_FILE
+# # CAS properties generation
+export DYN_AVENIRS_OPENLDAP_CONTAINER_NAME=${AVENIRS_OPENLDAP_CONTAINER_NAME}
+export DYN_AVENIRS_CAS_SERVER_NAME=${AVENIRS_CAS_SERVER_NAME}
+substitute_secrets_and_dynamics $CAS_SETTINGS_TEMPLATE_FILE
+substitute_secrets_and_dynamics $CAS_APIM_SERVICE_TEMPLATE_FILE
 
 # Overlay files
 install_overlay $CAS_OVERLAY_DIR $CAS_REPOSITORY_DIR

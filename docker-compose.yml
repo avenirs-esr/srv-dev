@@ -6,9 +6,9 @@ networks:
 include:
   - ./services/postgresql/docker-compose.yml
   - ./services/openldap/docker-compose.yml
-  - ./services/apisix/apisix-docker/example/docker-compose.yml
   - ./services/cas/cas-overlay-template/docker-compose.yml
   - ./services/apache/docker-compose.yml
   - ./services/kafka/docker-compose.yml
   - ./services/node/docker-compose.yml
   - ./services/avenirs-portfolio/docker-compose.yml
+  - ./services/apisix/apisix-docker/example/docker-compose.yml

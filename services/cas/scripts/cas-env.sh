@@ -24,12 +24,17 @@ CAS_ENV_FILE=$CAS_REPOSITORY_DIR/.env
 # Container name
 [ -z  "$AVENIRS_CAS_CONTAINER_NAME" ] && AVENIRS_CAS_CONTAINER_NAME="${AVENIRS_CONTAINER_PREFIX}cas"
 
-# Server name (CAS settings)
-host=`hostname`
-[ "$host" == "srv-dev-avenir" -o "$host" == "srv-dev-avenirs" ] && AVENIRS_CAS_SERVER_NAME="https://`hostname -f`" || AVENIRS_CAS_SERVER_NAME='https://localhost'
+# Server name (CAS settings)
+fqdn=`hostname -f`
+if [[ "$fqdn" =~ \.recia\.net$ ]]; then
+    AVENIRS_CAS_SERVER_NAME="https://$fqdn"
+else
+    AVENIRS_CAS_SERVER_NAME='https://localhost'
+fi
 
 CAS_SETTINGS_TEMPLATE_FILE=$CAS_OVERLAY_DIR/etc/cas/config/cas.properties.template
-CAS_SETTINGS_FILE=$CAS_REPOSITORY_DIR/etc/cas/config/cas.properties
+CAS_APIM_SERVICE_TEMPLATE_FILE=$CAS_OVERLAY_DIR/etc/cas/services/apim-4000.json.template
+
 
 
 # This is to be sure that this script can be sourced.
