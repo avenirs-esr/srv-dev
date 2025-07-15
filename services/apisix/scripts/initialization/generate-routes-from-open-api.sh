@@ -9,8 +9,8 @@ COUNT_START=10
 
 wait_for_endpoint() {
   local url="$1"
-  local timeout=${2:-300}  # Timeout en secondes (défaut: 5 minutes)
-  local interval=${3:-5}   # Intervalle entre les tentatives (défaut: 5 secondes)
+  local timeout=${2:-300}  # Timeout in seconds (default: 5 minutes)
+  local interval=${3:-5}   # Interval between attempts in seconds (default: 5 seconds)
   local elapsed=0
   
   echo "Waiting for endpoint $url to be available..."
