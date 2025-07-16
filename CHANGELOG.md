@@ -10,6 +10,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 | Version | Date       | Related PR |
 |---------|------------|------------|
 
+| [1.8.1] | 2025-07-16 | [PR(#36)](https://github.com/avenirs-esr/srv-dev/pull/36) 
 | [1.8.0] | 2025-07-11 | [PR(#35)](https://github.com/avenirs-esr/srv-dev/pull/35) 
 | [1.7.0] | 2025-07-10 | [PR(#34)](https://github.com/avenirs-esr/srv-dev/pull/34) 
 | [1.6.1] | 2025-07-10 | [PR(#33)](https://github.com/avenirs-esr/srv-dev/pull/33)  |
@@ -31,6 +32,11 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 | [1.0.0] | 2025-04-20 | [PR(#11)](https://github.com/avenirs-esr/srv-dev/pull/11)  |
 
 ---
+### [1.8.1] - 2025-07-16 - [PR(#36)](https://github.com/avenirs-esr/srv-dev/pull/36)
+
+#### 🐛 Fixed
+- secrets management for services Apisix, Postgres and LDAP.
+
 ### [1.8.0] - 2025-07-11 - [PR(#35)](https://github.com/avenirs-esr/srv-dev/pull/35)
 
 #### ✨ Added

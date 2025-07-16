@@ -17,6 +17,8 @@ info "APISIX bootstrapping started."
 . $APISIX_SCRIPT_DIR/apisix-env.sh $APISIX_SCRIPT_DIR 2> /dev/null \
     || err "Unable to source $APISIX_SCRIPT_DIR/apisix-env.sh"
 
+. $APISIX_SCRIPT_DIR/../../../.secrets.env || err "Unable to source $APISIX_SCRIPT_DIR/../../../.secrets.env"
+
 # Initialization of the local branch of apisix if needed.
 cd $APISIX_REPOSITORY_DIR || err "Unable to enter $APISIX_REPOSITORY_DIR"
 if [ -z "`git branch   | grep $APISIX_LOCAL_BRANCH`" ]
@@ -54,6 +56,6 @@ echo "AVENIRS_APISIX_ETCD_CONTAINER_NAME=$AVENIRS_APISIX_ETCD_CONTAINER_NAME" >>
 echo "AVENIRS_APISIX_PROMETHEUS_CONTAINER_NAME=$AVENIRS_APISIX_PROMETHEUS_CONTAINER_NAME" >> $APISIX_ENV_FILE
 echo "AVENIRS_APISIX_GRAFANA_CONTAINER_NAME=$AVENIRS_APISIX_GRAFANA_CONTAINER_NAME" >> $APISIX_ENV_FILE
 echo "AVENIRS_APISIX_INIT_CONTAINER_NAME=$AVENIRS_APISIX_INIT_CONTAINER_NAME" >> $APISIX_ENV_FILE
-
+echo "SEC_APISIX_ADMIN_KEY=$SEC_APISIX_ADMIN_KEY" >> $APISIX_ENV_FILE
 info "APISIX bootstrapping completed."
 
