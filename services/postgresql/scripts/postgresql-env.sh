@@ -26,7 +26,6 @@ POSTGRESQL_OVERLAY_BASENAME=`basename $POSTGRESQL_OVERLAY_DIR`
 
 
 [ -z  "$POSTGRES_USER" ] && POSTGRES_USER=pguser
-[ -z  "$POSTGRES_PASSWORD" ] && POSTGRES_PASSWORD=pgpassword
 [ -z  "$POSTGRES_DB" ] && POSTGRES_DB=avenirs_eportfolio
 
 

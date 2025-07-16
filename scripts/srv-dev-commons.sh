@@ -351,8 +351,7 @@ function check_network(){
     [ -z "$AVENIRS_NETWORK" ] && err "AVENIRS_NETWORK unset (should be defined in srv-dev-env.sh)"
     vverbose "Using network $AVENIRS_NETWORK"
 
-    docker network inspect $AVENIRS_NETWORK > /dev/null 2>&1
-    if [ $? -eq 0 ]
+    if  docker network ls --format "{{.Name}}" | grep -q "^${AVENIRS_NETWORK}$"
     then
         verbose "Network $AVENIRS_NETWORK found"
     else

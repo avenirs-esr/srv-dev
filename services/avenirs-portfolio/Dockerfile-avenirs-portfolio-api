@@ -6,6 +6,7 @@ COPY ./avenirs-portfolio-api/pom.xml .
 COPY ./avenirs-portfolio-api/src src
 
 RUN chmod +x ./mvnw
+RUN ./mvnw spotless:apply
 RUN ./mvnw clean install package -DskipTests
 RUN mkdir -p ./target/dependency && (cd ./target/dependency; jar -xf ../*.jar)
 
