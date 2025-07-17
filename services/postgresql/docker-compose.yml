@@ -20,6 +20,19 @@ services:
     networks:
       - postgres-network
  
+  postgres-primary-exporter:
+    image: prometheuscommunity/postgres-exporter
+    container_name: ${AVENIRS_POSTGRESQL_PRIMARY_EXPORTER_CONTAINER_NAME}
+    restart: always
+    environment:
+      DATA_SOURCE_NAME: postgres://${POSTGRES_USER}:${SEC_POSTGRES_PASSWORD}@${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}:5432/${POSTGRES_DB}?sslmode=disable
+    ports:
+      - "9187:9187"
+    depends_on:
+      - postgresql-primary
+    networks:
+      - postgres-network
+
   postgresql-secondary1:
     container_name: ${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}
     hostname: ${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}
