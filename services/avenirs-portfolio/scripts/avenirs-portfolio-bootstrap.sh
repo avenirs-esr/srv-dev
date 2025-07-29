@@ -119,6 +119,8 @@ vverbose "Created $AVENIRS_PORTFOLIO_API_INIT_DB_CLEAR"
 
 info "Avenirs portfolio api databases initialization files generated."
 
+. $AVENIRS_PORTFOLIO_SCRIPT_DIR/init-storage-volume.sh
+
 info "Avenirs portfolio bootstrapping completed."
 
 

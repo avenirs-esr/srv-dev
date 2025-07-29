@@ -18,6 +18,8 @@ services:
       - postgresql-primary
     networks:
       - avenirs-api-network
+    volumes:
+      - srv-dev_file-storage:/workspace/app/target/storage
 
   avenirs-portfolio-security:
     container_name: ${AVENIRS_PORTFOLIO_SECURITY_CONTAINER_NAME}
@@ -87,3 +89,7 @@ networks:
   avenirs-api-network:
     external: true
     name: ${AVENIRS_NETWORK}
+
+volumes:
+  srv-dev_file-storage:
+    external: true
