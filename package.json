@@ -18,7 +18,7 @@
     "api:reset-db": "npm run api:clean-db && npm run api:init-db",
     "api:clean-db": "dotenv -e .env -e .secrets.env -- sh -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p 65432 -U $POSTGRES_USER -d template1 -f services/postgresql/avenirs-postgresql-overlay/init/10_avenirs-api_clean.generated.sql'",
     "api:init-db": "dotenv -e .env -e .secrets.env -- sh -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p 65432 -U $POSTGRES_USER -d template1 -f services/postgresql/avenirs-postgresql-overlay/init/11_avenirs-api_init-db.generated.sql' && cd services/avenirs-portfolio/avenirs-portfolio-api && mvn liquibase:update",
-    "api:generate-changelog": "cd services/avenirs-portfolio/avenirs-portfolio-api && mvn clean install -DskipTests && mvn liquibase:diff"
+    "api:generate-changelog": "cd services/avenirs-portfolio/avenirs-portfolio-api && mvn spotless:apply && mvn clean install -DskipTests && mvn liquibase:diff"
   },
   "repository": {
     "type": "git",
