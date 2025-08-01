@@ -14,11 +14,12 @@
     "ls-containers": "docker ps --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}'",
     "sync-modules": " git submodule foreach --recursive 'branch=$(git config -f $toplevel/.gitmodules submodule.$name.branch || echo master); echo Switching $name to branch $branch; git checkout $branch || git checkout -b $branch origin/$branch; git pull origin $branch'",
     "sync": "git pull --recurse-submodules && git submodule update --remote --recursive && npm run sync-modules",
-    "api:restart": "cd services/avenirs-portfolio/avenirs-portfolio-api && mvn spotless:apply && npm run deploy && docker logs --follow avenirs-portfolio-api",
+    "api:restart": "npm run api:check-domain-imports && cd services/avenirs-portfolio/avenirs-portfolio-api && mvn spotless:apply && npm run deploy && docker logs --follow avenirs-portfolio-api",
     "api:reset-db": "npm run api:clean-db && npm run api:init-db && bash services/avenirs-portfolio/scripts/reset-storage-volume.sh",
     "api:clean-db": "dotenv -e .env -e .secrets.env -- sh -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p 65432 -U $POSTGRES_USER -d template1 -f services/postgresql/avenirs-postgresql-overlay/init/10_avenirs-api_clean.generated.sql'",
     "api:init-db": "dotenv -e .env -e .secrets.env -- sh -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p 65432 -U $POSTGRES_USER -d template1 -f services/postgresql/avenirs-postgresql-overlay/init/11_avenirs-api_init-db.generated.sql' && cd services/avenirs-portfolio/avenirs-portfolio-api && mvn liquibase:update",
-    "api:generate-changelog": "cd services/avenirs-portfolio/avenirs-portfolio-api && mvn spotless:apply && mvn clean install -DskipTests && mvn liquibase:diff"
+    "api:generate-changelog": "cd services/avenirs-portfolio/avenirs-portfolio-api && mvn spotless:apply && mvn clean install -DskipTests && mvn liquibase:diff",
+    "api:check-domain-imports": "cd services/avenirs-portfolio/avenirs-portfolio-api && chmod +x scripts/check-domain-imports.sh && ./scripts/check-domain-imports.sh"
   },
   "repository": {
     "type": "git",
