@@ -11,6 +11,7 @@ curl -H "X-API-KEY: $SEC_APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
   
   
   "upstream": {
+    "pass_host": "pass",
     "type": "roundrobin",
     "nodes": {
       "avenirs-portfolio-api:10000": 1
