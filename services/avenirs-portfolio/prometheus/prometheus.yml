@@ -1,0 +1,24 @@
+global:
+  scrape_interval: 2s
+  evaluation_interval: 2s
+
+scrape_configs:
+  - job_name: 'avenirs-prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'avenirs-portfolio-api'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['avenirs-portfolio-api:10000']
+        labels:
+          application: 'Avenirs Portfolio API'
+
+  - job_name: 'avenirs-pgsql-primary-exporter'
+    static_configs:
+      - targets: ['avenirs-pgsql-primary-exporter:9187']
+
+  - job_name: "apisix"
+    metrics_path: "/apisix/prometheus/metrics"
+    static_configs:
+      - targets: ["apisix:9091"]

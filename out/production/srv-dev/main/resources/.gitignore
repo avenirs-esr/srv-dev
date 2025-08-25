@@ -1,4 +1,5 @@
 # This directory should be empty
 # everything is ignored except this
 # file
-env.properties
+*
+!.gitignore
