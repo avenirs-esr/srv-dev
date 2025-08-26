@@ -17,6 +17,16 @@ JSON_CONTENT=$(cat <<EOF
                   return
                 end
 
+                local uri = ctx.var.uri or ""
+
+                local is_public =
+                  ngx.re.find(uri, [[^/apim/storage(?:/|$)]], "jo")
+                  or ngx.re.find(uri, [[^/storage(?:/|$)]], "jo")
+                  
+                if is_public then
+                  return
+                end
+
                 local core = require(\"apisix.core\");
                 local http = require(\"resty.http\");
                 local hmac = require(\"resty.hmac\");
