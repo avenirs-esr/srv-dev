@@ -65,6 +65,17 @@ jq -c '
   route_id="${operation}-route"
   script_name=$(printf "%02d-%s.generated.curl.sh" "$i" "$route_id")
 
+  is_storage=false
+  case "$uri" in
+    /storage|/storage/*) is_storage=true ;;
+  esac
+
+  if [ "$is_storage" = true ]; then
+    plugin_line=
+  else
+    plugin_line="\"plugin_config_id\": \"$AC_PLUGIN_ID\","
+  fi
+
   cat > "$OUTPUT_DIR/$script_name" <<EOF
 #! /bin/sh
 
@@ -89,7 +100,7 @@ curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
       "max_age": 5
     }
   },
-  "plugin_config_id": "$AC_PLUGIN_ID",
+  $plugin_line
   "upstream": {
     "type": "roundrobin",
     "nodes": {
@@ -99,12 +110,12 @@ curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
 }'
 EOF
 
-
   chmod +x "$OUTPUT_DIR/$script_name"
-  echo "Endpoint: $method $uri -> $script_name"
+  echo "Endpoint: $method $uri -> $script_name (public=$is_storage)"
   count=$((count + 1))
   i=$((i + 1))
 done
+
 echo "Routes generated"
 echo "----"
 count=$(ls -1 "$OUTPUT_DIR" | wc -l)
