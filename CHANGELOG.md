@@ -9,6 +9,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+| [1.9.1] | 2025-08-26 | [PR(#40)](https://github.com/avenirs-esr/srv-dev/pull/40)  |
 | [1.9.0] | 2025-07-29 | [PR(#39)](https://github.com/avenirs-esr/srv-dev/pull/39)  |
 | [1.8.3] | 2025-07-18 | [PR(#38)](https://github.com/avenirs-esr/srv-dev/pull/38)  |
 | [1.8.2] | 2025-07-17 | [PR(#32)](https://github.com/avenirs-esr/srv-dev/pull/32)  |
@@ -34,6 +35,11 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 | [1.0.0] | 2025-04-20 | [PR(#11)](https://github.com/avenirs-esr/srv-dev/pull/11)  |
 
 ---
+### [1.9.1] - 2025-08-26 - [PR(#40)](https://github.com/avenirs-esr/srv-dev/pull/40)
+
+#### ✨ Added
+- added docker containers for opensearch, opensearch-dashboards and valkey
+
 ### [1.9.0] - 2025-07-29 - [PR(#39)](https://github.com/avenirs-esr/srv-dev/pull/39)
 
 #### ✨ Added
