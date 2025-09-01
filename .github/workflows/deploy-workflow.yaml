@@ -1,14 +1,11 @@
-name: Deploy prerelease
-#name: Deploy prerelease (${{ contains(github.event.release.tag_name, '-qa.') && 'Qualif' || contains(github.event.release.tag_name, '-rc.') && 'Recette' || 'Unknown' }}) — ${{ github.event.release.tag_name }}
-#on:
-#  release:
-#    types: [prereleased]
+name: Deploy prerelease server
 on:
-  push:
+  release:
+    types: [prereleased]
 
 jobs:
   call-deploy-workflow:
     uses: avenirs-esr/avenirs-workflows/.github/workflows/deploy-workflow.yaml@feat/518-deploy-workflow
     with:
-      tag_name: 0.0.1-qa
+      tag_name: ${{ github.event.release.tag_name }}
     secrets: inherit
