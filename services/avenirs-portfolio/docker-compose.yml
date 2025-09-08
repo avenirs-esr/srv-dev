@@ -111,7 +111,7 @@ services:
     ports:
       - "${AVENIRS_OPENSEARCH_CONTAINER_PORT}:9200"
     volumes:
-      - ./opensearch/data:/usr/share/opensearch/data
+      - srv-dev_opensearch-data:/usr/share/opensearch/data
     networks:
       - avenirs-api-network
 
@@ -144,5 +144,6 @@ networks:
     name: ${AVENIRS_NETWORK}
 
 volumes:
+  srv-dev_opensearch-data:
   srv-dev_file-storage:
     external: true
