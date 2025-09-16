@@ -8,11 +8,26 @@ set -eo pipefail
 #--------------------------------------#
 
 SRV_DEV_SCRIPT_DIR=$(dirname $0)
+OVERWRITE=false
+
+FILTERED_ARGS=()
+for arg in "$@"; do
+  case "$arg" in
+    --overwrite|-overwrite)
+      OVERWRITE=true
+      ;;
+    *)
+      FILTERED_ARGS+=("$arg")
+      ;;
+  esac
+done
+export OVERWRITE
+set -- "${FILTERED_ARGS[@]}"
 
 # Initialization
 . $SRV_DEV_SCRIPT_DIR/srv-dev-commons.sh
 init_help "$(basename $0)" "[-s|--services service [-s|--service service (...)]"
-init_commons $*
+init_commons "$@"
 . $SRV_DEV_SCRIPT_DIR/srv-dev-env.sh $SRV_DEV_SCRIPT_DIR 2> /dev/null || err "Unable to source $SRV_DEV_SCRIPT_DIR/srv-dev-env.sh"
 init_services
 initialize_override_file
