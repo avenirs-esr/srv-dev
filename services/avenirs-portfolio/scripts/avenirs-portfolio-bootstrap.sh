@@ -23,10 +23,10 @@ write_env_file () {
   else
     # Add the key only if it does not already exist
     if grep -Eq "^[[:space:]]*${key}=" "$env_file"; then
-      echo "⏭️  ${key} already exists, skipping"
+      vverbose "⏭️  ${key} already exists in $env_file, skipping"
     else
       printf '%s=%s\n' "$key" "$val" >> "$env_file"
-      echo "➕ Adding ${key}"
+      vverbose "➕ Adding ${key} to $env_file"
     fi
   fi
 }
