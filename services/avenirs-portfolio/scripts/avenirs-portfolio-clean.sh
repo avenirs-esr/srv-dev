@@ -25,7 +25,10 @@ info "Avenirs portfolio cleaning started."
 reset_git_repository $AVENIRS_PORTFOLIO_SECURITY_REPOSITORY_DIR $AVENIRS_PORTFOLIO_SECURITY_MAIN_BRANCH $AVENIRS_PORTFOLIO_SECURITY_LOCAL_BRANCH
 
 # Removes the overlay's files
-remove_overlay $AVENIRS_PORTFOLIO_SECURITY_REPOSITORY_DIR
+if [ "$KEEP_OVERLAY" = false ] ; then
+    remove_overlay $AVENIRS_PORTFOLIO_SECURITY_REPOSITORY_DIR
+fi
+
 
 # Removes the generated database sql files
 remove_file $AVENIRS_PORTFOLIO_SECURITY_CLEAN_DB_CLEAR
@@ -39,8 +42,9 @@ remove_file $AVENIRS_PORTFOLIO_API_INIT_DB_CLEAR
 verbose "Database initialization files removed."
 
 # ---- avenirs-cofolio-client
-remove_overlay $AVENIRS_COFOLIO_CLIENT_REPOSITORY_DIR
-remove_file $AVENIRS_COFOLIO_CLIENT_ENV_FILE
-
+if [ "$KEEP_OVERLAY" = false ] ; then
+    remove_overlay $AVENIRS_COFOLIO_CLIENT_REPOSITORY_DIR
+    remove_file $AVENIRS_COFOLIO_CLIENT_ENV_FILE
+fi
 
 info "Avenirs portfolio cleaning completed."
