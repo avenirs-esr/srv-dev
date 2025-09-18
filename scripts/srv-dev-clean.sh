@@ -8,6 +8,21 @@ set -eo pipefail
 #--------------------------------------#
 
 SRV_DEV_SCRIPT_DIR=`dirname $0`
+KEEP_OVERLAY=false
+
+FILTERED_ARGS=()
+for arg in "$@"; do
+  case "$arg" in
+    --keep-overlay|-keep-overlay)
+      KEEP_OVERLAY=true
+      ;;
+    *)
+      FILTERED_ARGS+=("$arg")
+      ;;
+  esac
+done
+export KEEP_OVERLAY
+set -- "${FILTERED_ARGS[@]}"
 
 . $SRV_DEV_SCRIPT_DIR/srv-dev-commons.sh
 init_help "`basename $0` [-p| --purge]" 
