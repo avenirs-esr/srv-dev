@@ -5,6 +5,7 @@ SWAGGER_URL="http://avenirs-portfolio-api:10000/avenirs-portfolio-api/api-docs"
 END_POINT="http://avenirs-apisix-api:9180/apisix/admin/routes"
 AC_PLUGIN_ID="avenirs-access-control-mock"
 COUNT_START=10
+SWAGGER_URLS="http://avenirs-portfolio-api:10000/avenirs-portfolio-api/api-docs http://avenirs-portfolio-back-office:10010/avenirs-portfolio-back-office/api-docs"
 # End Section to adapt
 
 wait_for_endpoint() {
@@ -30,22 +31,31 @@ wait_for_endpoint() {
   return 1
 }
 
-
-
 GENERATE_FROM_SWAGGER_SCRIPT_DIR=`dirname $0`
 OUTPUT_DIR="/scripts/"
 OPEN_API_FILE="$GENERATE_FROM_SWAGGER_SCRIPT_DIR/openapi.nogit.json"
+
 count=0
 i=$COUNT_START || 1
 
-wait_for_endpoint "$SWAGGER_URL" 300 5 || exit 1
-echo "Fetching OpenAPI definition..."
-curl -s "$SWAGGER_URL" -o $OPEN_API_FILE
-echo "OpenAPI definition fetched in $OPEN_API_FILE."
-echo "Generating routes..."
+for SWAGGER_URL in $SWAGGER_URLS; do
+  wait_for_endpoint "$SWAGGER_URL" 300 5 || exit 1
+  echo "Fetching OpenAPI definition..."
+  curl -s "$SWAGGER_URL" -o $OPEN_API_FILE
+  echo "OpenAPI definition fetched in $OPEN_API_FILE."
+  echo "Generating routes..."
+  case "$SWAGGER_URL" in
+    *avenirs-portfolio-api*) 
+        SERVICE_PREFIX="api" 
+        ;;
+    *avenirs-portfolio-back-office*) 
+      SERVICE_PREFIX="back-office" 
+      i=100
+      ;;
+    *) SERVICE_PREFIX="api" ;;
+  esac
 
-
-jq -c '
+  jq -c '
   .paths
   | to_entries[]
   | .key as $path
@@ -57,26 +67,26 @@ jq -c '
       method: (.key | ascii_upcase),
       operation: (.value.operationId | gsub("_"; "-") | ascii_downcase)
     }
-' $OPEN_API_FILE | while read -r json; do
-  uri=$(echo "$json" | jq -r '.uri')
-  uri=$(echo "$uri" | sed -E 's/\{[^}]+\}/*/g')
-  method=$(echo "$json" | jq -r '.method')
-  operation=$(echo "$json" | jq -r '.operation')
-  route_id="${operation}-route"
-  script_name=$(printf "%02d-%s.generated.curl.sh" "$i" "$route_id")
+  ' $OPEN_API_FILE | while read -r json; do
+    uri=$(echo "$json" | jq -r '.uri')
+    uri=$(echo "$uri" | sed -E 's/\{[^}]+\}/*/g')
+    method=$(echo "$json" | jq -r '.method')
+    operation=$(echo "$json" | jq -r '.operation')
+    route_id="${SERVICE_PREFIX}-${operation}-route"
+    script_name=$(printf "%02d-%s-%s.generated.curl.sh" "$i" "$SERVICE_PREFIX" "$operation")
 
-  is_storage=false
-  case "$uri" in
-    /storage|/storage/*) is_storage=true ;;
-  esac
+    is_storage=false
+    case "$uri" in
+      /storage|/storage/*) is_storage=true ;;
+    esac
 
-  if [ "$is_storage" = true ]; then
-    plugin_line=
-  else
-    plugin_line="\"plugin_config_id\": \"$AC_PLUGIN_ID\","
-  fi
+    if [ "$is_storage" = true ]; then
+      plugin_line=
+    else
+      plugin_line="\"plugin_config_id\": \"$AC_PLUGIN_ID\","
+    fi
 
-  cat > "$OUTPUT_DIR/$script_name" <<EOF
+    cat > "$OUTPUT_DIR/$script_name" <<EOF
 #! /bin/sh
 
 END_POINT="$END_POINT"
@@ -110,10 +120,11 @@ curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
 }'
 EOF
 
-  chmod +x "$OUTPUT_DIR/$script_name"
-  echo "Endpoint: $method $uri -> $script_name (public=$is_storage)"
-  count=$((count + 1))
-  i=$((i + 1))
+    chmod +x "$OUTPUT_DIR/$script_name"
+    echo "Endpoint: $method $uri -> $script_name (public=$is_storage)"
+    count=$((count + 1))
+    i=$((i + 1))
+  done
 done
 
 echo "Routes generated"

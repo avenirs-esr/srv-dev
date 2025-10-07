@@ -22,3 +22,6 @@
 	path = services/avenirs-portfolio/avenirs-cofolio-client
 	url = https://github.com:avenirs-esr/avenirs-cofolio-client.git
 	branch = develop
+[submodule "services/avenirs-portfolio/avenirs-portfolio-back-office"]
+	path = services/avenirs-portfolio/avenirs-portfolio-back-office
+	url = git@github.com:avenirs-esr/avenirs-portfolio-back-office.git

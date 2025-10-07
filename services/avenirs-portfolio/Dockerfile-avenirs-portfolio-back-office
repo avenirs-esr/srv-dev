@@ -1,10 +1,10 @@
 FROM eclipse-temurin:21-jdk-alpine as build
 WORKDIR /workspace/app
-COPY ./avenirs-portfolio-api/mvnw .
-COPY ./avenirs-portfolio-api/.mvn .mvn
-COPY ./avenirs-portfolio-api/pom.xml .
-COPY ./avenirs-portfolio-api/libs libs
-COPY ./avenirs-portfolio-api/src src
+COPY ./avenirs-portfolio-back-office/mvnw .
+COPY ./avenirs-portfolio-back-office/.mvn .mvn
+COPY ./avenirs-portfolio-back-office/pom.xml .
+COPY ./avenirs-portfolio-back-office/libs libs
+COPY ./avenirs-portfolio-back-office/src src
 
 RUN chmod +x ./mvnw
 RUN ./mvnw spotless:apply
@@ -14,11 +14,10 @@ RUN mkdir -p ./target/dependency && (cd ./target/dependency; jar -xf ../*.jar)
 
 FROM eclipse-temurin:21-jdk-alpine
 WORKDIR /workspace/app
-ARG AVENIRS_PORTFOLIO_API_VERSION=0.0.1
 VOLUME /tmp
 ARG DEPENDENCY=/workspace/app/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
-COPY --from=build /workspace/app/target/avenirs-portfolio-api-*-SNAPSHOT.jar /app/avenirs-portfolio-api.jar
+COPY --from=build /workspace/app/target/avenirs-portfolio-back-office-*-SNAPSHOT.jar /app/avenirs-portfolio-back-office.jar
 
-ENTRYPOINT ["java", "-server", "-noverify", "-Xmx2048M", "-jar", "/app/avenirs-portfolio-api.jar"]
+ENTRYPOINT ["java", "-server", "-noverify", "-Xmx2048M", "-jar", "/app/avenirs-portfolio-back-office.jar"]
