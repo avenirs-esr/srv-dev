@@ -4,9 +4,9 @@ END_POINT="http://avenirs-apisix-api:9180/apisix/admin/routes"
 
 curl -H "X-API-KEY: $SEC_APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
 {
-  "name": "api-docs-route",
-  "id": "api-docs-route",
-  "uri": "/avenirs-portfolio-api/api-docs",
+  "name": "back-office-docs-route",
+  "id": "back-office-docs-route",
+  "uri": "/avenirs-portfolio-back-office/api-docs",
   "methods": ["GET"],
   
   
@@ -14,7 +14,7 @@ curl -H "X-API-KEY: $SEC_APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
     "pass_host": "pass",
     "type": "roundrobin",
     "nodes": {
-      "avenirs-portfolio-api:10000": 1
+      "avenirs-portfolio-back-office:10010": 1
     }
   }
 }'
