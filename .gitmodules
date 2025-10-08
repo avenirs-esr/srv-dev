@@ -1,27 +1,28 @@
 [submodule "services/apisix/apisix-docker"]
 	path = services/apisix/apisix-docker
 	url = https://github.com/apache/apisix-docker.git
-    branch = master
+        branch = master
 [submodule "services/cas/cas-overlay-template"]
 	path = services/cas/cas-overlay-template
 	url = https://github.com/apereo/cas-overlay-template.git
-    branch = master
+        branch = master
 [submodule "services/apisix/apisix-dashboard"]
 	path = services/apisix/apisix-dashboard
 	url = https://github.com/apache/apisix-dashboard.git
-    branch = master
+        branch = master
 [submodule "services/avenirs-portfolio/avenirs-portfolio-security"]
 	path = services/avenirs-portfolio/avenirs-portfolio-security
-	url = https://github.com:avenirs-esr/avenirs-portfolio-security
+	url = https://github.com/avenirs-esr/avenirs-portfolio-security
 	branch = main
 [submodule "services/avenirs-portfolio/avenirs-portfolio-api"]
 	path = services/avenirs-portfolio/avenirs-portfolio-api
-	url = https://github.com:avenirs-esr/avenirs-portfolio-api
+	url = https://github.com/avenirs-esr/avenirs-portfolio-api
 	branch = develop
 [submodule "services/avenirs-portfolio/avenirs-cofolio-client"]
 	path = services/avenirs-portfolio/avenirs-cofolio-client
-	url = https://github.com:avenirs-esr/avenirs-cofolio-client.git
+	url = https://github.com/avenirs-esr/avenirs-cofolio-client.git
 	branch = develop
 [submodule "services/avenirs-portfolio/avenirs-portfolio-back-office"]
 	path = services/avenirs-portfolio/avenirs-portfolio-back-office
-	url = https://github.com:avenirs-esr/avenirs-portfolio-back-office.git
+	url = https://github.com/avenirs-esr/avenirs-portfolio-back-office.git
+	branch = develop

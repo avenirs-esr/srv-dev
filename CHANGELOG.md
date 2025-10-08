@@ -9,6 +9,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+| [1.10.1]| 2025-10-07 | [PR(#60)](https://github.com/avenirs-esr/srv-dev/pull/60)  |
 | [1.10.0]| 2025-10-07 | [PR(#59)](https://github.com/avenirs-esr/srv-dev/pull/59)  |
 | [1.9.1] | 2025-08-26 | [PR(#40)](https://github.com/avenirs-esr/srv-dev/pull/40)  |
 | [1.9.0] | 2025-07-29 | [PR(#39)](https://github.com/avenirs-esr/srv-dev/pull/39)  |
@@ -37,6 +38,9 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 
 ---
+### [1.10.1] - 2025-10-07 - [PR(#60)](https://github.com/avenirs-esr/srv-dev/pull/60)
+- Fix typos in submodules urls.
+
 ### [1.10.0] - 2025-10-07 - [PR(#59)](https://github.com/avenirs-esr/srv-dev/pull/59)
 - Integration of repositories avenirs-portfolio-back-office and avenirs-portfolio-common.
 - Fixes named volumes for Postgres service.
