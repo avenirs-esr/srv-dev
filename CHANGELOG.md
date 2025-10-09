@@ -9,6 +9,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+| [1.10.2]| 2025-10-09 | [PR(#61)](https://github.com/avenirs-esr/srv-dev/pull/61)  |
 | [1.10.1]| 2025-10-07 | [PR(#60)](https://github.com/avenirs-esr/srv-dev/pull/60)  |
 | [1.10.0]| 2025-10-07 | [PR(#59)](https://github.com/avenirs-esr/srv-dev/pull/59)  |
 | [1.9.1] | 2025-08-26 | [PR(#40)](https://github.com/avenirs-esr/srv-dev/pull/40)  |
@@ -38,6 +39,11 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 
 ---
+### [1.10.2] - 2025-10-09 - [PR(#61)](https://github.com/avenirs-esr/srv-dev/pull/61)
+- Fix seeding setting to CSV.
+- Fix settings for base url of back office.
+- Fix several issues in Apisix route generation.
+
 ### [1.10.1] - 2025-10-07 - [PR(#60)](https://github.com/avenirs-esr/srv-dev/pull/60)
 - Fix typos in submodules urls.
 
