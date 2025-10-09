@@ -37,7 +37,6 @@ OPEN_API_FILE="$GENERATE_FROM_SWAGGER_SCRIPT_DIR/openapi.nogit.json"
 
 count=0
 i=$COUNT_START || 1
-
 for SWAGGER_URL in $SWAGGER_URLS; do
   wait_for_endpoint "$SWAGGER_URL" 300 5 || exit 1
   echo "Fetching OpenAPI definition..."
@@ -47,10 +46,12 @@ for SWAGGER_URL in $SWAGGER_URLS; do
   case "$SWAGGER_URL" in
     *avenirs-portfolio-api*) 
         SERVICE_PREFIX="api" 
+        UPSTREAM_NODE="avenirs-portfolio-api:10000"
         ;;
     *avenirs-portfolio-back-office*) 
       SERVICE_PREFIX="back-office" 
       i=100
+      UPSTREAM_NODE="avenirs-portfolio-back-office:10010"
       ;;
     *) SERVICE_PREFIX="api" ;;
   esac
@@ -80,7 +81,7 @@ for SWAGGER_URL in $SWAGGER_URLS; do
       /storage|/storage/*) is_storage=true ;;
     esac
 
-    if [ "$is_storage" = true ]; then
+    if [ "$is_storage" = true ] || [ "$SERVICE_PREFIX" != "api" ] ; then
       plugin_line=
     else
       plugin_line="\"plugin_config_id\": \"$AC_PLUGIN_ID\","
@@ -114,7 +115,7 @@ curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
   "upstream": {
     "type": "roundrobin",
     "nodes": {
-      "avenirs-portfolio-api:10000": 1
+      "$UPSTREAM_NODE": 1
     }
   }
 }'
