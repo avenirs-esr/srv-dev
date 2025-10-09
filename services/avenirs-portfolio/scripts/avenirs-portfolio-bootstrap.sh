@@ -67,7 +67,7 @@ write_env_file "GF_SECURITY_ADMIN_PASSWORD" "$GF_SECURITY_ADMIN_PASSWORD" ">>" "
 # Spring env file generation
 echo "spring.datasource.url=jdbc:postgresql://$AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME:5432/avenirs_api" > $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
 echo "seeder.enabled=true" >> $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
-echo "seeder.source=FAKER">> $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+echo "avenirs.back-office.base-url=http://avenirs-portfolio-back-office:10010/back-office" >> $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
 [ "`hostname`" = "srv-dev-avenir" ] && swagger_root="srv-dev-avenir.srv-avenir.brgm.recia.net" || swagger_root="localhost"
 echo "app.server.url=http://$swagger_root/avenirs-portfolio-api" >> $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
 echo "logging.level.org.springframework.web=DEBUG" >> $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
@@ -87,7 +87,7 @@ install_overlay $AVENIRS_PORTFOLIO_API_OVERLAY_DIR $AVENIRS_PORTFOLIO_API_REPOSI
 # Spring env file generation
 echo "spring.datasource.url=jdbc:postgresql://$AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME:5432/avenirs_back_office" > $AVENIRS_PORTFOLIO_BACK_OFFICE_SPRING_ENV_FILE;
 echo "seeder.enabled=true" >> $AVENIRS_PORTFOLIO_BACK_OFFICE_SPRING_ENV_FILE;
-echo "avenirs.back-office.base-url=http://avenirs-portfolio-back-office:10010/back-office" >> $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+echo "seeder.source=FAKER">> $AVENIRS_PORTFOLIO_BACK_OFFICE_SPRING_ENV_FILE;
 [ "`hostname`" = "srv-dev-avenir" ] && swagger_root="srv-dev-avenir.srv-avenir.brgm.recia.net" || swagger_root="localhost"
 echo "app.server.url=http://$swagger_root/avenirs-portfolio-api" >> $AVENIRS_PORTFOLIO_BACK_OFFICE_SPRING_ENV_FILE;
 echo "security.authentication.filter=disabled" >> $AVENIRS_PORTFOLIO_BACK_OFFICE_SPRING_ENV_FILE;
