@@ -156,6 +156,20 @@ services:
     networks:
       - avenirs-api-network
 
+  avenirs-openapi-merge:
+    image: node:18
+    container_name: avenirs-openapi-merge
+    restart: "no"
+    depends_on:
+      - avenirs-portfolio-api
+      - avenirs-portfolio-back-office
+    networks:
+      - avenirs-api-network
+    volumes:
+      - ./scripts:/work/scripts:ro
+      - api-specs:/usr/local/apache2/htdocs/api-specs
+    entrypoint: ["bash", "-lc", "API_SPECS_DIR=/usr/local/apache2/htdocs/api-specs bash /work/scripts/merge-openapi-specs.sh"]
+
 networks: 
   avenirs-api-network:
     external: true
@@ -165,3 +179,5 @@ volumes:
   srv-dev_opensearch-data:
   srv-dev_file-storage:
     external: true
+  api-specs: {}
+  

@@ -9,6 +9,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+| [1.10.2]| 2025-10-10 | [PR(#65)](https://github.com/avenirs-esr/srv-dev/pull/65)  |
 | [1.10.2]| 2025-10-09 | [PR(#61)](https://github.com/avenirs-esr/srv-dev/pull/61)  |
 | [1.10.1]| 2025-10-07 | [PR(#60)](https://github.com/avenirs-esr/srv-dev/pull/60)  |
 | [1.10.0]| 2025-10-07 | [PR(#59)](https://github.com/avenirs-esr/srv-dev/pull/59)  |
@@ -37,6 +38,10 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 | [1.0.1] | 2025-05-06 | [PR(#12)](https://github.com/avenirs-esr/srv-dev/pull/12)  |
 | [1.0.0] | 2025-04-20 | [PR(#11)](https://github.com/avenirs-esr/srv-dev/pull/11)  |
 
+
+---
+### [1.11.0] - 2025-10-10 - [PR(#65)](https://github.com/avenirs-esr/srv-dev/pull/65)
+- Merge openapi specifications of microservices.
 
 ---
 ### [1.10.2] - 2025-10-09 - [PR(#61)](https://github.com/avenirs-esr/srv-dev/pull/61)
