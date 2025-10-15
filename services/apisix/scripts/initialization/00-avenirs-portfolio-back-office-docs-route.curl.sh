@@ -8,7 +8,7 @@ curl -H "X-API-KEY: $SEC_APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
   "id": "back-office-docs-route",
   "uri": "/avenirs-portfolio-back-office/api-docs",
   "methods": ["GET", "OPTIONS"],
-  
+  "labels": {"": "SPECS"},
   
   "upstream": {
     "pass_host": "pass",

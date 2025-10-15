@@ -34,9 +34,11 @@ wait_for_endpoint() {
 GENERATE_FROM_SWAGGER_SCRIPT_DIR=`dirname $0`
 OUTPUT_DIR="/scripts/"
 OPEN_API_FILE="$GENERATE_FROM_SWAGGER_SCRIPT_DIR/openapi.nogit.json"
-
+tags_line=''
 count=0
 i=$COUNT_START || 1
+
+
 for SWAGGER_URL in $SWAGGER_URLS; do
   wait_for_endpoint "$SWAGGER_URL" 300 5 || exit 1
   echo "Fetching OpenAPI definition..."
@@ -47,13 +49,18 @@ for SWAGGER_URL in $SWAGGER_URLS; do
     *avenirs-portfolio-api*) 
         SERVICE_PREFIX="api" 
         UPSTREAM_NODE="avenirs-portfolio-api:10000"
+        tags_line='"labels": {"": "API"},'
         ;;
     *avenirs-portfolio-back-office*) 
       SERVICE_PREFIX="back-office" 
       i=100
       UPSTREAM_NODE="avenirs-portfolio-back-office:10010"
+          tags_line='"labels": {"": "BACK-OFFICE"},'
       ;;
-    *) SERVICE_PREFIX="api" ;;
+    *) 
+     echo "ERROR: unknown service $SWAGGER_URL"
+     exit 1
+      ;;
   esac
 
   jq -c '
@@ -112,6 +119,7 @@ curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
     }
   },
   $plugin_line
+  $tags_line
   "upstream": {
     "type": "roundrobin",
     "nodes": {
@@ -127,7 +135,7 @@ EOF
     i=$((i + 1))
   done
 done
-
+rm $OPEN_API_FILE
 echo "Routes generated"
 echo "----"
 count=$(ls -1 "$OUTPUT_DIR" | wc -l)

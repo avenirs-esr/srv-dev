@@ -8,7 +8,7 @@ curl -H "X-API-KEY: $SEC_APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
   "id": "merged-docs-route",
   "uri": "/api-specs/openapi-merged.json",
   "methods": ["GET", "OPTIONS"],
-  
+  "labels": {"": "SPECS"},
   
   "upstream": {
     "pass_host": "pass",
