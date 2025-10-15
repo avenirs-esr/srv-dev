@@ -8,6 +8,7 @@ curl -H "X-API-KEY: $SEC_APISIX_ADMIN_KEY" -i "$END_POINT" -X PUT -d '
   "id": "api-docs-route",
   "uri": "/avenirs-portfolio-api/api-docs",
   "methods": ["GET", "OPTIONS"],
+  "labels": {"": "SPECS"},
   
   
   "upstream": {

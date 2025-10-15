@@ -27,6 +27,9 @@ else
     vverbose "APISIX config file $APISIX_CONFIG not present, nothing to remove."
 fi
 
+# Removes the generated scripts
+rm -f $APISIX_SCRIPT_DIR/initialization/*.generated.curl.sh && vverbose "Generated scripts removed." || err "Unable to remove generated scripts in $APISIX_SCRIPT_DIR/initialization/"
+
 # Empty folder generated with root as owner if the dockers are started without proper initialization
 [ -d $APISIX_SCRIPT_DIR/../apisix-docker/example/dashboard_conf/conf.yaml ] && sudo rmdir $APISIX_SCRIPT_DIR/../apisix-docker/example/dashboard_conf/conf.yaml
 
