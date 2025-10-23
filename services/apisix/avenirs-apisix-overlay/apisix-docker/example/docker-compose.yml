@@ -53,10 +53,10 @@ services:
 
   etcd:
     container_name: ${AVENIRS_APISIX_ETCD_CONTAINER_NAME}
-    image: bitnami/etcd:3.4.15
+    image: bitnamilegacy/etcd:latest
     restart: always
     volumes:
-      - etcd_data:/bitnami/etcd
+      - etcd_data:/bitnamilegacy/etcd
     environment:
       ETCD_ENABLE_V2: "true"
       ALLOW_NONE_AUTHENTICATION: "yes"
