@@ -5,7 +5,7 @@ SWAGGER_URL="http://avenirs-portfolio-api:10000/avenirs-portfolio-api/api-docs"
 END_POINT="http://avenirs-apisix-api:9180/apisix/admin/routes"
 AC_PLUGIN_ID="avenirs-access-control-mock"
 COUNT_START=10
-SWAGGER_URLS="http://avenirs-portfolio-api:10000/avenirs-portfolio-api/api-docs http://avenirs-portfolio-back-office:10010/avenirs-portfolio-back-office/api-docs"
+SWAGGER_URLS="http://avenirs-portfolio-api:10000/avenirs-portfolio-api/api-docs http://avenirs-portfolio-back-office:10010/avenirs-portfolio-back-office/api-docs http://avenirs-portfolio-interoperability:10020/avenirs-portfolio-interoperability/api-docs"
 # End Section to adapt
 
 wait_for_endpoint() {
@@ -57,8 +57,14 @@ for SWAGGER_URL in $SWAGGER_URLS; do
       UPSTREAM_NODE="avenirs-portfolio-back-office:10010"
           tags_line='"labels": {"": "BACK-OFFICE"},'
       ;;
+    *avenirs-portfolio-interoperability*) 
+      SERVICE_PREFIX="interoperability" 
+      i=100
+      UPSTREAM_NODE="avenirs-portfolio-interoperability:10020"
+          tags_line='"labels": {"": "INTEROPERABILITY"},'
+      ;;
     *) 
-     echo "ERROR: unknown service $SWAGGER_URL"
+     echo "ERROR: unknown service $SWAGGER_URL (could be a missing entry in case section of init script)"
      exit 1
       ;;
   esac

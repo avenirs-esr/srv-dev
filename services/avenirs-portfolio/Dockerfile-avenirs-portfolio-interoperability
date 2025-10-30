@@ -1,0 +1,23 @@
+FROM eclipse-temurin:21-jdk-alpine as build
+WORKDIR /workspace/app
+COPY ./avenirs-portfolio-interoperability/mvnw .
+COPY ./avenirs-portfolio-interoperability/.mvn .mvn
+COPY ./avenirs-portfolio-interoperability/pom.xml .
+COPY ./avenirs-portfolio-interoperability/libs libs
+COPY ./avenirs-portfolio-interoperability/src src
+
+RUN chmod +x ./mvnw
+RUN ./mvnw spotless:apply
+RUN ./mvnw clean install package -DskipTests
+RUN mkdir -p ./target/dependency && (cd ./target/dependency; jar -xf ../*.jar)
+
+
+FROM eclipse-temurin:21-jdk-alpine
+WORKDIR /workspace/app
+VOLUME /tmp
+ARG DEPENDENCY=/workspace/app/target/dependency
+COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
+COPY --from=build /workspace/app/target/avenirs-portfolio-interoperability-*-SNAPSHOT.jar /app/avenirs-portfolio-interoperability.jar
+
+ENTRYPOINT ["java", "-server", "-noverify", "-Xmx2048M", "-jar", "/app/avenirs-portfolio-interoperability.jar"]

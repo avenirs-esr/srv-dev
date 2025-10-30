@@ -41,6 +41,12 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 
 ---
+### [Unreleased]
+
+#### ✨ Added
+- Integration of the interoperability microservice as an additional backend service.
+
+---
 ### [1.11.0] - 2025-10-10 - [PR(#65)](https://github.com/avenirs-esr/srv-dev/pull/65)
 - clean existing APISIX routes before routes generation.
 - Add a tag on the routes: API (avenirs-portfolio-api), BACK-OFFICE (avenirs-portfolio-back-office), SPECS for swagger end points.
