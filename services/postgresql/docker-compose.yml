@@ -2,7 +2,7 @@ services:
   postgresql-primary:
     container_name: ${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}
     hostname: ${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}
-    image: postgres:latest
+    image: postgres:17
     command: ["postgres", "-c", "config_file=/etc/postgresql.conf"]
     restart: always
     environment:
@@ -36,7 +36,7 @@ services:
   postgresql-secondary1:
     container_name: ${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}
     hostname: ${AVENIRS_POSTGRESQL_SECONDARY1_CONTAINER_NAME}
-    image: postgres:latest
+    image: postgres:17
     command: |
       bash -c "
       if [ -e /var/lib/postgresql/data/standby.signal ]
@@ -80,7 +80,7 @@ services:
   postgresql-secondary2:
     container_name: ${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}
     hostname: ${AVENIRS_POSTGRESQL_SECONDARY2_CONTAINER_NAME}
-    image: postgres:latest
+    image: postgres:17
     command: |
       bash -c "
       if [ -e /var/lib/postgresql/data/standby.signal ]
