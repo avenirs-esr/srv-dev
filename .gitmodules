@@ -28,4 +28,4 @@
 	branch = develop
 [submodule "services/avenirs-portfolio/avenirs-portfolio-interoperability"]
 	path = services/avenirs-portfolio/avenirs-portfolio-interoperability
-	url = git@github.com:avenirs-esr/avenirs-portfolio-interoperability.git
+	url = https://github.com/avenirs-esr/avenirs-portfolio-interoperability.git
