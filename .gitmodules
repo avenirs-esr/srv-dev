@@ -26,3 +26,6 @@
 	path = services/avenirs-portfolio/avenirs-portfolio-back-office
 	url = https://github.com/avenirs-esr/avenirs-portfolio-back-office.git
 	branch = develop
+[submodule "services/avenirs-portfolio/avenirs-portfolio-interoperability"]
+	path = services/avenirs-portfolio/avenirs-portfolio-interoperability
+	url = https://github.com/avenirs-esr/avenirs-portfolio-interoperability.git
