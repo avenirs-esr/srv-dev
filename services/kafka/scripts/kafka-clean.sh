@@ -3,8 +3,7 @@
 #--------------------------------------#
 # Clean script for Kafka               #
 #                                      #  
-# Removes all the modifications:       #
-# - Deletes volumes                    #
+# Removes all the modifications        #
 #--------------------------------------#
 
 
@@ -21,10 +20,6 @@ info "Kafka cleaning started."
     && { rm $KAFKA_ENV_FILE && info "Docker environment file deleted: $KAFKA_ENV_FILE" || err "Unable to delete $KAFKA_ENV_FILE"; }\
     || info "File $KAFKA_ENV_FILE not present"
 
-
-# Volumes reset
-reset_volumes "kafka" $AVENIRS_KAFKA_VOLUMES_ROOT\
-     $AVENIRS_ZOOKEEPER_VOLUMES_ROOT
 
 
 info "Kafka cleaning completed."

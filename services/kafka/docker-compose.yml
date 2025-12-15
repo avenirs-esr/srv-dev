@@ -2,21 +2,6 @@
 # - https://docs.confluent.io/platform/current/installation/docker/installation.html
 # - https://www.baeldung.com/ops/kafka-docker-setup
 services:
-  zookeeper:
-   # user: "3000:999"
-    container_name: ${AVENIRS_ZOOKEEPER_CONTAINER_NAME}
-    image: confluentinc/cp-zookeeper:latest
-    restart: always
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - 22181:2181
-    volumes: 
-      - zookeeper_data:/var/lib/zookeeper/data
-      - zookeeper_log:/var/lib/zookeeper/log    
-    networks:
-      kafka-network:
   
   kafka:
     #user: "3000:999"
@@ -59,14 +44,10 @@ services:
       SERVER_SERVLET_CONTEXT_PATH: /kafka-ui
     networks:
       kafka-network:
-    # volumes:
-    #   - ${KAFKA_UI_OVERLAY_REALPATH}/etc/kafkaui/dynamic_config.yaml:/etc/kafkaui/dynamic_config.yaml
 networks: 
   kafka-network:
     external: true
     name: $AVENIRS_NETWORK
 
 volumes:
-  zookeeper_data:
-  zookeeper_log:
   kafka_data:

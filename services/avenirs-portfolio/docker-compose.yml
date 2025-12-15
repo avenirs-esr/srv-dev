@@ -69,7 +69,7 @@ services:
       args:
        AVENIRS_PORTFOLIO_SECURITY_VERSION: ${AVENIRS_PORTFOLIO_SECURITY_VERSION}
        OVERLAY_DIR: ${AVENIRS_PORTFOLIO_SECURITY_OVERLAY_BASENAME}
-    restart: always
+    restart: no
     ports:
       - "${AVENIRS_PORTFOLIO_SECURITY_CONTAINER_PORT}:12000"
     environment:
