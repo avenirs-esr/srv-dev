@@ -158,7 +158,7 @@ write_env_file "AVENIRS_PORTFOLIO_SECURITY_SPRING_ENV_FILE" "$AVENIRS_PORTFOLIO_
 write_env_file "spring.datasource.url" "jdbc:postgresql://$AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME:5432/avenirs_access_control" ">" $AVENIRS_PORTFOLIO_SECURITY_SPRING_ENV_FILE;
 
 [ "`hostname`" = "srv-dev-avenir" ] && swagger_root="srv-dev-avenir.srv-avenir.brgm.recia.net" || swagger_root="localhost"
-write_env_file "app.server.url=http://$swagger_root/avenirs-portfolio-security" ">>" $AVENIRS_PORTFOLIO_SECURITY_SPRING_ENV_FILE;
+write_env_file "app.server.url" "http://$swagger_root/avenirs-portfolio-security" ">>" $AVENIRS_PORTFOLIO_SECURITY_SPRING_ENV_FILE;
 
 # Overlay files
 echo "install_overlay $AVENIRS_PORTFOLIO_SECURITY_OVERLAY_DIR $AVENIRS_PORTFOLIO_SECURITY_REPOSITORY_DIR"
