@@ -9,8 +9,9 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
-| [1.10.3]| 2025-10-15 | [PR(#66)](https://github.com/avenirs-esr/srv-dev/pull/66)
-| [1.10.2]| 2025-10-10 | [PR(#65)](https://github.com/avenirs-esr/srv-dev/pull/65)  |
+| [1.12.0]| 2025-12-10 | [PR(#70)](https://github.com/avenirs-esr/srv-dev/pull/70)  |
+| [1.11.1]| 2025-10-15 | [PR(#66)](https://github.com/avenirs-esr/srv-dev/pull/66)  |
+| [1.11.0]| 2025-10-10 | [PR(#65)](https://github.com/avenirs-esr/srv-dev/pull/65)  |
 | [1.10.2]| 2025-10-09 | [PR(#61)](https://github.com/avenirs-esr/srv-dev/pull/61)  |
 | [1.10.1]| 2025-10-07 | [PR(#60)](https://github.com/avenirs-esr/srv-dev/pull/60)  |
 | [1.10.0]| 2025-10-07 | [PR(#59)](https://github.com/avenirs-esr/srv-dev/pull/59)  |
@@ -41,13 +42,17 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 
 ---
-### [Unreleased]
 
-#### ✨ Added
-- Integration of the interoperability microservice as an additional backend service.
+### [1.12.1] - 2025-12-15 - [PR(#71)](https://github.com/avenirs-esr/srv-dev/pull/71)
+
+- Fix Kafka bootstrap process (Use Kraft and Zookeeper removed)
+
+### [1.12.0] - 2025-12-10 - [PR(#70)](https://github.com/avenirs-esr/srv-dev/pull/66)
+
+- Add: Integration of the interoperability microservice as an additional backend service.
 
 ---
-### [1.11.0] - 2025-10-10 - [PR(#65)](https://github.com/avenirs-esr/srv-dev/pull/65)
+### [1.11.1] - 2025-10-15 - [PR(#66)](https://github.com/avenirs-esr/srv-dev/pull/66)
 - clean existing APISIX routes before routes generation.
 - Add a tag on the routes: API (avenirs-portfolio-api), BACK-OFFICE (avenirs-portfolio-back-office), SPECS for swagger end points.
 - Deletion of the generated route scripts in the APISIX clean process.
