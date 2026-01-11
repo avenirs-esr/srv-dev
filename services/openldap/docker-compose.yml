@@ -30,10 +30,9 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - ${AVENIRS_LDAP_VOLUMES_ROOT}/var/lib/ldap:/var/lib/ldap
-      - ${AVENIRS_LDAP_VOLUMES_ROOT}/etc/ldap/slapd.d:/etc/ldap/slapd.d
-      - ${AVENIRS_LDAP_VOLUMES_ROOT}/container/service/slapd/assets/certs/:/container/service/slapd/assets/certs/
-      - ${AVENIRS_LDAP_VOLUMES_ROOT}/container/service/slapd/assets/config/bootstrap/ldif/custom/:/container/service/slapd/assets/config/bootstrap/ldif/custom
+      - openldap_data:/var/lib/ldap
+      - openldap_config:/etc/ldap/slapd.d
+      - ${LDIF_CUSTOM_DIR}:/container/service/slapd/assets/config/bootstrap/ldif/custom
     ports:
       - "389:389"
       - "636:636"
@@ -61,3 +60,7 @@ networks:
   openldap-network:
     external: true
     name: $AVENIRS_NETWORK
+
+volumes:
+  openldap_data:
+  openldap_config:

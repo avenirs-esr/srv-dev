@@ -1,0 +1,55 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 a2683f49
+dn: cn=eduperson,cn=schema,cn=config
+changeType: add
+objectClass: olcSchemaConfig
+cn: eduperson
+olcAttributeTypes: {0}( 1.3.6.1.4.1.5923.1.1.1.1 NAME 'eduPersonAffiliation'
+  DESC 'eduPerson per Internet2 and EDUCAUSE' EQUALITY caseIgnoreMatch SYNTA
+ X 1.3.6.1.4.1.1466.115.121.1.15 )
+olcAttributeTypes: {1}( 1.3.6.1.4.1.5923.1.1.1.7 NAME 'eduPersonEntitlement'
+  DESC 'eduPerson per Internet2 and EDUCAUSE' EQUALITY caseIgnoreMatch SYNTA
+ X 1.3.6.1.4.1.1466.115.121.1.15 )
+olcAttributeTypes: {2}( 1.3.6.1.4.1.5923.1.1.1.2 NAME 'eduPersonNickname' DE
+ SC 'eduPerson per Internet2 and EDUCAUSE' EQUALITY caseIgnoreMatch SYNTAX 1
+ .3.6.1.4.1.1466.115.121.1.15 )
+olcAttributeTypes: {3}( 1.3.6.1.4.1.5923.1.1.1.3 NAME 'eduPersonOrgDN' DESC 
+ 'eduPerson per Internet2 and EDUCAUSE' EQUALITY distinguishedNameMatch SYNT
+ AX 1.3.6.1.4.1.1466.115.121.1.12 SINGLE-VALUE )
+olcAttributeTypes: {4}( 1.3.6.1.4.1.5923.1.1.1.4 NAME 'eduPersonOrgUnitDN' D
+ ESC 'eduPerson per Internet2 and EDUCAUSE' EQUALITY distinguishedNameMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.12 )
+olcAttributeTypes: {5}( 1.3.6.1.4.1.5923.1.1.1.5 NAME 'eduPersonPrimaryAffil
+ iation' DESC 'eduPerson per Internet2 and EDUCAUSE' EQUALITY caseIgnoreMatc
+ h SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE )
+olcAttributeTypes: {6}( 1.3.6.1.4.1.5923.1.1.1.8 NAME 'eduPersonPrimaryOrgUn
+ itDN' DESC 'eduPerson per Internet2 and EDUCAUSE' EQUALITY distinguishedNam
+ eMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.12 SINGLE-VALUE )
+olcAttributeTypes: {7}( 1.3.6.1.4.1.5923.1.1.1.6 NAME 'eduPersonPrincipalNam
+ e' DESC 'eduPerson per Internet2 and EDUCAUSE' EQUALITY caseIgnoreMatch SYN
+ TAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE )
+olcAttributeTypes:: ezh9KCAxLjMuNi4xLjQuMS41OTIzLjEuMS4xLjEyIE5BTUUgJ2VkdVBl
+ cnNvblByaW5jaXBhbE5hbWVQcmlvcicgREVTQyAnZWR1UGVyc29uUHJpbmNpcGFsTmFtZVByaW9
+ yIHBlciBJbnRlcm5ldDInIEVRVUFMSVRZIGNhc2VJZ25vcmVNYXRjaCBTWU5UQVggJzEuMy42Lj
+ EuNC4xLjE0NjYuMTE1LjEyMS4xLjE1JyApCg==
+olcAttributeTypes:: ezl9KCAxLjMuNi4xLjQuMS41OTIzLjEuMS4xLjkgTkFNRSAnZWR1UGVy
+ c29uU2NvcGVkQWZmaWxpYXRpb24nIERFU0MgJ2VkdVBlcnNvbiBwZXIgSW50ZXJuZXQyIGFuZCB
+ FRFVDQVVTRScgRVFVQUxJVFkgY2FzZUlnbm9yZU1hdGNoIFNZTlRBWCAxLjMuNi4xLjQuMS4xND
+ Y2LjExNS4xMjEuMS4xNSApCg==
+olcAttributeTypes:: ezEwfSggMS4zLjYuMS40LjEuNTkyMy4xLjEuMS4xMCBOQU1FICdlZHVQ
+ ZXJzb25UYXJnZXRlZElEJyBERVNDICdlZHVQZXJzb24gcGVyIEludGVybmV0MiBhbmQgRURVQ0F
+ VU0UnIEVRVUFMSVRZIGNhc2VFeGFjdE1hdGNoIFNZTlRBWCAxLjMuNi4xLjQuMS4xNDY2LjExNS
+ 4xMjEuMS4xNSApCg==
+olcAttributeTypes:: ezExfSggMS4zLjYuMS40LjEuNTkyMy4xLjEuMS4xMSBOQU1FICdlZHVQ
+ ZXJzb25Bc3N1cmFuY2UnIERFU0MgJ2VkdVBlcnNvbiBwZXIgSW50ZXJuZXQyIGFuZCBFRFVDQVV
+ TRScgRVFVQUxJVFkgY2FzZUV4YWN0TWF0Y2ggU1lOVEFYIDEuMy42LjEuNC4xLjE0NjYuMTE1Lj
+ EyMS4xLjE1ICkK
+olcAttributeTypes:: ezEyfSggMS4zLjYuMS40LjEuNTkyMy4xLjEuMS4xNiBOQU1FICdlZHVQ
+ ZXJzb25PcmNpZCcgREVTQyAnT1JDSUQgcmVzZWFyY2hlciBpZGVudGlmaWVycyBiZWxvbmdpbmc
+ gdG8gdGhlIHByaW5jaXBhbCcgRVFVQUxJVFkgY2FzZUlnbm9yZU1hdGNoIFNZTlRBWCAxLjMuNi
+ 4xLjQuMS4xNDY2LjExNS4xMjEuMS4xNSApCg==
+olcAttributeTypes:: ezEzfSggMS4zLjYuMS40LjEuNTkyMy4xLjEuMS4xMyBOQU1FICdlZHVQ
+ ZXJzb25VbmlxdWVJZCcgREVTQyAnZWR1UGVyc29uVW5pcXVlSWQgcGVyIEludGVybmV0MicgRVF
+ VQUxJVFkgY2FzZUlnbm9yZU1hdGNoIFNZTlRBWCAxLjMuNi4xLjQuMS4xNDY2LjExNS4xMjEuMS
+ 4xNSBTSU5HTEUtVkFMVUUgKQo=
+olcObjectClasses: {0}( 1.3.6.1.4.1.5923.1.1.2 NAME 'eduPerson' AUXILIARY MAY (eduPersonAffiliation $ eduPersonNickname $ eduPersonOrgDN $ eduPersonOrgUnitDN $ eduPersonPrimaryAffiliation $ eduPersonPrincipalName $ eduPersonEntitlement $ eduPersonPrimaryOrgUnitDN $ eduPersonScopedAffiliation $ eduPersonTargetedID $ eduPersonAssurance $ eduPersonPrincipalNamePrior $ eduPersonUniqueId $ eduPersonOrcid) )

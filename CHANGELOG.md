@@ -9,6 +9,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+| [1.13.0]| 2026-0112-12 | [PR(#71)](https://github.com/avenirs-esr/srv-dev/pull/71) 
 | [1.12.0]| 2025-12-10 | [PR(#70)](https://github.com/avenirs-esr/srv-dev/pull/70)  |
 | [1.11.1]| 2025-10-15 | [PR(#66)](https://github.com/avenirs-esr/srv-dev/pull/66)  |
 | [1.11.0]| 2025-10-10 | [PR(#65)](https://github.com/avenirs-esr/srv-dev/pull/65)  |
@@ -42,6 +43,12 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 
 ---
+
+### [1.13.0] - 2026-01-12 - [PR(#71)](https://github.com/avenirs-esr/srv-dev/pull/71)
+
+- Refactor: service openldap uses named volumes instead of bounded.
+- Add: LDAP supann support
+- Fixtures: more realistic fixtures (suppan) based on real data.
 
 ### [1.12.1] - 2025-12-15 - [PR(#71)](https://github.com/avenirs-esr/srv-dev/pull/71)
 
