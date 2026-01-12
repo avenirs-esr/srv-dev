@@ -25,6 +25,8 @@ info "Openldap bootstrapping started."
 [ -f $FIXTURES_SCRIPT ] || err "$FIXTURES_SCRIPT not found."
 [ -x $FIXTURES_SCRIPT ] || err "$FIXTURES_SCRIPT NOT executable."
 
+
+
 # Volumes creation
 init_volumes "openldap" $AVENIRS_LDAP_VOLUMES_ROOT/var/lib/ldap \
     $AVENIRS_LDAP_VOLUMES_ROOT/etc/ldap/slapd.d \
@@ -36,6 +38,7 @@ check_network
 
 # .env file generation
 echo "AVENIRS_LDAP_VOLUMES_ROOT=$AVENIRS_LDAP_VOLUMES_ROOT" > $OPENLDAP_ENV_FILE
+echo "LDIF_CUSTOM_DIR=$LDIF_CUSTOM_DIR" >> $OPENLDAP_ENV_FILE
 echo "LDAP_ORGANISATION=$LDAP_ORGANISATION" >> $OPENLDAP_ENV_FILE
 echo "LDAP_DOMAIN=$LDAP_DOMAIN" >> $OPENLDAP_ENV_FILE
 echo "LDAP_BASE_DN=$LDAP_BASE_DN" >> $OPENLDAP_ENV_FILE
@@ -49,7 +52,13 @@ echo "AVENIRS_OPENLDAP_CONTAINER_NAME=$AVENIRS_OPENLDAP_CONTAINER_NAME" >> $OPEN
 echo "AVENIRS_LDAP_ADMIN_CONTAINER_NAME=$AVENIRS_LDAP_ADMIN_CONTAINER_NAME" >> $OPENLDAP_ENV_FILE
 echo "AVENIRS_NETWORK=$AVENIRS_NETWORK" >> $OPENLDAP_ENV_FILE
 
-# Fixtures generation.
-$FIXTURES_SCRIPT_CMD || err "Fixture command exited with error: $FIXTURES_SCRIPT_CMD."
+# Fixtures generation if required
+if [ -e "$LDIF_FILE" ]
+then
+    vverbose "Fixtures file found: $LDIF_FILE"
+    verbose "Fixtures génération skipped"
+else    
+    $FIXTURES_SCRIPT_CMD || err "Fixtures generation command exited with error: $FIXTURES_SCRIPT_CMD."
+fi
 
 info "Openldap bootstrapping completed."

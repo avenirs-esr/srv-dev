@@ -1,0 +1,32 @@
+dn: uid=__UID__,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: supannPerson
+objectClass: eduPerson
+objectClass: eduMember
+uid: __UID__
+userPassword: __USER_PASSWORD__
+cn: __FIRST_NAME__ __LAST_NAME__
+givenName: __FIRST_NAME__
+displayName: __DISPLAY_NAME__
+supannEtuId: __SUPANN_ETU_ID__
+eduPersonPrimaryAffiliation: student
+sn: __LAST_NAME__
+supannEtablissement: {UAI}__UAI__
+supannCivilite: __CIVILITY__
+supannOIDCDateDeNaissance: __BIRTH_DATE__
+__ENTITY_ASSIGNMENTS__
+supannEntiteAffectationPrincipale: __MAIN_ENTITY_ASSIGNMENT__
+eduPersonPrincipalName: __EPPN__
+supannEtuSecteurDisciplinaire: __DISCIPLINE__
+supannEtuDiplome: {UAI:__UAI__}__DEGREE__
+supannEtuTypeDiplome: {SISE}__DEGREE_TYPE__
+supannEtuEtape: {UAI:__UAI__}__STEP__
+supannAffectation: __MAIN_ENTITY_ASSIGNMENT_LABEL__
+supannEtuCursusAnnee: __CURSUS_YEAR__
+supannNomDeNaissance: __LAST_NAME__
+eduPersonAffiliation: student
+supannCodeINE: __INE__
+
