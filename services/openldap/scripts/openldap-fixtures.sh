@@ -446,7 +446,7 @@ function generate_entry(){
     local step=""
     local birth_date=""
     local supannAffectation=""
-    local email=""
+    local mail=""
     local ine=$(printf "%010dB\n" "$entry_count") 
     local -i first_name_idx=0
     first_name_idx=$((RANDOM % ${#FIRST_NAMES[@]}))
@@ -494,7 +494,7 @@ function generate_entry(){
     vverbose "Last name: $last_name"
     vverbose "Display name: $display_name"
     vverbose "SupannEtuId: $supann_etu_id"
-    vverbose "EMail: $email"
+    vverbose "Mail: $mail"
     vverbose "Birth date: $birth_date"
     vverbose "Cursus year: $cursus_year"
     vverbose "Discipline: $discipline"
