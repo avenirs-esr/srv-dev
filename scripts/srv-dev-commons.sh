@@ -63,7 +63,7 @@ function vvverbose (){
 }
 
 function err (){
-    [ "$1" = "--no-exit" ] && local -i no_exit=1 || local -i no_exit=0
+    [ "$1" = "--no-exit" ] && { local -i no_exit=1; shift; } || local -i no_exit=0
     >&2 echo -ne "${GREY}[${BOLD_RED}ERROR${GREY}]${BOLD_RED} $*${NC}\n";
     [ $no_exit -ne 1 ] && exit 1
     return 0

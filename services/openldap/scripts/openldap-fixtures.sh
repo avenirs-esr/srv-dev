@@ -22,6 +22,7 @@ RANDOM=$FIXTURES_SEED
 # - https://www.data.gouv.fr/datasets/liste-de-prenoms-et-patronymes
 # - https://www.data.gouv.fr/datasets/prenoms-declares
 DOMAIN=avenirs-esr.fr
+ETAB_FAKE_DOMAIN=etab.fr
 FIXTURES_DATA_DIR=$OPENLDAP_SCRIPT_DIR/fixtures-data
 FIRST_NAMES_FILE=$FIXTURES_DATA_DIR/liste_des_prenoms.csv
 LAST_NAMES_FILE=$FIXTURES_DATA_DIR/patronymes.csv
@@ -46,6 +47,7 @@ cn \
 givenName \
 displayName \
 supannEtuId \
+mail \
 eduPersonPrimaryAffiliation \
 sn \
 supannEtablissement \
@@ -444,6 +446,7 @@ function generate_entry(){
     local step=""
     local birth_date=""
     local supannAffectation=""
+    local mail=""
     local ine=$(printf "%010dB\n" "$entry_count") 
     local -i first_name_idx=0
     first_name_idx=$((RANDOM % ${#FIRST_NAMES[@]}))
@@ -460,6 +463,7 @@ function generate_entry(){
     step="${STEPS[RANDOM % ${#STEPS[@]}]}"
     first_name="${first_name^^}"
     last_name="${last_name^^}"
+    mail="$uid@$ETAB_FAKE_DOMAIN"
     display_name="$last_name $first_name"
     uid="$(generate_uid "$last_name")"
     eppn="$uid@$DOMAIN"
@@ -483,12 +487,14 @@ function generate_entry(){
     vverbose "UAI: $UAI"
     vverbose "uid: $uid"
     vverbose "INE: $ine"
+    vverbose "mail: $mail"
     vverbose "EPPN: $eppn"
     vverbose "Civility: $civility"
     vverbose "First name: $first_name"
     vverbose "Last name: $last_name"
     vverbose "Display name: $display_name"
     vverbose "SupannEtuId: $supann_etu_id"
+    vverbose "Mail: $mail"
     vverbose "Birth date: $birth_date"
     vverbose "Cursus year: $cursus_year"
     vverbose "Discipline: $discipline"
@@ -505,6 +511,7 @@ function generate_entry(){
         | sed s"/__LAST_NAME__/$last_name/g" \
         | sed s"/__DISPLAY_NAME__/$display_name/g" \
         | sed s"/__SUPANN_ETU_ID__/$supann_etu_id/g" \
+        | sed s"/__MAIL__/$mail/g" \
         | sed s"/__UAI__/$UAI/g" \
         | sed s"/__CIVILITY__/$civility/g" \
         | sed s"/__BIRTH_DATE__/$birth_date/g" \
