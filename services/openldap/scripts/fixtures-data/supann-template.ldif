@@ -12,7 +12,7 @@ cn: __FIRST_NAME__ __LAST_NAME__
 givenName: __FIRST_NAME__
 displayName: __DISPLAY_NAME__
 supannEtuId: __SUPANN_ETU_ID__
-mail: __MAIL__,
+mail: __MAIL__
 eduPersonPrimaryAffiliation: student
 sn: __LAST_NAME__
 supannEtablissement: {UAI}__UAI__
