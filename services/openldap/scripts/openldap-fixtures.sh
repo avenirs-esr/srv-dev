@@ -463,10 +463,10 @@ function generate_entry(){
     step="${STEPS[RANDOM % ${#STEPS[@]}]}"
     first_name="${first_name^^}"
     last_name="${last_name^^}"
-    mail="$uid@$ETAB_FAKE_DOMAIN"
     display_name="$last_name $first_name"
     uid="$(generate_uid "$last_name")"
-    eppn="$uid@$DOMAIN"
+    mail="$uid@$ETAB_FAKE_DOMAIN"
+    eppn="$uid@$ETAB_FAKE_DOMAIN"
     cursus_year="$(fetch_cursus_year "$birth_date")"
     supann_etu_id=$((SUPANN_ETU_ID_START + entry_count))
     local -i assignment_idx=0

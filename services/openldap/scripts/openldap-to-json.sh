@@ -16,9 +16,10 @@ init_commons $*
 . $OPENLDAP_SCRIPT_DIR/openldap-env.sh $OPENLDAP_SCRIPT_DIR 2> /dev/null \
     || err "Unable to source $OPENLDAP_SCRIPT_DIR/openldap-env.sh"
 
-DEFAULT_ATTRIBUTES="givenName,sn,mail,displayName,supannCivilite,supannCodeINE,\
-supannEtablissement,supannEtuCursusAnnee,eduPersonAffiliation,supannEtuDiplome,\
-supannEtuEtape,supannEtuTypeDiplome,supannOIDCDateDeNaissance"
+DEFAULT_ATTRIBUTES="uid,givenName,sn,mail,displayName,supannCivilite,supannCodeINE,\
+supannEtablissement,supannEtuCursusAnnee,eduPersonAffiliation,eduPersonPrincipalName,supannEtuDiplome,\
+supannEtuEtape,supannEtuTypeDiplome,supannOIDCDateDeNaissance,supannEntiteAffectation,\
+supannEntiteAffectationPrincipale"
 LDAP_FILTER="${LDAP_FILTER:-(objectClass=inetOrgPerson)}"
 LDAP_URL="${LDAP_URL:-ldap://localhost:389}"
 LOGIN_DN="${LOGIN_DN:-cn=admin,dc=ldap-dev,dc=avenirs-esr,dc=fr}"
@@ -36,7 +37,9 @@ JSON_TEMPLATE="{
 }"
 
 ENTRY_TEMPLATE="{
-\"civility\": \"__supannCivilite__\",
+    \"externalId\": \"__uid__\",
+    \"eppn\": \"__eduPersonPrincipalName__\",
+    \"civility\": \"__supannCivilite__\",
     \"firstName\": \"__givenName__\",
     \"lastName\": \"__sn__\",
     \"displayName\": \"__displayName__\",
@@ -47,6 +50,8 @@ ENTRY_TEMPLATE="{
     \"cursusYear\": \"__supannEtuCursusAnnee__\",
     \"degree\": \"__supannEtuDiplome__\",
     \"degreeType\": \"__supannEtuTypeDiplome__\",
+    \"affectations\": __supannEntiteAffectation__,
+    \"affectationPrincipale\": \"__supannEntiteAffectationPrincipale__\",
     \"step\": \"__supannEtuEtape__\",
     \"birthDate\": \"__supannOIDCDateDeNaissance__\"
 }"
@@ -196,6 +201,7 @@ function process_entry(){
     local line=""
     local placeholder=""
     local entry_json="$ENTRY_TEMPLATE"
+    local affectations_items=""
     ((NB_ENTRIES+=1))
     verbose "Processing entry $NB_ENTRIES"
 
@@ -211,20 +217,35 @@ function process_entry(){
             value="${line#*: }"
         else
             continue
-        fi
+         fi
 
-        value="$(escape_json_values "$value")"
-        placeholder="__${attribute}__"
-        entry_json="${entry_json//$placeholder/$value}"
-        verbose "attribute: $attribute - value: $value"
-    done <<< "$entry"
-    vverbose Entry: "$entry_json"
-    if [ $NB_ENTRIES -gt 1 ]; then
-        printf ',\n' >> "$TMP_WORK_FILE"
-    fi
-    printf '%s' "$entry_json" >> "$TMP_WORK_FILE"
-    verbose "----"
-}
+         value="$(escape_json_values "$value")"
+         if [ "$attribute" = "supannEntiteAffectation" ]; then
+             if [ -n "$affectations_items" ]; then
+                 affectations_items+="," 
+             fi
+             affectations_items+="\"$value\""
+             verbose "attribute: $attribute - value: $value"
+             continue
+         fi
+         placeholder="__${attribute}__"
+         entry_json="${entry_json//$placeholder/$value}"
+         verbose "attribute: $attribute - value: $value"
+     done <<< "$entry"
+
+     placeholder="__supannEntiteAffectation__"
+     if [ -n "$affectations_items" ]; then
+         entry_json="${entry_json//$placeholder/[$affectations_items]}"
+     else
+         entry_json="${entry_json//$placeholder/[]}"
+     fi
+     vverbose Entry: "$entry_json"
+     if [ $NB_ENTRIES -gt 1 ]; then
+         printf ',\n' >> "$TMP_WORK_FILE"
+     fi
+     printf '%s' "$entry_json" >> "$TMP_WORK_FILE"
+     verbose "----"
+ }
 
 function process_entries(){
     vverbose "Processing entries"
