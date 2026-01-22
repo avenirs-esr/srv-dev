@@ -9,6 +9,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+| [1.15.0]| 2026-01-20 | [PR(#75)](https://github.com/avenirs-esr/srv-dev/pull/75)  |
 | [1.14.0]| 2026-01-12 | [PR(#73)](https://github.com/avenirs-esr/srv-dev/pull/73)  |
 | [1.13.0]| 2026-01-12 | [PR(#72)](https://github.com/avenirs-esr/srv-dev/pull/72)  |
 | [1.12.0]| 2025-12-10 | [PR(#70)](https://github.com/avenirs-esr/srv-dev/pull/70)  |
@@ -44,6 +45,11 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 
 ---
+
+### [1.15.0] - 2026-01-20 - [PR(#75)](https://github.com/avenirs-esr/srv-dev/pull/75)
+
+- Fix: multivalued attributes.
+- Fix: bug with mail generated with the bad uid.
 
 ### [1.14.0] - 2026-01-15 - [PR(#73)](https://github.com/avenirs-esr/srv-dev/pull/73)
 
