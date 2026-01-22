@@ -9,6 +9,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+| [1.16.0]| 2026-01-23 | [PR(#76)](https://github.com/avenirs-esr/srv-dev/pull/76)  |
 | [1.15.0]| 2026-01-20 | [PR(#75)](https://github.com/avenirs-esr/srv-dev/pull/75)  |
 | [1.14.0]| 2026-01-12 | [PR(#73)](https://github.com/avenirs-esr/srv-dev/pull/73)  |
 | [1.13.0]| 2026-01-12 | [PR(#72)](https://github.com/avenirs-esr/srv-dev/pull/72)  |
@@ -45,6 +46,13 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 
 ---
+
+
+### [1.16.0] - 2026-01-23 - [PR(#76)](https://github.com/avenirs-esr/srv-dev/pull/76)
+
+- Fix: problem with bind volume and permission for openldap service.
+- Add: script to load fixtures as the loading is performed only on the first boot of openldap service.
+
 
 ### [1.15.0] - 2026-01-20 - [PR(#75)](https://github.com/avenirs-esr/srv-dev/pull/75)
 

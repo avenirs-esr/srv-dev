@@ -35,8 +35,8 @@
   
     "db:reset-all": "npm run api:reset-db && npm run back-office:reset-db && npm run interoperability:reset-db",
     "db:clean-all": "npm run api:clean-db && npm run back-office:clean-db && npm run interoperability:clean-db",
-    "db:init-all": "npm run api:init-db && npm run back-office:init-db && npm run interoperability:init-db"
-    
+    "db:init-all": "npm run api:init-db && npm run back-office:init-db && npm run interoperability:init-db",
+    "ldap:load-fixtures": "services/openldap/scripts/openldap-load-fixtures.sh"
   },
   "repository": {
     "type": "git",
