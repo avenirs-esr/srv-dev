@@ -1,8 +1,21 @@
 services:
+  openldap-init-custom-ldif:
+    image: alpine:latest
+    container_name: ${AVENIRS_OPENLDAP_CONTAINER_NAME}-init-custom-ldif
+    restart: "no"
+    volumes:
+      - ${LDIF_CUSTOM_DIR}:/mnt/custom-ro:ro
+      - openldap_custom_ldif_dir:/container/service/slapd/assets/config/bootstrap/ldif/custom
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - "set -e; SRC=/mnt/custom-ro; DEST=/container/service/slapd/assets/config/bootstrap/ldif/custom; echo '[init] source:'; ls -la \"$$SRC\"; mkdir -p \"$$DEST\"; echo '[init] dest before:'; ls -la \"$$DEST\"; find \"$$DEST\" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +; cp -a \"$$SRC\"/. \"$$DEST\"/; echo '[init] dest after:'; ls -la \"$$DEST\"; test -f \"$$DEST/100-openldap-fixtures.ldif\""
   openldap:
     container_name: ${AVENIRS_OPENLDAP_CONTAINER_NAME}
     image: osixia/openldap:1.5.0
     restart: always
+    depends_on:
+      openldap-init-custom-ldif:
+        condition: service_completed_successfully
     environment:
       LDAP_LOG_LEVEL: "0"
       LDAP_ORGANISATION: ${LDAP_ORGANISATION}
@@ -32,7 +45,7 @@ services:
     volumes:
       - openldap_data:/var/lib/ldap
       - openldap_config:/etc/ldap/slapd.d
-      - ${LDIF_CUSTOM_DIR}:/container/service/slapd/assets/config/bootstrap/ldif/custom
+      - openldap_custom_ldif_dir:/container/service/slapd/assets/config/bootstrap/ldif/custom
     ports:
       - "389:389"
       - "636:636"
@@ -43,6 +56,7 @@ services:
     hostname: "ldap-server"
     networks:
       openldap-network:
+ 
   phpldapadmin:
     image: osixia/phpldapadmin:latest
     container_name: ${AVENIRS_LDAP_ADMIN_CONTAINER_NAME}
@@ -64,3 +78,4 @@ networks:
 volumes:
   openldap_data:
   openldap_config:
+  openldap_custom_ldif_dir:
