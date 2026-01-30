@@ -1,0 +1,19 @@
+name: Manual launch deploy on server
+on:
+  workflow_dispatch:
+    inputs:
+      env_name:
+        description: "Environnement cible : dev | qualif | recette"
+        required: true
+        type: choice
+        options:
+          - dev
+          - qualif
+          - recette
+
+jobs:
+  call-deploy-workflow:
+    uses: avenirs-esr/avenirs-workflows/.github/workflows/deploy-workflow.yaml@main
+    with:
+      env_name: ${{ github.event.inputs.env_name }}
+    secrets: inherit
