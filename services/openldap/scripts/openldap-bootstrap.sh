@@ -26,13 +26,6 @@ info "Openldap bootstrapping started."
 [ -x $FIXTURES_SCRIPT ] || err "$FIXTURES_SCRIPT NOT executable."
 
 
-
-# Volumes creation
-init_volumes "openldap" $AVENIRS_LDAP_VOLUMES_ROOT/var/lib/ldap \
-    $AVENIRS_LDAP_VOLUMES_ROOT/etc/ldap/slapd.d \
-    $AVENIRS_LDAP_VOLUMES_ROOT/container/service/slapd/assets/certs/ \
-    $LDIF_CUSTOM_DIR
-
 # Network check
 check_network
 
