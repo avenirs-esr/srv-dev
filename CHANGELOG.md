@@ -9,6 +9,7 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 | Version | Date       | Related PR |
 |---------|------------|------------|
+| [1.16.1]| 2026-02-05 | [PR(#78)](https://github.com/avenirs-esr/srv-dev/pull/78)  |  
 | [1.16.0]| 2026-01-23 | [PR(#76)](https://github.com/avenirs-esr/srv-dev/pull/76)  |
 | [1.15.0]| 2026-01-20 | [PR(#75)](https://github.com/avenirs-esr/srv-dev/pull/75)  |
 | [1.14.0]| 2026-01-12 | [PR(#73)](https://github.com/avenirs-esr/srv-dev/pull/73)  |
@@ -46,6 +47,13 @@ It follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format a
 
 
 ---
+
+
+### [1.16.1] - 2026-02-05 - [PR(#78)](https://github.com/avenirs-esr/srv-dev/pull/78)
+
+- Fix: 
+ - openldap volumes init boostraping and clean scripts.
+ - cas service setting for login/password
 
 
 ### [1.16.0] - 2026-01-23 - [PR(#76)](https://github.com/avenirs-esr/srv-dev/pull/76)

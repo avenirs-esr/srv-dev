@@ -5,7 +5,7 @@
   "bypassApprovalPrompt": true,
   "clientId": "__SEC_APISIX_OIDC_CLIENT_ID__",
   "clientSecret": "__SEC_APISIX_OIDC_CLIENT_SECRET__",
-  "supportedGrantTypes": [ "java.util.HashSet", [ "authorization_code", "refresh_token" ] ],
+  "supportedGrantTypes": [ "java.util.HashSet", [ "authorization_code", "refresh_token", "password" ] ],
   "supportedResponseTypes": [ "java.util.HashSet", [ "code", "token" ] ],
   "serviceId": "^https?://(httpbin.org$|((srv-(dev|recette|qualif)(\\.srv-avenirs?\\.brgm\\.recia\\.net)?)|localhost)/node-api/cas-auth-callback)(/.*)*",
   "jwtAccessToken": true,
