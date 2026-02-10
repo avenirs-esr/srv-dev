@@ -1,6 +1,6 @@
 services:
   openldap-init-custom-ldif:
-    image: alpine:latest
+    image: alpine:${ALPINE_VERSION}
     container_name: ${AVENIRS_OPENLDAP_CONTAINER_NAME}-init-custom-ldif
     restart: "no"
     volumes:
@@ -9,9 +9,10 @@ services:
     entrypoint: ["/bin/sh", "-c"]
     command:
       - "set -e; SRC=/mnt/custom-ro; DEST=/container/service/slapd/assets/config/bootstrap/ldif/custom; echo '[init] source:'; ls -la \"$$SRC\"; mkdir -p \"$$DEST\"; echo '[init] dest before:'; ls -la \"$$DEST\"; find \"$$DEST\" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +; cp -a \"$$SRC\"/. \"$$DEST\"/; echo '[init] dest after:'; ls -la \"$$DEST\"; test -f \"$$DEST/100-openldap-fixtures.ldif\""
+
   openldap:
     container_name: ${AVENIRS_OPENLDAP_CONTAINER_NAME}
-    image: osixia/openldap:1.5.0
+    image: osixia/openldap:${OPENLDAP_VERSION}
     restart: always
     depends_on:
       openldap-init-custom-ldif:
@@ -58,7 +59,7 @@ services:
       openldap-network:
  
   phpldapadmin:
-    image: osixia/phpldapadmin:latest
+    image: osixia/phpldapadmin:${PHPLDAPADMIN_VERSION}
     container_name: ${AVENIRS_LDAP_ADMIN_CONTAINER_NAME}
     restart: always
     environment:

@@ -56,3 +56,51 @@ AVENIRS_OPENSEARCH_DASHBOARDS_CONTAINER_NAME="${AVENIRS_CONTAINER_PREFIX}opensea
 AVENIRS_OPENSEARCH_DASHBOARDS_CONTAINER_PORT=5601
 AVENIRS_PORTFOLIO_BACK_OFFICE_CONTAINER_NAME="${AVENIRS_PORTFOLIO_CONTAINER_PREFIX}back-office"
 AVENIRS_PORTFOLIO_BACK_OFFICE_CONTAINER_PORT=10008
+
+# ---------------------------------------------------------
+# ---- Docker Image Versions (Defaults)
+# ---------------------------------------------------------
+
+# Infrastructure & Web
+export ALPINE_VERSION_DEFAULT="3.18"
+export DEBIAN_VERSION_DEFAULT="bullseye-slim"
+export HTTPD_VERSION_DEFAULT="2.4.56"
+export NGINX_VERSION_DEFAULT="alpine"
+
+# Databases & Stores
+export ADMINER_VERSION_DEFAULT="latest"
+export ETCD_VERSION_DEFAULT="3.5"
+export POSTGRES_VERSION_DEFAULT="17"
+export REDIS_VERSION_DEFAULT="7.0-alpine"
+export VALKEY_VERSION_DEFAULT="latest"
+
+# Identity & Security
+export CAS_BASE_IMAGE_DEFAULT="eclipse-temurin:11-jdk-alpine"
+export OPENLDAP_VERSION_DEFAULT="1.5.0"
+export PHPLDAPADMIN_VERSION_DEFAULT="latest"
+
+# Messaging & Search
+export KAFKA_VERSION_DEFAULT="latest"
+export KAFKA_UI_VERSION_DEFAULT="latest"
+export OPENSEARCH_VERSION_DEFAULT="latest"
+export OPENSEARCH_DASHBOARDS_VERSION_DEFAULT="latest"
+export ZOOKEEPER_VERSION_DEFAULT="latest"
+
+# Apisix & Gateway
+export APISIX_VERSION_DEFAULT="3.6.0-debian"
+export APISIX_DASHBOARD_VERSION_DEFAULT="3.0.1-alpine"
+export OPENRESTY_VERSION_DEFAULT="1.21.4.2-alpine-fat"
+
+# Monitoring
+export GRAFANA_VERSION_DEFAULT="latest"
+export PROMETHEUS_VERSION_DEFAULT="latest"
+
+# Java / Temurin
+export JAVA_ALPINE_VERSION_DEFAULT="21-jdk-alpine"
+export JAVA_VERSION_DEFAULT="21-jdk"
+
+# Node.js Variations
+export NODE_ALPINE_VERSION_DEFAULT="22-alpine"
+export NODE_BUILDER_VERSION_DEFAULT="16-alpine"
+export NODE_VERSION_DEFAULT="18"
+export GOLANG_VERSION_DEFAULT="1.19"

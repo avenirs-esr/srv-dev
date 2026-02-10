@@ -1,4 +1,6 @@
-FROM eclipse-temurin:21-jdk-alpine as build
+ARG JAVA_ALPINE_VERSION=21-jdk-alpin
+
+FROM eclipse-temurin:${JAVA_ALPINE_VERSION} as build
 WORKDIR /workspace/app
 COPY ./avenirs-portfolio-api/mvnw .
 COPY ./avenirs-portfolio-api/.mvn .mvn
@@ -12,7 +14,7 @@ RUN ./mvnw clean install package -DskipTests
 RUN mkdir -p ./target/dependency && (cd ./target/dependency; jar -xf ../*.jar)
 
 
-FROM eclipse-temurin:21-jdk-alpine
+FROM eclipse-temurin:${JAVA_ALPINE_VERSION}
 WORKDIR /workspace/app
 ARG AVENIRS_PORTFOLIO_API_VERSION=0.0.1
 VOLUME /tmp

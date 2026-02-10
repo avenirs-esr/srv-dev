@@ -1,11 +1,7 @@
-# Resources: 
-# - https://docs.confluent.io/platform/current/installation/docker/installation.html
-# - https://www.baeldung.com/ops/kafka-docker-setup
 services:
-  
+
   kafka:
-    #user: "3000:999"
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:${KAFKA_VERSION}
     container_name: ${AVENIRS_KAFKA_CONTAINER_NAME}
     restart: always
     ports:
@@ -29,7 +25,7 @@ services:
       kafka-network:
 
   kafka-ui:
-    image: provectuslabs/kafka-ui:latest
+    image: provectuslabs/kafka-ui:${KAFKA_UI_VERSION}
     container_name: ${AVENIRS_KAFKA_UI_CONTAINER_NAME}
     restart: always
     
