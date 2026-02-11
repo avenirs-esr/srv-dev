@@ -4,11 +4,62 @@ networks:
     external: true             # Created via bootstrap script
       
 include:
-  - ./services/postgresql/docker-compose.yml
-  - ./services/openldap/docker-compose.yml
-  - ./services/cas/cas-overlay-template/docker-compose.yml
-  - ./services/apache/docker-compose.yml
-  - ./services/kafka/docker-compose.yml
-  - ./services/node/docker-compose.yml
-  - ./services/avenirs-portfolio/docker-compose.yml
-  - ./services/apisix/apisix-docker/example/docker-compose.yml
+  - path: ./services/postgresql/docker-compose.yml
+    env_file:
+      - .env
+      - ./services/postgresql/.env
+
+  - path: ./services/openldap/docker-compose.yml
+    env_file:
+      - .env
+      - ./services/openldap/.env
+
+  - path: ./services/cas/cas-overlay-template/docker-compose.yml
+    env_file:
+      - .env
+      - ./services/cas/cas-overlay-template/.env
+
+  - path: ./services/apache/docker-compose.yml
+    env_file:
+      - .env
+      - ./services/apache/.env
+
+  - path: ./services/apisix/apisix-docker/example/docker-compose.yml
+    env_file:
+      - .env
+      - ./services/apisix/apisix-docker/example/.env
+
+  - path: ./services/kafka/docker-compose.yml
+    env_file:
+      - .env
+      - ./services/kafka/.env
+
+  - path: ./services/node/docker-compose.yml
+    env_file:
+      - .env
+      - ./services/node/.env
+
+  - path: ./services/avenirs-portfolio/docker-compose.yml
+    env_file:
+      - .env
+      - ./services/avenirs-portfolio/.env
+
+  - path: ./services/grafana/docker-compose.yml
+    env_file:
+      - .env
+      - ./services/grafana/.env
+
+  - path: ./services/opensearch/docker-compose.yml
+    env_file:
+      - .env
+      - ./services/opensearch/.env
+
+  - path: ./services/prometheus/docker-compose.yml
+    env_file:
+      - .env
+      - ./services/prometheus/.env
+
+  - path: ./services/valkey/docker-compose.yml
+    env_file:
+      - .env
+      - ./services/valkey/.env

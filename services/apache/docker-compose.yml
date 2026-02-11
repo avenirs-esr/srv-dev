@@ -1,21 +1,18 @@
 services:
   le-apache:
     container_name: ${AVENIRS_APACHE_CONTAINER_NAME}
-   # image: lets-encrypt-apache:latest
     build:
       context: .
       dockerfile: ./Dockerfile
       args:
         OVERLAY_DIR: ${APACHE_OVERLAY_BASENAME}
+        HTTPD_VERSION: ${HTTPD_VERSION}
     restart: always
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - api-specs:/usr/local/apache2/htdocs/api-specs:ro
-    # volumes:
-    #   - ./httpd.conf:/etc/apache2/httpd.conf
-    #   - ./html:/var/www/localhost/htdocs/
     networks:
       - apache-network
 networks: 

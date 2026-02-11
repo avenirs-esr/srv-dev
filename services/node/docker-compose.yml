@@ -2,20 +2,15 @@ services:
   node:
     container_name: ${AVENIRS_NODE_CONTAINER_NAME}
     restart: always
-    #environment:
-    #  - APP_RUNNING_CONTEXT=${APP_RUNNING_CONTEXT}
 
     build:
       context: ./node-api/
       dockerfile: Dockerfile
-    #  args:
-    #    APP_RUNNING_CONTEXT: ${APP_RUNNING_CONTEXT}
+      args:
+        NODE_VERSION: ${NODE_VERSION}
     ports:
       - "${AVENIRS_NODE_CONTAINER_PORT}:3000"
       - "${AVENIRS_WS_CONTAINER_PORT}:3003"
-
-    #volumes:
-    #  - /var/log/docker-containers/audit/node:/usr/src/app/logs
    
     networks:
       - node-network

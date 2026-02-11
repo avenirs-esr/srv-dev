@@ -1,0 +1,53 @@
+services:
+
+  avenirs-opensearch:
+    image: opensearchproject/opensearch:${OPENSEARCH_VERSION}
+    container_name: ${AVENIRS_OPENSEARCH_CONTAINER_NAME}
+    restart: always
+    environment:
+      - cluster.name=opensearch-cluster
+      - plugins.security.disabled=true
+      - discovery.type=single-node
+      - node.name=opensearch-node1
+      - discovery.seed_hosts=opensearch-node1
+      - bootstrap.memory_lock=true
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=OpensearchDefaultPassword0?
+      - OPENSEARCH_USERNAME=admin
+      - OPENSEARCH_PASSWORD=admin
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "${AVENIRS_OPENSEARCH_CONTAINER_PORT}:9200"
+    volumes:
+      - srv-dev_opensearch-data:/usr/share/opensearch/data
+    networks:
+      - avenirs-api-network
+
+  avenirs-opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:${OPENSEARCH_DASHBOARDS_VERSION}
+    container_name: ${AVENIRS_OPENSEARCH_DASHBOARDS_CONTAINER_NAME}
+    restart: always
+    ports:
+      - ${AVENIRS_OPENSEARCH_DASHBOARDS_CONTAINER_PORT}:5601
+    environment:
+      - 'OPENSEARCH_HOSTS=["http://${AVENIRS_OPENSEARCH_CONTAINER_NAME}:9200"]'
+      - "DISABLE_SECURITY_DASHBOARDS_PLUGIN=true"
+    depends_on:
+      - avenirs-opensearch
+    networks:
+      - avenirs-api-network
+
+networks: 
+  avenirs-api-network:
+    external: true
+    name: ${AVENIRS_NETWORK}
+
+volumes:
+  srv-dev_opensearch-data:
+  

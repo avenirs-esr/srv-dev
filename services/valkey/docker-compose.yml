@@ -1,0 +1,15 @@
+services:
+
+  avenirs-valkey:
+    image: valkey/valkey:${VALKEY_VERSION}
+    container_name: avenirs-valkey
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - avenirs-api-network
+
+networks: 
+  avenirs-api-network:
+    external: true
+    name: ${AVENIRS_NETWORK}

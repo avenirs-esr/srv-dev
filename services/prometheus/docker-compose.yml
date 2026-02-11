@@ -1,0 +1,18 @@
+services:
+
+  avenirs-prometheus:
+    image: prom/prometheus:${PROMETHEUS_VERSION}
+    container_name: ${AVENIRS_PROMETHEUS_CONTAINER_NAME}
+    restart: always
+    ports:
+      - "${AVENIRS_PROMETHEUS_CONTAINER_PORT}:9090"
+    volumes:
+      - ./avenirs-prometheus-conf/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - avenirs-api-network
+
+networks: 
+  avenirs-api-network:
+    external: true
+    name: ${AVENIRS_NETWORK}
+  

@@ -1,4 +1,7 @@
-FROM node:22-alpine AS build
+ARG NODE_ALPINE_VERSION=22-alpine
+ARG NGINX_VERSION=alpine
+
+FROM node:${NODE_ALPINE_VERSION} AS build
 WORKDIR /app
 COPY . .
 RUN npm ci
@@ -6,7 +9,7 @@ RUN npm run build-only
 RUN npm run type-check
 RUN npm run lint
 
-FROM nginx:alpine
+FROM nginx:${NGINX_VERSION}
 COPY --from=build /app/dist /usr/share/nginx/html/cofolio
 COPY --from=build /app/.env /usr/share/nginx/html/cofolio/.env
 RUN echo '\

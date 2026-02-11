@@ -14,7 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-FROM alpine:3.18 as pre-build
+ARG ALPINE_VERSION=3.18
+ARG GOLANG_VERSION=1.19
+ARG NODE_BUILDER_VERSION=16-alpine
+
+FROM alpine:${ALPINE_VERSION} as pre-build
 
 ARG APISIX_DASHBOARD_VERSION=master
 
@@ -26,7 +30,7 @@ RUN set -x \
 
 COPY web/config/config.ts /usr/local/apisix-dashboard/web/config/config.ts
 
-FROM golang:1.19 as api-builder
+FROM golang:${GOLANG_VERSION} as api-builder
 
 ARG ENABLE_PROXY=false
 
@@ -38,7 +42,7 @@ RUN if [ "$ENABLE_PROXY" = "true" ] ; then go env -w GOPROXY=https://goproxy.io,
     && go env -w GO111MODULE=on \
     && CGO_ENABLED=0 ./api/build.sh
 
-FROM node:16-alpine as fe-builder
+FROM node:${NODE_BUILDER_VERSION} as fe-builder
 
 WORKDIR /usr/local/apisix-dashboard
 
@@ -56,7 +60,7 @@ RUN if [ "$ENABLE_PROXY" = "true" ] ; then yarn config set registry https://regi
     && yarn install \
     && yarn build
 
-FROM alpine:3.18 as prod
+FROM alpine:${ALPINE_VERSION} as prod
 
 
 RUN if [ "$ENABLE_PROXY" = "true" ] ; then sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories ; fi

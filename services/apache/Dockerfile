@@ -1,5 +1,8 @@
 # Resource https://hub.docker.com/_/httpd?tab=description
-FROM httpd:2.4.56
+
+ARG HTTPD_VERSION=2.4.56
+
+FROM httpd:${HTTPD_VERSION}
 LABEL author="Arnaud Deman"
 
 ARG OVERLAY_DIR
