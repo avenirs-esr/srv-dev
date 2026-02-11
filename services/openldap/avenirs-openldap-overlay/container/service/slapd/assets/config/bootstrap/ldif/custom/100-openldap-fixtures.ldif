@@ -4,7 +4,8 @@ objectClass: top
 ou: people
 description: People branch
 
-dn: uid=agyepong,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=tessier,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -12,32 +13,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: agyepong
+uid: tessier
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: GIANNI AGYEPONG
-givenName: GIANNI
-displayName: AGYEPONG GIANNI
+cn: TESSIER LUCAS
+givenName: LUCAS
+displayName: TESSIER LUCAS
 supannEtuId: 10007474
-mail: agyepong@etab.fr
+mail: lucas.tessier@university.com
 eduPersonPrimaryAffiliation: student
-sn: AGYEPONG
+sn: TESSIER
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2003-09-23
 supannEntiteAffectation: 909
 supannEntiteAffectationPrincipale: 909
-eduPersonPrincipalName: agyepong@etab.fr
+eduPersonPrincipalName: lucas.tessier@university.com
 supannEtuSecteurDisciplinaire: {SISE}0067
 supannEtuDiplome: {UAI:0123456G}T3TCO-841
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}T3PAD3-100
 supannAffectation: L2 STAPS ES parcours LAS
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: AGYEPONG
+supannNomDeNaissance: TESSIER
 eduPersonAffiliation: student
 supannCodeINE: 0000000001B
 
-dn: uid=actisper,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=lambert,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -45,32 +47,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: actisper
+uid: lambert
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ROMAIN ACTIS PERINO
-givenName: ROMAIN
-displayName: ACTIS PERINO ROMAIN
+cn: LAMBERT ARTHUR
+givenName: ARTHUR
+displayName: LAMBERT ARTHUR
 supannEtuId: 10007475
-mail: actisper@etab.fr
+mail: arthur.lambert@university.com
 eduPersonPrimaryAffiliation: student
-sn: ACTIS PERINO
+sn: LAMBERT
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2005-08-14
 supannEntiteAffectation: DDRAG
 supannEntiteAffectationPrincipale: DDRAG
-eduPersonPrincipalName: actisper@etab.fr
+eduPersonPrincipalName: arthur.lambert@university.com
 supannEtuSecteurDisciplinaire: {SISE}0041
 supannEtuDiplome: {UAI:0123456G}R8DSD-800
 supannEtuTypeDiplome: {SISE}HD
 supannEtuEtape: {UAI:0123456G}D5CJU4-100
 supannAffectation: Ateliers artistiques
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ACTIS PERINO
+supannNomDeNaissance: LAMBERT
 eduPersonAffiliation: student
 supannCodeINE: 0000000002B
 
-dn: uid=amrikssa,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=charpent,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -78,33 +81,34 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: amrikssa
+uid: charpent
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: MARION AMRIKSSA
-givenName: MARION
-displayName: AMRIKSSA MARION
+cn: CHARPENTIER SOPHIE
+givenName: SOPHIE
+displayName: CHARPENTIER SOPHIE
 supannEtuId: 10007476
-mail: amrikssa@etab.fr
+mail: sophie.charpentier@university.com
 eduPersonPrimaryAffiliation: student
-sn: AMRIKSSA
+sn: CHARPENTIER
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2000-07-07
 supannEntiteAffectation: 904
 supannEntiteAffectation: ED548
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: amrikssa@etab.fr
+eduPersonPrincipalName: sophie.charpentier@university.com
 supannEtuSecteurDisciplinaire: {SISE}0005
 supannEtuDiplome: {UAI:0123456G}L5LSO-100
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}I5DED5-102
 supannAffectation: BUT 3 TC Parcours Marketing digital,e-business entrepreunar
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: AMRIKSSA
+supannNomDeNaissance: CHARPENTIER
 eduPersonAffiliation: student
 supannCodeINE: 0000000003B
 
-dn: uid=adamczew,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=perrin,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -112,32 +116,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: adamczew
+uid: perrin
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: TALIA ADAMCZEWSKA
-givenName: TALIA
-displayName: ADAMCZEWSKA TALIA
+cn: PERRIN ETHAN
+givenName: ETHAN
+displayName: PERRIN ETHAN
 supannEtuId: 10007477
-mail: adamczew@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: ADAMCZEWSKA
+mail: ethan.perrin@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: PERRIN
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 1999-11-17
 supannEntiteAffectation: 902
 supannEntiteAffectationPrincipale: 902
-eduPersonPrincipalName: adamczew@etab.fr
+eduPersonPrincipalName: ethan.perrin@university.com
 supannEtuSecteurDisciplinaire: {SISE}0062
 supannEtuDiplome: {UAI:0123456G}K3PCH-100
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}T3IAL2-830
 supannAffectation: Ateliers artistiques
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: ADAMCZEWSKA
-eduPersonAffiliation: student
+supannNomDeNaissance: PERRIN
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000004B
 
-dn: uid=angheles,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=fournier,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -145,32 +150,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: angheles
+uid: fournier
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: STEEVE ANGHELESCU
-givenName: STEEVE
-displayName: ANGHELESCU STEEVE
+cn: FOURNIER CAMILLE
+givenName: CAMILLE
+displayName: FOURNIER CAMILLE
 supannEtuId: 10007478
-mail: angheles@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: ANGHELESCU
+mail: camille.fournier@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: FOURNIER
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2007-07-02
 supannEntiteAffectation: 902
 supannEntiteAffectationPrincipale: 902
-eduPersonPrincipalName: angheles@etab.fr
+eduPersonPrincipalName: camille.fournier@university.com
 supannEtuSecteurDisciplinaire: {SISE}0006
 supannEtuDiplome: {UAI:0123456G}T3MMI-843
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}T3DNU1-820
 supannAffectation: L3 Physique Chimie-Chimie
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: ANGHELESCU
-eduPersonAffiliation: student
+supannNomDeNaissance: FOURNIER
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000005B
 
-dn: uid=agetti,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=marchand,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -178,32 +184,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: agetti
+uid: marchand
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: LÉO AGETTI
-givenName: LÉO
-displayName: AGETTI LÉO
+cn: MARCHAND ANAÏS
+givenName: ANAÏS
+displayName: MARCHAND ANAÏS
 supannEtuId: 10007479
-mail: agetti@etab.fr
+mail: anais.marchand@university.com
 eduPersonPrimaryAffiliation: student
-sn: AGETTI
+sn: MARCHAND
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2003-10-31
 supannEntiteAffectation: 903
 supannEntiteAffectationPrincipale: 903
-eduPersonPrincipalName: agetti@etab.fr
+eduPersonPrincipalName: anais.marchand@university.com
 supannEtuSecteurDisciplinaire: {SISE}0064
 supannEtuDiplome: {UAI:0123456G}S3PEM-103
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}F0DULB-801
 supannAffectation: M1 Droit des affaires parcours Droit de la Banque
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: AGETTI
+supannNomDeNaissance: MARCHAND
 eduPersonAffiliation: student
 supannCodeINE: 0000000006B
 
-dn: uid=akamoum,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=favre,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -211,33 +218,34 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: akamoum
+uid: favre
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: GISÈLE AKAMOUM
-givenName: GISÈLE
-displayName: AKAMOUM GISÈLE
+cn: FAVRE VALENTIN
+givenName: VALENTIN
+displayName: FAVRE VALENTIN
 supannEtuId: 10007480
-mail: akamoum@etab.fr
+mail: valentin.favre@university.com
 eduPersonPrimaryAffiliation: student
-sn: AKAMOUM
+sn: FAVRE
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2002-07-26
 supannEntiteAffectation: 911
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: 911
-eduPersonPrincipalName: akamoum@etab.fr
+eduPersonPrincipalName: valentin.favre@university.com
 supannEtuSecteurDisciplinaire: {SISE}0063
 supannEtuDiplome: {UAI:0123456G}R8DLF-800
 supannEtuTypeDiplome: {SISE}HD
 supannEtuEtape: {UAI:0123456G}T3DNU1-820
 supannAffectation: M2 CCS-Etudes politiques internationales:monde anglophone
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: AKAMOUM
+supannNomDeNaissance: FAVRE
 eduPersonAffiliation: student
 supannCodeINE: 0000000007B
 
-dn: uid=andreett,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=boucher,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -245,32 +253,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: andreett
+uid: boucher
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: MORGAN ANDREETTO
-givenName: MORGAN
-displayName: ANDREETTO MORGAN
+cn: BOUCHER LINA
+givenName: LINA
+displayName: BOUCHER LINA
 supannEtuId: 10007481
-mail: andreett@etab.fr
+mail: lina.boucher@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANDREETTO
+sn: BOUCHER
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2005-02-25
 supannEntiteAffectation: 915
 supannEntiteAffectationPrincipale: 915
-eduPersonPrincipalName: andreett@etab.fr
+eduPersonPrincipalName: lina.boucher@university.com
 supannEtuSecteurDisciplinaire: {SISE}0002
 supannEtuDiplome: {UAI:0123456G}A3MGC-100
 supannEtuTypeDiplome: {SISE}DP
 supannEtuEtape: {UAI:0123456G}D5ATE5-101
 supannAffectation: Master 1 Comptabilite Controle Audit
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: ANDREETTO
+supannNomDeNaissance: BOUCHER
 eduPersonAffiliation: student
 supannCodeINE: 0000000008B
 
-dn: uid=aflallo,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=carpenti,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -278,32 +287,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: aflallo
+uid: carpenti
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ASTOU AFLALLO
-givenName: ASTOU
-displayName: AFLALLO ASTOU
+cn: CARPENTIER JULES
+givenName: JULES
+displayName: CARPENTIER JULES
 supannEtuId: 10007482
-mail: aflallo@etab.fr
+mail: jules.carpentier@university.com
 eduPersonPrimaryAffiliation: student
-sn: AFLALLO
+sn: CARPENTIER
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2004-05-06
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: aflallo@etab.fr
+eduPersonPrincipalName: jules.carpentier@university.com
 supannEtuSecteurDisciplinaire: {SISE}0032
 supannEtuDiplome: {UAI:0123456G}T3GMP-820
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}D4IEJ0-101
 supannAffectation: BUT 2 GEII parcours Automatisme et informatique industriell
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: AFLALLO
+supannNomDeNaissance: CARPENTIER
 eduPersonAffiliation: student
 supannCodeINE: 0000000009B
 
-dn: uid=abrisham,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=lamy,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -311,32 +321,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abrisham
+uid: lamy
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: RÉMI ABRISHAMI
-givenName: RÉMI
-displayName: ABRISHAMI RÉMI
+cn: LAMY EVA
+givenName: EVA
+displayName: LAMY EVA
 supannEtuId: 10007483
-mail: abrisham@etab.fr
+mail: eva.lamy@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABRISHAMI
+sn: LAMY
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2007-06-12
 supannEntiteAffectation: 911
 supannEntiteAffectationPrincipale: 911
-eduPersonPrincipalName: abrisham@etab.fr
+eduPersonPrincipalName: eva.lamy@university.com
 supannEtuSecteurDisciplinaire: {SISE}0043
 supannEtuDiplome: {UAI:0123456G}R8DSV-800
 supannEtuTypeDiplome: {SISE}HD
 supannEtuEtape: {UAI:0123456G}R8DBIO-800
 supannAffectation: CPGE-L2 LLCER-Anglais
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: ABRISHAMI
+supannNomDeNaissance: LAMY
 eduPersonAffiliation: student
 supannCodeINE: 0000000010B
 
-dn: uid=adabi,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=fabre,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -344,32 +355,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: adabi
+uid: fabre
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ADAM ADABI
-givenName: ADAM
-displayName: ADABI ADAM
+cn: FABRE MARTIN
+givenName: MARTIN
+displayName: FABRE MARTIN
 supannEtuId: 10007484
-mail: adabi@etab.fr
+mail: martin.fabre@university.com
 eduPersonPrimaryAffiliation: student
-sn: ADABI
+sn: FABRE
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2004-08-29
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: adabi@etab.fr
+eduPersonPrincipalName: martin.fabre@university.com
 supannEtuSecteurDisciplinaire: {SISE}0003
 supannEtuDiplome: {UAI:0123456G}K5MAP-100
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}R8DCHI-800
 supannAffectation: BUT 3 Genie Industriel et Maintenance - ALT
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: ADABI
+supannNomDeNaissance: FABRE
 eduPersonAffiliation: student
 supannCodeINE: 0000000011B
 
-dn: uid=aitkhedd,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=cousin,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -377,32 +389,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: aitkhedd
+uid: cousin
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ATHÉNA AITKHEDDACHE
-givenName: ATHÉNA
-displayName: AITKHEDDACHE ATHÉNA
+cn: COUSIN ZOÉ
+givenName: ZOÉ
+displayName: COUSIN ZOÉ
 supannEtuId: 10007485
-mail: aitkhedd@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: AITKHEDDACHE
+mail: zoe.cousin@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: COUSIN
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 1974-09-06
 supannEntiteAffectation: 902
 supannEntiteAffectationPrincipale: 902
-eduPersonPrincipalName: aitkhedd@etab.fr
+eduPersonPrincipalName: zoe.cousin@university.com
 supannEtuSecteurDisciplinaire: {SISE}0017
 supannEtuDiplome: {UAI:0123456G}T3GEI-841
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}T3WDI2-830
 supannAffectation: M2 Info et Maths parcours Informatique
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: AITKHEDDACHE
-eduPersonAffiliation: student
+supannNomDeNaissance: COUSIN
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000012B
 
-dn: uid=alluaume,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=lefebvre,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -410,32 +423,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: alluaume
+uid: lefebvre
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ANDREA ALLUAUME
-givenName: ANDREA
-displayName: ALLUAUME ANDREA
+cn: LEFEBVRE NOAH
+givenName: NOAH
+displayName: LEFEBVRE NOAH
 supannEtuId: 10007486
-mail: alluaume@etab.fr
+mail: noah.lefebvre@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALLUAUME
+sn: LEFEBVRE
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2007-01-29
 supannEntiteAffectation: DDRAG
 supannEntiteAffectationPrincipale: DDRAG
-eduPersonPrincipalName: alluaume@etab.fr
+eduPersonPrincipalName: noah.lefebvre@university.com
 supannEtuSecteurDisciplinaire: {SISE}0011
 supannEtuDiplome: {UAI:0123456G}T3CPI-800
 supannEtuTypeDiplome: {SISE}DP
 supannEtuEtape: {UAI:0123456G}K3LBG2-101
 supannAffectation: M1 JPP (Contentieux judiciaire)-Draguignan
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: ALLUAUME
+supannNomDeNaissance: LEFEBVRE
 eduPersonAffiliation: student
 supannCodeINE: 0000000013B
 
-dn: uid=akcagun,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=paris,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -443,32 +457,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: akcagun
+uid: paris
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: SHIREL AKCAGUN
-givenName: SHIREL
-displayName: AKCAGUN SHIREL
+cn: PARIS AYA
+givenName: AYA
+displayName: PARIS AYA
 supannEtuId: 10007487
-mail: akcagun@etab.fr
+mail: aya.paris@university.com
 eduPersonPrimaryAffiliation: student
-sn: AKCAGUN
+sn: PARIS
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2002-02-04
 supannEntiteAffectation: 911
 supannEntiteAffectationPrincipale: 911
-eduPersonPrincipalName: akcagun@etab.fr
+eduPersonPrincipalName: aya.paris@university.com
 supannEtuSecteurDisciplinaire: {SISE}0023
 supannEtuDiplome: {UAI:0123456G}D5DPU-100
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}S3PLP3-101
 supannAffectation: L2 LEA-Anglais / Italien
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: AKCAGUN
+supannNomDeNaissance: PARIS
 eduPersonAffiliation: student
 supannCodeINE: 0000000014B
 
-dn: uid=abdulgha,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=renaud,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -476,32 +491,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abdulgha
+uid: renaud
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: MATILDE ABDULGHANI
-givenName: MATILDE
-displayName: ABDULGHANI MATILDE
+cn: RENAUD TOM
+givenName: TOM
+displayName: RENAUD TOM
 supannEtuId: 10007488
-mail: abdulgha@etab.fr
+mail: tom.renaud@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABDULGHANI
+sn: RENAUD
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2003-03-21
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: abdulgha@etab.fr
+eduPersonPrincipalName: tom.renaud@university.com
 supannEtuSecteurDisciplinaire: {SISE}0032
 supannEtuDiplome: {UAI:0123456G}K5MER-103
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}T3AII2-830
 supannAffectation: BUT 1 Genie Electrique et Informatique Industrielle - TP
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: ABDULGHANI
+supannNomDeNaissance: RENAUD
 eduPersonAffiliation: student
 supannCodeINE: 0000000015B
 
-dn: uid=ahfoune,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=baron,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -509,33 +525,34 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: ahfoune
+uid: baron
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: LOUISON AH FOUNE
-givenName: LOUISON
-displayName: AH FOUNE LOUISON
+cn: BARON SARAH
+givenName: SARAH
+displayName: BARON SARAH
 supannEtuId: 10007489
-mail: ahfoune@etab.fr
+mail: sarah.baron@university.com
 eduPersonPrimaryAffiliation: student
-sn: AH FOUNE
+sn: BARON
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2001-02-01
 supannEntiteAffectation: DEVE
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 911
-eduPersonPrincipalName: ahfoune@etab.fr
+eduPersonPrincipalName: sarah.baron@university.com
 supannEtuSecteurDisciplinaire: {SISE}0043
 supannEtuDiplome: {UAI:0123456G}F0SPJ-100
 supannEtuTypeDiplome: {SISE}ZA
 supannEtuEtape: {UAI:0123456G}L3LCE3-101
 supannAffectation: M1 Tourisme-Management du tourisme durable
 supannEtuCursusAnnee: {SUPANN}D
-supannNomDeNaissance: AH FOUNE
+supannNomDeNaissance: BARON
 eduPersonAffiliation: student
 supannCodeINE: 0000000016B
 
-dn: uid=agussolr,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=richard,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -543,33 +560,34 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: agussolr
+uid: richard
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: YAZAN AGUSSOL ROUSSEAUX
-givenName: YAZAN
-displayName: AGUSSOL ROUSSEAUX YAZAN
+cn: RICHARD LÉA
+givenName: LÉA
+displayName: RICHARD LÉA
 supannEtuId: 10007490
-mail: agussolr@etab.fr
+mail: lea.richard@university.com
 eduPersonPrimaryAffiliation: student
-sn: AGUSSOL ROUSSEAUX
+sn: RICHARD
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2007-10-17
 supannEntiteAffectation: DEVE
 supannEntiteAffectation: 903
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: agussolr@etab.fr
+eduPersonPrincipalName: lea.richard@university.com
 supannEtuSecteurDisciplinaire: {SISE}0032
 supannEtuDiplome: {UAI:0123456G}T3MGO-842
 supannEtuTypeDiplome: {SISE}DP
 supannEtuEtape: {UAI:0123456G}T3ESE3-841
 supannAffectation: BUT 3 MMI Parcours developpt web et dispositifs interactifs
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: AGUSSOL ROUSSEAUX
+supannNomDeNaissance: RICHARD
 eduPersonAffiliation: student
 supannCodeINE: 0000000017B
 
-dn: uid=ahdidan,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=hubert,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -577,32 +595,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: ahdidan
+uid: hubert
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: SABRINE AHDIDAN
-givenName: SABRINE
-displayName: AHDIDAN SABRINE
+cn: HUBERT ADAM
+givenName: ADAM
+displayName: HUBERT ADAM
 supannEtuId: 10007491
-mail: ahdidan@etab.fr
+mail: adam.hubert@university.com
 eduPersonPrimaryAffiliation: student
-sn: AHDIDAN
+sn: HUBERT
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2005-04-14
 supannEntiteAffectation: 903
 supannEntiteAffectationPrincipale: 903
-eduPersonPrincipalName: ahdidan@etab.fr
+eduPersonPrincipalName: adam.hubert@university.com
 supannEtuSecteurDisciplinaire: {SISE}0013
 supannEtuDiplome: {UAI:0123456G}K3PCH-103
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}R8DINF-800
 supannAffectation: M1 Droit notarial
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: AHDIDAN
+supannNomDeNaissance: HUBERT
 eduPersonAffiliation: student
 supannCodeINE: 0000000018B
 
-dn: uid=albarel,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=gaillard,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -610,32 +629,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: albarel
+uid: gaillard
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: OPHÉLIE ALBAREL
-givenName: OPHÉLIE
-displayName: ALBAREL OPHÉLIE
+cn: GAILLARD EMMA
+givenName: EMMA
+displayName: GAILLARD EMMA
 supannEtuId: 10007492
-mail: albarel@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: ALBAREL
+mail: emma.gaillard@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: GAILLARD
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2006-10-18
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: albarel@etab.fr
+eduPersonPrincipalName: emma.gaillard@university.com
 supannEtuSecteurDisciplinaire: {SISE}0021
 supannEtuDiplome: {UAI:0123456G}R8DSL-800
 supannEtuTypeDiplome: {SISE}HD
 supannEtuEtape: {UAI:0123456G}D5DGP4-101
 supannAffectation: BUT 1 GEA - Toulon
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: ALBAREL
-eduPersonAffiliation: student
+supannNomDeNaissance: GAILLARD
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000019B
 
-dn: uid=albaniac,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=mahe,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -643,32 +663,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: albaniac
+uid: mahe
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: MARLON ALBANIAC
-givenName: MARLON
-displayName: ALBANIAC MARLON
+cn: MAHE HUGO
+givenName: HUGO
+displayName: MAHE HUGO
 supannEtuId: 10007493
-mail: albaniac@etab.fr
+mail: hugo.mahe@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALBANIAC
+sn: MAHE
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2006-08-16
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: albaniac@etab.fr
+eduPersonPrincipalName: hugo.mahe@university.com
 supannEtuSecteurDisciplinaire: {SISE}0035
 supannEtuDiplome: {UAI:0123456G}T3TCO-833
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}D5DBA5-101
 supannAffectation: LP CVCA parcours Production Audiovisuelle
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: ALBANIAC
+supannNomDeNaissance: MAHE
 eduPersonAffiliation: student
 supannCodeINE: 0000000020B
 
-dn: uid=adamdiol,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=lebrun,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -676,32 +697,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: adamdiol
+uid: lebrun
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: SOLINE ADAM DIOLEZ
-givenName: SOLINE
-displayName: ADAM DIOLEZ SOLINE
+cn: LEBRUN CHLOÉ
+givenName: CHLOÉ
+displayName: LEBRUN CHLOÉ
 supannEtuId: 10007494
-mail: adamdiol@etab.fr
+mail: chloe.lebrun@university.com
 eduPersonPrimaryAffiliation: student
-sn: ADAM DIOLEZ
+sn: LEBRUN
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2004-10-03
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: adamdiol@etab.fr
+eduPersonPrincipalName: chloe.lebrun@university.com
 supannEtuSecteurDisciplinaire: {SISE}0013
 supannEtuDiplome: {UAI:0123456G}D3DRI-101
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}F0MARD-820
 supannAffectation: BUT 2 MMI Parcours developpt web et dispositifs interactifs
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: ADAM DIOLEZ
+supannNomDeNaissance: LEBRUN
 eduPersonAffiliation: student
 supannCodeINE: 0000000021B
 
-dn: uid=andradet,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=arnaud,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -709,32 +731,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: andradet
+uid: arnaud
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: MORGANE ANDRADE TAVARES
-givenName: MORGANE
-displayName: ANDRADE TAVARES MORGANE
+cn: ARNAUD LOUIS
+givenName: LOUIS
+displayName: ARNAUD LOUIS
 supannEtuId: 10007495
-mail: andradet@etab.fr
+mail: louis.arnaud@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANDRADE TAVARES
+sn: ARNAUD
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2005-02-25
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: andradet@etab.fr
+eduPersonPrincipalName: louis.arnaud@university.com
 supannEtuSecteurDisciplinaire: {SISE}0066
 supannEtuDiplome: {UAI:0123456G}L3LCE-100
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}K3ING3-100
 supannAffectation: BUT 2 GEA Parcours GEMA -  La Garde
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: ANDRADE TAVARES
+supannNomDeNaissance: ARNAUD
 eduPersonAffiliation: student
 supannCodeINE: 0000000022B
 
-dn: uid=andriasa,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=blanc,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -742,32 +765,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: andriasa
+uid: blanc
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: MAÏSSA ANDRIASAMY
-givenName: MAÏSSA
-displayName: ANDRIASAMY MAÏSSA
+cn: BLANC INES
+givenName: INES
+displayName: BLANC INES
 supannEtuId: 10007496
-mail: andriasa@etab.fr
+mail: ines.blanc@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANDRIASAMY
+sn: BLANC
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2006-02-16
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: andriasa@etab.fr
+eduPersonPrincipalName: ines.blanc@university.com
 supannEtuSecteurDisciplinaire: {SISE}0032
 supannEtuDiplome: {UAI:0123456G}D4PCA-100
 supannEtuTypeDiplome: {SISE}
 supannEtuEtape: {UAI:0123456G}F0SPJE-100
 supannAffectation: BUT 3 GMP parcours Inovation pour l'industrie
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: ANDRIASAMY
+supannNomDeNaissance: BLANC
 eduPersonAffiliation: student
 supannCodeINE: 0000000023B
 
-dn: uid=aloev,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=rolland,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -775,32 +799,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: aloev
+uid: rolland
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: IDRIS ALOEV
-givenName: IDRIS
-displayName: ALOEV IDRIS
+cn: ROLLAND NATHAN
+givenName: NATHAN
+displayName: ROLLAND NATHAN
 supannEtuId: 10007497
-mail: aloev@etab.fr
+mail: nathan.rolland@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALOEV
+sn: ROLLAND
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2005-02-18
 supannEntiteAffectation: 909
 supannEntiteAffectationPrincipale: 909
-eduPersonPrincipalName: aloev@etab.fr
+eduPersonPrincipalName: nathan.rolland@university.com
 supannEtuSecteurDisciplinaire: {SISE}0039
 supannEtuDiplome: {UAI:0123456G}R8DPH-800
 supannEtuTypeDiplome: {SISE}HD
 supannEtuEtape: {UAI:0123456G}D5ATE5-101
 supannAffectation: L1 STAPS
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: ALOEV
+supannNomDeNaissance: ROLLAND
 eduPersonAffiliation: student
 supannCodeINE: 0000000024B
 
-dn: uid=amaralta,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=hoareau,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -808,32 +833,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: amaralta
+uid: hoareau
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ASSA AMARAL TAVARES
-givenName: ASSA
-displayName: AMARAL TAVARES ASSA
+cn: HOAREAU MANON
+givenName: MANON
+displayName: HOAREAU MANON
 supannEtuId: 10007498
-mail: amaralta@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: AMARAL TAVARES
+mail: manon.hoareau@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: HOAREAU
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2006-07-30
 supannEntiteAffectation: ED548
 supannEntiteAffectationPrincipale: ED548
-eduPersonPrincipalName: amaralta@etab.fr
+eduPersonPrincipalName: manon.hoareau@university.com
 supannEtuSecteurDisciplinaire: {SISE}0040
 supannEtuDiplome: {UAI:0123456G}K3MAT-102
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}T3EME3-841
 supannAffectation: Doctorat Sciences de l'univers
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: AMARAL TAVARES
-eduPersonAffiliation: student
+supannNomDeNaissance: HOAREAU
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000025B
 
-dn: uid=alcabes,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=poirier,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -841,32 +867,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: alcabes
+uid: poirier
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: VALENTINE ALCABES
-givenName: VALENTINE
-displayName: ALCABES VALENTINE
+cn: POIRIER ALEX
+givenName: ALEX
+displayName: POIRIER ALEX
 supannEtuId: 10007499
-mail: alcabes@etab.fr
+mail: alex.poirier@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALCABES
+sn: POIRIER
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2007-09-27
 supannEntiteAffectation: 903
 supannEntiteAffectationPrincipale: 903
-eduPersonPrincipalName: alcabes@etab.fr
+eduPersonPrincipalName: alex.poirier@university.com
 supannEtuSecteurDisciplinaire: {SISE}0023
 supannEtuDiplome: {UAI:0123456G}T3GEI-820
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}D3MDI3-100
 supannAffectation: M1 Droit notarial
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: ALCABES
+supannNomDeNaissance: POIRIER
 eduPersonAffiliation: student
 supannCodeINE: 0000000026B
 
-dn: uid=abdelkad,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=teixeira,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -874,32 +901,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abdelkad
+uid: teixeira
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: HERMINE ABD EL KADER
-givenName: HERMINE
-displayName: ABD EL KADER HERMINE
+cn: TEIXEIRA JULIE
+givenName: JULIE
+displayName: TEIXEIRA JULIE
 supannEtuId: 10007500
-mail: abdelkad@etab.fr
+mail: julie.teixeira@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABD EL KADER
+sn: TEIXEIRA
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2006-02-21
 supannEntiteAffectation: ED548
 supannEntiteAffectationPrincipale: ED548
-eduPersonPrincipalName: abdelkad@etab.fr
+eduPersonPrincipalName: julie.teixeira@university.com
 supannEtuSecteurDisciplinaire: {SISE}0011
 supannEtuDiplome: {UAI:0123456G}K3SVI-105
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}K3EGE2-101
 supannAffectation: Doctorat Physique
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ABD EL KADER
+supannNomDeNaissance: TEIXEIRA
 eduPersonAffiliation: student
 supannCodeINE: 0000000027B
 
-dn: uid=agyeman,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=grondin,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -907,32 +935,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: agyeman
+uid: grondin
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: EMILIO AGYEMAN
-givenName: EMILIO
-displayName: AGYEMAN EMILIO
+cn: GRONDIN MAXIME
+givenName: MAXIME
+displayName: GRONDIN MAXIME
 supannEtuId: 10007501
-mail: agyeman@etab.fr
+mail: maxime.grondin@university.com
 eduPersonPrimaryAffiliation: student
-sn: AGYEMAN
+sn: GRONDIN
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2006-08-03
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: agyeman@etab.fr
+eduPersonPrincipalName: maxime.grondin@university.com
 supannEtuSecteurDisciplinaire: {SISE}0024
 supannEtuDiplome: {UAI:0123456G}T3GEI-842
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}T3CFF3-840
 supannAffectation: BUT 3 Genie Industriel et Maintenance - ALT
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: AGYEMAN
+supannNomDeNaissance: GRONDIN
 eduPersonAffiliation: student
 supannCodeINE: 0000000028B
 
-dn: uid=abres,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=lemoine,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -940,32 +969,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abres
+uid: lemoine
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: MATHIAS ABRES
-givenName: MATHIAS
-displayName: ABRES MATHIAS
+cn: LEMOINE PAUL
+givenName: PAUL
+displayName: LEMOINE PAUL
 supannEtuId: 10007502
-mail: abres@etab.fr
+mail: paul.lemoine@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABRES
+sn: LEMOINE
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2007-10-22
 supannEntiteAffectation: TGEAD
 supannEntiteAffectationPrincipale: TGEAD
-eduPersonPrincipalName: abres@etab.fr
+eduPersonPrincipalName: paul.lemoine@university.com
 supannEtuSecteurDisciplinaire: {SISE}0016
 supannEtuDiplome: {UAI:0123456G}I5ICO-105
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}L3MTL3-103
 supannAffectation: BUT 1 GEA - Draguignan
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ABRES
+supannNomDeNaissance: LEMOINE
 eduPersonAffiliation: student
 supannCodeINE: 0000000029B
 
-dn: uid=aitboulm,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=renault,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -973,32 +1003,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: aitboulm
+uid: renault
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ELOUAN AIT BOULMAL
-givenName: ELOUAN
-displayName: AIT BOULMAL ELOUAN
+cn: RENAULT CLARA
+givenName: CLARA
+displayName: RENAULT CLARA
 supannEtuId: 10007503
-mail: aitboulm@etab.fr
+mail: clara.renault@university.com
 eduPersonPrimaryAffiliation: student
-sn: AIT BOULMAL
+sn: RENAULT
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2006-04-03
 supannEntiteAffectation: 909
 supannEntiteAffectationPrincipale: 909
-eduPersonPrincipalName: aitboulm@etab.fr
+eduPersonPrincipalName: clara.renault@university.com
 supannEtuSecteurDisciplinaire: {SISE}0014
 supannEtuDiplome: {UAI:0123456G}F0DUA-800
 supannEtuTypeDiplome: {SISE}NA
 supannEtuEtape: {UAI:0123456G}K3PCH3-100
 supannAffectation: L1 STAPS
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: AIT BOULMAL
+supannNomDeNaissance: RENAULT
 eduPersonAffiliation: student
 supannCodeINE: 0000000030B
 
-dn: uid=ance,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=royer,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1006,33 +1037,34 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: ance
+uid: royer
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: MARIN ANCE
-givenName: MARIN
-displayName: ANCE MARIN
+cn: ROYER BAPTISTE
+givenName: BAPTISTE
+displayName: ROYER BAPTISTE
 supannEtuId: 10007504
-mail: ance@etab.fr
+mail: baptiste.royer@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANCE
+sn: ROYER
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2001-04-13
 supannEntiteAffectation: 908
 supannEntiteAffectation: 903
 supannEntiteAffectationPrincipale: 908
-eduPersonPrincipalName: ance@etab.fr
+eduPersonPrincipalName: baptiste.royer@university.com
 supannEtuSecteurDisciplinaire: {SISE}0017
 supannEtuDiplome: {UAI:0123456G}E5EDE-104
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}T3EMA3-841
 supannAffectation: CPGE-L1 Economie, Gestion
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ANCE
+supannNomDeNaissance: ROYER
 eduPersonAffiliation: student
 supannCodeINE: 0000000031B
 
-dn: uid=allaverd,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=barre,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1040,32 +1072,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: allaverd
+uid: barre
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: HELLA ALLAVERDIAN
-givenName: HELLA
-displayName: ALLAVERDIAN HELLA
+cn: BARRE INES
+givenName: INES
+displayName: BARRE INES
 supannEtuId: 10007505
-mail: allaverd@etab.fr
+mail: ines.barre@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALLAVERDIAN
+sn: BARRE
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2005-01-16
 supannEntiteAffectation: 911
 supannEntiteAffectationPrincipale: 911
-eduPersonPrincipalName: allaverd@etab.fr
+eduPersonPrincipalName: ines.barre@university.com
 supannEtuSecteurDisciplinaire: {SISE}0003
 supannEtuDiplome: {UAI:0123456G}F5TMN-800
 supannEtuTypeDiplome: {SISE}FI
 supannEtuEtape: {UAI:0123456G}E3CPG2-100
 supannAffectation: L2 LEA-Anglais / Italien
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: ALLAVERDIAN
+supannNomDeNaissance: BARRE
 eduPersonAffiliation: student
 supannCodeINE: 0000000032B
 
-dn: uid=albaric,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=perret,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1073,32 +1106,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: albaric
+uid: perret
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: OCÉANE ALBARIC
-givenName: OCÉANE
-displayName: ALBARIC OCÉANE
+cn: PERRET ALEXANDRE
+givenName: ALEXANDRE
+displayName: PERRET ALEXANDRE
 supannEtuId: 10007506
-mail: albaric@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: ALBARIC
+mail: alexandre.perret@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: PERRET
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2005-03-29
 supannEntiteAffectation: 909
 supannEntiteAffectationPrincipale: 909
-eduPersonPrincipalName: albaric@etab.fr
+eduPersonPrincipalName: alexandre.perret@university.com
 supannEtuSecteurDisciplinaire: {SISE}0016
 supannEtuDiplome: {UAI:0123456G}D5DTA-105
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}T3PRH3-840
 supannAffectation: L1 STAPS
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ALBARIC
-eduPersonAffiliation: student
+supannNomDeNaissance: PERRET
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000033B
 
-dn: uid=alvarino,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=carlier,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1106,32 +1140,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: alvarino
+uid: carlier
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: HÉLÈNE ALVARINO
-givenName: HÉLÈNE
-displayName: ALVARINO HÉLÈNE
+cn: CARLIER MARINE
+givenName: MARINE
+displayName: CARLIER MARINE
 supannEtuId: 10007507
-mail: alvarino@etab.fr
+mail: marine.carlier@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALVARINO
+sn: CARLIER
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2006-11-03
 supannEntiteAffectation: 909
 supannEntiteAffectationPrincipale: 909
-eduPersonPrincipalName: alvarino@etab.fr
+eduPersonPrincipalName: marine.carlier@university.com
 supannEtuSecteurDisciplinaire: {SISE}0015
 supannEtuDiplome: {UAI:0123456G}D3DRI-102
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}T3WDI3-841
 supannAffectation: L1 STAPS
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: ALVARINO
+supannNomDeNaissance: CARLIER
 eduPersonAffiliation: student
 supannCodeINE: 0000000034B
 
-dn: uid=adjili,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=rodier,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1139,32 +1174,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: adjili
+uid: rodier
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: AMANI ADJILI
-givenName: AMANI
-displayName: ADJILI AMANI
+cn: RODIER YANISS
+givenName: YANISS
+displayName: RODIER YANISS
 supannEtuId: 10007508
-mail: adjili@etab.fr
+mail: yaniss.rodier@university.com
 eduPersonPrimaryAffiliation: student
-sn: ADJILI
+sn: RODIER
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2005-04-28
 supannEntiteAffectation: 908
 supannEntiteAffectationPrincipale: 908
-eduPersonPrincipalName: adjili@etab.fr
+eduPersonPrincipalName: yaniss.rodier@university.com
 supannEtuSecteurDisciplinaire: {SISE}0064
 supannEtuDiplome: {UAI:0123456G}S3STA-100
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}K3PCH1-100
 supannAffectation: Licence 3 Economie et Gestion parcours Economie Appliquee
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: ADJILI
+supannNomDeNaissance: RODIER
 eduPersonAffiliation: student
 supannCodeINE: 0000000035B
 
-dn: uid=alayrac,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=peltier,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1172,15 +1208,15 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: alayrac
+uid: peltier
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ANOUK ALAYRAC
-givenName: ANOUK
-displayName: ALAYRAC ANOUK
+cn: PELTIER MAYA
+givenName: MAYA
+displayName: PELTIER MAYA
 supannEtuId: 10007509
-mail: alayrac@etab.fr
+mail: maya.peltier@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALAYRAC
+sn: PELTIER
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2001-02-24
@@ -1188,18 +1224,19 @@ supannEntiteAffectation: 904
 supannEntiteAffectation: 915
 supannEntiteAffectation: 902
 supannEntiteAffectationPrincipale: 902
-eduPersonPrincipalName: alayrac@etab.fr
+eduPersonPrincipalName: maya.peltier@university.com
 supannEtuSecteurDisciplinaire: {SISE}0013
 supannEtuDiplome: {UAI:0123456G}F0MAR-820
 supannEtuTypeDiplome: {SISE}ZA
 supannEtuEtape: {UAI:0123456G}I5DED4-101
 supannAffectation: Master 1 Informatique
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: ALAYRAC
+supannNomDeNaissance: PELTIER
 eduPersonAffiliation: student
 supannCodeINE: 0000000036B
 
-dn: uid=andriamp,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=bodin,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1207,32 +1244,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: andriamp
+uid: bodin
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: OMAR ANDRIAMPANANA
-givenName: OMAR
-displayName: ANDRIAMPANANA OMAR
+cn: BODIN OLIVIER
+givenName: OLIVIER
+displayName: BODIN OLIVIER
 supannEtuId: 10007510
-mail: andriamp@etab.fr
+mail: olivier.bodin@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANDRIAMPANANA
+sn: BODIN
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2004-07-29
 supannEntiteAffectation: ED509
 supannEntiteAffectationPrincipale: ED509
-eduPersonPrincipalName: andriamp@etab.fr
+eduPersonPrincipalName: olivier.bodin@university.com
 supannEtuSecteurDisciplinaire: {SISE}0006
 supannEtuDiplome: {UAI:0123456G}K3INF-101
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}L3AIL2-100
 supannAffectation: Doctorat Sciences juridiques
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: ANDRIAMPANANA
+supannNomDeNaissance: BODIN
 eduPersonAffiliation: student
 supannCodeINE: 0000000037B
 
-dn: uid=ananguet,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=thierry,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1240,32 +1278,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: ananguet
+uid: thierry
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: WILSON ANANGUE TSOTCHA
-givenName: WILSON
-displayName: ANANGUE TSOTCHA WILSON
+cn: THIERRY SALOMÉ
+givenName: SALOMÉ
+displayName: THIERRY SALOMÉ
 supannEtuId: 10007511
-mail: ananguet@etab.fr
+mail: salome.thierry@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANANGUE TSOTCHA
+sn: THIERRY
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2004-03-01
 supannEntiteAffectation: 911
 supannEntiteAffectationPrincipale: 911
-eduPersonPrincipalName: ananguet@etab.fr
+eduPersonPrincipalName: salome.thierry@university.com
 supannEtuSecteurDisciplinaire: {SISE}0002
 supannEtuDiplome: {UAI:0123456G}K5MAP-101
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}D5DPE4-100
 supannAffectation: L2 LEA-Anglais / Espagnol
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: ANANGUE TSOTCHA
+supannNomDeNaissance: THIERRY
 eduPersonAffiliation: student
 supannCodeINE: 0000000038B
 
-dn: uid=andriama,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=bertin,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1273,32 +1312,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: andriama
+uid: bertin
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: EL ANDRIAMAMPANDRY RABETSARA
-givenName: EL
-displayName: ANDRIAMAMPANDRY RABETSARA EL
+cn: BERTIN TIMÉO
+givenName: TIMÉO
+displayName: BERTIN TIMÉO
 supannEtuId: 10007512
-mail: andriama@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: ANDRIAMAMPANDRY RABETSARA
+mail: timeo.bertin@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: BERTIN
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2004-10-23
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: andriama@etab.fr
+eduPersonPrincipalName: timeo.bertin@university.com
 supannEtuSecteurDisciplinaire: {SISE}0036
 supannEtuDiplome: {UAI:0123456G}R8DSL-800
 supannEtuTypeDiplome: {SISE}HD
 supannEtuEtape: {UAI:0123456G}I5CIM5-101
 supannAffectation: BUT 2 TC parcours Business International : Achat et Vente
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ANDRIAMAMPANDRY RABETSARA
-eduPersonAffiliation: student
+supannNomDeNaissance: BERTIN
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000039B
 
-dn: uid=anavian,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=laporte,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1306,32 +1346,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: anavian
+uid: laporte
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: FATIMATA ANAVIAN
-givenName: FATIMATA
-displayName: ANAVIAN FATIMATA
+cn: LAPORTE GIULIA
+givenName: GIULIA
+displayName: LAPORTE GIULIA
 supannEtuId: 10007513
-mail: anavian@etab.fr
+mail: giulia.laporte@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANAVIAN
+sn: LAPORTE
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2005-08-24
 supannEntiteAffectation: 902
 supannEntiteAffectationPrincipale: 902
-eduPersonPrincipalName: anavian@etab.fr
+eduPersonPrincipalName: giulia.laporte@university.com
 supannEtuSecteurDisciplinaire: {SISE}0041
 supannEtuDiplome: {UAI:0123456G}T3GEA-832
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}I5DED5-103
 supannAffectation: Ateliers artistiques
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: ANAVIAN
+supannNomDeNaissance: LAPORTE
 eduPersonAffiliation: student
 supannCodeINE: 0000000040B
 
-dn: uid=adoux,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=riviere,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1339,32 +1380,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: adoux
+uid: riviere
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: VICTORIA ADOUX
-givenName: VICTORIA
-displayName: ADOUX VICTORIA
+cn: RIVIÈRE MALO
+givenName: MALO
+displayName: RIVIÈRE MALO
 supannEtuId: 10007514
-mail: adoux@etab.fr
+mail: malo.riviere@university.com
 eduPersonPrimaryAffiliation: student
-sn: ADOUX
+sn: RIVIÈRE
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2005-04-26
 supannEntiteAffectation: 915
 supannEntiteAffectationPrincipale: 915
-eduPersonPrincipalName: adoux@etab.fr
+eduPersonPrincipalName: malo.riviere@university.com
 supannEtuSecteurDisciplinaire: {SISE}0041
 supannEtuDiplome: {UAI:0123456G}I5CNU-102
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}E3ECG1-100
 supannAffectation: Master 1 Comptabilite Controle Audit
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: ADOUX
+supannNomDeNaissance: RIVIÈRE
 eduPersonAffiliation: student
 supannCodeINE: 0000000041B
 
-dn: uid=akkoyunl,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=monnier,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1372,32 +1414,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: akkoyunl
+uid: monnier
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: MAHAMADOU AKKOYUNLU
-givenName: MAHAMADOU
-displayName: AKKOYUNLU MAHAMADOU
+cn: MONNIER ELISA
+givenName: ELISA
+displayName: MONNIER ELISA
 supannEtuId: 10007515
-mail: akkoyunl@etab.fr
+mail: elisa.monnier@university.com
 eduPersonPrimaryAffiliation: student
-sn: AKKOYUNLU
+sn: MONNIER
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2007-01-30
 supannEntiteAffectation: 911
 supannEntiteAffectationPrincipale: 911
-eduPersonPrincipalName: akkoyunl@etab.fr
+eduPersonPrincipalName: elisa.monnier@university.com
 supannEtuSecteurDisciplinaire: {SISE}0011
 supannEtuDiplome: {UAI:0123456G}E5EDE-102
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}E3CPG1-100
 supannAffectation: CPGE-L1 LEA-Anglais / Espagnol
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: AKKOYUNLU
+supannNomDeNaissance: MONNIER
 eduPersonAffiliation: student
 supannCodeINE: 0000000042B
 
-dn: uid=abdoulha,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=descamps,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1405,32 +1448,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abdoulha
+uid: descamps
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: INAYAH ABDOULHAMID
-givenName: INAYAH
-displayName: ABDOULHAMID INAYAH
+cn: DESCAMPS MATHIS
+givenName: MATHIS
+displayName: DESCAMPS MATHIS
 supannEtuId: 10007516
-mail: abdoulha@etab.fr
+mail: mathis.descamps@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABDOULHAMID
+sn: DESCAMPS
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2001-03-09
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: abdoulha@etab.fr
+eduPersonPrincipalName: mathis.descamps@university.com
 supannEtuSecteurDisciplinaire: {SISE}0063
 supannEtuDiplome: {UAI:0123456G}V5MEF-102
 supannEtuTypeDiplome: {SISE}XD
 supannEtuEtape: {UAI:0123456G}T3DNU3-840
 supannAffectation: LP CVCA parcours Production Audiovisuelle
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: ABDOULHAMID
+supannNomDeNaissance: DESCAMPS
 eduPersonAffiliation: student
 supannCodeINE: 0000000043B
 
-dn: uid=abuodeh,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=delorme,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1438,32 +1482,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abuodeh
+uid: delorme
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: NOOR ABU ODEH
-givenName: NOOR
-displayName: ABU ODEH NOOR
+cn: DELORME CAMILLE
+givenName: CAMILLE
+displayName: DELORME CAMILLE
 supannEtuId: 10007517
-mail: abuodeh@etab.fr
+mail: camille.delorme@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABU ODEH
+sn: DELORME
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2005-10-06
 supannEntiteAffectation: DDRAG
 supannEntiteAffectationPrincipale: DDRAG
-eduPersonPrincipalName: abuodeh@etab.fr
+eduPersonPrincipalName: camille.delorme@university.com
 supannEtuSecteurDisciplinaire: {SISE}0064
 supannEtuDiplome: {UAI:0123456G}L3LCE-101
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}K3PVI1-100
 supannAffectation: L2 Droit-Draguignan
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: ABU ODEH
+supannNomDeNaissance: DELORME
 eduPersonAffiliation: student
 supannCodeINE: 0000000044B
 
-dn: uid=adourrou,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=normand,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1471,32 +1516,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: adourrou
+uid: normand
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: SEYDOU ADOURROU
-givenName: SEYDOU
-displayName: ADOURROU SEYDOU
+cn: NORMAND THELMA
+givenName: THELMA
+displayName: NORMAND THELMA
 supannEtuId: 10007518
-mail: adourrou@etab.fr
+mail: thelma.normand@university.com
 eduPersonPrimaryAffiliation: student
-sn: ADOURROU
+sn: NORMAND
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2004-09-20
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: adourrou@etab.fr
+eduPersonPrincipalName: thelma.normand@university.com
 supannEtuSecteurDisciplinaire: {SISE}0034
 supannEtuDiplome: {UAI:0123456G}E5EDE-100
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}D5DGP4-101
 supannAffectation: LP CVCA parcours Production Audiovisuelle
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: ADOURROU
+supannNomDeNaissance: NORMAND
 eduPersonAffiliation: student
 supannCodeINE: 0000000045B
 
-dn: uid=alsidche,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=maury,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1504,32 +1550,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: alsidche
+uid: maury
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ÉMILIE ALSIDCHEIK
-givenName: ÉMILIE
-displayName: ALSIDCHEIK ÉMILIE
+cn: MAURY NOAH
+givenName: NOAH
+displayName: MAURY NOAH
 supannEtuId: 10007519
-mail: alsidche@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: ALSIDCHEIK
+mail: noah.maury@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: MAURY
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2002-09-15
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: alsidche@etab.fr
+eduPersonPrincipalName: noah.maury@university.com
 supannEtuSecteurDisciplinaire: {SISE}0001
 supannEtuDiplome: {UAI:0123456G}PATEL-100
 supannEtuTypeDiplome: {SISE}
 supannEtuEtape: {UAI:0123456G}L5LCP4-100
 supannAffectation: BUT 3 TC Parcours Marketing digital,e-business entrepreunar
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: ALSIDCHEIK
-eduPersonAffiliation: student
+supannNomDeNaissance: MAURY
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000046B
 
-dn: uid=andrzejz,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=barreau,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1537,32 +1584,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: andrzejz
+uid: barreau
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: JOY ANDRZEJZAK
-givenName: JOY
-displayName: ANDRZEJZAK JOY
+cn: BARREAU LOUNA
+givenName: LOUNA
+displayName: BARREAU LOUNA
 supannEtuId: 10007520
-mail: andrzejz@etab.fr
+mail: louna.barreau@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANDRZEJZAK
+sn: BARREAU
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 1994-04-04
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: andrzejz@etab.fr
+eduPersonPrincipalName: louna.barreau@university.com
 supannEtuSecteurDisciplinaire: {SISE}0021
 supannEtuDiplome: {UAI:0123456G}L3ALE-102
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}K5MID5-100
 supannAffectation: BUT 2 GEA Parcours GEMA -  La Garde
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: ANDRZEJZAK
+supannNomDeNaissance: BARREAU
 eduPersonAffiliation: student
 supannCodeINE: 0000000047B
 
-dn: uid=aligne,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=ledoux,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1570,32 +1618,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: aligne
+uid: ledoux
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: LASSANA ALIGNE
-givenName: LASSANA
-displayName: ALIGNE LASSANA
+cn: LEDOUX LEO
+givenName: LEO
+displayName: LEDOUX LEO
 supannEtuId: 10007521
-mail: aligne@etab.fr
+mail: leo.ledoux@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALIGNE
+sn: LEDOUX
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2007-01-22
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: aligne@etab.fr
+eduPersonPrincipalName: leo.ledoux@university.com
 supannEtuSecteurDisciplinaire: {SISE}0063
 supannEtuDiplome: {UAI:0123456G}T3MMI-843
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}T3BMB3-841
 supannAffectation: BUT 3 MMI Parcours developpt web et dispositifs interactifs
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: ALIGNE
+supannNomDeNaissance: LEDOUX
 eduPersonAffiliation: student
 supannCodeINE: 0000000048B
 
-dn: uid=angyal,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=becker,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1603,32 +1652,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: angyal
+uid: becker
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: GABIN ANGYAL
-givenName: GABIN
-displayName: ANGYAL GABIN
+cn: BECKER AMBRE
+givenName: AMBRE
+displayName: BECKER AMBRE
 supannEtuId: 10007522
-mail: angyal@etab.fr
+mail: ambre.becker@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANGYAL
+sn: BECKER
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2005-06-05
 supannEntiteAffectation: 911
 supannEntiteAffectationPrincipale: 911
-eduPersonPrincipalName: angyal@etab.fr
+eduPersonPrincipalName: ambre.becker@university.com
 supannEtuSecteurDisciplinaire: {SISE}0011
 supannEtuDiplome: {UAI:0123456G}D4PCA-100
 supannEtuTypeDiplome: {SISE}
 supannEtuEtape: {UAI:0123456G}T3PAS3-840
 supannAffectation: L3 LEA-Anglais / Italien
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: ANGYAL
+supannNomDeNaissance: BECKER
 eduPersonAffiliation: student
 supannCodeINE: 0000000049B
 
-dn: uid=adigozel,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=mary,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1636,32 +1686,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: adigozel
+uid: mary
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: INAYA ADIGOZEL
-givenName: INAYA
-displayName: ADIGOZEL INAYA
+cn: MARY OSCAR
+givenName: OSCAR
+displayName: MARY OSCAR
 supannEtuId: 10007523
-mail: adigozel@etab.fr
+mail: oscar.mary@university.com
 eduPersonPrimaryAffiliation: student
-sn: ADIGOZEL
+sn: MARY
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2005-09-30
 supannEntiteAffectation: 903
 supannEntiteAffectationPrincipale: 903
-eduPersonPrincipalName: adigozel@etab.fr
+eduPersonPrincipalName: oscar.mary@university.com
 supannEtuSecteurDisciplinaire: {SISE}0033
 supannEtuDiplome: {UAI:0123456G}K5ISC-103
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}R8DELE-800
 supannAffectation: M2 JPP-Contentieux judiciaire-Toulon
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: ADIGOZEL
+supannNomDeNaissance: MARY
 eduPersonAffiliation: student
 supannCodeINE: 0000000050B
 
-dn: uid=alfreija,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=peron,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1669,32 +1720,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: alfreija
+uid: peron
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: SOFIANE AL FREIJAT
-givenName: SOFIANE
-displayName: AL FREIJAT SOFIANE
+cn: PERON AGATHE
+givenName: AGATHE
+displayName: PERON AGATHE
 supannEtuId: 10007524
-mail: alfreija@etab.fr
+mail: agathe.peron@university.com
 eduPersonPrimaryAffiliation: student
-sn: AL FREIJAT
+sn: PERON
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 1997-07-28
 supannEntiteAffectation: NC
 supannEntiteAffectationPrincipale: NC
-eduPersonPrincipalName: alfreija@etab.fr
+eduPersonPrincipalName: agathe.peron@university.com
 supannEtuSecteurDisciplinaire: {SISE}0024
 supannEtuDiplome: {UAI:0123456G}S5APA-100
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}D5DGP4-101
 supannAffectation: DU Soins palliatifs
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: AL FREIJAT
+supannNomDeNaissance: PERON
 eduPersonAffiliation: student
 supannCodeINE: 0000000051B
 
-dn: uid=abrantes,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=barbier,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1702,32 +1754,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abrantes
+uid: barbier
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: APOLLINE ABRANTES SIMOES
-givenName: APOLLINE
-displayName: ABRANTES SIMOES APOLLINE
+cn: BARBIER SAMI
+givenName: SAMI
+displayName: BARBIER SAMI
 supannEtuId: 10007525
-mail: abrantes@etab.fr
+mail: sami.barbier@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABRANTES SIMOES
+sn: BARBIER
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2007-12-09
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: abrantes@etab.fr
+eduPersonPrincipalName: sami.barbier@university.com
 supannEtuSecteurDisciplinaire: {SISE}0013
 supannEtuDiplome: {UAI:0123456G}T3MMI-832
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}K3INF3-100
 supannAffectation: BUT 2 GEII parcours Automatisme et informatique industriell
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: ABRANTES SIMOES
+supannNomDeNaissance: BARBIER
 eduPersonAffiliation: student
 supannCodeINE: 0000000052B
 
-dn: uid=adestam,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=chretien,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1735,32 +1788,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: adestam
+uid: chretien
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: SONIA ADESTAM
-givenName: SONIA
-displayName: ADESTAM SONIA
+cn: CHRETIEN ELODIE
+givenName: ELODIE
+displayName: CHRETIEN ELODIE
 supannEtuId: 10007526
-mail: adestam@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: ADESTAM
+mail: elodie.chretien@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: CHRETIEN
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2002-04-18
 supannEntiteAffectation: 903
 supannEntiteAffectationPrincipale: 903
-eduPersonPrincipalName: adestam@etab.fr
+eduPersonPrincipalName: elodie.chretien@university.com
 supannEtuSecteurDisciplinaire: {SISE}0062
 supannEtuDiplome: {UAI:0123456G}T3MMI-842
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}T3BMB2-831
 supannAffectation: M1 DP-Administration, territoires et environnement
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: ADESTAM
-eduPersonAffiliation: student
+supannNomDeNaissance: CHRETIEN
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000053B
 
-dn: uid=alvespra,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=raynaud,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1768,32 +1822,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: alvespra
+uid: raynaud
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: KHADIJA ALVES PRATES
-givenName: KHADIJA
-displayName: ALVES PRATES KHADIJA
+cn: RAYNAUD EVAN
+givenName: EVAN
+displayName: RAYNAUD EVAN
 supannEtuId: 10007527
-mail: alvespra@etab.fr
+mail: evan.raynaud@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALVES PRATES
+sn: RAYNAUD
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2001-11-28
 supannEntiteAffectation: 902
 supannEntiteAffectationPrincipale: 902
-eduPersonPrincipalName: alvespra@etab.fr
+eduPersonPrincipalName: evan.raynaud@university.com
 supannEtuSecteurDisciplinaire: {SISE}0011
 supannEtuDiplome: {UAI:0123456G}SUAPS-100
 supannEtuTypeDiplome: {SISE}
 supannEtuEtape: {UAI:0123456G}L5MTD5-101
 supannAffectation: M2 Info et Maths parcours Informatique
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ALVES PRATES
+supannNomDeNaissance: RAYNAUD
 eduPersonAffiliation: student
 supannCodeINE: 0000000054B
 
-dn: uid=alvesper,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=weber,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1801,32 +1856,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: alvesper
+uid: weber
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: TAO ALVES PEREIRA GUIMARAES
-givenName: TAO
-displayName: ALVES PEREIRA GUIMARAES TAO
+cn: WEBER HELENA
+givenName: HELENA
+displayName: WEBER HELENA
 supannEtuId: 10007528
-mail: alvesper@etab.fr
+mail: helena.weber@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALVES PEREIRA GUIMARAES
+sn: WEBER
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2005-02-21
 supannEntiteAffectation: DDRAG
 supannEntiteAffectationPrincipale: DDRAG
-eduPersonPrincipalName: alvesper@etab.fr
+eduPersonPrincipalName: helena.weber@university.com
 supannEtuSecteurDisciplinaire: {SISE}0066
 supannEtuDiplome: {UAI:0123456G}PECIN-800
 supannEtuTypeDiplome: {SISE}
 supannEtuEtape: {UAI:0123456G}I5ACC5-101
 supannAffectation: L2 Droit-Draguignan
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ALVES PEREIRA GUIMARAES
+supannNomDeNaissance: WEBER
 eduPersonAffiliation: student
 supannCodeINE: 0000000055B
 
-dn: uid=angelodo,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=roy,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1834,32 +1890,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: angelodo
+uid: roy
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: MELVIL ANGELO DOUGLAS
-givenName: MELVIL
-displayName: ANGELO DOUGLAS MELVIL
+cn: ROY SIMON
+givenName: SIMON
+displayName: ROY SIMON
 supannEtuId: 10007529
-mail: angelodo@etab.fr
+mail: simon.roy@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANGELO DOUGLAS
+sn: ROY
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2007-07-15
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: angelodo@etab.fr
+eduPersonPrincipalName: simon.roy@university.com
 supannEtuSecteurDisciplinaire: {SISE}0020
 supannEtuDiplome: {UAI:0123456G}T3GEI-831
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}K3CIG3-100
 supannAffectation: BUT 1 Genie Industriel et Maintenance - ALT
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: ANGELO DOUGLAS
+supannNomDeNaissance: ROY
 eduPersonAffiliation: student
 supannCodeINE: 0000000056B
 
-dn: uid=abdad,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=philippe,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1867,32 +1924,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abdad
+uid: philippe
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: INAYAH ABDAD
-givenName: INAYAH
-displayName: ABDAD INAYAH
+cn: PHILIPPE NINA
+givenName: NINA
+displayName: PHILIPPE NINA
 supannEtuId: 10007530
-mail: abdad@etab.fr
+mail: nina.philippe@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABDAD
+sn: PHILIPPE
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2006-04-25
 supannEntiteAffectation: 903
 supannEntiteAffectationPrincipale: 903
-eduPersonPrincipalName: abdad@etab.fr
+eduPersonPrincipalName: nina.philippe@university.com
 supannEtuSecteurDisciplinaire: {SISE}0020
 supannEtuDiplome: {UAI:0123456G}T3GIM-820
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}T3EBE3-840
 supannAffectation: M2 DDA-Droit et gestion du patrimoine
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ABDAD
+supannNomDeNaissance: PHILIPPE
 eduPersonAffiliation: student
 supannCodeINE: 0000000057B
 
-dn: uid=acciavat,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=gilbert,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1900,32 +1958,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: acciavat
+uid: gilbert
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ALHASSANE ACCIAVATTI
-givenName: ALHASSANE
-displayName: ACCIAVATTI ALHASSANE
+cn: GILBERT ILIAN
+givenName: ILIAN
+displayName: GILBERT ILIAN
 supannEtuId: 10007531
-mail: acciavat@etab.fr
+mail: ilian.gilbert@university.com
 eduPersonPrimaryAffiliation: student
-sn: ACCIAVATTI
+sn: GILBERT
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2004-10-08
 supannEntiteAffectation: DDRAG
 supannEntiteAffectationPrincipale: DDRAG
-eduPersonPrincipalName: acciavat@etab.fr
+eduPersonPrincipalName: ilian.gilbert@university.com
 supannEtuSecteurDisciplinaire: {SISE}0005
 supannEtuDiplome: {UAI:0123456G}N5ING-800
 supannEtuTypeDiplome: {SISE}FI
 supannEtuEtape: {UAI:0123456G}SUAPS-100
 supannAffectation: Ateliers artistiques
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: ACCIAVATTI
+supannNomDeNaissance: GILBERT
 eduPersonAffiliation: student
 supannCodeINE: 0000000058B
 
-dn: uid=alvescal,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=poulain,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1933,32 +1992,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: alvescal
+uid: poulain
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: LUBIN ALVES CALDAS
-givenName: LUBIN
-displayName: ALVES CALDAS LUBIN
+cn: POULAIN AXEL
+givenName: AXEL
+displayName: POULAIN AXEL
 supannEtuId: 10007532
-mail: alvescal@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: ALVES CALDAS
+mail: axel.poulain@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: POULAIN
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2003-05-17
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: alvescal@etab.fr
+eduPersonPrincipalName: axel.poulain@university.com
 supannEtuSecteurDisciplinaire: {SISE}0034
 supannEtuDiplome: {UAI:0123456G}F0MED-900
 supannEtuTypeDiplome: {SISE}ZA
 supannEtuEtape: {UAI:0123456G}L3AEL1-100
 supannAffectation: BUT 3 GMP parcours Inovation pour l'industrie
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: ALVES CALDAS
-eduPersonAffiliation: student
+supannNomDeNaissance: POULAIN
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000059B
 
-dn: uid=akoutai,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=caillet,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -1966,33 +2026,34 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: akoutai
+uid: caillet
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: THOMAS AKOUTAI
-givenName: THOMAS
-displayName: AKOUTAI THOMAS
+cn: CAILLET JADE
+givenName: JADE
+displayName: CAILLET JADE
 supannEtuId: 10007533
-mail: akoutai@etab.fr
+mail: jade.caillet@university.com
 eduPersonPrimaryAffiliation: student
-sn: AKOUTAI
+sn: CAILLET
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2007-09-27
 supannEntiteAffectation: DEVE
 supannEntiteAffectation: 911
 supannEntiteAffectationPrincipale: ED548
-eduPersonPrincipalName: akoutai@etab.fr
+eduPersonPrincipalName: jade.caillet@university.com
 supannEtuSecteurDisciplinaire: {SISE}0040
 supannEtuDiplome: {UAI:0123456G}S3PEM-100
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}I5DED5-102
 supannAffectation: Doctorat Sciences de l'univers
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: AKOUTAI
+supannNomDeNaissance: CAILLET
 eduPersonAffiliation: student
 supannCodeINE: 0000000060B
 
-dn: uid=alfia,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=camus,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2000,32 +2061,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: alfia
+uid: camus
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: LILYA ALFIA
-givenName: LILYA
-displayName: ALFIA LILYA
+cn: CAMUS DAVID
+givenName: DAVID
+displayName: CAMUS DAVID
 supannEtuId: 10007534
-mail: alfia@etab.fr
+mail: david.camus@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALFIA
+sn: CAMUS
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2003-10-31
 supannEntiteAffectation: 908
 supannEntiteAffectationPrincipale: 908
-eduPersonPrincipalName: alfia@etab.fr
+eduPersonPrincipalName: david.camus@university.com
 supannEtuSecteurDisciplinaire: {SISE}0040
 supannEtuDiplome: {UAI:0123456G}K5ISC-105
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}T3MMI1-820
 supannAffectation: CPGE-L1 Economie, Gestion
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ALFIA
+supannNomDeNaissance: CAMUS
 eduPersonAffiliation: student
 supannCodeINE: 0000000061B
 
-dn: uid=amsil,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=bonneau,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2033,32 +2095,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: amsil
+uid: bonneau
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: DUNE AMSIL
-givenName: DUNE
-displayName: AMSIL DUNE
+cn: BONNEAU LISE
+givenName: LISE
+displayName: BONNEAU LISE
 supannEtuId: 10007535
-mail: amsil@etab.fr
+mail: lise.bonneau@university.com
 eduPersonPrimaryAffiliation: student
-sn: AMSIL
+sn: BONNEAU
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2005-11-10
 supannEntiteAffectation: 911
 supannEntiteAffectationPrincipale: 911
-eduPersonPrincipalName: amsil@etab.fr
+eduPersonPrincipalName: lise.bonneau@university.com
 supannEtuSecteurDisciplinaire: {SISE}0063
 supannEtuDiplome: {UAI:0123456G}E5EDE-102
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}E5EGR4-100
 supannAffectation: M2 MEEF-Lettres
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: AMSIL
+supannNomDeNaissance: BONNEAU
 eduPersonAffiliation: student
 supannCodeINE: 0000000062B
 
-dn: uid=afouagea,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=prevost,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2066,32 +2129,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: afouagea
+uid: prevost
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ILANA AFOUA GEAY
-givenName: ILANA
-displayName: AFOUA GEAY ILANA
+cn: PREVOST YANIS
+givenName: YANIS
+displayName: PREVOST YANIS
 supannEtuId: 10007536
-mail: afouagea@etab.fr
+mail: yanis.prevost@university.com
 eduPersonPrimaryAffiliation: student
-sn: AFOUA GEAY
+sn: PREVOST
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2004-07-30
 supannEntiteAffectation: TGEAD
 supannEntiteAffectationPrincipale: TGEAD
-eduPersonPrincipalName: afouagea@etab.fr
+eduPersonPrincipalName: yanis.prevost@university.com
 supannEtuSecteurDisciplinaire: {SISE}0068
 supannEtuDiplome: {UAI:0123456G}E5EDE-104
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}E5CID4-100
 supannAffectation: BUT 2 GEA Parcours GEMA Draguignan
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: AFOUA GEAY
+supannNomDeNaissance: PREVOST
 eduPersonAffiliation: student
 supannCodeINE: 0000000063B
 
-dn: uid=allehose,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=brunet,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2099,32 +2163,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: allehose
+uid: brunet
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: NAËL ALLEHOSE
-givenName: NAËL
-displayName: ALLEHOSE NAËL
+cn: BRUNET LOLA
+givenName: LOLA
+displayName: BRUNET LOLA
 supannEtuId: 10007537
-mail: allehose@etab.fr
+mail: lola.brunet@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALLEHOSE
+sn: BRUNET
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2007-12-29
 supannEntiteAffectation: 902
 supannEntiteAffectationPrincipale: 902
-eduPersonPrincipalName: allehose@etab.fr
+eduPersonPrincipalName: lola.brunet@university.com
 supannEtuSecteurDisciplinaire: {INCONNU}
 supannEtuDiplome: {UAI:0123456G}T3GEA-841
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}I5CMD4-100
 supannAffectation: L1 Informatique-Informatique
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ALLEHOSE
+supannNomDeNaissance: BRUNET
 eduPersonAffiliation: student
 supannCodeINE: 0000000064B
 
-dn: uid=aguade,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=aubert,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2132,32 +2197,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: aguade
+uid: aubert
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: MARINA AGUADE
-givenName: MARINA
-displayName: AGUADE MARINA
+cn: AUBERT ISMAEL
+givenName: ISMAEL
+displayName: AUBERT ISMAEL
 supannEtuId: 10007538
-mail: aguade@etab.fr
+mail: ismael.aubert@university.com
 eduPersonPrimaryAffiliation: student
-sn: AGUADE
+sn: AUBERT
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2006-07-12
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: aguade@etab.fr
+eduPersonPrincipalName: ismael.aubert@university.com
 supannEtuSecteurDisciplinaire: {SISE}0015
 supannEtuDiplome: {UAI:0123456G}R8FLE-800
 supannEtuTypeDiplome: {SISE}HD
 supannEtuEtape: {UAI:0123456G}E3ECG1-100
 supannAffectation: BUT 2 TC parcours strategie de marque et evenementiel
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: AGUADE
+supannNomDeNaissance: AUBERT
 eduPersonAffiliation: student
 supannCodeINE: 0000000065B
 
-dn: uid=ahmeddao,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=guillot,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2165,32 +2231,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: ahmeddao
+uid: guillot
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: KILLIAN AHMED DAOUD
-givenName: KILLIAN
-displayName: AHMED DAOUD KILLIAN
+cn: GUILLOT ELINE
+givenName: ELINE
+displayName: GUILLOT ELINE
 supannEtuId: 10007539
-mail: ahmeddao@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: AHMED DAOUD
+mail: eline.guillot@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: GUILLOT
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 1996-05-16
 supannEntiteAffectation: 902
 supannEntiteAffectationPrincipale: 902
-eduPersonPrincipalName: ahmeddao@etab.fr
+eduPersonPrincipalName: eline.guillot@university.com
 supannEtuSecteurDisciplinaire: {SISE}0035
 supannEtuDiplome: {UAI:0123456G}PCAMP-820
 supannEtuTypeDiplome: {SISE}
 supannEtuEtape: {UAI:0123456G}S3PES2-100
 supannAffectation: CPGE-L2 Physique Chimie
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: AHMED DAOUD
-eduPersonAffiliation: student
+supannNomDeNaissance: GUILLOT
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000066B
 
-dn: uid=abouakil,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=blot,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2198,32 +2265,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abouakil
+uid: blot
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: PAULIN ABOUAKILAT
-givenName: PAULIN
-displayName: ABOUAKILAT PAULIN
+cn: BLOT LEO
+givenName: LEO
+displayName: BLOT LEO
 supannEtuId: 10007540
-mail: abouakil@etab.fr
+mail: leo.blot@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABOUAKILAT
+sn: BLOT
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2004-08-18
 supannEntiteAffectation: 908
 supannEntiteAffectationPrincipale: 908
-eduPersonPrincipalName: abouakil@etab.fr
+eduPersonPrincipalName: leo.blot@university.com
 supannEtuSecteurDisciplinaire: {SISE}0063
 supannEtuDiplome: {UAI:0123456G}D5JPP-101
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}N5IMD2-101
 supannAffectation: Licence 3 Economie et Gestion parcours Economie Appliquee
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: ABOUAKILAT
+supannNomDeNaissance: BLOT
 eduPersonAffiliation: student
 supannCodeINE: 0000000067B
 
-dn: uid=amedegna,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=denis,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2231,32 +2299,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: amedegna
+uid: denis
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: JENNIFER AMEDEGNATO CODO
-givenName: JENNIFER
-displayName: AMEDEGNATO CODO JENNIFER
+cn: DENIS NOUR
+givenName: NOUR
+displayName: DENIS NOUR
 supannEtuId: 10007541
-mail: amedegna@etab.fr
+mail: nour.denis@university.com
 eduPersonPrimaryAffiliation: student
-sn: AMEDEGNATO CODO
+sn: DENIS
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 1974-11-07
 supannEntiteAffectation: 903
 supannEntiteAffectationPrincipale: 903
-eduPersonPrincipalName: amedegna@etab.fr
+eduPersonPrincipalName: nour.denis@university.com
 supannEtuSecteurDisciplinaire: {SISE}0013
 supannEtuDiplome: {UAI:0123456G}S3PAP-101
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}E5CID5-100
 supannAffectation: M1 Droit social Parc Drt & Gest Sect Sanitaire & Social
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: AMEDEGNATO CODO
+supannNomDeNaissance: DENIS
 eduPersonAffiliation: student
 supannCodeINE: 0000000068B
 
-dn: uid=abdourab,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=navarro,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2264,33 +2333,34 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abdourab
+uid: navarro
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: AICHA ABDOURAB
-givenName: AICHA
-displayName: ABDOURAB AICHA
+cn: NAVARRO ALICIA
+givenName: ALICIA
+displayName: NAVARRO ALICIA
 supannEtuId: 10007542
-mail: abdourab@etab.fr
+mail: alicia.navarro@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABDOURAB
+sn: NAVARRO
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2003-10-16
 supannEntiteAffectation: 915
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 902
-eduPersonPrincipalName: abdourab@etab.fr
+eduPersonPrincipalName: alicia.navarro@university.com
 supannEtuSecteurDisciplinaire: {SISE}0033
 supannEtuDiplome: {UAI:0123456G}A5QHS-101
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}D5SSS4-100
 supannAffectation: L3 Physique Chimie-Chimie
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: ABDOURAB
+supannNomDeNaissance: NAVARRO
 eduPersonAffiliation: student
 supannCodeINE: 0000000069B
 
-dn: uid=amarelle,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=masson,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2298,32 +2368,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: amarelle
+uid: masson
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ANTONIN AMARELLE BELLO
-givenName: ANTONIN
-displayName: AMARELLE BELLO ANTONIN
+cn: MASSON MAEL
+givenName: MAEL
+displayName: MASSON MAEL
 supannEtuId: 10007543
-mail: amarelle@etab.fr
+mail: mael.masson@university.com
 eduPersonPrimaryAffiliation: student
-sn: AMARELLE BELLO
+sn: MASSON
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2006-09-09
 supannEntiteAffectation: 908
 supannEntiteAffectationPrincipale: 908
-eduPersonPrincipalName: amarelle@etab.fr
+eduPersonPrincipalName: mael.masson@university.com
 supannEtuSecteurDisciplinaire: {SISE}0040
 supannEtuDiplome: {UAI:0123456G}I5CNU-101
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}T3PAS3-840
 supannAffectation: CPGE-L1 Economie, Gestion
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: AMARELLE BELLO
+supannNomDeNaissance: MASSON
 eduPersonAffiliation: student
 supannCodeINE: 0000000070B
 
-dn: uid=aluffo,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=lacombe,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2331,32 +2402,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: aluffo
+uid: lacombe
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: YASSINE ALUFFO
-givenName: YASSINE
-displayName: ALUFFO YASSINE
+cn: LACOMBE LOUISE
+givenName: LOUISE
+displayName: LACOMBE LOUISE
 supannEtuId: 10007544
-mail: aluffo@etab.fr
+mail: louise.lacombe@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALUFFO
+sn: LACOMBE
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2005-08-13
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: aluffo@etab.fr
+eduPersonPrincipalName: louise.lacombe@university.com
 supannEtuSecteurDisciplinaire: {SISE}0011
 supannEtuDiplome: {UAI:0123456G}S3STA-100
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}S3PEM2-101
 supannAffectation: BUT 2 MMI Parcours developpt web et dispositifs interactifs
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: ALUFFO
+supannNomDeNaissance: LACOMBE
 eduPersonAffiliation: student
 supannCodeINE: 0000000071B
 
-dn: uid=abecassi,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=schmitt,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2364,33 +2436,34 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abecassi
+uid: schmitt
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ALBERTINE ABECASSIS
-givenName: ALBERTINE
-displayName: ABECASSIS ALBERTINE
+cn: SCHMITT VICTOR
+givenName: VICTOR
+displayName: SCHMITT VICTOR
 supannEtuId: 10007545
-mail: abecassi@etab.fr
+mail: victor.schmitt@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABECASSIS
+sn: SCHMITT
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2005-10-23
 supannEntiteAffectation: 915
 supannEntiteAffectation: 902
 supannEntiteAffectationPrincipale: 915
-eduPersonPrincipalName: abecassi@etab.fr
+eduPersonPrincipalName: victor.schmitt@university.com
 supannEtuSecteurDisciplinaire: {SISE}0024
 supannEtuDiplome: {UAI:0123456G}D5DTA-105
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}T3ESE3-841
 supannAffectation: Ateliers artistiques
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: ABECASSIS
+supannNomDeNaissance: SCHMITT
 eduPersonAffiliation: student
 supannCodeINE: 0000000072B
 
-dn: uid=aliberti,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=hardy,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2398,32 +2471,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: aliberti
+uid: hardy
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: MATIAS ALIBERTINI
-givenName: MATIAS
-displayName: ALIBERTINI MATIAS
+cn: HARDY ANAEL
+givenName: ANAEL
+displayName: HARDY ANAEL
 supannEtuId: 10007546
-mail: aliberti@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: ALIBERTINI
+mail: anael.hardy@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: HARDY
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2005-08-09
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: aliberti@etab.fr
+eduPersonPrincipalName: anael.hardy@university.com
 supannEtuSecteurDisciplinaire: {SISE}0034
 supannEtuDiplome: {UAI:0123456G}D3MDS-100
 supannEtuTypeDiplome: {SISE}DP
 supannEtuEtape: {UAI:0123456G}K3PVI1-100
 supannAffectation: BUT 1 Genie Electrique et Informatique Industrielle - ALT
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ALIBERTINI
-eduPersonAffiliation: student
+supannNomDeNaissance: HARDY
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000073B
 
-dn: uid=ahmedeld,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=godard,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2431,33 +2505,34 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: ahmedeld
+uid: godard
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: JUDITH AHMED ELDARS
-givenName: JUDITH
-displayName: AHMED ELDARS JUDITH
+cn: GODARD SOFIA
+givenName: SOFIA
+displayName: GODARD SOFIA
 supannEtuId: 10007547
-mail: ahmedeld@etab.fr
+mail: sofia.godard@university.com
 eduPersonPrimaryAffiliation: student
-sn: AHMED ELDARS
+sn: GODARD
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2001-01-06
 supannEntiteAffectation: 903
 supannEntiteAffectation: 908
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: ahmedeld@etab.fr
+eduPersonPrincipalName: sofia.godard@university.com
 supannEtuSecteurDisciplinaire: {SISE}0010
 supannEtuDiplome: {UAI:0123456G}E5EDE-104
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}T3SCN3-840
 supannAffectation: BUT 2 Genie Industriel et Maintenance - Temps plein
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: AHMED ELDARS
+supannNomDeNaissance: GODARD
 eduPersonAffiliation: student
 supannCodeINE: 0000000074B
 
-dn: uid=aimad,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=guichard,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2465,34 +2540,35 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: aimad
+uid: guichard
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: IZIA AIMAD
-givenName: IZIA
-displayName: AIMAD IZIA
+cn: GUICHARD NOLAN
+givenName: NOLAN
+displayName: GUICHARD NOLAN
 supannEtuId: 10007548
-mail: aimad@etab.fr
+mail: nolan.guichard@university.com
 eduPersonPrimaryAffiliation: student
-sn: AIMAD
+sn: GUICHARD
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2005-03-29
 supannEntiteAffectation: 904
 supannEntiteAffectation: 915
 supannEntiteAffectation: 909
 supannEntiteAffectationPrincipale: 911
-eduPersonPrincipalName: aimad@etab.fr
+eduPersonPrincipalName: nolan.guichard@university.com
 supannEtuSecteurDisciplinaire: {SISE}0006
 supannEtuDiplome: {UAI:0123456G}D5JPP-100
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}T3CFF2-831
 supannAffectation: M2 MEEF-Lettres
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: AIMAD
+supannNomDeNaissance: GUICHARD
 eduPersonAffiliation: student
 supannCodeINE: 0000000075B
 
-dn: uid=aker,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=bruneau,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2500,32 +2576,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: aker
+uid: bruneau
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: IZIA AKER
-givenName: IZIA
-displayName: AKER IZIA
+cn: BRUNEAU MILA
+givenName: MILA
+displayName: BRUNEAU MILA
 supannEtuId: 10007549
-mail: aker@etab.fr
+mail: mila.bruneau@university.com
 eduPersonPrimaryAffiliation: student
-sn: AKER
+sn: BRUNEAU
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2006-12-26
 supannEntiteAffectation: 903
 supannEntiteAffectationPrincipale: 903
-eduPersonPrincipalName: aker@etab.fr
+eduPersonPrincipalName: mila.bruneau@university.com
 supannEtuSecteurDisciplinaire: {SISE}0039
 supannEtuDiplome: {UAI:0123456G}A5QHS-100
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}N5MAT3-100
 supannAffectation: M2 JPP-Contentieux administratif
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: AKER
+supannNomDeNaissance: BRUNEAU
 eduPersonAffiliation: student
 supannCodeINE: 0000000076B
 
-dn: uid=adishank,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=lapeyre,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2533,32 +2610,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: adishank
+uid: lapeyre
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ELIE ADISHANKAR
-givenName: ELIE
-displayName: ADISHANKAR ELIE
+cn: LAPEYRE ILYES
+givenName: ILYES
+displayName: LAPEYRE ILYES
 supannEtuId: 10007550
-mail: adishank@etab.fr
+mail: ilyes.lapeyre@university.com
 eduPersonPrimaryAffiliation: student
-sn: ADISHANKAR
+sn: LAPEYRE
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2005-02-26
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: adishank@etab.fr
+eduPersonPrincipalName: ilyes.lapeyre@university.com
 supannEtuSecteurDisciplinaire: {SISE}0039
 supannEtuDiplome: {UAI:0123456G}T3MMI-832
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}T3HFF3-840
 supannAffectation: BUT 1 Genie Industriel et Maintenance - Temps plein
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ADISHANKAR
+supannNomDeNaissance: LAPEYRE
 eduPersonAffiliation: student
 supannCodeINE: 0000000077B
 
-dn: uid=ampem,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=launay,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2566,32 +2644,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: ampem
+uid: launay
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: YSÉE AMPEM
-givenName: YSÉE
-displayName: AMPEM YSÉE
+cn: LAUNAY ROMY
+givenName: ROMY
+displayName: LAUNAY ROMY
 supannEtuId: 10007551
-mail: ampem@etab.fr
+mail: romy.launay@university.com
 eduPersonPrimaryAffiliation: student
-sn: AMPEM
+sn: LAUNAY
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2004-10-22
 supannEntiteAffectation: 915
 supannEntiteAffectationPrincipale: 915
-eduPersonPrincipalName: ampem@etab.fr
+eduPersonPrincipalName: romy.launay@university.com
 supannEtuSecteurDisciplinaire: {SISE}0021
 supannEtuDiplome: {UAI:0123456G}F0ACC-800
 supannEtuTypeDiplome: {SISE}
 supannEtuEtape: {UAI:0123456G}K3MAM2-100
 supannAffectation: Master 2 Market Vent Market Digi Rela Client
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: AMPEM
+supannNomDeNaissance: LAUNAY
 eduPersonAffiliation: student
 supannCodeINE: 0000000078B
 
-dn: uid=altani,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=barre,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2599,32 +2678,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: altani
+uid: barre
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ANITA ALTANI
-givenName: ANITA
-displayName: ALTANI ANITA
+cn: BARRE IRIS
+givenName: IRIS
+displayName: BARRE IRIS
 supannEtuId: 10007552
-mail: altani@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: ALTANI
+mail: iris.barre@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: BARRE
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2005-05-01
 supannEntiteAffectation: 915
 supannEntiteAffectationPrincipale: 915
-eduPersonPrincipalName: altani@etab.fr
+eduPersonPrincipalName: iris.barre@university.com
 supannEtuSecteurDisciplinaire: {SISE}0033
 supannEtuDiplome: {UAI:0123456G}R8DEL-800
 supannEtuTypeDiplome: {SISE}HD
 supannEtuEtape: {UAI:0123456G}I5DED5-103
 supannAffectation: M2 Quali Hyg Secu Manag Quali Devel Durab
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ALTANI
-eduPersonAffiliation: student
+supannNomDeNaissance: BARRE
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000079B
 
-dn: uid=ahamedsa,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=descarte,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2632,32 +2712,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: ahamedsa
+uid: descarte
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: AXEL AHAMEDSAH
-givenName: AXEL
-displayName: AHAMEDSAH AXEL
+cn: DESCARTES MAELYS
+givenName: MAELYS
+displayName: DESCARTES MAELYS
 supannEtuId: 10007553
-mail: ahamedsa@etab.fr
+mail: maelys.descartes@university.com
 eduPersonPrimaryAffiliation: student
-sn: AHAMEDSAH
+sn: DESCARTES
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2006-08-25
 supannEntiteAffectation: 903
 supannEntiteAffectationPrincipale: 903
-eduPersonPrincipalName: ahamedsa@etab.fr
+eduPersonPrincipalName: maelys.descartes@university.com
 supannEtuSecteurDisciplinaire: {SISE}0014
 supannEtuDiplome: {UAI:0123456G}PAUDI-800
 supannEtuTypeDiplome: {SISE}
 supannEtuEtape: {UAI:0123456G}R8DSUN-800
 supannAffectation: M1 JPP Pratique droits fondamentaux
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: AHAMEDSAH
+supannNomDeNaissance: DESCARTES
 eduPersonAffiliation: student
 supannCodeINE: 0000000080B
 
-dn: uid=amayagim,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=langlois,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2665,32 +2746,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: amayagim
+uid: langlois
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ANNE-MARIE AMAYA GIMENEZ
-givenName: ANNE-MARIE
-displayName: AMAYA GIMENEZ ANNE-MARIE
+cn: LANGLOIS ELIAS
+givenName: ELIAS
+displayName: LANGLOIS ELIAS
 supannEtuId: 10007554
-mail: amayagim@etab.fr
+mail: elias.langlois@university.com
 eduPersonPrimaryAffiliation: student
-sn: AMAYA GIMENEZ
+sn: LANGLOIS
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2007-09-28
 supannEntiteAffectation: 902
 supannEntiteAffectationPrincipale: 902
-eduPersonPrincipalName: amayagim@etab.fr
+eduPersonPrincipalName: elias.langlois@university.com
 supannEtuSecteurDisciplinaire: {SISE}0033
 supannEtuDiplome: {UAI:0123456G}T3GIM-830
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}K5MIR4-100
 supannAffectation: L1 Physique, Chimie
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: AMAYA GIMENEZ
+supannNomDeNaissance: LANGLOIS
 eduPersonAffiliation: student
 supannCodeINE: 0000000081B
 
-dn: uid=animer,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=jacquet,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2698,32 +2780,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: animer
+uid: jacquet
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: HAYDEN ANIMER
-givenName: HAYDEN
-displayName: ANIMER HAYDEN
+cn: JACQUET MYA
+givenName: MYA
+displayName: JACQUET MYA
 supannEtuId: 10007555
-mail: animer@etab.fr
+mail: mya.jacquet@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANIMER
+sn: JACQUET
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2003-12-10
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: animer@etab.fr
+eduPersonPrincipalName: mya.jacquet@university.com
 supannEtuSecteurDisciplinaire: {SISE}0043
 supannEtuDiplome: {UAI:0123456G}A5MAV-101
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}T3AII2-830
 supannAffectation: BUT 1 Genie Industriel et Maintenance - Temps plein
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: ANIMER
+supannNomDeNaissance: JACQUET
 eduPersonAffiliation: student
 supannCodeINE: 0000000082B
 
-dn: uid=abdera,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=parent,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2731,32 +2814,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abdera
+uid: parent
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: GEORGIA ABDERA
-givenName: GEORGIA
-displayName: ABDERA GEORGIA
+cn: PARENT OWEN
+givenName: OWEN
+displayName: PARENT OWEN
 supannEtuId: 10007556
-mail: abdera@etab.fr
+mail: owen.parent@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABDERA
+sn: PARENT
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2006-06-20
 supannEntiteAffectation: 902
 supannEntiteAffectationPrincipale: 902
-eduPersonPrincipalName: abdera@etab.fr
+eduPersonPrincipalName: owen.parent@university.com
 supannEtuSecteurDisciplinaire: {SISE}0019
 supannEtuDiplome: {UAI:0123456G}I5ICO-107
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}D5GJU4-100
 supannAffectation: L1 Informatique-Informatique
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: ABDERA
+supannNomDeNaissance: PARENT
 eduPersonAffiliation: student
 supannCodeINE: 0000000083B
 
-dn: uid=alileric,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=thiery,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2764,33 +2848,34 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: alileric
+uid: thiery
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: WESLEY ALILERICHE
-givenName: WESLEY
-displayName: ALILERICHE WESLEY
+cn: THIERY NORA
+givenName: NORA
+displayName: THIERY NORA
 supannEtuId: 10007557
-mail: alileric@etab.fr
+mail: nora.thiery@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALILERICHE
+sn: THIERY
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2007-08-02
 supannEntiteAffectation: 903
 supannEntiteAffectation: 911
 supannEntiteAffectationPrincipale: 903
-eduPersonPrincipalName: alileric@etab.fr
+eduPersonPrincipalName: nora.thiery@university.com
 supannEtuSecteurDisciplinaire: {SISE}0032
 supannEtuDiplome: {UAI:0123456G}T3BIO-820
 supannEtuTypeDiplome: {SISE}DR
 supannEtuEtape: {UAI:0123456G}A5DRC4-101
 supannAffectation: M2 JPP-Contentieux judiciaire-Toulon
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: ALILERICHE
+supannNomDeNaissance: THIERY
 eduPersonAffiliation: student
 supannCodeINE: 0000000084B
 
-dn: uid=annotell,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=pineau,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2798,32 +2883,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: annotell
+uid: pineau
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ELÉNA ANNOTELLI
-givenName: ELÉNA
-displayName: ANNOTELLI ELÉNA
+cn: PINEAU IDRISS
+givenName: IDRISS
+displayName: PINEAU IDRISS
 supannEtuId: 10007558
-mail: annotell@etab.fr
+mail: idriss.pineau@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANNOTELLI
+sn: PINEAU
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2005-04-14
 supannEntiteAffectation: 903
 supannEntiteAffectationPrincipale: 903
-eduPersonPrincipalName: annotell@etab.fr
+eduPersonPrincipalName: idriss.pineau@university.com
 supannEtuSecteurDisciplinaire: {SISE}0041
 supannEtuDiplome: {UAI:0123456G}D5JPP-105
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}R8FLET-800
 supannAffectation: M2 Droit notarial
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: ANNOTELLI
+supannNomDeNaissance: PINEAU
 eduPersonAffiliation: student
 supannCodeINE: 0000000085B
 
-dn: uid=alghazi,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=daniel,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2831,32 +2917,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: alghazi
+uid: daniel
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: EILEEN AL GHAZI
-givenName: EILEEN
-displayName: AL GHAZI EILEEN
+cn: DANIEL LILA
+givenName: LILA
+displayName: DANIEL LILA
 supannEtuId: 10007559
-mail: alghazi@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: AL GHAZI
+mail: lila.daniel@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: DANIEL
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2005-03-07
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: alghazi@etab.fr
+eduPersonPrincipalName: lila.daniel@university.com
 supannEtuSecteurDisciplinaire: {SISE}0038
 supannEtuDiplome: {UAI:0123456G}R8DLF-800
 supannEtuTypeDiplome: {SISE}HD
 supannEtuEtape: {UAI:0123456G}T3AII2-831
 supannAffectation: Campus Connecte La Seyne
 supannEtuCursusAnnee: {SUPANN}L3
-supannNomDeNaissance: AL GHAZI
-eduPersonAffiliation: student
+supannNomDeNaissance: DANIEL
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000086B
 
-dn: uid=allue,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=perrault,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2864,32 +2951,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: allue
+uid: perrault
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: MENDEL ALLUE
-givenName: MENDEL
-displayName: ALLUE MENDEL
+cn: PERRAULT EDEN
+givenName: EDEN
+displayName: PERRAULT EDEN
 supannEtuId: 10007560
-mail: allue@etab.fr
+mail: eden.perrault@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALLUE
+sn: PERRAULT
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2005-12-12
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: allue@etab.fr
+eduPersonPrincipalName: eden.perrault@university.com
 supannEtuSecteurDisciplinaire: {SISE}0039
 supannEtuDiplome: {UAI:0123456G}K3MAT-101
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}E5EMD4-100
 supannAffectation: BUT 3 Genie Industriel et Maintenance - ALT
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: ALLUE
+supannNomDeNaissance: PERRAULT
 eduPersonAffiliation: student
 supannCodeINE: 0000000087B
 
-dn: uid=abbassen,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=hoquet,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2897,32 +2985,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abbassen
+uid: hoquet
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: JENNAH ABBASSENE
-givenName: JENNAH
-displayName: ABBASSENE JENNAH
+cn: HOQUET TALIA
+givenName: TALIA
+displayName: HOQUET TALIA
 supannEtuId: 10007561
-mail: abbassen@etab.fr
+mail: talia.hoquet@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABBASSENE
+sn: HOQUET
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2002-05-26
 supannEntiteAffectation: 909
 supannEntiteAffectationPrincipale: 909
-eduPersonPrincipalName: abbassen@etab.fr
+eduPersonPrincipalName: talia.hoquet@university.com
 supannEtuSecteurDisciplinaire: {SISE}0039
 supannEtuDiplome: {UAI:0123456G}R8DLE-801
 supannEtuTypeDiplome: {SISE}HD
 supannEtuEtape: {UAI:0123456G}S3EMS3-101
 supannAffectation: L3 STAPS APAS
 supannEtuCursusAnnee: {SUPANN}D
-supannNomDeNaissance: ABBASSENE
+supannNomDeNaissance: HOQUET
 eduPersonAffiliation: student
 supannCodeINE: 0000000088B
 
-dn: uid=andriana,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=legendre,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2930,15 +3019,15 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: andriana
+uid: legendre
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: LUIS ANDRIANARIVONY
-givenName: LUIS
-displayName: ANDRIANARIVONY LUIS
+cn: LEGENDRE MARIN
+givenName: MARIN
+displayName: LEGENDRE MARIN
 supannEtuId: 10007562
-mail: andriana@etab.fr
+mail: marin.legendre@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANDRIANARIVONY
+sn: LEGENDRE
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2003-04-08
@@ -2946,18 +3035,19 @@ supannEntiteAffectation: 902
 supannEntiteAffectation: 911
 supannEntiteAffectation: 908
 supannEntiteAffectationPrincipale: 911
-eduPersonPrincipalName: andriana@etab.fr
+eduPersonPrincipalName: marin.legendre@university.com
 supannEtuSecteurDisciplinaire: {SISE}0024
 supannEtuDiplome: {UAI:0123456G}E3ECG-103
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}A3MGC3-100
 supannAffectation: M2 L&S-Traitement de l'information, linguistique, traductio
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: ANDRIANARIVONY
+supannNomDeNaissance: LEGENDRE
 eduPersonAffiliation: student
 supannCodeINE: 0000000089B
 
-dn: uid=allostry,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=chauvet,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2965,32 +3055,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: allostry
+uid: chauvet
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: BÉATRICE ALLOSTRY
-givenName: BÉATRICE
-displayName: ALLOSTRY BÉATRICE
+cn: CHAUVET NILS
+givenName: NILS
+displayName: CHAUVET NILS
 supannEtuId: 10007563
-mail: allostry@etab.fr
+mail: nils.chauvet@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALLOSTRY
+sn: CHAUVET
 supannEtablissement: {UAI}0123456G
-supannCivilite: MME
+supannCivilite: M.
 supannOIDCDateDeNaissance: 2004-12-02
 supannEntiteAffectation: 915
 supannEntiteAffectationPrincipale: 915
-eduPersonPrincipalName: allostry@etab.fr
+eduPersonPrincipalName: nils.chauvet@university.com
 supannEtuSecteurDisciplinaire: {SISE}0002
 supannEtuDiplome: {UAI:0123456G}L5ALC-100
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}K3MAM2-100
 supannAffectation: M2 Comptabilite Controle Audit
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: ALLOSTRY
+supannNomDeNaissance: CHAUVET
 eduPersonAffiliation: student
 supannCodeINE: 0000000090B
 
-dn: uid=angoulve,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=perrot,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -2998,32 +3089,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: angoulve
+uid: perrot
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: BILAL ANGOULVENT
-givenName: BILAL
-displayName: ANGOULVENT BILAL
+cn: PERROT AVA
+givenName: AVA
+displayName: PERROT AVA
 supannEtuId: 10007564
-mail: angoulve@etab.fr
+mail: ava.perrot@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANGOULVENT
+sn: PERROT
 supannEtablissement: {UAI}0123456G
-supannCivilite: M.
+supannCivilite: MME
 supannOIDCDateDeNaissance: 2007-01-12
 supannEntiteAffectation: 903
 supannEntiteAffectationPrincipale: 903
-eduPersonPrincipalName: angoulve@etab.fr
+eduPersonPrincipalName: ava.perrot@university.com
 supannEtuSecteurDisciplinaire: {SISE}0041
 supannEtuDiplome: {UAI:0123456G}K5ISC-103
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}D5DBA5-102
 supannAffectation: Licence 3 Droit LAS
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: ANGOULVENT
+supannNomDeNaissance: PERROT
 eduPersonAffiliation: student
 supannCodeINE: 0000000091B
 
-dn: uid=abcar,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=savary,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -3031,32 +3123,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abcar
+uid: savary
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: CAMILLE ABCAR
-givenName: CAMILLE
-displayName: ABCAR CAMILLE
+cn: SAVARY TITOUAN
+givenName: TITOUAN
+displayName: SAVARY TITOUAN
 supannEtuId: 10007565
-mail: abcar@etab.fr
+mail: titouan.savary@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABCAR
+sn: SAVARY
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 1999-08-09
 supannEntiteAffectation: 909
 supannEntiteAffectationPrincipale: 909
-eduPersonPrincipalName: abcar@etab.fr
+eduPersonPrincipalName: titouan.savary@university.com
 supannEtuSecteurDisciplinaire: {SISE}0064
 supannEtuDiplome: {UAI:0123456G}K3SVI-101
 supannEtuTypeDiplome: {SISE}XA
 supannEtuEtape: {UAI:0123456G}E3ECG1-100
 supannAffectation: L3 STAPS ES parcours LAS
 supannEtuCursusAnnee: {SUPANN}L2
-supannNomDeNaissance: ABCAR
+supannNomDeNaissance: SAVARY
 eduPersonAffiliation: student
 supannCodeINE: 0000000092B
 
-dn: uid=aftenii,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=poulain,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -3064,32 +3157,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: aftenii
+uid: poulain
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: MODIBO AFTENII
-givenName: MODIBO
-displayName: AFTENII MODIBO
+cn: POULAIN DORIAN
+givenName: DORIAN
+displayName: POULAIN DORIAN
 supannEtuId: 10007566
-mail: aftenii@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: AFTENII
+mail: dorian.poulain@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: POULAIN
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2004-10-21
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: aftenii@etab.fr
+eduPersonPrincipalName: dorian.poulain@university.com
 supannEtuSecteurDisciplinaire: {SISE}0024
 supannEtuDiplome: {UAI:0123456G}N5SNU-900
 supannEtuTypeDiplome: {SISE}FI
 supannEtuEtape: {UAI:0123456G}I3DES3-101
 supannAffectation: LP Management et Gestion des Organisations-parc Gest projet
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: AFTENII
-eduPersonAffiliation: student
+supannNomDeNaissance: POULAIN
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000093B
 
-dn: uid=adanfom,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=marchal,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -3097,32 +3191,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: adanfom
+uid: marchal
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ALYCIA ADANFOM
-givenName: ALYCIA
-displayName: ADANFOM ALYCIA
+cn: MARCHAL JENNA
+givenName: JENNA
+displayName: MARCHAL JENNA
 supannEtuId: 10007567
-mail: adanfom@etab.fr
+mail: jenna.marchal@university.com
 eduPersonPrimaryAffiliation: student
-sn: ADANFOM
+sn: MARCHAL
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2004-11-28
 supannEntiteAffectation: 911
 supannEntiteAffectationPrincipale: 911
-eduPersonPrincipalName: adanfom@etab.fr
+eduPersonPrincipalName: jenna.marchal@university.com
 supannEtuSecteurDisciplinaire: {SISE}0039
 supannEtuDiplome: {UAI:0123456G}D5JPP-104
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}I5CIM4-101
 supannAffectation: L2 LEA-Anglais / Italien
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: ADANFOM
+supannNomDeNaissance: MARCHAL
 eduPersonAffiliation: student
 supannCodeINE: 0000000094B
 
-dn: uid=alibar,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=meunier,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -3130,33 +3225,34 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: alibar
+uid: meunier
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ALHASSANE ALIBAR
-givenName: ALHASSANE
-displayName: ALIBAR ALHASSANE
+cn: MEUNIER ALI
+givenName: ALI
+displayName: MEUNIER ALI
 supannEtuId: 10007568
-mail: alibar@etab.fr
+mail: ali.meunier@university.com
 eduPersonPrimaryAffiliation: student
-sn: ALIBAR
+sn: MEUNIER
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2003-11-06
 supannEntiteAffectation: 904
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: alibar@etab.fr
+eduPersonPrincipalName: ali.meunier@university.com
 supannEtuSecteurDisciplinaire: {INCONNU}
 supannEtuDiplome: {UAI:0123456G}D5JPP-101
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}V5MLT5-100
 supannAffectation: IFTS Croix Rouge
 supannEtuCursusAnnee: {SUPANN}L1
-supannNomDeNaissance: ALIBAR
+supannNomDeNaissance: MEUNIER
 eduPersonAffiliation: student
 supannCodeINE: 0000000095B
 
-dn: uid=abomonoa,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=pineau,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -3164,32 +3260,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abomonoa
+uid: pineau
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: ADJA ABOMO NOAH
-givenName: ADJA
-displayName: ABOMO NOAH ADJA
+cn: PINEAU SELENA
+givenName: SELENA
+displayName: PINEAU SELENA
 supannEtuId: 10007569
-mail: abomonoa@etab.fr
+mail: selena.pineau@university.com
 eduPersonPrimaryAffiliation: student
-sn: ABOMO NOAH
+sn: PINEAU
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2006-03-31
 supannEntiteAffectation: 902
 supannEntiteAffectationPrincipale: 902
-eduPersonPrincipalName: abomonoa@etab.fr
+eduPersonPrincipalName: selena.pineau@university.com
 supannEtuSecteurDisciplinaire: {SISE}0016
 supannEtuDiplome: {UAI:0123456G}R8DLF-800
 supannEtuTypeDiplome: {SISE}HD
 supannEtuEtape: {UAI:0123456G}D5SDD5-100
 supannAffectation: L1 Sciences de la vie (SDV)
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: ABOMO NOAH
+supannNomDeNaissance: PINEAU
 eduPersonAffiliation: student
 supannCodeINE: 0000000096B
 
-dn: uid=andriami,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=picard,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -3197,32 +3294,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: andriami
+uid: picard
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: NINO ANDRIAMIDONA
-givenName: NINO
-displayName: ANDRIAMIDONA NINO
+cn: PICARD ILAN
+givenName: ILAN
+displayName: PICARD ILAN
 supannEtuId: 10007570
-mail: andriami@etab.fr
+mail: ilan.picard@university.com
 eduPersonPrimaryAffiliation: student
-sn: ANDRIAMIDONA
+sn: PICARD
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2006-03-10
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: andriami@etab.fr
+eduPersonPrincipalName: ilan.picard@university.com
 supannEtuSecteurDisciplinaire: {SISE}0062
 supannEtuDiplome: {UAI:0123456G}S5APA-101
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}R8DELE-800
 supannAffectation: BUT 1 Techniques de Commercialisation
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: ANDRIAMIDONA
+supannNomDeNaissance: PICARD
 eduPersonAffiliation: student
 supannCodeINE: 0000000097B
 
-dn: uid=amtouti,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=bonnard,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -3230,33 +3328,34 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: amtouti
+uid: bonnard
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: KHADIDIATOU AMTOUTI
-givenName: KHADIDIATOU
-displayName: AMTOUTI KHADIDIATOU
+cn: BONNARD MAUD
+givenName: MAUD
+displayName: BONNARD MAUD
 supannEtuId: 10007571
-mail: amtouti@etab.fr
+mail: maud.bonnard@university.com
 eduPersonPrimaryAffiliation: student
-sn: AMTOUTI
+sn: BONNARD
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2003-01-28
 supannEntiteAffectation: DEVE
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 903
-eduPersonPrincipalName: amtouti@etab.fr
+eduPersonPrincipalName: maud.bonnard@university.com
 supannEtuSecteurDisciplinaire: {SISE}0041
 supannEtuDiplome: {UAI:0123456G}R8DIN-800
 supannEtuTypeDiplome: {SISE}HD
 supannEtuEtape: {UAI:0123456G}T3IIN3-840
 supannAffectation: M1 JPP Contentieux adminsitratif
 supannEtuCursusAnnee: {SUPANN}X2
-supannNomDeNaissance: AMTOUTI
+supannNomDeNaissance: BONNARD
 eduPersonAffiliation: student
 supannCodeINE: 0000000098B
 
-dn: uid=alzobieh,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=roche,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -3264,32 +3363,33 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: alzobieh
+uid: roche
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: GABRIEL AL ZO BIEH
-givenName: GABRIEL
-displayName: AL ZO BIEH GABRIEL
+cn: ROCHE KENZO
+givenName: KENZO
+displayName: ROCHE KENZO
 supannEtuId: 10007572
-mail: alzobieh@etab.fr
+mail: kenzo.roche@university.com
 eduPersonPrimaryAffiliation: student
-sn: AL ZO BIEH
+sn: ROCHE
 supannEtablissement: {UAI}0123456G
 supannCivilite: M.
 supannOIDCDateDeNaissance: 2007-08-07
 supannEntiteAffectation: DEVE
 supannEntiteAffectationPrincipale: DEVE
-eduPersonPrincipalName: alzobieh@etab.fr
+eduPersonPrincipalName: kenzo.roche@university.com
 supannEtuSecteurDisciplinaire: {SISE}0013
 supannEtuDiplome: {UAI:0123456G}E5EDE-101
 supannEtuTypeDiplome: {SISE}XB
 supannEtuEtape: {UAI:0123456G}S3PEM2-101
 supannAffectation: BUT 3 TC Parcours Marketing digital,e-business entrepreunar
 supannEtuCursusAnnee: {SUPANN}X1
-supannNomDeNaissance: AL ZO BIEH
+supannNomDeNaissance: ROCHE
 eduPersonAffiliation: student
 supannCodeINE: 0000000099B
 
-dn: uid=abouhann,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+
+dn: uid=germain,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
 objectClass: person
 objectClass: organizationalPerson
@@ -3297,30 +3397,31 @@ objectClass: inetOrgPerson
 objectClass: supannPerson
 objectClass: eduPerson
 objectClass: eduMember
-uid: abouhann
+uid: germain
 userPassword: {ssha}Ke8lVwbkuJcEbWdCur8XLG9QwggNciz6UlwH/w==
-cn: DINA ABOU HANNA
-givenName: DINA
-displayName: ABOU HANNA DINA
+cn: GERMAIN AYA
+givenName: AYA
+displayName: GERMAIN AYA
 supannEtuId: 10007573
-mail: abouhann@etab.fr
-eduPersonPrimaryAffiliation: student
-sn: ABOU HANNA
+mail: aya.germain@university.com
+eduPersonPrimaryAffiliation: faculty
+sn: GERMAIN
 supannEtablissement: {UAI}0123456G
 supannCivilite: MME
 supannOIDCDateDeNaissance: 2006-02-15
 supannEntiteAffectation: 904
 supannEntiteAffectationPrincipale: 904
-eduPersonPrincipalName: abouhann@etab.fr
+eduPersonPrincipalName: aya.germain@university.com
 supannEtuSecteurDisciplinaire: {SISE}0023
 supannEtuDiplome: {UAI:0123456G}I2DAN-100
 supannEtuTypeDiplome: {SISE}ZA
 supannEtuEtape: {UAI:0123456G}T3IIN2-830
 supannAffectation: BUT 3 MMI Parcours developpt web et dispositifs interactifs
 supannEtuCursusAnnee: {SUPANN}X3
-supannNomDeNaissance: ABOU HANNA
-eduPersonAffiliation: student
+supannNomDeNaissance: GERMAIN
+eduPersonAffiliation: faculty
 supannCodeINE: 0000000100B
+
 
 dn: uid=aitouaka,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
 objectClass: top
@@ -132973,5 +133074,4 @@ supannEtuCursusAnnee: {SUPANN}L3
 supannNomDeNaissance: AKLAN
 eduPersonAffiliation: student
 supannCodeINE: 0000004000B
-
 

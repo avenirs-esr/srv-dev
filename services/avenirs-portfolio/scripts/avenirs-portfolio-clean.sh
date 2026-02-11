@@ -21,8 +21,6 @@ info "Avenirs portfolio cleaning started."
 
 # ---- avenirs-portfolio-security
 
-# Resets the repository
-reset_git_repository $AVENIRS_PORTFOLIO_SECURITY_REPOSITORY_DIR $AVENIRS_PORTFOLIO_SECURITY_MAIN_BRANCH $AVENIRS_PORTFOLIO_SECURITY_LOCAL_BRANCH
 
 # Removes the overlay's files
 if [ "$KEEP_OVERLAY" = false ] ; then
