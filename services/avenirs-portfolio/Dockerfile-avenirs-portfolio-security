@@ -1,4 +1,4 @@
-ARG JAVA_VERSION=21-jdk
+ARG JAVA_VERSION=21-jdk-alpine
 
 FROM eclipse-temurin:${JAVA_VERSION} as build
 ARG OVERLAY_DIR

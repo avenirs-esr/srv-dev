@@ -1,4 +1,4 @@
-ARG JAVA_ALPINE_VERSION=21-jdk-alpin
+ARG JAVA_ALPINE_VERSION=21-jdk-alpine
 
 FROM eclipse-temurin:${JAVA_ALPINE_VERSION} as build
 WORKDIR /workspace/app
