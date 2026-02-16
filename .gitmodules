@@ -13,7 +13,7 @@
 [submodule "services/avenirs-portfolio/avenirs-portfolio-security"]
 	path = services/avenirs-portfolio/avenirs-portfolio-security
 	url = https://github.com/avenirs-esr/avenirs-portfolio-security
-	branch = main
+	branch = develop
 [submodule "services/avenirs-portfolio/avenirs-portfolio-api"]
 	path = services/avenirs-portfolio/avenirs-portfolio-api
 	url = https://github.com/avenirs-esr/avenirs-portfolio-api
@@ -29,3 +29,4 @@
 [submodule "services/avenirs-portfolio/avenirs-portfolio-interoperability"]
 	path = services/avenirs-portfolio/avenirs-portfolio-interoperability
 	url = https://github.com/avenirs-esr/avenirs-portfolio-interoperability.git
+	branch = develop
