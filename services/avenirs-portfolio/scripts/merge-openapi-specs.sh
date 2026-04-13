@@ -25,6 +25,22 @@ wait_for_endpoint() {
   return 1
 }
 
+filter_openapi_paths() {
+  file="$1"
+  tmp="$(mktemp)"
+
+  jq '
+    .paths |= with_entries(
+      select(
+        (.key | startswith("/health") | not) and
+        (.key | startswith("/actuator") | not)
+      )
+    )
+  ' "$file" > "$tmp"
+
+  mv "$tmp" "$file"
+}
+
 mkdir -p "$SPECS_DIR"
 
 for u in $SWAGGER_URLS; do
@@ -35,9 +51,13 @@ for u in $SWAGGER_URLS; do
     *avenirs-portfolio-interoperability*) out="$SPECS_DIR/interoperability.json" ;;
     *) echo "Unknown swagger url $u" >&2; exit 1 ;;
   esac
+
   echo "Fetching $u -> $out"
   curl -s "$u" -o "$out"
   echo "Fetched: $out"
+
+  echo "Filtering technical endpoints from $out"
+  filter_openapi_paths "$out"
 done
 
 echo "Writing merge config: $MERGE_CONFIG_PATH"
