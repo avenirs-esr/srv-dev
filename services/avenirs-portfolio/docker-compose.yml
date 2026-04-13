@@ -112,7 +112,7 @@ services:
     volumes:
       - ./scripts:/work/scripts:ro
       - api-specs:/usr/local/apache2/htdocs/api-specs
-    entrypoint: ["bash", "-lc", "API_SPECS_DIR=/usr/local/apache2/htdocs/api-specs bash /work/scripts/merge-openapi-specs.sh"]
+    entrypoint: ["bash", "-lc", "apt-get update && apt-get install -y jq && API_SPECS_DIR=/usr/local/apache2/htdocs/api-specs bash /work/scripts/merge-openapi-specs.sh"]
 
 networks: 
   avenirs-api-network:
