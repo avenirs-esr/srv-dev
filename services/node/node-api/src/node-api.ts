@@ -89,9 +89,14 @@ app.get("/debug", (req: any, res: any) => {
  * Redirection used after CAS authorization.
  */
 app.get("/cas-auth-callback/access", (req: any, res: any) => {
-  const host = req.headers?.["x-forwarded-host"] || "localhost";
-  console.log("cas-auth-callback/access host", host);
-  res.redirect(`http://${host}/examples/authentication-webcomp-demo/`);
+  const host = req.headers?.["x-forwarded-host"] || "dev.avenirs-esr.fr";
+  const state = typeof req.query.state === "string" ? req.query.state : "/cofolio/student";
+
+  const safePath = state.startsWith("/") && !state.startsWith("//")
+    ? state
+    : "/cofolio/student";
+
+  res.redirect(`https://${host}${safePath}`);
 });
 
 /**

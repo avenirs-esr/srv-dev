@@ -25,11 +25,24 @@ CAS_ENV_FILE=$CAS_REPOSITORY_DIR/.env
 [ -z  "$AVENIRS_CAS_CONTAINER_NAME" ] && AVENIRS_CAS_CONTAINER_NAME="${AVENIRS_CONTAINER_PREFIX}cas"
 
 # Server name (CAS settings)
-fqdn=`hostname -f`
+fqdn=$(hostname -f)
 if [[ "$fqdn" =~ \.recia\.net$ ]]; then
-    AVENIRS_CAS_SERVER_NAME="https://$fqdn"
+    case "$fqdn" in
+        *srv-dev*)
+            AVENIRS_CAS_SERVER_NAME="https://dev.avenirs-esr.fr"
+            ;;
+        *srv-qualif*)
+            AVENIRS_CAS_SERVER_NAME="https://qualif.avenirs-esr.fr"
+            ;;
+        *srv-recette*)
+            AVENIRS_CAS_SERVER_NAME="https://recette.avenirs-esr.fr"
+            ;;
+        *)
+            AVENIRS_CAS_SERVER_NAME="https://$fqdn"
+            ;;
+    esac
 else
-    AVENIRS_CAS_SERVER_NAME='https://localhost'
+    AVENIRS_CAS_SERVER_NAME="https://localhost"
 fi
 
 CAS_SETTINGS_TEMPLATE_FILE=$CAS_OVERLAY_DIR/etc/cas/config/cas.properties.template
