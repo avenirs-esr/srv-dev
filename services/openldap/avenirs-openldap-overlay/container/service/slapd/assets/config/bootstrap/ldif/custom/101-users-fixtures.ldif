@@ -1,0 +1,33 @@
+dn: uid=nathan.pignon,ou=people,dc=ldap-dev,dc=avenirs-esr,dc=fr
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: supannPerson
+objectClass: eduPerson
+objectClass: eduMember
+uid: pignon
+userPassword: {SSHA}ye0I8b8MkCQFGJKbZKagLzlVx09SE9xj
+cn: NATHAN PIGNON
+givenName: NATHAN
+displayName: PIGNON NATHAN
+supannEtuId: 10011474
+mail: pignon@etab.fr
+eduPersonPrimaryAffiliation: student
+sn: PIGNON
+supannEtablissement: {UAI}0123456G
+supannCivilite: M.
+supannOIDCDateDeNaissance: 2001-11-10
+supannEntiteAffectation: DEVE
+supannEntiteAffectation: 911
+supannEntiteAffectationPrincipale: NC
+eduPersonPrincipalName: pignon@etab.fr
+supannEtuSecteurDisciplinaire: {SISE}0017
+supannEtuDiplome: {UAI:0123456G}T3BIO-821
+supannEtuTypeDiplome: {SISE}DR
+supannEtuEtape: {UAI:0123456G}D3MDI3-100
+supannAffectation: DU Soins palliatifs
+supannEtuCursusAnnee: {SUPANN}L3
+supannNomDeNaissance: PIGNON
+eduPersonAffiliation: student
+supannCodeINE: 0000004001B
