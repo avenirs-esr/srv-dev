@@ -3,6 +3,9 @@ ARG NGINX_VERSION=alpine
 
 FROM node:${NODE_ALPINE_VERSION} AS build
 WORKDIR /app
+
+ENV IS_DOCKER=true
+
 COPY . .
 RUN npm ci
 RUN npm run build-only
