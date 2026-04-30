@@ -35,11 +35,17 @@
     "interoperability:init-db": "dotenv -e .env -e .secrets.env -- sh -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p 65432 -U $POSTGRES_USER -d template1 -f services/postgresql/avenirs-postgresql-overlay/init/11_avenirs-interoperability_init-db.generated.sql' && cd services/avenirs-portfolio/avenirs-portfolio-interoperability && mvn liquibase:update",
     "interoperability:update-db": "cd services/avenirs-portfolio/avenirs-portfolio-interoperability && mvn liquibase:update",
     "interoperability:generate-changelog": "cd services/avenirs-portfolio/avenirs-portfolio-interoperability && mvn spotless:apply && mvn clean install -DskipTests && mvn liquibase:diff",
+    "security:restart": "cd services/avenirs-portfolio/avenirs-portfolio-security && mvn spotless:apply && npm run deploy && docker logs --follow avenirs-portfolio-security",
+    "security:reset-db": "npm run security:clean-db && npm run security:init-db",
+    "security:clean-db": "dotenv -e .env -e .secrets.env -- sh -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p 65432 -U $POSTGRES_USER -d template1 -f services/postgresql/avenirs-postgresql-overlay/init/10_avenirs-security_clean.generated.sql'",
+    "security:init-db": "dotenv -e .env -e .secrets.env -- sh -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p 65432 -U $POSTGRES_USER -d template1 -f services/postgresql/avenirs-postgresql-overlay/init/11_avenirs-security_init-db.generated.sql' && cd services/avenirs-portfolio/avenirs-portfolio-security && mvn liquibase:update",
+    "security:update-db": "cd services/avenirs-portfolio/avenirs-portfolio-security && mvn liquibase:update",
+    "security:generate-changelog": "cd services/avenirs-portfolio/avenirs-portfolio-security && mvn spotless:apply && mvn clean install -DskipTests && mvn liquibase:diff",
   
-    "db:reset-all": "npm run api:reset-db && npm run back-office:reset-db && npm run interoperability:reset-db",
-    "db:clean-all": "npm run api:clean-db && npm run back-office:clean-db && npm run interoperability:clean-db",
-    "db:init-all": "npm run api:init-db && npm run back-office:init-db && npm run interoperability:init-db",
-    "db:update-all": "npm run api:update-db && npm run back-office:update-db && npm run interoperability:update-db",
+    "db:reset-all": "npm run api:reset-db && npm run back-office:reset-db && npm run interoperability:reset-db && npm run security:reset-db",
+    "db:clean-all": "npm run api:clean-db && npm run back-office:clean-db && npm run interoperability:clean-db && npm run security:clean-db",
+    "db:init-all": "npm run api:init-db && npm run back-office:init-db && npm run interoperability:init-db && npm run security:init-db",
+    "db:update-all": "npm run api:update-db && npm run back-office:update-db && npm run interoperability:update-db && npm run security:update-db",
     "ldap:load-fixtures": "services/openldap/scripts/openldap-load-fixtures.sh"
   },
   "repository": {
