@@ -17,24 +17,28 @@ import express from "express";
 //import { disableProxy } from './no-proxy';
 import audit from "express-requests-logger";
 import * as needle from "needle";
+import session from "express-session";
 
 const cors = require("cors");
 const bodyQueryBoolean = require("express-query-boolean");
 const app = express();
-app.use(
-  cors({
-    origin: "*",
-    optionsSuccessStatus: 200,
-  })
-);
+app.set("trust proxy", 1);
+
+app.use(cors({ origin: "*", optionsSuccessStatus: 200 }));
 app.use(json());
 app.use(bodyQueryBoolean());
-app.use(
-  urlencoded({
-    extended: true,
-  })
-);
-
+app.use(urlencoded({ extended: true }));
+app.use(session({
+  secret: process.env.SEC_SESSION_SECRET || "dev-secret-change-me",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: true,
+    sameSite: "lax",
+    maxAge: 8 * 60 * 60 * 1000
+  }
+}));
 app.use(audit());
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
@@ -54,17 +58,53 @@ app.get("/health", (req: any, res: any) => {
  * Call the cas oidcAuthorize end point to generate a jwt (access token) from a session code.
  * After authorization cas will redirect to the uri given in parameter (must be declared in service definition of CAS).
  */
-app.get("/cas-auth-callback", (req: any, res: any) => {
+app.get("/cas-auth-callback", async (req: any, res: any) => {
   const sessionCode = req?.query?.code;
+  const state = typeof req?.query?.state === "string" ? req.query.state : "/cofolio/student";
   const host = req.headers?.["x-forwarded-host"] || "localhost";
+
   console.log("cas-auth-callback host", host);
   console.log("cas-auth-callback sessionCode", sessionCode);
 
-  const uri = `https://${host}/cas/oidc/oidcAuthorize`;
-  console.log("URI", uri);
-  const url = `${uri}?client_id=${cas_client_id}&client_secret=${cas_client_secret}&redirect_uri=http://${host}/node-api/cas-auth-callback/access&code=${sessionCode}&scope=openid profile email&response_type=token`;
-  console.log("url", url);
-  res.redirect(url);
+  try {
+    const params = new URLSearchParams({
+      grant_type: "authorization_code",
+      code: sessionCode,
+      redirect_uri: `https://${host}/node-api/cas-auth-callback`,
+      client_id: cas_client_id,
+      client_secret: cas_client_secret,
+    });
+
+    const tokenResponse = await fetch("https://avenirs-apache/cas/oidc/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString(),
+    });
+
+    if (!tokenResponse.ok) {
+      const error = await tokenResponse.text();
+      console.error("cas-auth-callback token exchange failed:", error);
+      return res.status(401).send("Authentication failed");
+    }
+
+    const tokens: any = await tokenResponse.json();
+    console.log("cas-auth-callback tokens received, expires_in:", tokens.expires_in);
+
+    req.session.access_token = tokens.access_token;
+    req.session.refresh_token = tokens.refresh_token;
+    req.session.id_token = tokens.id_token;
+
+    const safePath = state.startsWith("/") && !state.startsWith("//")
+      ? state
+      : "/cofolio/student";
+
+    console.log("cas-auth-callback redirecting to", safePath);
+    res.redirect(`https://${host}${safePath}`);
+
+  } catch (err) {
+    console.error("cas-auth-callback error", err);
+    res.status(500).send("Internal error");
+  }
 });
 
 /**
@@ -83,6 +123,12 @@ app.get("/debug", (req: any, res: any) => {
   console.log("/debug req.query", req.query);
 
   res.json(req.headers);
+});
+app.get("/debug/session", (req: any, res) => {
+  res.json({
+    sessionID: req.sessionID,
+    session: req.session
+  });
 });
 
 /**
@@ -318,6 +364,38 @@ app.post("/access-token", async (req: any, res: any) => {
       }
     }
   );
+});
+
+app.use("/me", async (req: any, res: any) => {
+  const accessToken = req.session?.access_token;
+
+  if (!accessToken) {
+    return res.status(401).json({ message: "Not authenticated" });
+  }
+
+  const targetPath = req.originalUrl; // ex: /me/users/STUDENT/overview
+  const targetUrl = `http://avenirs-apache/apim${targetPath}`;
+
+  const response = await fetch(targetUrl, {
+    method: req.method,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      Accept: req.headers.accept || "application/json",
+      "Content-Type": req.headers["content-type"] || "application/json",
+    },
+    body: ["GET", "HEAD"].includes(req.method)
+      ? undefined
+      : JSON.stringify(req.body),
+  });
+
+  const body = await response.text();
+
+  const contentType = response.headers.get("content-type");
+  if (contentType) {
+    res.setHeader("content-type", contentType);
+  }
+
+  return res.status(response.status).send(body);
 });
 
 /** ---- dynamic upstream experimentation ---- **/

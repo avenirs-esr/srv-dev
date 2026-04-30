@@ -132,46 +132,112 @@ JSON_CONTENT=$(cat <<EOF
 
                 local bearer = core.request.header(ctx, \"Authorization\");
                 local token = \"\";
+
                 if bearer ~= nil then
-                 local _, _, payload = string.find(bearer, \"Bearer%s+(.+)\");
-                 token=payload
+                  local _, _, payload = string.find(bearer, \"Bearer%s+(.+)\");
+                  token = payload;
                 end
-                ngx.log(ngx.ERR, \"serverless pre function token \",token)
-                
-                local user_id = token_to_uuid[token]
-                if user_id == nil then
-                 return 403, {
-                  message = \"Forbidden: invalid token\",
-                  status = 403,
-                  code = \"FORBIDDEN\",  
-                  details = {
-                      reason = \"Token authentication failed, invalid access token\"
-                  }
-                }
-               end  
-           
-            local now = ngx.time()
-            local user_context = {
-                sub = user_id,
-                iat = now,
-                exp = now + 300
-            }
-            local payload = cjson.encode(user_context)
-            local current_kid = \"v2\"
+
+                ngx.log(ngx.ERR, \"serverless pre function token prefix \", string.sub(token or \"\", 1, 20));
+
+                local user_id = token_to_uuid[token];
+                local now = ngx.time();
+                local user_context = nil;
+
+                if token == nil or token == \"\" then
+                  return 401, {
+                    message = \"Unauthorized: missing bearer token\",
+                    status = 401,
+                    code = \"UNAUTHORIZED\"
+                  };
+                end
+
+                if user_id ~= nil then
+                  user_context = {
+                    sub = user_id,
+                    iat = now,
+                    exp = now + 300
+                  };
+                else
+                  local httpc = http.new();
+
+                  ngx.log(ngx.INFO, \"call security service for non-mock token\");
+
+                  local res, err = httpc:request_uri(
+                    \"http://avenirs-portfolio-security:12000/oidc/introspect\",
+                    {
+                      method = \"POST\",
+                      headers = {
+                        [\"x-authorization\"] = token,
+                        [\"Content-Type\"] = \"application/json\"
+                      }
+                    }
+                  );
+
+                  if not res then
+                    return 503, {
+                      message = \"Security service unavailable\",
+                      status = 503,
+                      code = \"SECURITY_UNAVAILABLE\",
+                      details = {
+                        reason = err
+                      }
+                    };
+                  end
+
+                  if res.status ~= 200 then
+                    ngx.log(ngx.ERR, \"security introspection failed with status \", res.status, \" body \", res.body or \"\");
+                    return 401, {
+                      message = \"Unauthorized: token introspection failed\",
+                      status = 401,
+                      code = \"UNAUTHORIZED\"
+                    };
+                  end
+
+                  local ok, introspection = pcall(cjson.decode, res.body);
+
+                  if not ok or introspection == nil then
+                    return 500, {
+                      message = \"Invalid security introspection response\",
+                      status = 500,
+                      code = \"INVALID_SECURITY_RESPONSE\"
+                    };
+                  end
+
+                  if introspection.active ~= true then
+                    return 401, {
+                      message = \"Unauthorized: inactive token\",
+                      status = 401,
+                      code = \"UNAUTHORIZED\"
+                    };
+                  end
+
+                  user_context = {
+                    sub = introspection.userId or \"oidc-authenticated-user\",
+                    iat = now,
+                    exp = now + 300
+                  };
+                end
+
+            local payload = cjson.encode(user_context);
+            local current_kid = \"v2\";
             local hmac_keys = {
-                v1 = \"super-secret-v1\",
-                v2 = \"super-secret-v2\"
-            }    
-            local hmac_key = hmac_keys[current_kid]
-            local h = hmac:new(hmac_key, hmac.ALGOS.SHA256)
-            h:update(payload)
-            local signature_bin = h:final(nil, false)
-            local signature_base64 = ngx.encode_base64(signature_bin)
-            core.request.set_header(ctx, \"X-Signed-Context\", payload)
-            core.request.set_header(ctx, \"X-Context-Signature\", signature_base64)
-            core.request.set_header(ctx, \"X-Context-Kid\", current_kid)
-            ngx.req.clear_header(\"Authorization\")
-            core.request.set_header(ctx, \"avenirsEndPoint\",ctx.var.uri)
+              v1 = \"super-secret-v1\",
+              v2 = \"super-secret-v2\"
+            };
+
+            local hmac_key = hmac_keys[current_kid];
+            local h = hmac:new(hmac_key, hmac.ALGOS.SHA256);
+            h:update(payload);
+
+            local signature_bin = h:final(nil, false);
+            local signature_base64 = ngx.encode_base64(signature_bin);
+
+            core.request.set_header(ctx, \"X-Signed-Context\", payload);
+            core.request.set_header(ctx, \"X-Context-Signature\", signature_base64);
+            core.request.set_header(ctx, \"X-Context-Kid\", current_kid);
+            ngx.req.clear_header(\"Authorization\");
+            core.request.set_header(ctx, \"avenirsEndPoint\", ctx.var.uri);
                 
                 
             end"
