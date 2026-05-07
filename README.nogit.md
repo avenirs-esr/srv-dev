@@ -4,11 +4,98 @@ The repository can be used to install the services and all the development envir
 It is based on bash scripts for bootstraping and cleaning and a main docker compose file that includes a docker compose file for each service to deploy.
 The main bootstrap script will invoque the bootstrap script for each service. A service bootstrap script may create the docker volumes on file system, 
 check the branch (if a git submodule), and create a .env file to propagate the settings.
-
 ## Prerequisites
-- Git, 
-- Docker (tested with 24.0.6) 
-- Docker-compose >=2.2.0 for the support of "include".
+
+- Git
+- Docker (tested with 24.0.6)
+- Docker Compose >= 2.2.0 (required for `include` support)
+
+---
+
+## Windows Development Environment Setup
+
+This section explains how to configure the development environment on Windows using WSL and Ubuntu.
+
+## 1. Install WSL and Ubuntu
+
+Open PowerShell as Administrator and run:
+
+```bash
+wsl --install
+```
+
+Restart your computer after the installation.
+
+---
+
+## 2. Launch Ubuntu and Create User
+
+- Open the Ubuntu application
+- Create your Linux username and password
+
+---
+
+## 3. Install SDKMAN
+
+Run:
+
+```bash
+curl -s "https://get.sdkman.io" | bash
+```
+
+Then restart the terminal.
+
+---
+
+## 5. Install Java 21
+
+```bash
+sdk install java 21.0.4-oracle
+```
+
+Verify installation:
+
+```bash
+java -version
+```
+
+---
+
+## 6. Install Maven
+
+```bash
+sdk install maven 3.9.9
+```
+
+Verify installation:
+
+```bash
+mvn -v
+```
+
+---
+
+## 7. Install NVM (Node Version Manager)
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+```
+
+---
+
+## 8. Install Node.js
+
+```bash
+nvm install 24
+nvm use 24
+```
+
+Verify installation:
+
+```bash
+node -v
+npm -v
+```
 
 
 ## Architecture experimentation

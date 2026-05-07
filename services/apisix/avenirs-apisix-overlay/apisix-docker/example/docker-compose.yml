@@ -71,7 +71,7 @@ services:
     container_name: ${AVENIRS_APISIX_INIT_CONTAINER_NAME}
     image: alpine:latest
     env_file:
-      - ../../../../.secrets.env
+      - ../../../../..secrets.env
     depends_on:
       - apisix
       - apisix-dashboard
