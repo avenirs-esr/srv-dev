@@ -386,6 +386,30 @@ app.get("/auth/login", (req: any, res: any) => {
   res.redirect(casAuthorizeUrl);
 });
 
+app.get('/auth/logout', (req: any, res: any) => {
+  const redirectAfterLogout = 'https://dev.avenirs-esr.fr/cofolio/student'
+
+  req.session.destroy((err: unknown) => {
+    if (err) {
+      console.error('logout session destroy error', err)
+    }
+
+    res.clearCookie('connect.sid', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'lax',
+      path: '/',
+    })
+
+    const casLogoutUrl =
+      'https://dev.avenirs-esr.fr/cas/logout'
+      + '?service='
+      + encodeURIComponent(redirectAfterLogout)
+
+    return res.redirect(casLogoutUrl)
+  })
+})
+
 app.use("/me", async (req: any, res: any) => {
   const accessToken = req.session?.access_token;
 
