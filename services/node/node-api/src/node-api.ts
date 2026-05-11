@@ -366,6 +366,26 @@ app.post("/access-token", async (req: any, res: any) => {
   );
 });
 
+app.get("/auth/login", (req: any, res: any) => {
+  const redirect = typeof req.query.redirect === "string"
+    ? req.query.redirect
+    : "/cofolio/student";
+
+  const safeRedirect = redirect.startsWith("/") && !redirect.startsWith("//")
+    ? redirect
+    : "/cofolio/student";
+
+  const casAuthorizeUrl =
+    "https://dev.avenirs-esr.fr/cas/oidc/oidcAuthorize"
+    + "?client_id=" + encodeURIComponent(cas_client_id)
+    + "&response_type=code"
+    + "&scope=" + encodeURIComponent("openid profile email offline_access")
+    + "&redirect_uri=" + encodeURIComponent("https://dev.avenirs-esr.fr/node-api/cas-auth-callback")
+    + "&state=" + encodeURIComponent(safeRedirect);
+
+  res.redirect(casAuthorizeUrl);
+});
+
 app.use("/me", async (req: any, res: any) => {
   const accessToken = req.session?.access_token;
 
