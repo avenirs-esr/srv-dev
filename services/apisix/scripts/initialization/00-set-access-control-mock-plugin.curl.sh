@@ -8,6 +8,17 @@ JSON_CONTENT=$(cat <<EOF
   "id": "avenirs-access-control-mock",
   "desc": "Avenirs access control mock based on serveless-pre-function",
   "plugins": {
+    "cors": {
+      "_meta": {
+        "disable": false
+      },
+      "allow_credential": true,
+      "allow_headers": "Authorization,Content-Type,Accept,Origin,X-Requested-With,x-authorization,x-signed-context",
+      "allow_methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      "allow_origins": "http://localhost:5173,https://dev.avenirs-esr.fr,https://qualif.avenirs-esr.fr,https://recette.avenirs-esr.fr",
+      "expose_headers": "Content-Disposition",
+      "max_age": 3600
+    },
     "serverless-pre-function": {
       "phase": "rewrite",
       "functions": [

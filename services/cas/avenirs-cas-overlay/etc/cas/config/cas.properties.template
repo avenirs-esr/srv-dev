@@ -40,6 +40,7 @@ cas.authn.oidc.discovery.scopes=openid,profile,email,offline_access
 #cas.authn.oidc.discovery.claims=family_name,given_name,email, mail, cn,givenName,sn,displayName,isMemberOf
 cas.authn.oidc.discovery.claims=family_name,given_name,email
 
+# Time in seconds
 cas.authn.oauth.access-token.max-time-to-live-in-seconds=600
 cas.authn.oauth.refresh-token.time-to-kill-in-seconds=28800
 

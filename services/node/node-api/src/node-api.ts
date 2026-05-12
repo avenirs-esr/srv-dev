@@ -24,7 +24,30 @@ const bodyQueryBoolean = require("express-query-boolean");
 const app = express();
 app.set("trust proxy", 1);
 
-app.use(cors({ origin: "*", optionsSuccessStatus: 200 }));
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://dev.avenirs-esr.fr',
+  'https://qualif.avenirs-esr.fr',
+  'https://recette.avenirs-esr.fr',
+]
+
+const corsOptions = {
+  origin: (
+    origin: string | undefined,
+    callback: (error: Error | null, allow?: boolean) => void,
+  ) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+      return
+    }
+
+    callback(new Error(`CORS not allowed for origin: ${origin}`))
+  },
+  credentials: true,
+  optionsSuccessStatus: 200,
+}
+
+app.use(cors(corsOptions))
 app.use(json());
 app.use(bodyQueryBoolean());
 app.use(urlencoded({ extended: true }));
