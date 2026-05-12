@@ -43,6 +43,16 @@ app.use(audit());
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
 
+
+function toSafeRelativePath(
+  value: string,
+  fallback = "/cofolio/student"
+): string {
+  return value.startsWith("/") && !value.startsWith("//")
+    ? value
+    : fallback;
+}
+
 /**
  * Health method to check quickly if the backend is responding.
  */
@@ -94,9 +104,7 @@ app.get("/cas-auth-callback", async (req: any, res: any) => {
     req.session.refresh_token = tokens.refresh_token;
     req.session.id_token = tokens.id_token;
 
-    const safePath = state.startsWith("/") && !state.startsWith("//")
-      ? state
-      : "/cofolio/student";
+    const safePath = toSafeRelativePath(state);
 
     console.log("cas-auth-callback redirecting to", safePath);
     res.redirect(`https://${host}${safePath}`);
@@ -138,9 +146,7 @@ app.get("/cas-auth-callback/access", (req: any, res: any) => {
   const host = req.headers?.["x-forwarded-host"] || "dev.avenirs-esr.fr";
   const state = typeof req.query.state === "string" ? req.query.state : "/cofolio/student";
 
-  const safePath = state.startsWith("/") && !state.startsWith("//")
-    ? state
-    : "/cofolio/student";
+  const safePath = toSafeRelativePath(state);
 
   res.redirect(`https://${host}${safePath}`);
 });
@@ -371,9 +377,7 @@ app.get("/auth/login", (req: any, res: any) => {
     ? req.query.redirect
     : "/cofolio/student";
 
-  const safeRedirect = redirect.startsWith("/") && !redirect.startsWith("//")
-    ? redirect
-    : "/cofolio/student";
+  const safeRedirect = toSafeRelativePath(redirect);
 
   const casAuthorizeUrl =
     "https://dev.avenirs-esr.fr/cas/oidc/oidcAuthorize"
