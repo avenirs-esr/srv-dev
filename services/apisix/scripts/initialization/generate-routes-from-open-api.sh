@@ -111,19 +111,6 @@ curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
   "id": "$route_id",
   "uri": "$uri",
   "methods": ["$method", "OPTIONS"],
-  "plugins": {
-    "cors": {
-      "_meta": {
-        "disable": false
-      },
-      "allow_credential": false,
-      "allow_headers": "*",
-      "allow_methods": "*",
-      "allow_origins": "*",
-      "expose_headers": "*",
-      "max_age": 5
-    }
-  },
   $plugin_line
   $tags_line
   "upstream": {
