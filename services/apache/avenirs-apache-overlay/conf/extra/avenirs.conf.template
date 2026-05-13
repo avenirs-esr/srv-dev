@@ -43,6 +43,9 @@ ProxyPassReverse /apim/rt-notification ws://__AVENIRS_APISIX_API_CONTAINER_NAME_
 # ----
 
 # ---- The entry below must be after the settings for Websockets
+ProxyPass /apim/v1 http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/_v1
+ProxyPassReverse /apim/v1 http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080/_v1
+
 ProxyPass /apim http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080
 ProxyPassReverse /apim http://__AVENIRS_APISIX_API_CONTAINER_NAME__:9080
 
