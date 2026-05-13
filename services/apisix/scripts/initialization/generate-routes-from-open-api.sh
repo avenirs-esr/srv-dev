@@ -8,7 +8,7 @@ CORS_ONLY_PLUGIN_ID="avenirs-cors-only"
 COUNT_START=10
 V1_INTERNAL_PREFIX="/_v1"
 
-SWAGGER_URLS="http://avenirs-portfolio-api:10000/avenirs-portfolio-api/api-docs http://avenirs-portfolio-back-office:10010/avenirs-portfolio-back-office/api-docs http://avenirs-portfolio-interoperability:10020/avenirs-portfolio-interoperability/api-docs"
+SWAGGER_URLS="http://avenirs-portfolio-api:10000/avenirs-portfolio-api/api-docs http://avenirs-portfolio-back-office:10010/avenirs-portfolio-back-office/api-docs http://avenirs-portfolio-interoperability:10020/avenirs-portfolio-interoperability/api-docs http://avenirs-portfolio-security:12000/avenirs-portfolio-security/api-docs"
 # End Section to adapt
 
 wait_for_endpoint() {
@@ -67,6 +67,12 @@ for SWAGGER_URL in $SWAGGER_URLS; do
       UPSTREAM_NODE="avenirs-portfolio-interoperability:10020"
       tags_line='"labels": {"": "INTEROPERABILITY"},'
       ;;
+    *avenirs-portfolio-security*)
+      SERVICE_PREFIX="security"
+      i=200
+      UPSTREAM_NODE="avenirs-portfolio-security:12000"
+      tags_line='"labels": {"": "SECURITY"},'
+      ;;
     *)
       echo "ERROR: unknown service $SWAGGER_URL"
       exit 1
@@ -95,6 +101,13 @@ for SWAGGER_URL in $SWAGGER_URLS; do
     is_storage=false
     case "$uri" in
       /storage|/storage/*) is_storage=true ;;
+    esac
+
+    is_public_security_auth=false
+    case "$uri" in
+      /auth/login|/auth/callback|/auth/logout|*/auth/login|*/auth/callback|*/auth/logout)
+        is_public_security_auth=true
+        ;;
     esac
 
     route_id="${SERVICE_PREFIX}-${operation}-route"
@@ -130,12 +143,12 @@ curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
 EOF
 
     chmod +x "$OUTPUT_DIR/$script_name"
-    echo "Endpoint: $method $uri -> $script_name (public=$is_storage)"
 
     count=$((count + 1))
     i=$((i + 1))
 
-    if [ "$is_storage" = false ] && [ "$SERVICE_PREFIX" = "api" ]; then
+    if [ "$is_storage" = false ] && { [ "$SERVICE_PREFIX" = "api" ] || [ "$is_public_security_auth" = true ]; }; then
+
       legacy_options_route_id="${SERVICE_PREFIX}-${operation}-options-route"
       legacy_options_script_name=$(printf "%02d-%s-%s-options.generated.curl.sh" "$i" "$SERVICE_PREFIX" "$operation")
 
@@ -163,7 +176,6 @@ curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
 EOF
 
       chmod +x "$OUTPUT_DIR/$legacy_options_script_name"
-      echo "Endpoint OPTIONS: OPTIONS $uri -> $legacy_options_script_name"
 
       count=$((count + 1))
       i=$((i + 1))
@@ -197,10 +209,17 @@ curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
 EOF
 
       chmod +x "$OUTPUT_DIR/$options_script_name"
-      echo "Endpoint OPTIONS V1: OPTIONS $v1_uri -> $options_script_name"
 
       count=$((count + 1))
       i=$((i + 1))
+
+      if [ "$is_public_security_auth" = true ]; then
+        v1_plugin_line=
+        v1_inline_plugins_line="\"plugins\": { \"proxy-rewrite\": { \"regex_uri\": [\"^$V1_INTERNAL_PREFIX(.*)\", \"\$1\"] } },"
+      else
+        v1_plugin_line="\"plugin_config_id\": \"$AC_SESSION_V1_PLUGIN_ID\","
+        v1_inline_plugins_line=
+      fi
 
       v1_route_id="${SERVICE_PREFIX}-${operation}-route-v1"
       v1_script_name=$(printf "%02d-%s-%s-v1.generated.curl.sh" "$i" "$SERVICE_PREFIX" "$operation")
@@ -217,7 +236,8 @@ curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
   "uri": "$v1_uri",
   "methods": ["$method"],
   "priority": 10,
-  "plugin_config_id": "$AC_SESSION_V1_PLUGIN_ID",
+  $v1_plugin_line
+  $v1_inline_plugins_line
   $tags_line
   "upstream": {
     "type": "roundrobin",
@@ -229,7 +249,6 @@ curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
 EOF
 
       chmod +x "$OUTPUT_DIR/$v1_script_name"
-      echo "Endpoint V1: $method $v1_uri -> $v1_script_name"
 
       count=$((count + 1))
       i=$((i + 1))
