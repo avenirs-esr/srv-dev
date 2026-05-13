@@ -37,7 +37,9 @@ JSON_CONTENT=$(cat <<EOF
 
           ngx.log(ngx.INFO, \"avenirs-access-control-session-v1 start\")
 
-          local cookie = core.request.header(ctx, \"Cookie\")
+          local cookie = ngx.var.http_cookie
+
+          ngx.log(ngx.ERR, \"session-v1 raw cookie: \", cookie or \"nil\")
 
           if cookie == nil or cookie == \"\" then
             return 401, {
@@ -119,9 +121,6 @@ JSON_CONTENT=$(cat <<EOF
 
           local user_context = {
             sub = auth_context.userId or auth_context.sub,
-            userId = auth_context.userId,
-            principalId = auth_context.principalId,
-            login = auth_context.login,
             iat = now,
             exp = now + 300
           }

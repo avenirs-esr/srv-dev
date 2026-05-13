@@ -7,7 +7,7 @@
   "clientSecret": "__SEC_APISIX_OIDC_CLIENT_SECRET__",
   "supportedGrantTypes": [ "java.util.HashSet", [ "authorization_code", "refresh_token", "password" ] ],
   "supportedResponseTypes": [ "java.util.HashSet", [ "code", "token" ] ],
-  "serviceId": "^https?://(httpbin.org$|dev\\.avenirs-esr\\.fr|((srv-(dev|recette|qualif)(\\.srv-avenirs?\\.brgm\\.recia\\.net)?)|localhost))/node-api/cas-auth-callback(/.*)*",
+  "serviceId": "^https?://(httpbin.org$|dev\\.avenirs-esr\\.fr|((srv-(dev|recette|qualif)(\\.srv-avenirs?\\.brgm\\.recia\\.net)?)|localhost))/(node-api/cas-auth-callback|apim/v1/auth/callback)(/.*)*",
   "jwtAccessToken": true,
  
 
