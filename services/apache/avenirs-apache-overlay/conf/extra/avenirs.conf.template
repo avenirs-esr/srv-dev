@@ -16,6 +16,10 @@ ProxyPassReverse "/cofolio" "http://__AVENIRS_COFOLIO_CLIENT_CONTAINER_NAME__/co
 ProxyPreserveHost On
 ProxyAddHeaders Off
 
+RequestHeader unset X-Signed-Context early
+RequestHeader unset X-Context-Signature early
+RequestHeader unset X-Context-Kid early
+
 RequestHeader unset X-Forwarded-Host early
 RequestHeader set X-Forwarded-Host "dev.avenirs-esr.fr" early
 
