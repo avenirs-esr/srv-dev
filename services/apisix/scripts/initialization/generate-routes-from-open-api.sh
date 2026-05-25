@@ -147,7 +147,7 @@ EOF
     count=$((count + 1))
     i=$((i + 1))
 
-    if [ "$is_storage" = false ] && { [ "$SERVICE_PREFIX" = "api" ] || [ "$is_public_security_auth" = true ]; }; then
+    if [ "$is_storage" = false ]; then
 
       legacy_options_route_id="${SERVICE_PREFIX}-${operation}-options-route"
       legacy_options_script_name=$(printf "%02d-%s-%s-options.generated.curl.sh" "$i" "$SERVICE_PREFIX" "$operation")

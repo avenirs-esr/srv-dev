@@ -26,6 +26,15 @@ JSON_CONTENT=$(cat <<EOF
       "functions": [
         "return function(conf, ctx)
 
+          local uri = ctx.var.uri
+
+          if uri == \"/_v1/auth/login\"
+            or uri == \"/_v1/auth/callback\"
+            or uri == \"/_v1/auth/logout\" then
+              ngx.log(ngx.INFO, \"Skipping auth for public route: \", uri)
+              return
+          end
+
           if ctx.var.request_method == \"OPTIONS\" then
             return
           end
