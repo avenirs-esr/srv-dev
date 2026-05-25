@@ -21,19 +21,20 @@ RequestHeader unset X-Context-Signature early
 RequestHeader unset X-Context-Kid early
 
 RequestHeader unset X-Forwarded-Host early
-RequestHeader set X-Forwarded-Host "dev.avenirs-esr.fr" early
+RequestHeader set X-Forwarded-Host "dev.avenirs-esr.fr"
 
 RequestHeader unset X-Forwarded-Proto early
-RequestHeader set X-Forwarded-Proto "https" early
+RequestHeader set X-Forwarded-Proto "https"
 
 RequestHeader unset X-Forwarded-Port early
-RequestHeader set X-Forwarded-Port "443" early
+RequestHeader set X-Forwarded-Port "443"
 
-ProxyPass "/cas" "https://__AVENIRS_CAS_CONTAINER_NAME__:8443/cas"
-ProxyPassReverse "/cas" "https://__AVENIRS_CAS_CONTAINER_NAME__:8443/cas"
-ProxyPassReverse "/cas" "https://avenirs-cas:8443/cas"
-ProxyPassReverse "/cas" "https://avenirs-cas/cas"
-ProxyPassReverse "/cas" "https://dev.avenirs-esr.fr/cas"
+ProxyPass "/cas/" "https://__AVENIRS_CAS_CONTAINER_NAME__:8443/cas/"
+ProxyPassReverse "/cas/" "https://__AVENIRS_CAS_CONTAINER_NAME__:8443/cas/"
+ProxyPassReverse "/cas/" "https://avenirs-cas:8443/cas/"
+ProxyPassReverse "/cas/" "https://avenirs-cas/cas/"
+ProxyPassReverse "/cas/" "https://dev.avenirs-esr.fr/cas/"
+ProxyPassReverse "/cas/" "http://dev.avenirs-esr.fr/cas/"
 
 ProxyPass /ldapadmin http://__AVENIRS_LDAP_ADMIN_CONTAINER_NAME__/phpldapadmin
 ProxyPassReverse /ldapadmin http://__AVENIRS_LDAP_ADMIN_CONTAINER_NAME__/phpldapadmin

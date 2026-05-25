@@ -2,6 +2,7 @@ import org.apache.tools.ant.taskdefs.condition.*
 import org.gradle.internal.logging.text.*
 import org.apereo.cas.metadata.*
 import java.nio.file.*
+import java.lang.reflect.*
 import org.gradle.internal.logging.text.*
 import static org.gradle.internal.logging.text.StyledTextOutput.Style
 
@@ -20,11 +21,11 @@ buildscript {
         mavenCentral()
         gradlePluginPortal()
         maven {
-            url 'https://oss.sonatype.org/content/repositories/snapshots'
+            url = 'https://central.sonatype.com/repository/maven-snapshots/'
             mavenContent { snapshotsOnly() }
         }
         maven {
-            url "https://repo.spring.io/milestone"
+            url = "https://repo.spring.io/milestone"
             mavenContent { releasesOnly() }
         }
     }
@@ -32,13 +33,12 @@ buildscript {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${project.springBootVersion}"
         classpath "io.freefair.gradle:maven-plugin:${project.gradleFreeFairPluginVersion}"
         classpath "io.freefair.gradle:lombok-plugin:${project.gradleFreeFairPluginVersion}"
-        classpath "io.spring.gradle:dependency-management-plugin:${project.gradleDependencyManagementPluginVersion}"
         classpath "com.google.cloud.tools:jib-gradle-plugin:${project.jibVersion}"
         classpath "com.bmuschko:gradle-docker-plugin:${project.gradleDockerPluginVersion}"
-
+        classpath "org.cyclonedx:cyclonedx-gradle-plugin:${project.gradleCyclonePluginVersion}"
         classpath "de.undercouch:gradle-download-task:${project.gradleDownloadTaskVersion}"
         classpath "org.apereo.cas:cas-server-core-api-configuration-model:${project.'cas.version'}"
-        classpath "org.apereo.cas:cas-server-core-configuration-metadata-repository:${project.'cas.version'}"
+        classpath "org.apereo.cas:cas-server-support-configuration-metadata-repository:${project.'cas.version'}"
     }
 }
 
@@ -54,35 +54,39 @@ repositories {
     }
     mavenLocal()
     mavenCentral()
-    maven { url 'https://oss.sonatype.org/content/repositories/releases' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/releases' }
     maven {
-        url 'https://oss.sonatype.org/content/repositories/snapshots'
+        url = 'https://central.sonatype.com/repository/maven-snapshots/'
         mavenContent { snapshotsOnly() }
     }
     maven {
-        url "https://repository.apache.org/content/repositories/snapshots"
+        url = "https://repository.apache.org/content/repositories/snapshots"
         mavenContent { snapshotsOnly() }
     }
     maven {
-        url 'https://build.shibboleth.net/nexus/content/repositories/releases/'
+        url = 'https://build.shibboleth.net/nexus/content/repositories/releases/'
         mavenContent { releasesOnly() }
     }
     maven {
-        url "https://build.shibboleth.net/nexus/content/repositories/snapshots"
+        url = "https://build.shibboleth.net/nexus/content/repositories/snapshots"
         mavenContent { snapshotsOnly() }
     }
     maven {
-        url "https://repo.spring.io/milestone"
+        url = "https://repo.spring.io/milestone"
         mavenContent { releasesOnly() }
     }
 }
-
 
 apply plugin: "io.freefair.war-overlay"
 apply plugin: "war"
 
 apply plugin: "org.springframework.boot"
 apply plugin: "io.freefair.lombok"
+lombok {
+    version = "${project.lombokVersion}"
+}
+
+apply plugin: "org.cyclonedx.bom"
 
 
 apply from: rootProject.file("gradle/springboot.gradle")
@@ -90,6 +94,8 @@ apply plugin: "com.google.cloud.tools.jib"
 apply plugin: "com.bmuschko.docker-remote-api"
 apply from: rootProject.file("gradle/tasks.gradle")
 
+def out = services.get(StyledTextOutputFactory).create("cas")
+def configurationCacheRequested = services.get(BuildFeatures).configurationCache.requested.getOrElse(true)
 
 configurations {
     all {
@@ -128,6 +134,18 @@ war {
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(project.targetCompatibility)
+
+        def chosenJvmVendor = null
+        if (project.jvmVendor != null) {
+            out.withStyle(Style.Info).println("JVM vendor ${project.jvmVendor} is requested for the Java toolchain")
+            chosenJvmVendor = JvmVendorSpec.of(project.jvmVendor?.toUpperCase())
+        }
+        if (chosenJvmVendor != null) {
+            vendor = chosenJvmVendor
+            out.withStyle(Style.Success).println("Using ${chosenJvmVendor} as the JVM vendor for the Java toolchain")
+        } else {
+            out.withStyle(Style.Info).println("JVM vendor ${project.jvmVendor} is not recognized")
+        }
     }
 }
 
@@ -137,12 +155,10 @@ bootBuildImage {
 
 
 ['jibDockerBuild', 'jibBuildTar', 'jib'].each { taskName ->
-    if (gradle.gradleVersion >= "8.0") {
-        getTasksByName(taskName, true).each(it -> {
-            it.notCompatibleWithConfigurationCache("Jib is not compatible with configuration cache");
-            it.enabled = !gradle.startParameter.isConfigurationCacheRequested()
-        })
-    }
+    getTasksByName(taskName, true).each(it -> {
+        it.notCompatibleWithConfigurationCache("Jib is not compatible with configuration cache");
+        it.enabled = !configurationCacheRequested
+    })
 }
 
 def imagePlatforms = project.dockerImagePlatform.split(",")
@@ -151,8 +167,7 @@ def dockerPassword = providers.systemProperty("dockerPassword").getOrNull()
 def imageTagPostFix = providers.systemProperty("dockerImageTagPostfix").getOrElse("")
 
 jib {
-    if (gradle.gradleVersion >= "8.0" && gradle.startParameter.isConfigurationCacheRequested()) {
-        def out = services.get(StyledTextOutputFactory).create("cas")
+    if (configurationCacheRequested) {
         out.withStyle(Style.Info).println("You are seeing this message because the Gradle configuration cache is turned on")
         out.withStyle(Style.Info).println("Running Jib tasks to produce Docker images will require the command-line option: --no-configuration-cache")
         out.withStyle(Style.Info).println("Jib does not support the Gradle configuration cache; Please see https://github.com/GoogleContainerTools/jib/issues/3132")
@@ -227,7 +242,6 @@ tasks.register("casBuildDockerImage", DockerBuildImage) {
         password = dockerPassword
     }
     doLast {
-        def out = services.get(StyledTextOutputFactory).create("cas")
         out.withStyle(Style.Success).println("Built CAS images successfully.")
     }
 }
@@ -244,9 +258,16 @@ tasks.register("casPushDockerImage", DockerPushImage) {
         password = dockerPassword
     }
     doLast {
-        def out = services.get(StyledTextOutputFactory).create("cas")
         out.withStyle(Style.Success).println("Pushed CAS images successfully.")
     }
+}
+
+
+if (project.hasProperty("appServer")) {
+    def appServer = project.findProperty('appServer') ?: ''
+    out.withStyle(Style.Success).println("Building CAS version ${project.version} with application server ${appServer}")
+} else {
+    out.withStyle(Style.Success).println("Building CAS version ${project.version} without an application server")
 }
 
 dependencies {
@@ -262,11 +283,12 @@ dependencies {
     implementation "org.apereo.cas:cas-server-core-api-configuration-model"
     implementation "org.apereo.cas:cas-server-webapp-init"
 
-    if (project.hasProperty("appServer")) {
-        implementation "org.apereo.cas:cas-server-webapp-init${project.appServer}"
+    if (appServer == '-tomcat') {
+        implementation "org.apereo.cas:cas-server-webapp-init-tomcat"
     }
     
     developmentOnly "org.springframework.boot:spring-boot-devtools:${project.springBootVersion}"
+    // developmentOnly "org.springframework.boot:spring-boot-docker-compose:${project.springBootVersion}"
         
     /**
      * CAS dependencies and modules may be listed here.
@@ -277,19 +299,18 @@ dependencies {
      **/
     implementation "org.apereo.cas:cas-server-support-rest"
 
+
     
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 
-
     // ---- Avenirs-esr - Support for LDAP, OIDC ect.
-    implementation "org.apereo.cas:cas-server-support-ldap:${project.'cas.version'}"
-    implementation "org.apereo.cas:cas-server-support-json-service-registry:${project.'cas.version'}"
-    implementation "org.apereo.cas:cas-server-support-saml:${project.'cas.version'}"
-    implementation "org.apereo.cas:cas-server-support-oidc:${project.'cas.version'}"
-    implementation "org.apereo.cas:cas-server-support-interrupt-webflow:${project.'cas.version'}"
-
-    
-    /** To activate actuators */
-    // implementation "org.apereo.cas:cas-server-support-reports:${project.'cas.version'}"
+    implementation "org.apereo.cas:cas-server-support-ldap"
+    implementation "org.apereo.cas:cas-server-support-json-service-registry"
+    implementation "org.apereo.cas:cas-server-support-saml"
+    implementation "org.apereo.cas:cas-server-support-oidc"
+    implementation "org.apereo.cas:cas-server-support-interrupt-webflow"
+    implementation "org.apereo.cas:cas-server-support-jdbc"
+    implementation "org.apereo.cas:cas-server-support-jdbc-authentication"
+    implementation "org.postgresql:postgresql"
 }
 

@@ -11,21 +11,33 @@ cas.authn.accept.users=
 
 ### Connexion LDAP
 ### obso cas.authn.ldap[0].providerClass=org.ldaptive.provider.unboundid.UnboundIDProvider
-cas.authn.ldap[0].type=AUTHENTICATED
-cas.authn.ldap[0].ldapUrl=ldap://__DYN_AVENIRS_OPENLDAP_CONTAINER_NAME__:389
-cas.authn.ldap[0].baseDn=dc=ldap-dev,dc=avenirs-esr,dc=fr
-cas.authn.ldap[0].subtreeSearch=true
-cas.authn.ldap[0].searchFilter=uid=\{user\}
+#cas.authn.ldap[0].type=AUTHENTICATED
+#cas.authn.ldap[0].ldapUrl=ldap://__DYN_AVENIRS_OPENLDAP_CONTAINER_NAME__:389
+#cas.authn.ldap[0].baseDn=dc=ldap-dev,dc=avenirs-esr,dc=fr
+#cas.authn.ldap[0].subtreeSearch=true
+#cas.authn.ldap[0].searchFilter=uid=\{user\}
 #cas.authn.ldap[0].principalAttributeList=cn,givenName,mail, 
-cas.authn.ldap[0].principalAttributeList=cn,mail,sn,uid,givenName,displayName
+#cas.authn.ldap[0].principalAttributeList=cn,mail,sn,uid,givenName,displayName
 ### Credential to connect to LDAP
-cas.authn.ldap[0].bindDn=cn=admin,dc=ldap-dev,dc=avenirs-esr,dc=fr
-cas.authn.ldap[0].bindCredential=__SEC_LDAP_ADMIN_PASSWORD__
+#cas.authn.ldap[0].bindDn=cn=admin,dc=ldap-dev,dc=avenirs-esr,dc=fr
+#cas.authn.ldap[0].bindCredential=__SEC_LDAP_ADMIN_PASSWORD__
 ### obso cas.authn.ldap[0].useSsl=false
 
-cas.authn.oidc.core.claims-map.email=mail
-cas.authn.oidc.core.claims-map.given_name=givenName
-cas.authn.oidc.core.claims-map.family_name=sn
+### Connexion PostgreSQL / Security principal
+cas.authn.jdbc.query[0].sql=SELECT password_hash, eppn FROM dev.principal WHERE eppn = ?
+cas.authn.jdbc.query[0].field-password=password_hash
+cas.authn.jdbc.query[0].principal-attribute-list=eppn
+cas.authn.jdbc.query[0].driver-class=org.postgresql.Driver
+cas.authn.jdbc.query[0].url=jdbc:postgresql://avenirs-pgsql-primary:5432/avenirs_access_control
+cas.authn.jdbc.query[0].user=pguser
+cas.authn.jdbc.query[0].password=__SEC_POSTGRES_PASSWORD__
+
+cas.authn.jdbc.query[0].password-encoder.type=BCRYPT
+
+#cas.authn.oidc.core.claims-map.email=mail
+cas.authn.oidc.core.claims-map.email=eppn
+#cas.authn.oidc.core.claims-map.given_name=givenName
+#cas.authn.oidc.core.claims-map.family_name=sn
 
 cas.authn.oidc.id-token.include-id-token-claims=false
 cas.authn.oauth.access-token.crypto.enabled=true
@@ -33,7 +45,7 @@ cas.authn.oauth.access-token.crypto.encryption-enabled=true
 
 
 
-cas.serviceRegistry.json.location=file:/etc/cas/services
+cas.service-registry.json.location=file:/etc/cas/services
 cas.service-registry.json.watcher-enabled=true
 
 cas.authn.oidc.discovery.scopes=openid,profile,email,offline_access
@@ -48,6 +60,8 @@ cas.authn.oauth.refresh-token.time-to-kill-in-seconds=28800
 #cas.interrupt.core.force-execution=true
 #cas.interrupt.groovy.location=file:/etc/cas/config/interrupt/interrupt-inquirer.groovy
 #cas.interrupt.core.trigger-mode=AFTER_SSO
+cas.interrupt.cookie.crypto.encryption.key=__SEC_CAS_INTERRUPT_COOKIE_CRYPTO_ENCRYPTION_KEY__
+cas.interrupt.cookie.crypto.signing.key=__SEC_CAS_INTERRUPT_COOKIE_CRYPTO_SIGNING_KEY__
 
 cas.audit.slf4j.use-single-line=true
 
@@ -64,7 +78,11 @@ cas.authn.oauth.access-token.crypto.signing.key=__SEC_CAS_AUTHN_OAUTH_ACCESS_TOK
 spring.security.user.name=casuser
 spring.security.user.password=__SEC_CAS_SPRING_SECURITY_USER_PASSWORD__
 
-
+server.forward-headers-strategy=native
+server.tomcat.remoteip.protocol-header=x-forwarded-proto
+server.tomcat.remoteip.remote-ip-header=x-forwarded-for
+server.tomcat.remoteip.host-header=x-forwarded-host
+server.tomcat.remoteip.port-header=x-forwarded-port
 
 ### Actuators - dependency for actuators has to be added in  build.gradle
 
