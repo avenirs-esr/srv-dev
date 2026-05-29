@@ -14,7 +14,7 @@ JSON_CONTENT=$(cat <<EOF
       "allow_credential": true,
       "allow_headers": "Authorization,Content-Type,Accept,Origin,X-Requested-With,x-authorization",
       "allow_methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-      "allow_origins": "http://localhost:5173,https://dev.avenirs-esr.fr,https://qualif.avenirs-esr.fr,https://recette.avenirs-esr.fr",
+      "allow_origins": "http://localhost:5173,http://localhost:4173,https://dev.avenirs-esr.fr,https://qualif.avenirs-esr.fr,https://recette.avenirs-esr.fr",
       "expose_headers": "Content-Disposition",
       "max_age": 3600
     },
