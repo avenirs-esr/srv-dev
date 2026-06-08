@@ -21,7 +21,7 @@ RequestHeader unset X-Context-Signature early
 RequestHeader unset X-Context-Kid early
 
 RequestHeader unset X-Forwarded-Host early
-RequestHeader set X-Forwarded-Host "dev.avenirs-esr.fr"
+RequestHeader set X-Forwarded-Host expr=%{HTTP_HOST}
 
 RequestHeader unset X-Forwarded-Proto early
 RequestHeader set X-Forwarded-Proto "https"

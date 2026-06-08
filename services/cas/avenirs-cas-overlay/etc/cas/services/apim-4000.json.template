@@ -4,7 +4,7 @@
   "name": "APIM",
   "clientId": "__SEC_APISIX_OIDC_CLIENT_ID__",
   "clientSecret": "__SEC_APISIX_OIDC_CLIENT_SECRET__",
-  "serviceId": "^https?://(dev\\.avenirs-esr\\.fr|localhost|srv-(dev|recette|qualif)(\\.srv-avenirs?\\.brgm\\.recia\\.net)?)/(node-api/cas-auth-callback|apim/v1/auth/callback|cofolio(/.*)?)$",
+  "serviceId": "^https?://((dev|recette|qualif)\\.avenirs-esr\\.fr|localhost|srv-(dev|recette|qualif)(\\.srv-avenirs?\\.brgm\\.recia\\.net)?)/(node-api/cas-auth-callback|apim/v1/auth/callback|cofolio(/.*)?)$",
   "bypassApprovalPrompt": true,
   "generateRefreshToken": true,
   "jwtAccessToken": true,
