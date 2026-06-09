@@ -113,7 +113,7 @@ for SWAGGER_URL in $SWAGGER_URLS; do
     route_id="${SERVICE_PREFIX}-${operation}-route"
     script_name=$(printf "%02d-%s-%s.generated.curl.sh" "$i" "$SERVICE_PREFIX" "$operation")
 
-    if [ "$is_storage" = true ] || [ "$SERVICE_PREFIX" != "api" ]; then
+    if [ "$is_storage" = true ]; then
       plugin_line=
     else
       plugin_line="\"plugin_config_id\": \"$AC_PLUGIN_ID\","
