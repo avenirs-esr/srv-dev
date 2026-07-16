@@ -9,16 +9,6 @@ include:
       - .env
       - ./services/postgresql/.env
 
-  - path: ./services/openldap/docker-compose.yml
-    env_file:
-      - .env
-      - ./services/openldap/.env
-
-  - path: ./services/cas/cas-overlay-template/docker-compose.yml
-    env_file:
-      - .env
-      - ./services/cas/cas-overlay-template/.env
-
   - path: ./services/apache/docker-compose.yml
     env_file:
       - .env
