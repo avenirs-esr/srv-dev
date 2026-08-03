@@ -31,11 +31,30 @@ write_env_file () {
   fi
 }
 
+# Writes a key regardless of the --overwrite flag, replacing any previous value.
+# Used for values that must rotate on every deployment run (e.g. the HMAC secret).
+set_rotating_env_value () {
+  local key="$1"
+  local val="$2"
+  local env_file="$3"
+
+  touch "$env_file"
+  grep -Ev "^[[:space:]]*${key}=" "$env_file" > "${env_file}.tmp"
+  mv "${env_file}.tmp" "$env_file"
+  printf '%s=%s\n' "$key" "$val" >> "$env_file"
+  vverbose "🔄 Rotated ${key} in $env_file"
+}
+
 . $AVENIRS_PORTFOLIO_SCRIPT_DIR/avenirs-portfolio-env.sh $AVENIRS_PORTFOLIO_SCRIPT_DIR 2> /dev/null \
     || err "Unable to source $AVENIRS_PORTFOLIO_SCRIPT_DIR/avenirs-portfolio-env.sh"
 
 # Network check
 check_network
+
+# HMAC secret, regenerated on every deployment and shared by all backend micro-services
+# (api, back-office, interoperability, security) for internal signed-header authentication.
+AVENIRS_PORTFOLIO_HMAC_SECRET=$(openssl rand -base64 32)
+set_rotating_env_value "AVENIRS_PORTFOLIO_HMAC_SECRET" "$AVENIRS_PORTFOLIO_HMAC_SECRET" "$AVENIRS_PORTFOLIO_ENV_FILE"
 
 # .env file generation
 write_env_file "JASYPT_ENCRYPTOR_PASSWORD" "$JASYPT_ENCRYPTOR_PASSWORD" ">" "$AVENIRS_PORTFOLIO_ENV_FILE"
@@ -75,6 +94,7 @@ write_env_file "logging.level.org.springframework.security.web.FilterChainProxy"
 write_env_file "rome.4.competence.client.id" "$SEC_AVENIRS_PORTFOLIO_API_ROME_4_CLIENT_ID" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
 write_env_file "rome.4.competence.client.secret" "$SEC_AVENIRS_PORTFOLIO_API_ROME_4_CLIENT_SECRET" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
 write_env_file "security.authentication.filter" "hmac" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+set_rotating_env_value "security.hmac.secret" "$AVENIRS_PORTFOLIO_HMAC_SECRET" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
 
 
 # Overlay files
@@ -90,6 +110,7 @@ write_env_file "seeder.source" "FAKER" ">>" $AVENIRS_PORTFOLIO_BACK_OFFICE_SPRIN
 [ "`hostname`" = "srv-dev-avenir" ] && swagger_root="srv-dev-avenir.srv-avenir.brgm.recia.net" || swagger_root="localhost"
 write_env_file "app.server.url" "http://$swagger_root/avenirs-portfolio-back-office" ">>" $AVENIRS_PORTFOLIO_BACK_OFFICE_SPRING_ENV_FILE;
 write_env_file  "security.authentication.filter" "disabled" ">>" $AVENIRS_PORTFOLIO_BACK_OFFICE_SPRING_ENV_FILE;
+set_rotating_env_value "security.hmac.secret" "$AVENIRS_PORTFOLIO_HMAC_SECRET" $AVENIRS_PORTFOLIO_BACK_OFFICE_SPRING_ENV_FILE;
 
 # Overlay files
 echo "install_overlay $AVENIRS_PORTFOLIO_BACK_OFFICE_OVERLAY_DIR $AVENIRS_PORTFOLIO_BACK_OFFICE_REPOSITORY_DIR"
@@ -105,6 +126,7 @@ write_env_file  "seeder.source" "CSV" ">>" $AVENIRS_PORTFOLIO_INTEROPERABILITY_S
 [ "`hostname`" = "srv-dev-avenir" ] && swagger_root="srv-dev-avenir.srv-avenir.brgm.recia.net" || swagger_root="localhost"
 write_env_file  "app.server.url" "http://$swagger_root/avenirs-portfolio-interoperability" ">>" $AVENIRS_PORTFOLIO_INTEROPERABILITY_SPRING_ENV_FILE;
 write_env_file  "security.authentication.filter" "disabled" ">>" $AVENIRS_PORTFOLIO_INTEROPERABILITY_SPRING_ENV_FILE;
+set_rotating_env_value "security.hmac.secret" "$AVENIRS_PORTFOLIO_HMAC_SECRET" $AVENIRS_PORTFOLIO_INTEROPERABILITY_SPRING_ENV_FILE;
 
 # Overlay files
 echo "install_overlay $AVENIRS_PORTFOLIO_INTEROPERABILITY_OVERLAY_DIR $AVENIRS_PORTFOLIO_INTEROPERABILITY_REPOSITORY_DIR"
@@ -147,6 +169,7 @@ write_env_file "spring.datasource.url" "jdbc:postgresql://$AVENIRS_POSTGRESQL_PR
 
 [ "`hostname`" = "srv-dev-avenir" ] && swagger_root="srv-dev-avenir.srv-avenir.brgm.recia.net" || swagger_root="localhost"
 write_env_file "app.server.url" "http://$swagger_root/avenirs-portfolio-security" ">>" $AVENIRS_PORTFOLIO_SECURITY_SPRING_ENV_FILE;
+set_rotating_env_value "security.hmac.secret" "$AVENIRS_PORTFOLIO_HMAC_SECRET" $AVENIRS_PORTFOLIO_SECURITY_SPRING_ENV_FILE;
 
 # Overlay files
 echo "install_overlay $AVENIRS_PORTFOLIO_SECURITY_OVERLAY_DIR $AVENIRS_PORTFOLIO_SECURITY_REPOSITORY_DIR"
