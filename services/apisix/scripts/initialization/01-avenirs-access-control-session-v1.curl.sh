@@ -119,8 +119,7 @@ JSON_CONTENT=$(cat <<EOF
           end
 
           if signed_context.payload == nil or signed_context.payload == \"\"
-              or signed_context.signature == nil or signed_context.signature == \"\"
-              or signed_context.kid == nil or signed_context.kid == \"\" then
+              or signed_context.signature == nil or signed_context.signature == \"\" then
             ngx.log(ngx.ERR, \"signed context response missing fields\")
 
             return 500, {
@@ -132,7 +131,6 @@ JSON_CONTENT=$(cat <<EOF
 
           core.request.set_header(ctx, \"X-Signed-Context\", signed_context.payload)
           core.request.set_header(ctx, \"X-Context-Signature\", signed_context.signature)
-          core.request.set_header(ctx, \"X-Context-Kid\", signed_context.kid)
 
           ngx.req.clear_header(\"Cookie\")
 
