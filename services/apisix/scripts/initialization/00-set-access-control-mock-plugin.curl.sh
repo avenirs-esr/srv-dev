@@ -231,13 +231,7 @@ JSON_CONTENT=$(cat <<EOF
                 end
 
             local payload = cjson.encode(user_context);
-            local current_kid = \"v2\";
-            local hmac_keys = {
-              v1 = \"super-secret-v1\",
-              v2 = \"super-secret-v2\"
-            };
-
-            local hmac_key = hmac_keys[current_kid];
+            local hmac_key = \"$AVENIRS_PORTFOLIO_HMAC_SECRET\";
             local h = hmac:new(hmac_key, hmac.ALGOS.SHA256);
             h:update(payload);
 
@@ -246,7 +240,6 @@ JSON_CONTENT=$(cat <<EOF
 
             core.request.set_header(ctx, \"X-Signed-Context\", payload);
             core.request.set_header(ctx, \"X-Context-Signature\", signature_base64);
-            core.request.set_header(ctx, \"X-Context-Kid\", current_kid);
             ngx.req.clear_header(\"Authorization\");
             core.request.set_header(ctx, \"avenirsEndPoint\", ctx.var.uri);
                 

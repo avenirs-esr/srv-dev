@@ -55,6 +55,9 @@ check_network
 # (api, back-office, interoperability, security) for internal signed-header authentication.
 AVENIRS_PORTFOLIO_HMAC_SECRET=$(openssl rand -base64 32)
 set_rotating_env_value "AVENIRS_PORTFOLIO_HMAC_SECRET" "$AVENIRS_PORTFOLIO_HMAC_SECRET" "$AVENIRS_PORTFOLIO_ENV_FILE"
+# Also propagated to .secrets.env so the APISIX init container (avenirs-access-control-mock
+# plugin) can sign the mocked security context with the same secret.
+set_rotating_env_value "AVENIRS_PORTFOLIO_HMAC_SECRET" "$AVENIRS_PORTFOLIO_HMAC_SECRET" "$AVENIRS_PORTFOLIO_SCRIPT_DIR/../../../.secrets.env"
 
 # .env file generation
 write_env_file "JASYPT_ENCRYPTOR_PASSWORD" "$JASYPT_ENCRYPTOR_PASSWORD" ">" "$AVENIRS_PORTFOLIO_ENV_FILE"
