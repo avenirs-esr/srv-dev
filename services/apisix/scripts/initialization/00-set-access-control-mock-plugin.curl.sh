@@ -139,6 +139,35 @@ JSON_CONTENT=$(cat <<EOF
                   [\"AT-100-a29sDr2iCnLiog-RRDVpuBII5cd4WD8r\"] = \"aya.germain@university.com\",
                 }
 
+                -- Mock mode: grant every known permission so local/dev testing
+                -- never gets blocked by authorization checks.
+                local mock_authorities = {
+                  \"profile:read:own\", \"profile:update:own\",
+                  \"trace:create:own\", \"trace:list:own\", \"trace:read:contextual\",
+                  \"trace:download:contextual\", \"trace:association:manage:own\",
+                  \"competency:read\",
+                  \"declared-skill:list:own\", \"declared-skill:create:own\",
+                  \"declared-skill:update:own\", \"declared-skill:delete:own\",
+                  \"declared-skill:association:manage:own\",
+                  \"declared-experience:list:own\", \"declared-experience:create:own\",
+                  \"declared-experience:delete:own\", \"declared-experience:association:manage:own\",
+                  \"activity:catalog:read:contextual\", \"activity:register:own\",
+                  \"activity:read:contextual\", \"activity:document:download:contextual\",
+                  \"activity:document:read:contextual\", \"employment-kit:read:own\",
+                  \"activity:library:staff:read\", \"activity:national:create\",
+                  \"activity:national:update\", \"activity:published:update:contextual\",
+                  \"activity:national:delete\", \"activity:feedback-settings:update\",
+                  \"feedback:request:create:own\", \"feedback:received:read:own\",
+                  \"feedback:request:read:assigned\", \"feedback:request:respond:assigned\",
+                  \"feedback:history:read:contextual\", \"feedback:dashboard:read:contextual\",
+                  \"primary-establishment:read\", \"primary-establishment:create\",
+                  \"primary-establishment:update\", \"primary-establishment:delete\",
+                  \"secondary-establishment:read\", \"secondary-establishment:create\",
+                  \"secondary-establishment:update\", \"secondary-establishment:delete\",
+                  \"group:read\", \"group:import\", \"group:create\", \"group:update\", \"group:delete\",
+                  \"rbac:read\", \"rbac:assign\", \"rbac:revoke\", \"rbac:manage\"
+                };
+
                 ngx.log(ngx.ERR, \"serverless pre function\");
 
                 local bearer = core.request.header(ctx, \"Authorization\");
@@ -167,7 +196,8 @@ JSON_CONTENT=$(cat <<EOF
                   user_context = {
                     sub = user_id,
                     iat = now,
-                    exp = now + 300
+                    exp = now + 300,
+                    authorities = mock_authorities
                   };
                 else
                   local httpc = http.new();
@@ -226,7 +256,8 @@ JSON_CONTENT=$(cat <<EOF
                   user_context = {
                     sub = introspection.userId or \"oidc-authenticated-user\",
                     iat = now,
-                    exp = now + 300
+                    exp = now + 300,
+                    authorities = mock_authorities
                   };
                 end
 
