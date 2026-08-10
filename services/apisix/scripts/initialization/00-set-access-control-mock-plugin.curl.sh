@@ -178,6 +178,12 @@ JSON_CONTENT=$(cat <<EOF
                   \"rbac:read\", \"rbac:assign\", \"rbac:revoke\", \"rbac:manage\"
                 };
 
+                -- Mock mode: grant every known role so local/dev testing
+                -- never gets blocked by role-based authorization checks.
+                local mock_roles = {
+                  \"ROLE_STUDENT\", \"ROLE_STAFF\", \"ROLE_SUPER_ADMIN\"
+                };
+
                 ngx.log(ngx.ERR, \"serverless pre function\");
 
                 local bearer = core.request.header(ctx, \"Authorization\");
@@ -207,7 +213,8 @@ JSON_CONTENT=$(cat <<EOF
                     sub = user_id,
                     iat = now,
                     exp = now + 300,
-                    authorities = mock_authorities
+                    authorities = mock_authorities,
+                    roles = mock_roles
                   };
                 else
                   local httpc = http.new();
@@ -267,7 +274,8 @@ JSON_CONTENT=$(cat <<EOF
                     sub = introspection.userId or \"oidc-authenticated-user\",
                     iat = now,
                     exp = now + 300,
-                    authorities = mock_authorities
+                    authorities = mock_authorities,
+                    roles = mock_roles
                   };
                 end
 
