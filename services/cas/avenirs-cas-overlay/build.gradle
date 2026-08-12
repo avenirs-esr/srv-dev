@@ -263,6 +263,11 @@ tasks.register("casPushDockerImage", DockerPushImage) {
 }
 
 
+tasks.named('test') {
+    useJUnitPlatform()
+    failOnNoDiscoveredTests = false
+}
+
 if (project.hasProperty("appServer")) {
     def appServer = project.findProperty('appServer') ?: ''
     out.withStyle(Style.Success).println("Building CAS version ${project.version} with application server ${appServer}")
@@ -288,8 +293,9 @@ dependencies {
     }
     
     developmentOnly "org.springframework.boot:spring-boot-devtools:${project.springBootVersion}"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
     // developmentOnly "org.springframework.boot:spring-boot-docker-compose:${project.springBootVersion}"
-        
+
     /**
      * CAS dependencies and modules may be listed here.
      *
