@@ -6,9 +6,15 @@ services:
     ports:
      - "8443:8443"
      - "8081:8080"
+    volumes:
+      - cas_saml:/etc/cas/saml
     networks:
       - cas-network
-networks: 
+networks:
   cas-network:
     external: true
     name: ${AVENIRS_NETWORK}
+
+volumes:
+  cas_saml:
+    name: ${AVENIRS_CAS_SAML_VOLUME_NAME:-cas_saml}
