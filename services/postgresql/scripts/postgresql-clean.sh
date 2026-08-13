@@ -24,10 +24,10 @@ info "Postgresql cleaning started."
 
 
 # Volumes reset
+# postgresql-secondary1/2 are temporarily disabled in docker-compose.yml,
+# their volumes are no longer created by postgresql-bootstrap.sh.
 reset_volumes "postgresql" $AVENIRS_POSTGRESQL_PRIMARY_VOLUME \
-    $AVENIRS_POSTGRESQL_ARCHIVE_VOLUME \
-    $AVENIRS_POSTGRESQL_SECONDARY1_VOLUME \
-    $AVENIRS_POSTGRESQL_SECONDARY2_VOLUME
+    $AVENIRS_POSTGRESQL_ARCHIVE_VOLUME
 
 
 info "Postgresql cleaning completed."

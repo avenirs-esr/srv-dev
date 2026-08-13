@@ -9,10 +9,11 @@ include:
       - .env
       - ./services/postgresql/.env
 
-  - path: ./services/openldap/docker-compose.yml
-    env_file:
-      - .env
-      - ./services/openldap/.env
+# This feature is temporarily disabled until you start using this service
+#  - path: ./services/openldap/docker-compose.yml
+#    env_file:
+#      - .env
+#      - ./services/openldap/.env
 
   - path: ./services/cas/cas-overlay-template/docker-compose.yml
     env_file:
@@ -29,35 +30,39 @@ include:
       - .env
       - ./services/apisix/apisix-docker/example/.env
 
-  - path: ./services/kafka/docker-compose.yml
-    env_file:
-      - .env
-      - ./services/kafka/.env
+# This feature is temporarily disabled until you start using this service
+#  - path: ./services/kafka/docker-compose.yml
+#    env_file:
+#      - .env
+#      - ./services/kafka/.env
 
-  - path: ./services/node/docker-compose.yml
-    env_file:
-      - .env
-      - ./services/node/.env
+# This feature is temporarily disabled until you start using this service
+#  - path: ./services/node/docker-compose.yml
+##    env_file:
+##      - .env
+##      - ./services/node/.env
 
   - path: ./services/avenirs-portfolio/docker-compose.yml
     env_file:
       - .env
       - ./services/avenirs-portfolio/.env
 
-  - path: ./services/grafana/docker-compose.yml
-    env_file:
-      - .env
-      - ./services/grafana/.env
+# This feature is temporarily disabled until you start using this service
+#  - path: ./services/grafana/docker-compose.yml
+#    env_file:
+#      - .env
+#      - ./services/grafana/.env
 
   - path: ./services/opensearch/docker-compose.yml
     env_file:
       - .env
       - ./services/opensearch/.env
 
-  - path: ./services/prometheus/docker-compose.yml
-    env_file:
-      - .env
-      - ./services/prometheus/.env
+# This feature is temporarily disabled until you start using this service
+#  - path: ./services/prometheus/docker-compose.yml
+#    env_file:
+#      - .env
+#      - ./services/prometheus/.env
 
   - path: ./services/valkey/docker-compose.yml
     env_file:
