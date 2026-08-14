@@ -39,6 +39,13 @@ cas.authn.pac4j.saml[0].private-key-password=__SEC_CAS_SAML_FER_PRIVATE_KEY_PASS
 cas.authn.pac4j.saml[0].metadata.service-provider.file-system.location=/etc/cas/saml/fer-sp-metadata.xml
 ### /!\ TO BE PROVIDED BY FER (do not fabricate)
 cas.authn.pac4j.saml[0].metadata.identity-provider-metadata-path=https://pub.federation.renater.fr/metadata/test/idps.xml
+### idps.xml is an aggregate (many IDPSSODescriptor entities) - without this flag pac4j-saml treats
+### it as a single-IdP file and silently resolves the first entity (CHU Limoges), ignoring the rest.
+cas.authn.pac4j.saml[0].metadata.identity-provider-metadata-aggregate=true
+### /!\ No confirmed GIP Recia entityID in idps.xml yet - do not restrict identity-provider-entity-id
+### (a fabricated value silently falls back to the first IdP in the aggregate, e.g. CHU Limoges).
+### With the aggregate flag above, each IdP is registered as its own delegated client, so CAS's
+### discovery selection page (WAYF, MENU mode by default) lets the user pick one (e.g. GIP Recia).
 ### /!\ TO BE CONFIRMED BY FER (do not fabricate) - matches our JDBC principal source ("eppn")
 cas.authn.pac4j.saml[0].principal-id-attribute=eduPersonPrincipalName
 
