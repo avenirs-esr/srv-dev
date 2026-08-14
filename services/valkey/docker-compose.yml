@@ -4,6 +4,8 @@ services:
     image: valkey/valkey:${VALKEY_VERSION}
     container_name: avenirs-valkey
     restart: always
+    mem_limit: 512m
+    mem_reservation: 128m
     ports:
       - "6379:6379"
     networks:

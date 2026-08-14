@@ -15,6 +15,9 @@ services:
       - "${AVENIRS_PORTFOLIO_API_CONTAINER_PORT}:10000"
     environment:
       - JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_ENCRYPTOR_PASSWORD}
+      - JAVA_XMX=${AVENIRS_PORTFOLIO_API_JAVA_XMX:-2048M}
+    mem_limit: ${AVENIRS_PORTFOLIO_API_MEM_LIMIT:-2560m}
+    mem_reservation: 512m
     depends_on:
       - postgresql-primary
     networks:
@@ -36,13 +39,16 @@ services:
       - "${AVENIRS_PORTFOLIO_BACK_OFFICE_CONTAINER_PORT}:10010"
     environment:
       - JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_ENCRYPTOR_PASSWORD}
+      - JAVA_XMX=${AVENIRS_PORTFOLIO_BACK_OFFICE_JAVA_XMX:-2048M}
+    mem_limit: ${AVENIRS_PORTFOLIO_BACK_OFFICE_MEM_LIMIT:-2560m}
+    mem_reservation: 512m
     depends_on:
       - postgresql-primary
     networks:
       - avenirs-api-network
-    
-  
-  
+
+
+
   avenirs-portfolio-interoperability:
     container_name: ${AVENIRS_PORTFOLIO_INTEROPERABILITY_CONTAINER_NAME}
 
@@ -57,11 +63,14 @@ services:
       - "${AVENIRS_PORTFOLIO_INTEROPERABILITY_CONTAINER_PORT}:10020"
     environment:
       - JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_ENCRYPTOR_PASSWORD}
+      - JAVA_XMX=${AVENIRS_PORTFOLIO_INTEROPERABILITY_JAVA_XMX:-2048M}
+    mem_limit: ${AVENIRS_PORTFOLIO_INTEROPERABILITY_MEM_LIMIT:-2560m}
+    mem_reservation: 512m
     depends_on:
       - postgresql-primary
     networks:
       - avenirs-api-network
-    
+
   avenirs-portfolio-security:
     container_name: ${AVENIRS_PORTFOLIO_SECURITY_CONTAINER_NAME}
    
@@ -77,6 +86,9 @@ services:
       - "${AVENIRS_PORTFOLIO_SECURITY_CONTAINER_PORT}:12000"
     environment:
       - JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_ENCRYPTOR_PASSWORD}
+      - JAVA_XMX=${AVENIRS_PORTFOLIO_SECURITY_JAVA_XMX:-2048M}
+    mem_limit: ${AVENIRS_PORTFOLIO_SECURITY_MEM_LIMIT:-2560m}
+    mem_reservation: 512m
     depends_on:
       - postgresql-primary
     networks:
@@ -95,6 +107,7 @@ services:
     restart: always
     ports:
       - "${AVENIRS_COFOLIO_CLIENT_CONTAINER_PORT}:80"
+    mem_limit: 256m
     depends_on:
       - avenirs-portfolio-api
     networks:
@@ -104,6 +117,7 @@ services:
     image: node:${NODE_VERSION}
     container_name: avenirs-openapi-merge
     restart: "no"
+    mem_limit: 512m
     depends_on:
       - avenirs-portfolio-api
       - avenirs-portfolio-back-office

@@ -15,6 +15,8 @@ services:
       - OPENSEARCH_INITIAL_ADMIN_PASSWORD=OpensearchDefaultPassword0?
       - OPENSEARCH_USERNAME=admin
       - OPENSEARCH_PASSWORD=admin
+    mem_limit: 1200m
+    mem_reservation: 512m
     ulimits:
       memlock:
         soft: -1
@@ -33,6 +35,7 @@ services:
     image: opensearchproject/opensearch-dashboards:${OPENSEARCH_DASHBOARDS_VERSION}
     container_name: ${AVENIRS_OPENSEARCH_DASHBOARDS_CONTAINER_NAME}
     restart: always
+    mem_limit: 512m
     ports:
       - ${AVENIRS_OPENSEARCH_DASHBOARDS_CONTAINER_PORT}:5601
     environment:
