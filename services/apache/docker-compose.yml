@@ -8,6 +8,7 @@ services:
         OVERLAY_DIR: ${APACHE_OVERLAY_BASENAME}
         HTTPD_VERSION: ${HTTPD_VERSION}
     restart: always
+    mem_limit: 256m
     ports:
       - "80:80"
       - "443:443"
