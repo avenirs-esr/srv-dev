@@ -31,16 +31,16 @@ cas.authn.accept.users=
 ### /!\ DO NOT UNCOMMENT before a resolvable FER metadata file (test federation first) exists at the
 ### identity-provider-metadata-path below - CAS starts fine either way (lazy-init), but pac4j cannot
 ### generate/serve SP metadata without it (see README-SAML.md).
-#cas.authn.pac4j.saml[0].client-name=FER
-#cas.authn.pac4j.saml[0].service-provider-entity-id=${cas.server.prefix}/saml/fer
-#cas.authn.pac4j.saml[0].keystore-path=/etc/cas/saml/fer-sp-keystore.jks
-#cas.authn.pac4j.saml[0].keystore-password=__SEC_CAS_SAML_FER_KEYSTORE_PASSWORD__
-#cas.authn.pac4j.saml[0].private-key-password=__SEC_CAS_SAML_FER_PRIVATE_KEY_PASSWORD__
-#cas.authn.pac4j.saml[0].metadata.service-provider.file-system.location=/etc/cas/saml/fer-sp-metadata.xml
+cas.authn.pac4j.saml[0].client-name=FER
+cas.authn.pac4j.saml[0].service-provider-entity-id=${cas.server.prefix}/saml/fer
+cas.authn.pac4j.saml[0].keystore-path=/etc/cas/saml/fer-sp-keystore.jks
+cas.authn.pac4j.saml[0].keystore-password=__SEC_CAS_SAML_FER_KEYSTORE_PASSWORD__
+cas.authn.pac4j.saml[0].private-key-password=__SEC_CAS_SAML_FER_PRIVATE_KEY_PASSWORD__
+cas.authn.pac4j.saml[0].metadata.service-provider.file-system.location=/etc/cas/saml/fer-sp-metadata.xml
 ### /!\ TO BE PROVIDED BY FER (do not fabricate)
-#cas.authn.pac4j.saml[0].metadata.identity-provider-metadata-path=https://pub.federation.renater.fr/metadata/test/idps.xml
+cas.authn.pac4j.saml[0].metadata.identity-provider-metadata-path=https://pub.federation.renater.fr/metadata/test/idps.xml
 ### /!\ TO BE CONFIRMED BY FER (do not fabricate) - matches our JDBC principal source ("eppn")
-#cas.authn.pac4j.saml[0].principal-id-attribute=eduPersonPrincipalName
+cas.authn.pac4j.saml[0].principal-id-attribute=eduPersonPrincipalName
 
 ### Connexion PostgreSQL / Security principal
 cas.authn.jdbc.query[0].sql=SELECT password_hash, eppn FROM dev.principal WHERE eppn = ?
