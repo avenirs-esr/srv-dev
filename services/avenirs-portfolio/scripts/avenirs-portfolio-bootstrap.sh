@@ -19,7 +19,11 @@ write_env_file () {
   local env_file="$4"
 
   if [ "$OVERWRITE" = "true" ]; then
-    echo "$key=$val" $redirection_operator $env_file
+    if [ "$redirection_operator" = ">" ]; then
+      printf '%s=%s\n' "$key" "$val" > "$env_file"
+    else
+      printf '%s=%s\n' "$key" "$val" >> "$env_file"
+    fi
   else
     # Add the key only if it does not already exist
     if grep -Eq "^[[:space:]]*${key}=" "$env_file"; then
@@ -98,6 +102,51 @@ write_env_file "rome.4.competence.client.id" "$SEC_AVENIRS_PORTFOLIO_API_ROME_4_
 write_env_file "rome.4.competence.client.secret" "$SEC_AVENIRS_PORTFOLIO_API_ROME_4_CLIENT_SECRET" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
 write_env_file "security.authentication.filter" "hmac" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
 set_rotating_env_value "security.hmac.secret" "$AVENIRS_PORTFOLIO_HMAC_SECRET" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+
+# File storage backend, driven by AVENIRS_PORTFOLIO_STORAGE_BACKEND (set in .secrets.env,
+# defaulted in srv-dev-env.sh).
+# The default pictures stay on the mounted volume in every case: the API serves them as
+# Spring resource locations, so they never travel through the object storage.
+grep -Ev "^[[:space:]]*file\.storage\.(type|s3\.)" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE > $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE.tmp
+mv $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE.tmp $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE
+
+case "$AVENIRS_PORTFOLIO_STORAGE_BACKEND" in
+  local)
+    info "avenirs-portfolio-api file storage: filesystem of the api container, no object storage"
+    write_env_file "file.storage.type" "local" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    ;;
+  minio)
+    info "avenirs-portfolio-api file storage: local MinIO container ($AVENIRS_MINIO_CONTAINER_NAME)"
+    write_env_file "file.storage.type" "s3" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    write_env_file "file.storage.s3.endpoint" "http://$AVENIRS_MINIO_CONTAINER_NAME:9000" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    write_env_file "file.storage.s3.region" "$AVENIRS_MINIO_REGION" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    write_env_file "file.storage.s3.bucket" "$AVENIRS_MINIO_BUCKET" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    write_env_file "file.storage.s3.access-key" "$AVENIRS_MINIO_ROOT_USER" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    write_env_file "file.storage.s3.secret-key" "$AVENIRS_MINIO_ROOT_PASSWORD" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    write_env_file "file.storage.s3.path-style-access" "true" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    ;;
+  s3)
+    info "avenirs-portfolio-api file storage: online S3 ($SEC_AVENIRS_PORTFOLIO_API_S3_ENDPOINT)"
+    [ -n "$SEC_AVENIRS_PORTFOLIO_API_S3_ENDPOINT" ] \
+      || err "AVENIRS_PORTFOLIO_STORAGE_BACKEND=s3 but SEC_AVENIRS_PORTFOLIO_API_S3_ENDPOINT is missing from .secrets.env"
+    [ -n "$SEC_AVENIRS_PORTFOLIO_API_S3_BUCKET" ] \
+      || err "AVENIRS_PORTFOLIO_STORAGE_BACKEND=s3 but SEC_AVENIRS_PORTFOLIO_API_S3_BUCKET is missing from .secrets.env"
+    [ -n "$SEC_AVENIRS_PORTFOLIO_API_S3_ACCESS_KEY" ] \
+      || err "AVENIRS_PORTFOLIO_STORAGE_BACKEND=s3 but SEC_AVENIRS_PORTFOLIO_API_S3_ACCESS_KEY is missing from .secrets.env"
+    [ -n "$SEC_AVENIRS_PORTFOLIO_API_S3_SECRET_KEY" ] \
+      || err "AVENIRS_PORTFOLIO_STORAGE_BACKEND=s3 but SEC_AVENIRS_PORTFOLIO_API_S3_SECRET_KEY is missing from .secrets.env"
+    write_env_file "file.storage.type" "s3" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    write_env_file "file.storage.s3.endpoint" "$SEC_AVENIRS_PORTFOLIO_API_S3_ENDPOINT" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    write_env_file "file.storage.s3.region" "${SEC_AVENIRS_PORTFOLIO_API_S3_REGION:-eu-west-3}" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    write_env_file "file.storage.s3.bucket" "$SEC_AVENIRS_PORTFOLIO_API_S3_BUCKET" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    write_env_file "file.storage.s3.access-key" "$SEC_AVENIRS_PORTFOLIO_API_S3_ACCESS_KEY" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    write_env_file "file.storage.s3.secret-key" "$SEC_AVENIRS_PORTFOLIO_API_S3_SECRET_KEY" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    write_env_file "file.storage.s3.path-style-access" "${SEC_AVENIRS_PORTFOLIO_API_S3_PATH_STYLE_ACCESS:-true}" ">>" $AVENIRS_PORTFOLIO_API_SPRING_ENV_FILE;
+    ;;
+  *)
+    err "Unknown AVENIRS_PORTFOLIO_STORAGE_BACKEND \"$AVENIRS_PORTFOLIO_STORAGE_BACKEND\" (expected minio, s3 or local)"
+    ;;
+esac
 
 
 # Overlay files

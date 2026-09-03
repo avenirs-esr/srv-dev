@@ -68,3 +68,8 @@ include:
     env_file:
       - .env
       - ./services/valkey/.env
+
+  - path: ./services/minio/docker-compose.yml
+    env_file:
+      - .env
+      - ./services/minio/.env

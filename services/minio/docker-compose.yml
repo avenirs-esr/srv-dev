@@ -1,0 +1,57 @@
+services:
+
+  avenirs-minio:
+    image: minio/minio:${MINIO_VERSION}
+    container_name: ${AVENIRS_MINIO_CONTAINER_NAME}
+    restart: always
+    # Only started when AVENIRS_PORTFOLIO_STORAGE_BACKEND=minio, which makes the
+    # bootstrap write COMPOSE_PROFILES=minio into the root .env.
+    profiles: ["minio"]
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ROOT_USER=${AVENIRS_MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=${AVENIRS_MINIO_ROOT_PASSWORD}
+      - MINIO_SITE_REGION=${AVENIRS_MINIO_REGION}
+    ports:
+      # S3 API
+      - "${AVENIRS_MINIO_CONTAINER_PORT}:9000"
+      # Web console
+      - "${AVENIRS_MINIO_CONSOLE_PORT}:9001"
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    networks:
+      - avenirs-api-network
+
+  # One-shot container creating the bucket avenirs-portfolio-api uploads into.
+  # The API does not create it itself: in production the bucket is provisioned
+  # by the hosting provider and the credentials are not allowed to create one.
+  avenirs-minio-init:
+    image: minio/mc:${MINIO_MC_VERSION}
+    container_name: ${AVENIRS_MINIO_INIT_CONTAINER_NAME}
+    restart: "no"
+    profiles: ["minio"]
+    depends_on:
+      avenirs-minio:
+        condition: service_healthy
+    entrypoint:
+      - sh
+      - -c
+      - |
+        mc alias set local http://${AVENIRS_MINIO_CONTAINER_NAME}:9000 "${AVENIRS_MINIO_ROOT_USER}" "${AVENIRS_MINIO_ROOT_PASSWORD}" &&
+        mc mb --ignore-existing --region ${AVENIRS_MINIO_REGION} local/${AVENIRS_MINIO_BUCKET} &&
+        echo "Bucket ${AVENIRS_MINIO_BUCKET} is ready"
+    networks:
+      - avenirs-api-network
+
+networks:
+  avenirs-api-network:
+    external: true
+    name: ${AVENIRS_NETWORK}
+
+volumes:
+  minio-data: {}

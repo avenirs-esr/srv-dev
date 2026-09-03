@@ -57,6 +57,21 @@ AVENIRS_OPENSEARCH_DASHBOARDS_CONTAINER_PORT=5601
 AVENIRS_PORTFOLIO_BACK_OFFICE_CONTAINER_NAME="${AVENIRS_PORTFOLIO_CONTAINER_PREFIX}back-office"
 AVENIRS_PORTFOLIO_BACK_OFFICE_CONTAINER_PORT=10008
 
+# ---- File storage
+# Backend used by avenirs-portfolio-api to store uploaded files:
+#   minio -> the avenirs-minio container, started by this stack (default)
+#   s3    -> an online S3-compatible service, credentials read from .secrets.env
+#   local -> the filesystem of the api container, no object storage at all
+AVENIRS_PORTFOLIO_STORAGE_BACKEND="${AVENIRS_PORTFOLIO_STORAGE_BACKEND:-minio}"
+AVENIRS_MINIO_CONTAINER_NAME="${AVENIRS_CONTAINER_PREFIX}minio"
+AVENIRS_MINIO_INIT_CONTAINER_NAME="${AVENIRS_CONTAINER_PREFIX}minio-init"
+AVENIRS_MINIO_CONTAINER_PORT=9100
+AVENIRS_MINIO_CONSOLE_PORT=9101
+AVENIRS_MINIO_ROOT_USER=avenirs
+AVENIRS_MINIO_ROOT_PASSWORD=avenirs-minio-password
+AVENIRS_MINIO_BUCKET=avenirs-portfolio
+AVENIRS_MINIO_REGION=eu-west-3
+
 # ---------------------------------------------------------
 # ---- Docker Image Versions (Defaults)
 # ---------------------------------------------------------
@@ -73,6 +88,8 @@ export ETCD_VERSION_DEFAULT="3.5"
 export POSTGRES_VERSION_DEFAULT="17"
 export REDIS_VERSION_DEFAULT="7.0-alpine"
 export VALKEY_VERSION_DEFAULT="latest"
+export MINIO_VERSION_DEFAULT="RELEASE.2025-04-22T22-12-26Z"
+export MINIO_MC_VERSION_DEFAULT="RELEASE.2025-04-16T18-13-26Z"
 
 # Identity & Security
 export CAS_BASE_IMAGE_DEFAULT="eclipse-temurin:11-jdk-alpine"
