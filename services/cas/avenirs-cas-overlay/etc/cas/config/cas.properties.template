@@ -37,17 +37,36 @@ cas.authn.pac4j.saml[0].keystore-path=/etc/cas/saml/fer-sp-keystore.jks
 cas.authn.pac4j.saml[0].keystore-password=__SEC_CAS_SAML_FER_KEYSTORE_PASSWORD__
 cas.authn.pac4j.saml[0].private-key-password=__SEC_CAS_SAML_FER_PRIVATE_KEY_PASSWORD__
 cas.authn.pac4j.saml[0].metadata.service-provider.file-system.location=/etc/cas/saml/fer-sp-metadata.xml
-### /!\ TO BE PROVIDED BY FER (do not fabricate)
-cas.authn.pac4j.saml[0].metadata.identity-provider-metadata-path=https://pub.federation.renater.fr/metadata/test/idps.xml
-### idps.xml is an aggregate (many IDPSSODescriptor entities) - without this flag pac4j-saml treats
-### it as a single-IdP file and silently resolves the first entity (CHU Limoges), ignoring the rest.
-cas.authn.pac4j.saml[0].metadata.identity-provider-metadata-aggregate=true
-### /!\ No confirmed GIP Recia entityID in idps.xml yet - do not restrict identity-provider-entity-id
-### (a fabricated value silently falls back to the first IdP in the aggregate, e.g. CHU Limoges).
-### With the aggregate flag above, each IdP is registered as its own delegated client, so CAS's
-### discovery selection page (WAYF, MENU mode by default) lets the user pick one (e.g. GIP Recia).
+### Bootstrap only: NOT used for real authentication (that's resolved dynamically per-login via MDQ, see
+### avenirs.cas.saml-fer-mdq.* below and fr.avenirsesr.cas.saml.fer.FerMdqDynamicDiscoveryProviderLocator).
+### CAS needs exactly one resolvable IdP entity at startup to init the pac4j client (SP metadata generation,
+### signing/decryption setup) - any reachable entity works. Verified live against the test federation's MDQ
+### (curl, 2026-09-03): mdq.federation.renater.fr/test/entities/{urlencoded entityID} returns HTTP 200 with
+### Content-Type application/samlmetadata+xml even without an explicit Accept header.
+cas.authn.pac4j.saml[0].metadata.identity-provider-metadata-path=https://mdq.federation.renater.fr/test/entities/http%3A%2F%2Fidp-pre.math.cnrs.fr%2Fidp%2Fshibboleth
 ### /!\ TO BE CONFIRMED BY FER (do not fabricate) - matches our JDBC principal source ("eppn")
 cas.authn.pac4j.saml[0].principal-id-attribute=eduPersonPrincipalName
+
+### Real IdP resolution: MDQ query to the FER on demand for the entityID chosen on the FER's WAYF (RFC MDQ,
+### {url}/entities/{entityID} - see FerMdqDynamicDiscoveryProviderLocator), signature-checked against
+### services/cas/avenirs-cas-overlay/src/main/resources/fer/renater-metadata-query-signing-cert.pem.
+### /!\ Base URL and signing cert verified live against the FER's own infrastructure (2026-09-03): fetched
+### https://mdq.federation.renater.fr/test/entities/... and cross-checked its <ds:Signature> cert fingerprint
+### against every cert published at https://metadata.federation.renater.fr/certs/ - only "metadata-signature
+### -2026.pem" matches (the "renater-metadata-signing-cert-2016.pem" referenced in FER's own MDQ doc example
+### has itself expired 2026-06-07 - their doc is stale). Re-verify if RENATER rotates the signing cert again.
+avenirs.cas.saml-fer-mdq.url=https://mdq.federation.renater.fr/test
+avenirs.cas.saml-fer-mdq.signing-certificate=classpath:fer/renater-metadata-query-signing-cert.pem
+
+### IdP selection is delegated to the FER's own WAYF instead of CAS's internal MENU (see fr.avenirsesr.cas.saml.fer.*
+### in src/main/java - custom DYNAMIC discovery locator + webflow redirect - rationale: README-SAML.md).
+cas.authn.pac4j.core.discovery-selection.selection-type=DYNAMIC
+### /!\ TO BE CONFIRMED BY FER (do not fabricate): exact WAYF URL for the test federation, and that it
+### honors a caller-supplied returnIDParam and preserves extra query params on the return URL (OASIS
+### SAML V2.0 IdP Discovery Service Protocol). Inferred from RENATER's federation doc (discovery.renater.fr
+### exposes /renater, /edugain and /test), not verified against FER's technical documentation.
+avenirs.cas.saml-fer-wayf.url=https://discovery.renater.fr/test/WAYF
+avenirs.cas.saml-fer-wayf.return-id-param=username
 
 ### Connexion PostgreSQL / Security principal
 cas.authn.jdbc.query[0].sql=SELECT password_hash, eppn FROM dev.principal WHERE eppn = ?
