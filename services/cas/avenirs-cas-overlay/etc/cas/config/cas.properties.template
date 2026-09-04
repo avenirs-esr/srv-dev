@@ -44,8 +44,13 @@ cas.authn.pac4j.saml[0].metadata.service-provider.file-system.location=/etc/cas/
 ### (curl, 2026-09-03): mdq.federation.renater.fr/test/entities/{urlencoded entityID} returns HTTP 200 with
 ### Content-Type application/samlmetadata+xml even without an explicit Accept header.
 cas.authn.pac4j.saml[0].metadata.identity-provider-metadata-path=https://mdq.federation.renater.fr/test/entities/http%3A%2F%2Fidp-pre.math.cnrs.fr%2Fidp%2Fshibboleth
-### /!\ TO BE CONFIRMED BY FER (do not fabricate) - matches our JDBC principal source ("eppn")
-cas.authn.pac4j.saml[0].principal-id-attribute=eduPersonPrincipalName
+### GIP Recia ne libère pas eduPersonPrincipalName (confirmé par log pac4j/opensaml, 2026-09-08) - seuls
+### subject-id/pairwise-id sont fournis, et le NameID est transient (opaque, change à chaque session). Sans
+### eduPersonPrincipalName, pac4j retombait sur ce NameID comme principal CAS, cassant l'appel back-office
+### /external-users/eppn/{id}. subject-id est l'identifiant persistant du profil OASIS Subject Identifier.
+### /!\ Ce paramètre s'applique à tous les IdP FER résolus dynamiquement (FerMdqDynamicDiscoveryProviderLocator)
+### - à revoir si un futur IdP fournit eduPersonPrincipalName mais pas subject-id.
+cas.authn.pac4j.saml[0].principal-id-attribute=subject-id
 
 ### Real IdP resolution: MDQ query to the FER on demand for the entityID chosen on the FER's WAYF (RFC MDQ,
 ### {url}/entities/{entityID} - see FerMdqDynamicDiscoveryProviderLocator), signature-checked against

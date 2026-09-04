@@ -2,6 +2,7 @@ package fr.avenirsesr.cas.saml.fer;
 
 import com.google.common.cache.Cache;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.pac4j.client.DelegatedIdentityProviderFactory;
@@ -30,8 +31,9 @@ import java.util.Optional;
 /**
  * Resolves the SAML2 IdP for the entityID returned by the FER's WAYF by querying the FER's MDQ service on
  * demand. buildClientForEntity mirrors org.apereo.cas.web.saml2.DelegatedClientSaml2Builder#buildSaml2ClientFromAggregate,
- * reusing the bootstrap SAML2Client's SP-side machinery (decrypter, signing, replay cache, validators...).
+ * reusing the bootstrap SAML2Client's SP-side machinery (decrypter, signing, replay cache...).
  */
+@Slf4j
 @RequiredArgsConstructor
 public class FerMdqDynamicDiscoveryProviderLocator implements DelegatedAuthenticationDynamicDiscoveryProviderLocator {
 
@@ -65,6 +67,15 @@ public class FerMdqDynamicDiscoveryProviderLocator implements DelegatedAuthentic
         singleClient.init();
         // See FerDynamicClientAwareDelegatedIdentityProviders for why this cache exists.
         resolvedClientsCache.put(singleClient.getName(), singleClient);
+
+        // singleClient reuses the bootstrap client's federation-registered SP metadata (see
+        // buildClientForEntity), so the AssertionConsumerServiceURL in the AuthnRequest - and thus the
+        // "client_name" the IdP echoes back - is forever the bootstrap client's, baked in at its own
+        // init() time. CAS would otherwise resolve the wrong (bootstrap) client when validating the IdP's
+        // response. The real dynamic client name is instead recovered from RelayState, keyed by the
+        // TransientSessionTicket id CAS itself stores there a moment later (see FerRelayStateClientTracker,
+        // which records that ticket id -> this client name, and FerRelayStateClientNameExtractor, which
+        // reads it back). Nothing needs to be done with RelayState here.
         return Optional.of(singleClient);
     }
 
@@ -81,12 +92,16 @@ public class FerMdqDynamicDiscoveryProviderLocator implements DelegatedAuthentic
         singleClient.setContextProvider(new SAML2ContextProvider(singleConfiguration.getIdentityProviderMetadataResolver(),
             bootstrapClient.getServiceProviderMetadataResolver(), bootstrapClient.getConfiguration().getSamlMessageStoreFactory()));
         singleClient.setReplayCache(bootstrapClient.getReplayCache());
-        singleClient.setAuthnResponseValidator(bootstrapClient.getAuthnResponseValidator());
+        // authnResponseValidator/logoutValidator/authenticator/credentialsExtractor intentionally left unset
+        // (unlike CAS's own createSaml2Client, which this method mirrors): each one captures a reference back
+        // to its originating client's contextProvider/configuration/validator AT CONSTRUCTION TIME (see
+        // org.pac4j.saml.credentials.authenticator.SAML2Authenticator and
+        // org.pac4j.saml.credentials.extractor.SAML2CredentialsExtractor), so reusing the bootstrap's would
+        // silently keep building/validating the SAML message context against the bootstrap's fixed,
+        // bootstrap-only IdP - even with contextProvider/authnResponseValidator freshly scoped to this
+        // entityDescriptor everywhere else. singleClient.init() below builds all of these fresh instead.
         singleClient.setSoapPipelineProvider(new DefaultSOAPPipelineProvider(singleClient));
-        singleClient.setLogoutValidator(bootstrapClient.getLogoutValidator());
         singleClient.setRedirectionActionBuilder(new SAML2RedirectionActionBuilder(singleClient));
-        singleClient.setCredentialsExtractor(bootstrapClient.getCredentialsExtractor());
-        singleClient.setAuthenticator(bootstrapClient.getAuthenticator());
         singleClient.setLogoutProcessor(new SAML2LogoutProcessor(singleClient));
         singleClient.setLogoutActionBuilder(new SAML2LogoutActionBuilder(singleClient));
         singleClient.setServiceProviderMetadataResolver(bootstrapClient.getServiceProviderMetadataResolver());

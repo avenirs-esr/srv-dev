@@ -4,12 +4,15 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import lombok.val;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apereo.cas.config.CasDelegatedAuthenticationAutoConfiguration;
 import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.multitenancy.TenantExtractor;
+import org.apereo.cas.pac4j.client.DelegatedClientNameExtractor;
 import org.apereo.cas.pac4j.client.DelegatedIdentityProviderFactory;
 import org.apereo.cas.pac4j.client.DelegatedIdentityProviders;
 import org.apereo.cas.pac4j.discovery.DelegatedAuthenticationDynamicDiscoveryProviderLocator;
 import org.apereo.cas.support.pac4j.authentication.clients.DefaultDelegatedIdentityProviders;
+import org.apereo.cas.support.pac4j.authentication.clients.DelegatedClientSessionManager;
 import org.apereo.cas.support.saml.OpenSamlConfigBean;
 import org.apereo.cas.util.crypto.CertUtils;
 import org.apereo.cas.web.CasWebSecurityConfigurer;
@@ -29,6 +32,7 @@ import org.pac4j.core.client.IndirectClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -45,6 +49,11 @@ import java.util.List;
  * See services/cas/README-SAML.md.
  */
 @AutoConfiguration
+// Must register pac4jDelegatedClientNameExtractor before CAS's own default (same bean name,
+// both @ConditionalOnMissingBean - see DelegatedAuthenticationEventExecutionPlanConfiguration)
+// or FerRelayStateClientNameExtractor never gets picked up and CAS silently falls back to the
+// bootstrap client name, breaking IdP response signature validation.
+@AutoConfigureBefore(CasDelegatedAuthenticationAutoConfiguration.class)
 @EnableConfigurationProperties(CasConfigurationProperties.class)
 public class FerWayfAutoConfiguration {
 
@@ -68,6 +77,31 @@ public class FerWayfAutoConfiguration {
             .expireAfterWrite(Duration.ofMinutes(10))
             .maximumSize(10_000)
             .build();
+    }
+
+    @Bean
+    public Cache<String, String> ferMdqRelayStateTokens() {
+        // Written by FerRelayStateClientTracker, read by FerRelayStateClientNameExtractor.
+        return CacheBuilder.newBuilder()
+            .expireAfterWrite(Duration.ofMinutes(10))
+            .maximumSize(10_000)
+            .build();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(name = "pac4jDelegatedClientNameExtractor")
+    public DelegatedClientNameExtractor pac4jDelegatedClientNameExtractor(
+        @Qualifier("ferMdqRelayStateTokens") final Cache<String, String> ferMdqRelayStateTokens) {
+        return new FerRelayStateClientNameExtractor(ferMdqRelayStateTokens);
+    }
+
+    @Bean
+    public DelegatedClientSessionManager ferRelayStateClientTracker(
+        @Qualifier("ferMdqRelayStateTokens") final Cache<String, String> ferMdqRelayStateTokens) {
+        // Additive: org.apereo.cas.web.saml2.DelegatedClientSaml2SessionManager (CAS's own) still runs too -
+        // see FerRelayStateClientTracker for why this one only needs to record the mapping, not touch
+        // RelayState/session itself.
+        return new FerRelayStateClientTracker(ferMdqRelayStateTokens);
     }
 
     @Bean
