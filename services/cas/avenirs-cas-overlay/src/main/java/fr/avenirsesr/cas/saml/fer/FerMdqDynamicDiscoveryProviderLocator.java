@@ -15,6 +15,7 @@ import org.opensaml.saml.metadata.resolver.MetadataResolver;
 import org.opensaml.saml.saml2.metadata.EntityDescriptor;
 import org.pac4j.core.client.IndirectClient;
 import org.pac4j.core.context.WebContext;
+import org.pac4j.core.context.session.SessionStore;
 import org.pac4j.saml.client.SAML2Client;
 import org.pac4j.saml.context.SAML2ContextProvider;
 import org.pac4j.saml.logout.SAML2LogoutActionBuilder;
@@ -26,6 +27,7 @@ import org.pac4j.saml.sso.artifact.DefaultSOAPPipelineProvider;
 import org.pac4j.saml.state.SAML2StateGenerator;
 
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Resolves the SAML2 IdP for the entityID returned by the FER's WAYF by querying the FER's MDQ service on
@@ -44,6 +46,10 @@ public class FerMdqDynamicDiscoveryProviderLocator implements DelegatedAuthentic
     private final CasConfigurationProperties casProperties;
 
     private final Cache<String, IndirectClient> resolvedClientsCache;
+
+    private final SessionStore sessionStore;
+
+    private final Cache<String, String> relayStateTokens;
 
     @Override
     public Optional<IndirectClient> locate(final DynamicDiscoveryProviderRequest request, final WebContext webContext) throws Throwable {
@@ -65,6 +71,18 @@ public class FerMdqDynamicDiscoveryProviderLocator implements DelegatedAuthentic
         singleClient.init();
         // See FerDynamicClientAwareDelegatedIdentityProviders for why this cache exists.
         resolvedClientsCache.put(singleClient.getName(), singleClient);
+
+        // singleClient reuses the bootstrap client's federation-registered SP metadata (see
+        // buildClientForEntity), so the AssertionConsumerServiceURL in the AuthnRequest - and thus the
+        // "client_name" the IdP echoes back - is forever the bootstrap client's, baked in at its own
+        // init() time. CAS would otherwise resolve the wrong (bootstrap) client when validating the IdP's
+        // response. Carry the real dynamic client name through RelayState instead, via a short opaque
+        // token (a full client name is too long/unsafe to trust literally in a RelayState round-trip) -
+        // see FerRelayStateClientNameExtractor for where this is read back.
+        val relayStateToken = UUID.randomUUID().toString();
+        relayStateTokens.put(relayStateToken, singleClient.getName());
+        sessionStore.set(webContext, SAML2StateGenerator.SAML_RELAY_STATE_ATTRIBUTE, relayStateToken);
+
         return Optional.of(singleClient);
     }
 

@@ -6,6 +6,7 @@ import lombok.val;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.multitenancy.TenantExtractor;
+import org.apereo.cas.pac4j.client.DelegatedClientNameExtractor;
 import org.apereo.cas.pac4j.client.DelegatedIdentityProviderFactory;
 import org.apereo.cas.pac4j.client.DelegatedIdentityProviders;
 import org.apereo.cas.pac4j.discovery.DelegatedAuthenticationDynamicDiscoveryProviderLocator;
@@ -56,9 +57,11 @@ public class FerWayfAutoConfiguration {
         @Qualifier("ferMdqMetadataResolver") final MetadataResolver ferMdqMetadataResolver,
         @Value("${cas.authn.pac4j.saml[0].client-name}") final String bootstrapClientName,
         final CasConfigurationProperties casProperties,
-        @Qualifier("ferMdqResolvedClients") final Cache<String, IndirectClient> ferMdqResolvedClients) {
+        @Qualifier("ferMdqResolvedClients") final Cache<String, IndirectClient> ferMdqResolvedClients,
+        @Qualifier("ferMdqRelayStateTokens") final Cache<String, String> ferMdqRelayStateTokens) {
         return new FerMdqDynamicDiscoveryProviderLocator(configContext.getIdentityProviders(),
-            ferMdqMetadataResolver, bootstrapClientName, casProperties, ferMdqResolvedClients);
+            ferMdqMetadataResolver, bootstrapClientName, casProperties, ferMdqResolvedClients,
+            configContext.getSessionStore(), ferMdqRelayStateTokens);
     }
 
     @Bean
@@ -68,6 +71,22 @@ public class FerWayfAutoConfiguration {
             .expireAfterWrite(Duration.ofMinutes(10))
             .maximumSize(10_000)
             .build();
+    }
+
+    @Bean
+    public Cache<String, String> ferMdqRelayStateTokens() {
+        // Read by FerRelayStateClientNameExtractor - see FerMdqDynamicDiscoveryProviderLocator for why this exists.
+        return CacheBuilder.newBuilder()
+            .expireAfterWrite(Duration.ofMinutes(10))
+            .maximumSize(10_000)
+            .build();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(name = "pac4jDelegatedClientNameExtractor")
+    public DelegatedClientNameExtractor pac4jDelegatedClientNameExtractor(
+        @Qualifier("ferMdqRelayStateTokens") final Cache<String, String> ferMdqRelayStateTokens) {
+        return new FerRelayStateClientNameExtractor(ferMdqRelayStateTokens);
     }
 
     @Bean
