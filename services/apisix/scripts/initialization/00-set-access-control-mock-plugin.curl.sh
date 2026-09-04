@@ -2,6 +2,32 @@
 
 END_POINT="http://avenirs-apisix-api:9180/apisix/admin/plugin_configs"
 
+# Mock mode: grant every known permission/role so local/dev testing never
+# gets blocked by authorization checks. Built from EPermission/ERole in
+# avenirs-portfolio-common instead of a hand-maintained list. Fetched over
+# HTTP from the develop branch so this never depends on a local submodule
+# checkout being initialized or up to date.
+COMMON_BRANCH="${PORTFOLIO_COMMON_BRANCH:-develop}"
+ENUMS_BASE_URL="${PORTFOLIO_COMMON_ENUMS_URL:-https://raw.githubusercontent.com/avenirs-esr/avenirs-portfolio-common/$COMMON_BRANCH/src/main/java/fr/avenirsesr/portfolio/common/security/accesscontrol/domain/model/enums}"
+
+PERMISSION_CONTENT=$(curl -sf "$ENUMS_BASE_URL/EPermission.java")
+ROLE_CONTENT=$(curl -sf "$ENUMS_BASE_URL/ERole.java")
+
+if [ -z "$PERMISSION_CONTENT" ] || [ -z "$ROLE_CONTENT" ]; then
+  echo "ERROR: could not fetch EPermission.java or ERole.java from $ENUMS_BASE_URL."
+  exit 1
+fi
+
+mock_authorities=""
+for value in $(echo "$PERMISSION_CONTENT" | grep -oE '"[a-z][a-z0-9-]*(:[a-z0-9-]+)+"' | tr -d '"' | sort -u); do
+  mock_authorities="${mock_authorities:+$mock_authorities, }\\\"$value\\\""
+done
+
+mock_roles=""
+for value in $(echo "$ROLE_CONTENT" | grep -oE '^[[:space:]]*ROLE_[A-Z0-9_]+\(' | sed -E 's/^[[:space:]]*//; s/\($//' | sort -u); do
+  mock_roles="${mock_roles:+$mock_roles, }\\\"$value\\\""
+done
+
 
 JSON_CONTENT=$(cat <<EOF
 {
@@ -142,46 +168,13 @@ JSON_CONTENT=$(cat <<EOF
                 -- Mock mode: grant every known permission so local/dev testing
                 -- never gets blocked by authorization checks.
                 local mock_authorities = {
-                  \"profile:read:own\", \"profile:update:own\",
-                  \"trace:create:own\", \"trace:list:own\", \"trace:read:contextual\",
-                  \"trace:download:contextual\", \"trace:association:manage:own\",
-                  \"trace:update:own\", \"trace:delete:own\",
-                  \"competency:read\",
-                  \"declared-activity:list:own\", \"declared-activity:update:own\",
-                  \"declared-activity:association:manage:own\",
-                  \"declared-skill:list:own\", \"declared-skill:create:own\",
-                  \"declared-skill:update:own\", \"declared-skill:delete:own\",
-                  \"declared-skill:association:manage:own\",
-                  \"declared-experience:list:own\", \"declared-experience:create:own\",
-                  \"declared-experience:update:own\", \"declared-experience:delete:own\",
-                  \"declared-experience:association:manage:own\",
-                  \"declared-program:list:own\", \"declared-program:create:own\",
-                  \"declared-program:update:own\", \"declared-program:delete:own\",
-                  \"self-knowledge:list:own\", \"self-knowledge:create:own\",
-                  \"self-knowledge:update:own\", \"self-knowledge:delete:own\",
-                  \"notification:read:own\", \"notification:update:own\",
-                  \"activity:catalog:read:contextual\", \"activity:register:own\",
-                  \"activity:read:contextual\", \"activity:document:download:contextual\",
-                  \"activity:document:read:contextual\", \"employment-kit:read:own\",
-                  \"activity:library:staff:read\", \"activity:create\",
-                  \"activity:duplicate\", \"activity:update\",
-                  \"activity:published:update:contextual\", \"activity:delete\",
-                  \"activity:feedback-settings:update\",
-                  \"feedback:request:create:own\", \"feedback:received:read:own\",
-                  \"feedback:request:read:assigned\", \"feedback:request:respond:assigned\",
-                  \"feedback:history:read:contextual\", \"feedback:dashboard:read:contextual\",
-                  \"primary-establishment:read\", \"primary-establishment:create\",
-                  \"primary-establishment:update\", \"primary-establishment:delete\",
-                  \"secondary-establishment:read\", \"secondary-establishment:create\",
-                  \"secondary-establishment:update\", \"secondary-establishment:delete\",
-                  \"group:read\", \"group:import\", \"group:create\", \"group:update\", \"group:delete\",
-                  \"rbac:read\", \"rbac:assign\", \"rbac:revoke\", \"rbac:manage\"
+                  $mock_authorities
                 };
 
                 -- Mock mode: grant every known role so local/dev testing
                 -- never gets blocked by role-based authorization checks.
                 local mock_roles = {
-                  \"ROLE_STUDENT\", \"ROLE_STAFF\", \"ROLE_SUPER_ADMIN\"
+                  $mock_roles
                 };
 
                 ngx.log(ngx.ERR, \"serverless pre function\");
