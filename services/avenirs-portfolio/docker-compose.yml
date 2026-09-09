@@ -9,7 +9,6 @@ services:
       args:
         AVENIRS_PORTFOLIO_API_VERSION: ${AVENIRS_PORTFOLIO_API_VERSION}
         OVERLAY_DIR: ${AVENIRS_PORTFOLIO_API_OVERLAY_BASENAME}
-        JAVA_ALPINE_VERSION: ${JAVA_ALPINE_VERSION}
     restart: always
     ports:
       - "${AVENIRS_PORTFOLIO_API_CONTAINER_PORT}:10000"
@@ -33,7 +32,6 @@ services:
       dockerfile: ./Dockerfile-avenirs-portfolio-back-office
       args:
         OVERLAY_DIR: ${AVENIRS_PORTFOLIO_BACK_OFFICE_OVERLAY_BASENAME}
-        JAVA_ALPINE_VERSION: ${JAVA_ALPINE_VERSION}
     restart: always
     ports:
       - "${AVENIRS_PORTFOLIO_BACK_OFFICE_CONTAINER_PORT}:10010"
@@ -57,7 +55,6 @@ services:
       dockerfile: ./Dockerfile-avenirs-portfolio-interoperability
       args:
         OVERLAY_DIR: ${AVENIRS_PORTFOLIO_INTEROPERABILITY_OVERLAY_BASENAME}
-        JAVA_ALPINE_VERSION: ${JAVA_ALPINE_VERSION}
     restart: always
     ports:
       - "${AVENIRS_PORTFOLIO_INTEROPERABILITY_CONTAINER_PORT}:10020"
