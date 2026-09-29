@@ -3,17 +3,18 @@ ARG JAVA_ALPINE_VERSION=25-jdk-alpine
 FROM eclipse-temurin:${JAVA_ALPINE_VERSION} as build
 ARG OVERLAY_DIR
 ENV AVENIRS_PORTFOLIO_SECURITY_OVERLAY_DIR=$OVERLAY_DIR
+ARG MAVEN_VERSION=3.9.9
+COPY ./maven-dist/apache-maven-${MAVEN_VERSION}-bin.zip /tmp/maven.zip
+RUN unzip -q /tmp/maven.zip -d /opt && ln -s /opt/apache-maven-${MAVEN_VERSION}/bin/mvn /usr/local/bin/mvn && rm /tmp/maven.zip
 WORKDIR /workspace/app
 RUN echo "AVENIRS_PORTFOLIO_SECURITY_OVERLAY_DIR $AVENIRS_PORTFOLIO_SECURITY_OVERLAY_DIR"
-COPY ./avenirs-portfolio-security/mvnw .
 COPY ./avenirs-portfolio-security/.mvn .mvn
 COPY ./avenirs-portfolio-security/pom.xml .
 COPY ./avenirs-portfolio-security/libs libs
 COPY ./avenirs-portfolio-security/src src
 COPY avenirs-portfolio-overlay/avenirs-portfolio-security/src/main/resources/env.properties src/main/resources/
 
-RUN chmod +x ./mvnw
-RUN ./mvnw clean install package -DskipTests
+RUN --mount=type=cache,id=maven-repo,target=/root/.m2,sharing=locked mvn clean install package -DskipTests
 RUN mkdir -p ./target/dependency && (cd ./target/dependency; jar -xf ../*.jar)
 
 
