@@ -44,6 +44,10 @@ if [[ "$fqdn" =~ \.recia\.net$ ]]; then
             AVENIRS_CAS_SERVER_NAME="https://recette.avenirs-esr.fr"
             AVENIRS_CAS_ENV_LABEL="recette"
             ;;
+        *srv-preprod*)
+            AVENIRS_CAS_SERVER_NAME="https://preprod.avenirs-esr.fr"
+            AVENIRS_CAS_ENV_LABEL="preprod"
+            ;;
         *)
             AVENIRS_CAS_SERVER_NAME="https://$fqdn"
             AVENIRS_CAS_ENV_LABEL="$fqdn"

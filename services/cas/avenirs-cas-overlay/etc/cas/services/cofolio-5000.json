@@ -2,6 +2,6 @@
   "@class": "org.apereo.cas.services.CasRegisteredService",
   "id": 5000,
   "name": "Cofolio Front",
-  "serviceId": "^https?://((dev|recette|qualif)\\.avenirs-esr\\.fr|srv-(dev|recette|qualif)(\\.srv-avenirs?\\.brgm\\.recia\\.net)?|localhost)/cofolio(/.*)?$",
+  "serviceId": "^https?://((dev|recette|qualif|preprod)\\.avenirs-esr\\.fr|srv-(dev|recette|qualif|preprod)(\\.srv-avenirs?\\.brgm\\.recia\\.net)?|localhost)/cofolio(/.*)?$",
   "evaluationOrder": 1
 }
