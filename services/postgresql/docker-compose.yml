@@ -2,18 +2,29 @@ services:
   postgresql-primary:
     container_name: ${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}
     hostname: ${AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME}
-    image: postgres:${POSTGRES_VERSION}
+    build:
+      context: ./${POSTGRESQL_OVERLAY_BASENAME}/backup
+      args:
+        POSTGRES_VERSION: ${POSTGRES_VERSION}
+    image: avenirs-postgres-pgbackrest:${POSTGRES_VERSION}
     command: ["postgres", "-c", "config_file=/etc/postgresql.conf"]
     restart: always
+    healthcheck:
+      test: ["CMD", "pg-backup-check.sh"]
+      interval: 5m
+      timeout: 30s
+      retries: 3
+      start_period: 5m
     environment:
       POSTGRES_USER: ${POSTGRES_USER} 
       POSTGRES_PASSWORD: ${SEC_POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+      PGBACKREST_PG1_USER: ${POSTGRES_USER}
     mem_limit: 768m
     mem_reservation: 256m
     volumes:
       - postgres_primary_data:/var/lib/postgresql/data
-      - postgres_primary_archive:/var/lib/postgresql/archive
+      - postgres_primary_backup:/var/lib/pgbackrest
       - ./${POSTGRESQL_OVERLAY_BASENAME}/primary_postgresql.conf:/etc/postgresql.conf
       - ./${POSTGRESQL_OVERLAY_BASENAME}/primary_pg_hba.conf:/etc/pg_hba.conf
       - ./${POSTGRESQL_OVERLAY_BASENAME}/init/:/docker-entrypoint-initdb.d
@@ -145,7 +156,7 @@ networks:
 
 volumes:
   postgres_primary_data:
-  postgres_primary_archive:
+  postgres_primary_backup:
 #  postgres_secondary1_data:
 #  postgres_secondary2_data:
 #  postgres_secondary_archive:
