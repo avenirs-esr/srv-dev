@@ -40,6 +40,8 @@ services:
       - JAVA_XMX=${AVENIRS_PORTFOLIO_BACK_OFFICE_JAVA_XMX:-2048M}
     mem_limit: ${AVENIRS_PORTFOLIO_BACK_OFFICE_MEM_LIMIT:-2560m}
     mem_reservation: 512m
+    volumes:
+      - back-office-file-storage:/workspace/app/target/storage
     depends_on:
       - postgresql-primary
     networks:
@@ -133,5 +135,6 @@ networks:
 volumes:
   srv-dev_file-storage:
     external: true
+  back-office-file-storage: {}
   api-specs: {}
   
