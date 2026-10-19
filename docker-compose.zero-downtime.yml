@@ -1,0 +1,56 @@
+# Override used ONLY by deploy_srv-dev_zero-downtime.sh (avenirs-deployment).
+# Makes the stateless services scalable so that a new replica can run next to
+# the old one during a deployment:
+#   - no container_name  (a fixed name forbids a 2nd replica)
+#   - no published host port (a fixed host port forbids a 2nd replica);
+#     other containers keep reaching the service through the Docker network,
+#     where the service name (= former container name) resolves to every replica
+#   - healthcheck, used to know when a new replica can receive traffic
+#   - graceful shutdown, so the old replica finishes its in-flight requests
+#
+# Requires Docker Compose >= 2.24.4 (`!reset`).
+# Usage: COMPOSE_FILE=docker-compose.yml:docker-compose.zero-downtime.yml docker compose ...
+
+x-healthcheck: &healthcheck
+  interval: 5s
+  timeout: 3s
+  start_period: 120s
+
+x-spring-service: &spring-service
+  stop_grace_period: 45s
+  environment:
+    SERVER_SHUTDOWN: graceful
+    SPRING_LIFECYCLE_TIMEOUT_PER_SHUTDOWN_PHASE: 30s
+
+services:
+  avenirs-portfolio-api:
+    <<: *spring-service
+    container_name: !reset null
+    ports: !reset []
+    healthcheck:
+      <<: *healthcheck
+      test: wget -q -O /dev/null http://localhost:10000/actuator/health
+
+  avenirs-portfolio-back-office:
+    <<: *spring-service
+    container_name: !reset null
+    ports: !reset []
+    healthcheck:
+      <<: *healthcheck
+      test: wget -q -O /dev/null http://localhost:10010/actuator/health
+
+  avenirs-portfolio-security:
+    <<: *spring-service
+    container_name: !reset null
+    ports: !reset []
+    healthcheck:
+      <<: *healthcheck
+      test: wget -q -O /dev/null http://localhost:12000/actuator/health
+
+  avenirs-cofolio-client:
+    container_name: !reset null
+    ports: !reset []
+    healthcheck:
+      <<: *healthcheck
+      test: wget -q -O /dev/null http://127.0.0.1/cofolio/
+      start_period: 10s
