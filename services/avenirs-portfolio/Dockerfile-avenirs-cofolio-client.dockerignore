@@ -1,0 +1,13 @@
+**/.git
+**/node_modules
+**/.pnpm-store
+**/dist
+**/coverage
+**/test-results
+**/playwright-report
+**/a11y/reports
+**/a11y/.output
+**/*.tsbuildinfo
+**/.env*
+!apps/avenirs-cofolio-client/.env
+**/.DS_Store
