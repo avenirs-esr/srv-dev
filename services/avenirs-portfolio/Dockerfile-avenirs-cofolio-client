@@ -2,19 +2,22 @@ ARG NODE_ALPINE_VERSION=26-alpine
 ARG NGINX_VERSION=alpine
 
 FROM node:${NODE_ALPINE_VERSION} AS build
+ARG PNPM_VERSION=10.34.2
 WORKDIR /app
 
 ENV IS_DOCKER=true
+ENV HUSKY=0
+
+RUN npm install --global "pnpm@${PNPM_VERSION}"
 
 COPY . .
-RUN npm ci
-RUN npm run build-only
-RUN npm run type-check
-RUN npm run lint
+RUN pnpm install --frozen-lockfile
+RUN pnpm --filter avenirs-cofolio-client run build-only
+RUN pnpm --filter avenirs-cofolio-client run type-check
+RUN pnpm --filter avenirs-cofolio-client run lint
 
 FROM nginx:${NGINX_VERSION}
-COPY --from=build /app/dist /usr/share/nginx/html/cofolio
-COPY --from=build /app/.env /usr/share/nginx/html/cofolio/.env
+COPY --from=build /app/apps/avenirs-cofolio-client/dist /usr/share/nginx/html/cofolio
 RUN echo '\
 server {\
     listen 80;\

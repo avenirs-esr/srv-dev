@@ -140,6 +140,11 @@ function generate_env_file() {
     )
     write_section "Node.js Variations" "${node[@]}"
 
+    local package_managers=(
+        "PNPM"
+    )
+    write_section "Package Managers" "${package_managers[@]}"
+
     # 9. Languages & Utils
     local utils=(
         "GOLANG"
