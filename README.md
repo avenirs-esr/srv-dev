@@ -126,6 +126,22 @@ Available npm scripts :
 
 
 
+## Cofolio client build
+
+The Cofolio image builds the PNPM workspace with Node, then serves only
+`apps/avenirs-cofolio-client/dist` with Nginx under `/cofolio/`.
+`PNPM_VERSION_DEFAULT` in `scripts/srv-dev-env.sh` pins PNPM to `10.34.2`.
+The root bootstrap generates `PNPM_VERSION`, which Compose passes to the builder.
+
+The frontend environment overlay remains in its existing location, but bootstrap
+installs it into `apps/avenirs-cofolio-client/.env`. Vite consumes it during the
+build; the environment file is not copied into the Nginx web root.
+
+After the usual bootstrap, build only the frontend with
+`docker compose build avenirs-cofolio-client`. This builds the current submodule
+checkout; it does not select or synchronize a branch. `npm run sync` resets the
+submodule to the branch configured in `.gitmodules`.
+
 ## Test
 <pre>
 curl "http://localhost/apim" --head | grep Server
