@@ -98,11 +98,6 @@ for SWAGGER_URL in $SWAGGER_URLS; do
     method=$(echo "$json" | jq -r '.method')
     operation=$(echo "$json" | jq -r '.operation')
 
-    is_storage=false
-    case "$uri" in
-      /storage|/storage/*) is_storage=true ;;
-    esac
-
     is_public_security_auth=false
     case "$uri" in
       /auth/login|/auth/callback|/auth/logout|*/auth/login|*/auth/callback|*/auth/logout)
@@ -113,11 +108,7 @@ for SWAGGER_URL in $SWAGGER_URLS; do
     route_id="${SERVICE_PREFIX}-${operation}-route"
     script_name=$(printf "%02d-%s-%s.generated.curl.sh" "$i" "$SERVICE_PREFIX" "$operation")
 
-    if [ "$is_storage" = true ]; then
-      plugin_line=
-    else
-      plugin_line="\"plugin_config_id\": \"$AC_PLUGIN_ID\","
-    fi
+    plugin_line="\"plugin_config_id\": \"$AC_PLUGIN_ID\","
 
     cat > "$OUTPUT_DIR/$script_name" <<EOF
 #! /bin/sh
@@ -147,12 +138,12 @@ EOF
     count=$((count + 1))
     i=$((i + 1))
 
-    if [ "$is_storage" = false ]; then
+    v1_uri="${V1_INTERNAL_PREFIX}${uri}"
 
-      legacy_options_route_id="${SERVICE_PREFIX}-${operation}-options-route"
-      legacy_options_script_name=$(printf "%02d-%s-%s-options.generated.curl.sh" "$i" "$SERVICE_PREFIX" "$operation")
+    legacy_options_route_id="${SERVICE_PREFIX}-${operation}-options-route"
+    legacy_options_script_name=$(printf "%02d-%s-%s-options.generated.curl.sh" "$i" "$SERVICE_PREFIX" "$operation")
 
-      cat > "$OUTPUT_DIR/$legacy_options_script_name" <<EOF
+    cat > "$OUTPUT_DIR/$legacy_options_script_name" <<EOF
 #! /bin/sh
 
 END_POINT="$END_POINT"
@@ -175,17 +166,15 @@ curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
 }'
 EOF
 
-      chmod +x "$OUTPUT_DIR/$legacy_options_script_name"
+    chmod +x "$OUTPUT_DIR/$legacy_options_script_name"
 
-      count=$((count + 1))
-      i=$((i + 1))
+    count=$((count + 1))
+    i=$((i + 1))
 
-      v1_uri="${V1_INTERNAL_PREFIX}${uri}"
+    options_route_id="${SERVICE_PREFIX}-${operation}-options-route-v1"
+    options_script_name=$(printf "%02d-%s-%s-options-v1.generated.curl.sh" "$i" "$SERVICE_PREFIX" "$operation")
 
-      options_route_id="${SERVICE_PREFIX}-${operation}-options-route-v1"
-      options_script_name=$(printf "%02d-%s-%s-options-v1.generated.curl.sh" "$i" "$SERVICE_PREFIX" "$operation")
-
-      cat > "$OUTPUT_DIR/$options_script_name" <<EOF
+    cat > "$OUTPUT_DIR/$options_script_name" <<EOF
 #! /bin/sh
 
 END_POINT="$END_POINT"
@@ -208,23 +197,22 @@ curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
 }'
 EOF
 
-      chmod +x "$OUTPUT_DIR/$options_script_name"
+    chmod +x "$OUTPUT_DIR/$options_script_name"
 
-      count=$((count + 1))
-      i=$((i + 1))
+    count=$((count + 1))
+    i=$((i + 1))
+    if [ "$is_public_security_auth" = true ]; then
+      v1_plugin_line=
+      v1_inline_plugins_line="\"plugins\": { \"proxy-rewrite\": { \"regex_uri\": [\"^$V1_INTERNAL_PREFIX(.*)\", \"\$1\"] } },"
+    else
+      v1_plugin_line="\"plugin_config_id\": \"$AC_SESSION_V1_PLUGIN_ID\","
+      v1_inline_plugins_line=
+    fi
 
-      if [ "$is_public_security_auth" = true ]; then
-        v1_plugin_line=
-        v1_inline_plugins_line="\"plugins\": { \"proxy-rewrite\": { \"regex_uri\": [\"^$V1_INTERNAL_PREFIX(.*)\", \"\$1\"] } },"
-      else
-        v1_plugin_line="\"plugin_config_id\": \"$AC_SESSION_V1_PLUGIN_ID\","
-        v1_inline_plugins_line=
-      fi
+    v1_route_id="${SERVICE_PREFIX}-${operation}-route-v1"
+    v1_script_name=$(printf "%02d-%s-%s-v1.generated.curl.sh" "$i" "$SERVICE_PREFIX" "$operation")
 
-      v1_route_id="${SERVICE_PREFIX}-${operation}-route-v1"
-      v1_script_name=$(printf "%02d-%s-%s-v1.generated.curl.sh" "$i" "$SERVICE_PREFIX" "$operation")
-
-      cat > "$OUTPUT_DIR/$v1_script_name" <<EOF
+    cat > "$OUTPUT_DIR/$v1_script_name" <<EOF
 #! /bin/sh
 
 END_POINT="$END_POINT"
@@ -248,11 +236,10 @@ curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
 }'
 EOF
 
-      chmod +x "$OUTPUT_DIR/$v1_script_name"
+    chmod +x "$OUTPUT_DIR/$v1_script_name"
 
-      count=$((count + 1))
-      i=$((i + 1))
-    fi
+    count=$((count + 1))
+    i=$((i + 1))
   done
 done
 
