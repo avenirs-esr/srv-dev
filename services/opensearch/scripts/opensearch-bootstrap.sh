@@ -21,7 +21,11 @@ write_env_file () {
   local env_file="$4"
 
   if [ "$OVERWRITE" = "true" ]; then
-    echo "$key=$val" $redirection_operator $env_file
+    if [ "$redirection_operator" = ">" ]; then
+      printf '%s=%s\n' "$key" "$val" > "$env_file"
+    else
+      printf '%s=%s\n' "$key" "$val" >> "$env_file"
+    fi
   else
     # Add the key only if it does not already exist
     if grep -Eq "^[[:space:]]*${key}=" "$env_file"; then
@@ -43,6 +47,6 @@ write_env_file "AVENIRS_OPENSEARCH_CONTAINER_NAME" "$AVENIRS_OPENSEARCH_CONTAINE
 write_env_file "AVENIRS_OPENSEARCH_CONTAINER_PORT" "$AVENIRS_OPENSEARCH_CONTAINER_PORT" ">>" "$OPENSEARCH_ENV_FILE"
 write_env_file "AVENIRS_OPENSEARCH_DASHBOARDS_CONTAINER_NAME" "$AVENIRS_OPENSEARCH_DASHBOARDS_CONTAINER_NAME" ">>" "$OPENSEARCH_ENV_FILE"
 write_env_file "AVENIRS_OPENSEARCH_DASHBOARDS_CONTAINER_PORT" "$AVENIRS_OPENSEARCH_DASHBOARDS_CONTAINER_PORT" ">>" "$OPENSEARCH_ENV_FILE"
-echo "AVENIRS_NETWORK=$AVENIRS_NETWORK" >> $OPENSEARCH_ENV_FILE
+write_env_file "AVENIRS_NETWORK" "$AVENIRS_NETWORK" ">>" "$OPENSEARCH_ENV_FILE"
 
 info "Opensearch bootstrapping completed."
