@@ -1,3 +1,9 @@
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "20m"
+    max-file: "5"
+
 services:
 
   avenirs-opensearch:
@@ -7,6 +13,7 @@ services:
     environment:
       - cluster.name=opensearch-cluster
       - plugins.security.disabled=true
+      - plugins.security.audit.type=noop
       - discovery.type=single-node
       - node.name=opensearch-node1
       - discovery.seed_hosts=opensearch-node1
@@ -30,6 +37,7 @@ services:
       - srv-dev_opensearch-data:/usr/share/opensearch/data
     networks:
       - avenirs-api-network
+    logging: *default-logging
 
   avenirs-opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:${OPENSEARCH_DASHBOARDS_VERSION}
@@ -45,6 +53,7 @@ services:
       - avenirs-opensearch
     networks:
       - avenirs-api-network
+    logging: *default-logging
 
 networks: 
   avenirs-api-network:
