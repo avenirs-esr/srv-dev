@@ -21,7 +21,11 @@ write_env_file () {
   local env_file="$4"
 
   if [ "$OVERWRITE" = "true" ]; then
-    echo "$key=$val" $redirection_operator $env_file
+    if [ "$redirection_operator" = ">" ]; then
+      printf '%s=%s\n' "$key" "$val" > "$env_file"
+    else
+      printf '%s=%s\n' "$key" "$val" >> "$env_file"
+    fi
   else
     # Add the key only if it does not already exist
     if grep -Eq "^[[:space:]]*${key}=" "$env_file"; then
