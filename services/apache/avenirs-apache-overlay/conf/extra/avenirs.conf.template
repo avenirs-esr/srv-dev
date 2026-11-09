@@ -13,6 +13,9 @@ SSLProxyCheckPeerName off
 ProxyPass "/cofolio" "http://__AVENIRS_COFOLIO_CLIENT_CONTAINER_NAME__/cofolio/"
 ProxyPassReverse "/cofolio" "http://__AVENIRS_COFOLIO_CLIENT_CONTAINER_NAME__/cofolio/"
 
+ProxyPass "/back-office" "http://__AVENIRS_COFOLIO_BACKOFFICE_CLIENT_CONTAINER_NAME__/back-office/"
+ProxyPassReverse "/back-office" "http://__AVENIRS_COFOLIO_BACKOFFICE_CLIENT_CONTAINER_NAME__/back-office/"
+
 ProxyPreserveHost On
 ProxyAddHeaders Off
 

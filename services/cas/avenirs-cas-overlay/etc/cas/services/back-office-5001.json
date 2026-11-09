@@ -1,0 +1,7 @@
+{
+  "@class": "org.apereo.cas.services.CasRegisteredService",
+  "id": 5001,
+  "name": "Cofolio Back Office Front",
+  "serviceId": "^https?://((dev|recette|qualif|preprod)\\.avenirs-esr\\.fr|srv-(dev|recette|qualif|preprod)(\\.srv-avenirs?\\.brgm\\.recia\\.net)?|localhost)/back-office(/.*)?$",
+  "evaluationOrder": 2
+}

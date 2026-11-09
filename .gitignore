@@ -27,3 +27,4 @@ apim-4000.json
 /services/avenirs-portfolio/avenirs-portfolio-overlay/avenirs-portfolio-api/src/main/resources/env.properties
 /services/avenirs-portfolio/avenirs-portfolio-overlay/avenirs-portfolio-back-office/src/main/resources/env.properties
 /services/avenirs-portfolio/avenirs-portfolio-overlay/avenirs-cofolio-client/.env
+/services/avenirs-portfolio/avenirs-portfolio-overlay/avenirs-cofolio-backoffice-client/.env

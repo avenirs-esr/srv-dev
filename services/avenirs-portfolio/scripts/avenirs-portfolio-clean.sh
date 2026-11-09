@@ -53,6 +53,7 @@ verbose "Database initialization files removed."
 if [ "$KEEP_OVERLAY" = false ] ; then
     remove_overlay $AVENIRS_COFOLIO_CLIENT_REPOSITORY_DIR
     remove_file $AVENIRS_COFOLIO_CLIENT_ENV_FILE
+    remove_file $AVENIRS_COFOLIO_BACKOFFICE_CLIENT_ENV_FILE
 fi
 
 info "Avenirs portfolio cleaning completed."
