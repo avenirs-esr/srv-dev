@@ -54,3 +54,11 @@ services:
       <<: *healthcheck
       test: wget -q -O /dev/null http://127.0.0.1/cofolio/
       start_period: 10s
+
+  avenirs-cofolio-backoffice-client:
+    container_name: !reset null
+    ports: !reset []
+    healthcheck:
+      <<: *healthcheck
+      test: wget -q -O /dev/null http://127.0.0.1/back-office/
+      start_period: 10s
