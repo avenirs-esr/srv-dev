@@ -60,6 +60,15 @@ fi
 
 [ -z "$AVENIRS_CAS_SAML_VOLUME_NAME" ] && AVENIRS_CAS_SAML_VOLUME_NAME="cas_saml_${AVENIRS_CAS_ENV_LABEL}"
 
+# FER federation (qualif/preprod -> qualif federation; use .../renater, .../test... via .secrets.env if needed).
+# SP, WAYF, MDQ and bootstrap IdP must all belong to the same federation.
+# Override any of these in .secrets.env (sourced before this file).
+[ -z "$AVENIRS_CAS_FER_WAYF_URL" ] && AVENIRS_CAS_FER_WAYF_URL="https://discovery.renater.fr/qualif"
+[ -z "$AVENIRS_CAS_FER_MDQ_URL" ] && AVENIRS_CAS_FER_MDQ_URL="https://mdq.federation.renater.fr/qualif"
+[ -z "$AVENIRS_CAS_FER_BOOTSTRAP_IDP_ENTITY_ID" ] && AVENIRS_CAS_FER_BOOTSTRAP_IDP_ENTITY_ID="https://idp-connect.renater.fr/idp/shibboleth"
+AVENIRS_CAS_FER_BOOTSTRAP_IDP_ENTITY_ID_ENCODED="${AVENIRS_CAS_FER_BOOTSTRAP_IDP_ENTITY_ID//:/%3A}"
+AVENIRS_CAS_FER_BOOTSTRAP_IDP_ENTITY_ID_ENCODED="${AVENIRS_CAS_FER_BOOTSTRAP_IDP_ENTITY_ID_ENCODED//\//%2F}"
+
 CAS_SETTINGS_TEMPLATE_FILE=$CAS_OVERLAY_DIR/etc/cas/config/cas.properties.template
 CAS_APIM_SERVICE_TEMPLATE_FILE=$CAS_OVERLAY_DIR/etc/cas/services/apim-4000.json.template
 
