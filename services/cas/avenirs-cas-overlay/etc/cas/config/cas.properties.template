@@ -37,13 +37,15 @@ cas.authn.pac4j.saml[0].keystore-path=/etc/cas/saml/fer-sp-keystore.jks
 cas.authn.pac4j.saml[0].keystore-password=__SEC_CAS_SAML_FER_KEYSTORE_PASSWORD__
 cas.authn.pac4j.saml[0].private-key-password=__SEC_CAS_SAML_FER_PRIVATE_KEY_PASSWORD__
 cas.authn.pac4j.saml[0].metadata.service-provider.file-system.location=/etc/cas/saml/fer-sp-metadata.xml
+### FER federation (WAYF, MDQ, bootstrap IdP) : valeurs par environnement, surchargeables dans .secrets.env
+### (AVENIRS_CAS_FER_*), defauts dans services/cas/scripts/cas-env.sh. SP et IdP doivent etre dans la MEME federation.
 ### Bootstrap only: NOT used for real authentication (that's resolved dynamically per-login via MDQ, see
 ### avenirs.cas.saml-fer-mdq.* below and fr.avenirsesr.cas.saml.fer.FerMdqDynamicDiscoveryProviderLocator).
 ### CAS needs exactly one resolvable IdP entity at startup to init the pac4j client (SP metadata generation,
 ### signing/decryption setup) - any reachable entity works. Verified live against the test federation's MDQ
 ### (curl, 2026-09-03): mdq.federation.renater.fr/test/entities/{urlencoded entityID} returns HTTP 200 with
 ### Content-Type application/samlmetadata+xml even without an explicit Accept header.
-cas.authn.pac4j.saml[0].metadata.identity-provider-metadata-path=https://mdq.federation.renater.fr/test/entities/http%3A%2F%2Fidp-pre.math.cnrs.fr%2Fidp%2Fshibboleth
+cas.authn.pac4j.saml[0].metadata.identity-provider-metadata-path=__DYN_AVENIRS_CAS_FER_MDQ_URL__/entities/__DYN_AVENIRS_CAS_FER_BOOTSTRAP_IDP_ENTITY_ID_ENCODED__
 ### GIP Recia ne libère pas eduPersonPrincipalName (confirmé par log pac4j/opensaml, 2026-09-08) - seuls
 ### subject-id/pairwise-id sont fournis, et le NameID est transient (opaque, change à chaque session). Sans
 ### eduPersonPrincipalName, pac4j retombait sur ce NameID comme principal CAS, cassant l'appel back-office
@@ -60,7 +62,7 @@ cas.authn.pac4j.saml[0].principal-id-attribute=subject-id
 ### against every cert published at https://metadata.federation.renater.fr/certs/ - only "metadata-signature
 ### -2026.pem" matches (the "renater-metadata-signing-cert-2016.pem" referenced in FER's own MDQ doc example
 ### has itself expired 2026-06-07 - their doc is stale). Re-verify if RENATER rotates the signing cert again.
-avenirs.cas.saml-fer-mdq.url=https://mdq.federation.renater.fr/test
+avenirs.cas.saml-fer-mdq.url=__DYN_AVENIRS_CAS_FER_MDQ_URL__
 avenirs.cas.saml-fer-mdq.signing-certificate=classpath:fer/renater-metadata-query-signing-cert.pem
 
 ### IdP selection is delegated to the FER's own WAYF instead of CAS's internal MENU (see fr.avenirsesr.cas.saml.fer.*
@@ -70,7 +72,7 @@ cas.authn.pac4j.core.discovery-selection.selection-type=DYNAMIC
 ### honors a caller-supplied returnIDParam and preserves extra query params on the return URL (OASIS
 ### SAML V2.0 IdP Discovery Service Protocol). Inferred from RENATER's federation doc (discovery.renater.fr
 ### exposes /renater, /edugain and /test), not verified against FER's technical documentation.
-avenirs.cas.saml-fer-wayf.url=https://discovery.renater.fr/test/WAYF
+avenirs.cas.saml-fer-wayf.url=__DYN_AVENIRS_CAS_FER_WAYF_URL__
 avenirs.cas.saml-fer-wayf.return-id-param=username
 
 ### Connexion PostgreSQL / Security principal
