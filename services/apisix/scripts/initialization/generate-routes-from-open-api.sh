@@ -34,6 +34,38 @@ wait_for_endpoint() {
   return 1
 }
 
+# Writes one route creation script. Uses (and increments) the globals i and count.
+# $1 route id, $2 uri, $3 method, $4 priority, $5 extra json lines (plugin_config_id, plugins)
+write_route() {
+  r_id="$1"; r_uri="$2"; r_method="$3"; r_priority="$4"; r_extra="$5"
+  r_script=$(printf "%02d-%s.generated.curl.sh" "$i" "$r_id")
+
+  cat > "$OUTPUT_DIR/$r_script" <<EOF
+END_POINT="$END_POINT"
+
+curl -H "X-API-KEY: \$SEC_APISIX_ADMIN_KEY" -i "\$END_POINT" -X PUT -d '
+{
+  "name": "$r_id",
+  "id": "$r_id",
+  "uri": "$r_uri",
+  "methods": ["$r_method"],
+  "priority": $r_priority,
+  $r_extra
+  $tags_line
+  "upstream": {
+    "type": "roundrobin",
+    "nodes": {
+      "$UPSTREAM_NODE": 1
+    }
+  }
+}'
+EOF
+
+  chmod +x "$OUTPUT_DIR/$r_script"
+  count=$((count + 1))
+  i=$((i + 1))
+}
+
 GENERATE_FROM_SWAGGER_SCRIPT_DIR=`dirname $0`
 OUTPUT_DIR="/scripts/"
 OPEN_API_FILE="$GENERATE_FROM_SWAGGER_SCRIPT_DIR/openapi.nogit.json"
@@ -240,6 +272,19 @@ EOF
 
     count=$((count + 1))
     i=$((i + 1))
+
+    if [ "$SERVICE_PREFIX" = "security" ]; then
+      # /apim/security/... and /apim/v1/security/... target the security service
+      prefixed_uri="/security${uri}"
+      v1_prefixed_uri="${V1_INTERNAL_PREFIX}/security${uri}"
+      prefixed_rewrite='"plugins": { "proxy-rewrite": { "regex_uri": ["^/security(.*)", "$1"] } },'
+      v1_prefixed_rewrite="\"plugins\": { \"proxy-rewrite\": { \"regex_uri\": [\"^${V1_INTERNAL_PREFIX}/security(.*)\", \"\$1\"] } },"
+
+      write_route "${SERVICE_PREFIX}-${operation}-route-prefixed" "$prefixed_uri" "$method" 10 "$plugin_line $prefixed_rewrite"
+      write_route "${SERVICE_PREFIX}-${operation}-route-v1-prefixed" "$v1_prefixed_uri" "$method" 10 "$v1_plugin_line $v1_prefixed_rewrite"
+      write_route "${SERVICE_PREFIX}-${operation}-options-route-prefixed" "$prefixed_uri" "OPTIONS" 1000 "\"plugin_config_id\": \"$CORS_ONLY_PLUGIN_ID\","
+      write_route "${SERVICE_PREFIX}-${operation}-options-route-v1-prefixed" "$v1_prefixed_uri" "OPTIONS" 1000 "\"plugin_config_id\": \"$CORS_ONLY_PLUGIN_ID\","
+    fi
   done
 done
 
