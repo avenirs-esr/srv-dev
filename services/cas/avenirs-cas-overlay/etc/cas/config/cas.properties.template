@@ -37,6 +37,10 @@ cas.authn.pac4j.saml[0].keystore-path=/etc/cas/saml/fer-sp-keystore.jks
 cas.authn.pac4j.saml[0].keystore-password=__SEC_CAS_SAML_FER_KEYSTORE_PASSWORD__
 cas.authn.pac4j.saml[0].private-key-password=__SEC_CAS_SAML_FER_PRIVATE_KEY_PASSWORD__
 cas.authn.pac4j.saml[0].metadata.service-provider.file-system.location=/etc/cas/saml/fer-sp-metadata.xml
+### Age max (secondes) de l'AuthnInstant accepte. Defaut pac4j = 3600 : une session SSO IdP de plus d'1h est rejetee
+### ("Authentication issue instant is too old", constate 2026-11-18). 28800 = 8h, a aligner sur la duree max de la
+### session SSO de l'IdP (RECIA). Ne pas baisser sous cette duree.
+cas.authn.pac4j.saml[0].maximum-authentication-lifetime=28800
 ### FER federation (WAYF, MDQ, bootstrap IdP) : valeurs par environnement, surchargeables dans .secrets.env
 ### (AVENIRS_CAS_FER_*), defauts dans services/cas/scripts/cas-env.sh. SP et IdP doivent etre dans la MEME federation.
 ### Bootstrap only: NOT used for real authentication (that's resolved dynamically per-login via MDQ, see
@@ -52,7 +56,17 @@ cas.authn.pac4j.saml[0].metadata.identity-provider-metadata-path=__DYN_AVENIRS_C
 ### /external-users/eppn/{id}. subject-id est l'identifiant persistant du profil OASIS Subject Identifier.
 ### /!\ Ce paramètre s'applique à tous les IdP FER résolus dynamiquement (FerMdqDynamicDiscoveryProviderLocator)
 ### - à revoir si un futur IdP fournit eduPersonPrincipalName mais pas subject-id.
-cas.authn.pac4j.saml[0].principal-id-attribute=subject-id
+### Noms techniques SAML (OID/URN) -> noms courts CAS (liste indexee, syntaxe 'source->cible', CAS 8.0.0).
+### Doit etre fait AVANT principal-id-attribute : celui-ci cherche l'attribut sous son nom court.
+cas.authn.pac4j.saml[0].mapped-attributes[0]=urn:oid:1.3.6.1.4.1.5923.1.1.1.6->eppn
+cas.authn.pac4j.saml[0].mapped-attributes[1]=urn:oasis:names:tc:SAML:attribute:pairwise-id->pairwise-id
+cas.authn.pac4j.saml[0].mapped-attributes[2]=urn:oasis:names:tc:SAML:attribute:subject-id->subject-id
+### Relevé FER (test-sp.federation.renater.fr, 2026-11-18) : l'IdP GIP-RECIA libère eduPersonPrincipalName (nom lisible).
+### Mapping ajouté en complément de l'OID, au cas où l'attribut arrive sous son FriendlyName.
+cas.authn.pac4j.saml[0].mapped-attributes[3]=eduPersonPrincipalName->eppn
+### Principal = eppn (demande RECIA/FER, 2026-11-12). /!\ Si un IdP ne libere pas eppn, pac4j retombe sur le NameID
+### transient (cf. commentaire ci-dessus) -> casse /external-users/eppn/{id}. Repasser a subject-id si besoin.
+cas.authn.pac4j.saml[0].principal-id-attribute=eppn
 
 ### Real IdP resolution: MDQ query to the FER on demand for the entityID chosen on the FER's WAYF (RFC MDQ,
 ### {url}/entities/{entityID} - see FerMdqDynamicDiscoveryProviderLocator), signature-checked against
