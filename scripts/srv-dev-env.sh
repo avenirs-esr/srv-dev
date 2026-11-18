@@ -81,7 +81,7 @@ AVENIRS_MINIO_REGION=eu-west-3
 # Infrastructure & Web
 export ALPINE_VERSION_DEFAULT="3.18"
 export DEBIAN_VERSION_DEFAULT="bullseye-slim"
-export HTTPD_VERSION_DEFAULT="2.4.56"
+export HTTPD_VERSION_DEFAULT="2.4.71"
 export NGINX_VERSION_DEFAULT="alpine"
 
 # Databases & Stores
