@@ -129,6 +129,36 @@ JSON_CONTENT=$(cat <<EOF
             }
           end
 
+          local origin = core.request.header(ctx, \"Origin\")
+
+          if origin == nil or origin == \"\" then
+            origin = core.request.header(ctx, \"Referer\") or \"\"
+          end
+
+          if string.find(origin, \"back-office\", 1, true) then
+            local payload_ok, security_payload = pcall(cjson.decode, signed_context.payload)
+            local is_super_admin = false
+
+            if payload_ok and type(security_payload) == \"table\" and type(security_payload.roles) == \"table\" then
+              for _, role in pairs(security_payload.roles) do
+                if role == \"ROLE_SUPER_ADMIN\" then
+                  is_super_admin = true
+                  break
+                end
+              end
+            end
+
+            if not is_super_admin then
+              ngx.log(ngx.WARN, \"back-office access denied, missing ROLE_SUPER_ADMIN for origin: \", origin)
+
+              return 403, {
+                message = \"Forbidden: back-office access is restricted to super admins\",
+                status = 403,
+                code = \"FORBIDDEN\"
+              }
+            end
+          end
+
           core.request.set_header(ctx, \"X-Signed-Context\", signed_context.payload)
           core.request.set_header(ctx, \"X-Context-Signature\", signed_context.signature)
 
