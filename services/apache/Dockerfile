@@ -1,6 +1,6 @@
 # Resource https://hub.docker.com/_/httpd?tab=description
 
-ARG HTTPD_VERSION=2.4.56
+ARG HTTPD_VERSION=2.4.71
 
 FROM httpd:${HTTPD_VERSION}
 LABEL author="Arnaud Deman"
