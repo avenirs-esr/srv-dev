@@ -28,9 +28,19 @@ die() { echo "ERROR: $*" >&2; exit 1; }
 [ "${AVENIRS_PORTFOLIO_STORAGE_BACKEND:-}" = "s3" ] || die "AVENIRS_PORTFOLIO_STORAGE_BACKEND must be s3"
 for v in SEC_AVENIRS_PORTFOLIO_API_S3_ENDPOINT SEC_AVENIRS_PORTFOLIO_API_S3_BUCKET \
          SEC_AVENIRS_PORTFOLIO_API_S3_ACCESS_KEY SEC_AVENIRS_PORTFOLIO_API_S3_SECRET_KEY \
-         AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME POSTGRES_USER POSTGRES_DB SEC_POSTGRES_PASSWORD; do
+         AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME SEC_POSTGRES_PASSWORD; do
   [ -n "${!v:-}" ] || die "$v is empty (check .secrets.env / srv-dev-env.sh)"
 done
+
+# POSTGRES_USER / POSTGRES_DB are not defined by .secrets.env or srv-dev-env.sh: read the
+# values the running container was actually created with.
+POSTGRES_USER="${POSTGRES_USER:-$(docker exec "$AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME" printenv POSTGRES_USER 2>/dev/null | tr -d '\r')}"
+# The portfolio API lives in its own database (see avenirs-portfolio-bootstrap.sh: spring.datasource.url),
+# not in the container's default POSTGRES_DB.
+POSTGRES_DB="${MIGRATION_DB:-avenirs_api}"
+[ -n "$POSTGRES_USER" ] || die "Cannot determine POSTGRES_USER: is container $AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME running? (or export POSTGRES_USER=...)"
+[ -n "$POSTGRES_DB" ] || die "Cannot determine POSTGRES_DB (or export MIGRATION_DB=...)"
+echo "Postgres: container=$AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME user=$POSTGRES_USER db=$POSTGRES_DB"
 
 VOLUME="${STORAGE_VOLUME:-srv-dev_file-storage}"
 PG="$AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME"
@@ -43,12 +53,23 @@ psql_pg() { docker exec -i -e PGPASSWORD="$SEC_POSTGRES_PASSWORD" "$PG" \
   psql -h localhost -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v ON_ERROR_STOP=1 -qAt "$@"; }
 
 echo "== Database"
-total=$(psql_pg -c "SELECT count(*) FROM dev.file")
-local_rows=$(psql_pg -c "SELECT count(*) FROM dev.file WHERE uri LIKE '/%'")
-echo "dev.file rows: $total, with a local path: $local_rows, already keys/other: $((total - local_rows))"
+# The schema is not guaranteed to be "dev" on every environment: detect it, or take SCHEMA=<name>.
+if [ -z "${SCHEMA:-}" ]; then
+  matches=$(psql_pg -c "SELECT table_schema FROM information_schema.columns WHERE table_name='file' AND column_name='uri' GROUP BY 1 ORDER BY 1" | tr -d '\r')
+  case "$(echo "$matches" | grep -c .)" in
+    1) SCHEMA="$matches" ;;
+    0) die "No table 'file' with a 'uri' column in database $POSTGRES_DB (databases: $(psql_pg -c "SELECT string_agg(datname, ', ') FROM pg_database WHERE NOT datistemplate")). Re-run with MIGRATION_DB=<name>" ;;
+    *) die "Several schemas have a file.uri column ($(echo $matches)). Re-run with SCHEMA=<name>" ;;
+  esac
+fi
+[[ "$SCHEMA" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]] || die "Invalid schema name: $SCHEMA"
+echo "Schema: $SCHEMA"
+total=$(psql_pg -c "SELECT count(*) FROM ${SCHEMA}.file")
+local_rows=$(psql_pg -c "SELECT count(*) FROM ${SCHEMA}.file WHERE uri LIKE '/%'")
+echo "${SCHEMA}.file rows: $total, with a local path: $local_rows, already keys/other: $((total - local_rows))"
 [ "$local_rows" -gt 0 ] || { echo "Nothing to migrate."; exit 0; }
 
-names=$(psql_pg -c "SELECT DISTINCT regexp_replace(uri, '^.*/', '') FROM dev.file WHERE uri LIKE '/%' ORDER BY 1" | tr -d '\r')
+names=$(psql_pg -c "SELECT DISTINCT regexp_replace(uri, '^.*/', '') FROM ${SCHEMA}.file WHERE uri LIKE '/%' ORDER BY 1" | tr -d '\r')
 while IFS= read -r n; do
   [[ "$n" =~ ^[A-Za-z0-9._-]+$ ]] || die "Unexpected file name in database: '$n'"
 done <<< "$names"
@@ -57,7 +78,7 @@ echo "Distinct files to handle: $(echo "$names" | wc -l)"
 if [ "$APPLY" = 1 ]; then
   mkdir -p "$BACKUP_DIR"
   backup="$BACKUP_DIR/dev_file_uri_backup_$(date +%Y%m%d-%H%M%S).csv"
-  psql_pg -c "COPY (SELECT id, uri FROM dev.file ORDER BY id) TO STDOUT WITH CSV HEADER" > "$backup"
+  psql_pg -c "COPY (SELECT id, uri FROM ${SCHEMA}.file ORDER BY id) TO STDOUT WITH CSV HEADER" > "$backup"
   [ "$(($(wc -l < "$backup") - 1))" -eq "$total" ] || die "Backup row count mismatch, aborting"
   echo "Backup written: $backup"
 fi
@@ -106,15 +127,15 @@ fi
 ok_list=$(echo "$result" | awk '$1=="OK"{printf "%s'\''%s'\''", (n++?",":""), $2}')
 [ -n "$ok_list" ] || die "No verified object, database left untouched"
 
-echo "== Updating dev.file (single transaction, verified objects only)"
+echo "== Updating ${SCHEMA}.file (single transaction, verified objects only)"
 psql_pg <<SQL
 BEGIN;
-UPDATE dev.file
+UPDATE ${SCHEMA}.file
    SET uri = regexp_replace(uri, '^.*/', '')
  WHERE uri LIKE '/%'
    AND regexp_replace(uri, '^.*/', '') = ANY (ARRAY[$ok_list]);
 COMMIT;
 SQL
-remaining=$(psql_pg -c "SELECT count(*) FROM dev.file WHERE uri LIKE '/%'")
+remaining=$(psql_pg -c "SELECT count(*) FROM ${SCHEMA}.file WHERE uri LIKE '/%'")
 echo "Rows still holding a local path (missing/conflict/failed files): $remaining"
 echo "Rollback source: $backup"
