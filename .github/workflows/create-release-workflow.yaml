@@ -1,0 +1,35 @@
+name: Create release on all repositories
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag à créer sur tous les repositories (ex. 0.14.0-rc)"
+        required: true
+        type: string
+      title:
+        description: "Titre de la release (ex. 0.14.0-rc (Sprint 16))"
+        required: true
+        type: string
+      include_sprint_us:
+        description: "Ajouter la liste des US d'un sprint à la release srv-dev"
+        required: false
+        type: boolean
+        default: false
+      sprint:
+        description: "Sprint ciblé (ex. Sprint 15) - obligatoire si include_sprint_us est coché, ignoré sinon"
+        required: false
+        type: string
+
+concurrency:
+  group: create-release-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  call-create-release-workflow:
+    uses: avenirs-esr/avenirs-workflows/.github/workflows/create-release-workflow.yaml@main
+    with:
+      tag: ${{ inputs.tag }}
+      title: ${{ inputs.title }}
+      include_sprint_us: ${{ inputs.include_sprint_us }}
+      sprint: ${{ inputs.sprint }}
+    secrets: inherit
