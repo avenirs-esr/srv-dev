@@ -2,18 +2,29 @@ name: Manual launch deploy on server
 on:
   workflow_dispatch:
     inputs:
-      env_name:
+      environment:
         description: "Environnement cible : dev | qualif | recette"
         required: true
         type: choice
         options:
-          - dev
-          - qualif
           - recette
+          - qualif
+          - dev
+        default: recette
+      sprint:
+        description: "Sprint à déployer (ex. Sprint 16) - ignoré si un tag est saisi"
+        required: false
+        type: string
+      tag:
+        description: "Tag explicite à déployer sur tous les repositories (ex. 0.14.0-rc) - prioritaire sur le sprint"
+        required: false
+        type: string
 
 jobs:
-  call-deploy-workflow:
-    uses: avenirs-esr/avenirs-workflows/.github/workflows/deploy-workflow.yaml@main
+  call-manual-deploy-workflow:
+    uses: avenirs-esr/avenirs-workflows/.github/workflows/manual-deploy-workflow.yaml@main
     with:
-      env_name: ${{ github.event.inputs.env_name }}
+      environment: ${{ inputs.environment }}
+      sprint: ${{ inputs.sprint }}
+      tag: ${{ inputs.tag }}
     secrets: inherit
