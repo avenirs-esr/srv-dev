@@ -9,7 +9,10 @@ log() { echo "$(date -Is) [scheduler] $*"; }
 until pg_isready -q -h /var/run/postgresql -U "$POSTGRES_USER"; do sleep 5; done
 
 # stanza-create needs the archive lock, held by the async archive-push while it drains a backlog.
-if ! pgbackrest --stanza=$STANZA info 2>/dev/null | grep -q "stanza: $STANZA"; then
+# `info` prints "stanza: <name>" even when the stanza does not exist yet (status
+# "missing stanza path", exit code 0): test that status, not the name, or the
+# stanza is never created and every archive-push fails.
+if pgbackrest --stanza=$STANZA info 2>/dev/null | grep -q "missing stanza path"; then
     until pgbackrest --stanza=$STANZA stanza-create; do log "stanza-create failed, retrying"; sleep 30; done
 fi
 pgbackrest --stanza=$STANZA check || log "check failed"
