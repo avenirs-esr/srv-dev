@@ -41,8 +41,6 @@ Technical architecture experimentation
     │   │   │      │           └── config.ts
     │   │   │      └── Dockerfile
     │   │   └──  apisix-docker      
-    │   │          ├── grafanapx_conf
-    │   │          │     └── grafana.ini
     │   │          └── example
     │   │                └── docker-compose.yml
     │   │   
@@ -79,13 +77,6 @@ Technical architecture experimentation
     │   │           └── thekeystore
     │   ├── cas-overlay-template
     │   └── scripts
-    ├── kafka
-    │   └── (...)
-    └── openldap                    custom container based on osixia's images
-        ├── doc
-        ├── fixtures
-        └── scripts
-    └── openldap     
 </pre>
 
 ## Scripts
@@ -169,11 +160,7 @@ curl "http://localhost/apim" --head | grep Server
 - `http://<server>/apisix-api/`
 - `http://<server>/apim/`
 - `http://<server>/apisix-ui/`
-- `http://<server>/apisix-prometheus/`
-- `http://<server>/apisix-grafana/`
-- `http://<server>/ldapadmin/`
 - `http://<server>/cas` -> e.g.:  `http://<server\>/cas/login` 
-- `http://<server>/kafka-ui/`
 
 ## Database initialisation
 The sql initialization scripts can be placed in the folder: *services/postgresql/avenirs-postgresql-overlay/init/*<br/>
@@ -198,22 +185,11 @@ Several containers should be deployed and running. The list of containers may va
 <pre>
 CONTAINER ID   NAMES                        STATUS        PORTS
 2e09fa47d0f5   avenirs-apache               Up 17 hours   0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp
-ad8e57a13587   avenirs-kafka-ui             Up 18 hours   0.0.0.0:8082->8080/tcp, [::]:8082->8080/tcp
-b6ca8c2e7e8f   avenirs-kafka                Up 18 hours   9092/tcp, 0.0.0.0:29092->29092/tcp, [::]:29092->29092/tcp
 a300df2b68b0   avenirs-portfolio-security   Up 18 hours   0.0.0.0:10003->12000/tcp, [::]:10003->12000/tcp
-2c37d79679a5   avenirs-pgsql-secondary2     Up 18 hours   0.0.0.0:65434->5432/tcp, [::]:65434->5432/tcp
-692effb34ac0   avenirs-pgsql-secondary1     Up 18 hours   0.0.0.0:65433->5432/tcp, [::]:65433->5432/tcp
 c8775b53c419   avenirs-cas                  Up 18 hours   0.0.0.0:8443->8443/tcp, [::]:8443->8443/tcp, 0.0.0.0:8081->8080/tcp, [::]:8081->8080/tcp
 79592ffdda03   avenirs-apisix-api           Up 18 hours   0.0.0.0:9080->9080/tcp, [::]:9080->9080/tcp, 0.0.0.0:9091-9092->9091-9092/tcp, [::]:9091-9092->9091-9092/tcp, 0.0.0.0:9180->9180/tcp, [::]:9180->9180/tcp, 0.0.0.0:9443->9443/tcp, [::]:9443->9443/tcp
-ce1286c8278d   avenirs-phpldapadmin         Up 18 hours   443/tcp, 0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
-cfcbe134ab3a   avenirs-node                 Up 18 hours   0.0.0.0:8030->3000/tcp, [::]:8030->3000/tcp, 0.0.0.0:8033->3003/tcp, [::]:8033->3003/tcp
-7e950e57121b   avenirs-openldap             Up 18 hours   0.0.0.0:389->389/tcp, [::]:389->389/tcp, 0.0.0.0:636->636/tcp, [::]:636->636/tcp
-b8a6e79234b6   avenirs-zookeeper            Up 18 hours   2888/tcp, 3888/tcp, 0.0.0.0:22181->2181/tcp, [::]:22181->2181/tcp
-55e1b5d1787e   avenirs-pgsql-ui             Up 18 hours   0.0.0.0:18080->8080/tcp, [::]:18080->8080/tcp
 8db72e197ee3   avenirs-pgsql-primary        Up 18 hours   0.0.0.0:65432->5432/tcp, [::]:65432->5432/tcp
 27f5be7db3e4   avenirs-apisix-etcd          Up 18 hours   0.0.0.0:2379->2379/tcp, [::]:2379->2379/tcp, 2380/tcp
-0950e3f9681f   avenirs-apisix-prometheus    Up 18 hours   0.0.0.0:9090->9090/tcp, [::]:9090->9090/tcp
-d04ea50f22bb   avenirs-apisix-grafana       Up 18 hours   0.0.0.0:3001->3000/tcp, [::]:3001->3000/tcp
 059251304e11   avenirs-apisix-dashboard     Up 18 hours   0.0.0.0:9000->9000/tcp, [::]:9000->9000/tcp
                             
 </pre>
