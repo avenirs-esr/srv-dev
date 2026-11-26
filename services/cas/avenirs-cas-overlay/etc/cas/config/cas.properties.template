@@ -9,19 +9,6 @@ logging.config=file:/etc/cas/config/log4j2.xml
 
 cas.authn.accept.users=
 
-### Connexion LDAP
-### obso cas.authn.ldap[0].providerClass=org.ldaptive.provider.unboundid.UnboundIDProvider
-#cas.authn.ldap[0].type=AUTHENTICATED
-#cas.authn.ldap[0].ldapUrl=ldap://__DYN_AVENIRS_OPENLDAP_CONTAINER_NAME__:389
-#cas.authn.ldap[0].baseDn=dc=ldap-dev,dc=avenirs-esr,dc=fr
-#cas.authn.ldap[0].subtreeSearch=true
-#cas.authn.ldap[0].searchFilter=uid=\{user\}
-#cas.authn.ldap[0].principalAttributeList=cn,givenName,mail, 
-#cas.authn.ldap[0].principalAttributeList=cn,mail,sn,uid,givenName,displayName
-### Credential to connect to LDAP
-#cas.authn.ldap[0].bindDn=cn=admin,dc=ldap-dev,dc=avenirs-esr,dc=fr
-#cas.authn.ldap[0].bindCredential=__SEC_LDAP_ADMIN_PASSWORD__
-### obso cas.authn.ldap[0].useSsl=false
 
 ### Delegated authentication (SAML2) to the FER - CAS 8.0.0, properties verified against that exact
 ### version (not master/development/7.x). Full rationale, activation procedure and what remains to

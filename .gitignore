@@ -12,14 +12,12 @@ envvars
 *.no-git.*
 *.nogit.*
 *.generated.*
-**/node-api/dist/
 **/avenirs-cas-overlay/.gradle/
 **/.idea
 
 # Files with secrets
 **/apisix_conf/config.yaml
 **/dashboard_conf/conf.yaml
-**/grafana_conf/config/grafana.ini
 .secrets.env
 cas.properties
 apim-4000.json
@@ -28,3 +26,4 @@ apim-4000.json
 /services/avenirs-portfolio/avenirs-portfolio-overlay/avenirs-portfolio-back-office/src/main/resources/env.properties
 /services/avenirs-portfolio/avenirs-portfolio-overlay/avenirs-cofolio-client/.env
 /services/avenirs-portfolio/avenirs-portfolio-overlay/avenirs-cofolio-backoffice-client/.env
+out/

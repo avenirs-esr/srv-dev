@@ -82,7 +82,6 @@ function generate_env_file() {
 
     # 2. Databases & Stores
     local databases=(
-        "ADMINER"
         "ETCD"
         "POSTGRES"
         "REDIS"
@@ -95,18 +94,13 @@ function generate_env_file() {
     # 3. Identity & Security
     local identity=(
         "CAS_BASE_IMAGE"
-        "OPENLDAP"
-        "PHPLDAPADMIN"
     )
     write_section "Identity & Security" "${identity[@]}"
 
     # 4. Messaging & Search
     local messaging=(
-        "KAFKA"
-        "KAFKA_UI"
         "OPENSEARCH"
         "OPENSEARCH_DASHBOARDS"
-        "ZOOKEEPER"
     )
     write_section "Messaging & Search" "${messaging[@]}"
 
@@ -118,12 +112,6 @@ function generate_env_file() {
     )
     write_section "Apisix & Gateway" "${apisix[@]}"
 
-    # 6. Monitoring
-    local monitoring=(
-        "GRAFANA"
-        "PROMETHEUS"
-    )
-    write_section "Monitoring" "${monitoring[@]}"
 
     # 7. Java / Temurin
     local java=(
