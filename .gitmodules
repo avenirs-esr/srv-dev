@@ -30,3 +30,7 @@
 	path = services/avenirs-portfolio/avenirs-portfolio-interoperability
 	url = https://github.com/avenirs-esr/avenirs-portfolio-interoperability.git
 	branch = develop
+[submodule "services/avenirs-portfolio/avenirs-portfolio-statistics"]
+	path = services/avenirs-portfolio/avenirs-portfolio-statistics
+	url = https://github.com/avenirs-esr/avenirs-portfolio-statistics.git
+	branch = develop

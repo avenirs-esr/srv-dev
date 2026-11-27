@@ -4,7 +4,7 @@ set -euo pipefail
 SPECS_DIR="${API_SPECS_DIR:-/usr/local/apache2/htdocs/api-specs}"
 MERGED_FILE_NAME="openapi-merged.json"
 MERGE_CONFIG_PATH="$SPECS_DIR/openapi-merge.config.json"
-SWAGGER_URLS="http://avenirs-portfolio-api:10000/avenirs-portfolio-api/api-docs http://avenirs-portfolio-back-office:10010/avenirs-portfolio-back-office/api-docs http://avenirs-portfolio-interoperability:10020/avenirs-portfolio-interoperability/api-docs"
+SWAGGER_URLS="http://avenirs-portfolio-api:10000/avenirs-portfolio-api/api-docs http://avenirs-portfolio-back-office:10010/avenirs-portfolio-back-office/api-docs http://avenirs-portfolio-interoperability:10020/avenirs-portfolio-interoperability/api-docs http://avenirs-portfolio-statistics:10030/avenirs-portfolio-statistics/api-docs"
 
 wait_for_endpoint() {
   url="$1"
@@ -49,6 +49,7 @@ for u in $SWAGGER_URLS; do
     *avenirs-portfolio-api*) out="$SPECS_DIR/portfolio.json" ;;
     *avenirs-portfolio-back-office*) out="$SPECS_DIR/back-office.json" ;;
     *avenirs-portfolio-interoperability*) out="$SPECS_DIR/interoperability.json" ;;
+    *avenirs-portfolio-statistics*) out="$SPECS_DIR/statistics.json" ;;
     *) echo "Unknown swagger url $u" >&2; exit 1 ;;
   esac
 
@@ -67,7 +68,8 @@ cat >"$MERGE_CONFIG_PATH" <<EOF
   "inputs": [
     { "inputFile": "portfolio.json" },
     { "inputFile": "back-office.json" },
-    { "inputFile": "interoperability.json" }
+    { "inputFile": "interoperability.json" },
+    { "inputFile": "statistics.json" }
   ]
 }
 EOF
