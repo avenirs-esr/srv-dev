@@ -56,7 +56,7 @@ set_rotating_env_value () {
 check_network
 
 # HMAC secret, regenerated on every deployment and shared by all backend micro-services
-# (api, back-office, interoperability, security) for internal signed-header authentication.
+# (api, back-office, interoperability, statistics, security) for internal signed-header authentication.
 AVENIRS_PORTFOLIO_HMAC_SECRET=$(openssl rand -base64 32)
 set_rotating_env_value "AVENIRS_PORTFOLIO_HMAC_SECRET" "$AVENIRS_PORTFOLIO_HMAC_SECRET" "$AVENIRS_PORTFOLIO_ENV_FILE"
 # Also propagated to .secrets.env so the APISIX init container (avenirs-access-control-mock
@@ -83,6 +83,12 @@ write_env_file "AVENIRS_PORTFOLIO_INTEROPERABILITY_CONTAINER_PORT" "$AVENIRS_POR
 write_env_file "AVENIRS_PORTFOLIO_INTEROPERABILITY_OVERLAY_DIR" "$AVENIRS_PORTFOLIO_INTEROPERABILITY_OVERLAY_DIR" ">>" "$AVENIRS_PORTFOLIO_ENV_FILE"
 write_env_file "AVENIRS_PORTFOLIO_INTEROPERABILITY_OVERLAY_BASENAME" "$AVENIRS_PORTFOLIO_INTEROPERABILITY_OVERLAY_BASENAME" ">>" "$AVENIRS_PORTFOLIO_ENV_FILE"
 write_env_file "AVENIRS_PORTFOLIO_INTEROPERABILITY_SPRING_ENV_FILE" "$AVENIRS_PORTFOLIO_INTEROPERABILITY_SPRING_ENV_FILE" ">>" "$AVENIRS_PORTFOLIO_ENV_FILE"
+
+write_env_file "AVENIRS_PORTFOLIO_STATISTICS_CONTAINER_NAME" "$AVENIRS_PORTFOLIO_STATISTICS_CONTAINER_NAME" ">>" "$AVENIRS_PORTFOLIO_ENV_FILE"
+write_env_file "AVENIRS_PORTFOLIO_STATISTICS_CONTAINER_PORT" "$AVENIRS_PORTFOLIO_STATISTICS_CONTAINER_PORT" ">>" "$AVENIRS_PORTFOLIO_ENV_FILE"
+write_env_file "AVENIRS_PORTFOLIO_STATISTICS_OVERLAY_DIR" "$AVENIRS_PORTFOLIO_STATISTICS_OVERLAY_DIR" ">>" "$AVENIRS_PORTFOLIO_ENV_FILE"
+write_env_file "AVENIRS_PORTFOLIO_STATISTICS_OVERLAY_BASENAME" "$AVENIRS_PORTFOLIO_STATISTICS_OVERLAY_BASENAME" ">>" "$AVENIRS_PORTFOLIO_ENV_FILE"
+write_env_file "AVENIRS_PORTFOLIO_STATISTICS_SPRING_ENV_FILE" "$AVENIRS_PORTFOLIO_STATISTICS_SPRING_ENV_FILE" ">>" "$AVENIRS_PORTFOLIO_ENV_FILE"
 
 # ---- avenirs-portfolio-api
 # Spring env file generation
@@ -192,6 +198,21 @@ echo "install_overlay $AVENIRS_PORTFOLIO_INTEROPERABILITY_OVERLAY_DIR $AVENIRS_P
 install_overlay $AVENIRS_PORTFOLIO_INTEROPERABILITY_OVERLAY_DIR $AVENIRS_PORTFOLIO_INTEROPERABILITY_REPOSITORY_DIR
 
 
+# ---- avenirs-portfolio-statistics
+# Spring env file generation
+write_env_file  "spring.datasource.url" "jdbc:postgresql://$AVENIRS_POSTGRESQL_PRIMARY_CONTAINER_NAME:5432/avenirs_statistics" ">" $AVENIRS_PORTFOLIO_STATISTICS_SPRING_ENV_FILE;
+
+[ "`hostname`" = "srv-dev-avenir" ] && swagger_root="srv-dev-avenir.srv-avenir.brgm.recia.net" || swagger_root="localhost"
+write_env_file  "app.server.url" "http://$swagger_root/avenirs-portfolio-statistics" ">>" $AVENIRS_PORTFOLIO_STATISTICS_SPRING_ENV_FILE;
+# Writes come from the other micro-services (api key), reads from the back-office through APISIX (hmac).
+write_env_file  "security.authentication.filter" "api-key-or-hmac" ">>" $AVENIRS_PORTFOLIO_STATISTICS_SPRING_ENV_FILE;
+set_rotating_env_value "security.hmac.secret" "$AVENIRS_PORTFOLIO_HMAC_SECRET" $AVENIRS_PORTFOLIO_STATISTICS_SPRING_ENV_FILE;
+
+# Overlay files
+echo "install_overlay $AVENIRS_PORTFOLIO_STATISTICS_OVERLAY_DIR $AVENIRS_PORTFOLIO_STATISTICS_REPOSITORY_DIR"
+install_overlay $AVENIRS_PORTFOLIO_STATISTICS_OVERLAY_DIR $AVENIRS_PORTFOLIO_STATISTICS_REPOSITORY_DIR
+
+
 # ---- avernirs-cofolio-client
 write_env_file "AVENIRS_COFOLIO_CLIENT_CONTAINER_NAME" "$AVENIRS_COFOLIO_CLIENT_CONTAINER_NAME" ">>" "$AVENIRS_PORTFOLIO_ENV_FILE"
 write_env_file "AVENIRS_COFOLIO_CLIENT_CONTAINER_PORT" "$AVENIRS_COFOLIO_CLIENT_CONTAINER_PORT" ">>" "$AVENIRS_PORTFOLIO_ENV_FILE"
@@ -299,6 +320,17 @@ $JASYPT_UTIL_SCRIPT $AVENIRS_PORTFOLIO_INTEROPERABILITY_INIT_DB > $AVENIRS_PORTF
 vverbose "Created $AVENIRS_PORTFOLIO_INTEROPERABILITY_INIT_DB_CLEAR"
 
 info "Initialization files for avenirs-portfolio-interoperability generated."
+
+
+info "Database initialization files generation for avenirs-portfolio-statistics"
+
+cat $AVENIRS_PORTFOLIO_STATISTICS_CLEAN_DB  > $AVENIRS_PORTFOLIO_STATISTICS_CLEAN_DB_CLEAR
+vverbose "Created $AVENIRS_PORTFOLIO_STATISTICS_CLEAN_DB_CLEAR"
+
+$JASYPT_UTIL_SCRIPT $AVENIRS_PORTFOLIO_STATISTICS_INIT_DB > $AVENIRS_PORTFOLIO_STATISTICS_INIT_DB_CLEAR
+vverbose "Created $AVENIRS_PORTFOLIO_STATISTICS_INIT_DB_CLEAR"
+
+info "Initialization files for avenirs-portfolio-statistics generated."
 
 . $AVENIRS_PORTFOLIO_SCRIPT_DIR/init-storage-volume.sh
 

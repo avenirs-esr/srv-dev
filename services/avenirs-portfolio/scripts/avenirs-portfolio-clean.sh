@@ -35,6 +35,14 @@ if [ "$KEEP_OVERLAY" = false ] ; then
     remove_overlay $AVENIRS_PORTFOLIO_BACK_OFFICE_REPOSITORY_DIR
 fi
 
+
+# ---- avenirs-portfolio-statistics
+
+# Removes the overlay's files
+if [ "$KEEP_OVERLAY" = false ] ; then
+    remove_overlay $AVENIRS_PORTFOLIO_STATISTICS_REPOSITORY_DIR
+fi
+
 # Removes the generated database sql files
 remove_file $AVENIRS_PORTFOLIO_SECURITY_CLEAN_DB_CLEAR
 remove_file $AVENIRS_PORTFOLIO_SECURITY_CLEAN_TEST_DB_CLEAR
@@ -46,6 +54,9 @@ remove_file $AVENIRS_PORTFOLIO_API_INIT_DB_CLEAR
 
 remove_file $AVENIRS_PORTFOLIO_BACK_OFFICE_CLEAN_DB_CLEAR
 remove_file $AVENIRS_PORTFOLIO_BACK_OFFICE_INIT_DB_CLEAR
+
+remove_file $AVENIRS_PORTFOLIO_STATISTICS_CLEAN_DB_CLEAR
+remove_file $AVENIRS_PORTFOLIO_STATISTICS_INIT_DB_CLEAR
 
 verbose "Database initialization files removed."
 
