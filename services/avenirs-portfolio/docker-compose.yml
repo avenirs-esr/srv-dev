@@ -2,19 +2,19 @@ services:
 
   avenirs-portfolio-api:
     container_name: ${AVENIRS_PORTFOLIO_API_CONTAINER_NAME}
-
-    build:
-      context: .
-      dockerfile: ./Dockerfile-avenirs-portfolio-api
-      args:
-        AVENIRS_PORTFOLIO_API_VERSION: ${AVENIRS_PORTFOLIO_API_VERSION}
-        OVERLAY_DIR: ${AVENIRS_PORTFOLIO_API_OVERLAY_BASENAME}
+    # Image publiée par la CI du repo avenirs-portfolio-api : plus de build ici.
+    # Version : un tag git (ex. 1.2.0), une branche (develop) ou sha-<commit>.
+    image: ghcr.io/avenirs-esr/avenirs-portfolio-api:${AVENIRS_PORTFOLIO_API_IMAGE_TAG:-develop}
+    pull_policy: always
     restart: always
     ports:
       - "${AVENIRS_PORTFOLIO_API_CONTAINER_PORT}:10000"
+    # La config n'est plus copiée dans l'image : le fichier généré par le bootstrap
+    # est passé en variables d'environnement (Spring lit aussi les noms à points).
+    env_file:
+      - ./avenirs-portfolio-overlay/avenirs-portfolio-api/src/main/resources/env.properties
     environment:
       - JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_ENCRYPTOR_PASSWORD}
-      - JAVA_XMX=${AVENIRS_PORTFOLIO_API_JAVA_XMX:-2048M}
     mem_limit: ${AVENIRS_PORTFOLIO_API_MEM_LIMIT:-2560m}
     mem_reservation: 512m
     depends_on:
